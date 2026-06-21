@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSC CGL 2026 Phase 1 Foundation</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=boska@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-full: 9999px;
+      --color-bg: #f7f6f2;
+      --color-surface: #f9f8f5;
+      --color-surface-2: #fbfbf9;
+      --color-surface-offset: #f3f0ec;
+      --color-border: #d4d1ca;
+      --color-divider: #dcd9d5;
+      --color-text: #28251d;
+      --color-text-muted: #66645f;
+      --color-text-faint: #99968f;
+      --color-primary: #01696f;
+      --color-primary-hover: #0c4e54;
+      --color-primary-highlight: #cedcd8;
+      --color-success: #437a22;
+      --color-warning: #964219;
+      --color-blue: #006494;
+      --shadow-sm: 0 1px 2px rgba(24, 24, 24, 0.06);
+      --shadow-md: 0 10px 30px rgba(24, 24, 24, 0.08);
+      --font-body: 'Satoshi', Inter, sans-serif;
+      --font-display: 'Boska', Georgia, serif;
+      --content: 1180px;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #171614;
+      --color-surface: #1c1b19;
+      --color-surface-2: #201f1d;
+      --color-surface-offset: #22211f;
+      --color-border: #393836;
+      --color-divider: #262523;
+      --color-text: #e1dfdb;
+      --color-text-muted: #aaa69e;
+      --color-text-faint: #7b7770;
+      --color-primary: #4f98a3;
+      --color-primary-hover: #227f8b;
+      --color-primary-highlight: #313b3b;
+      --color-success: #6daa45;
+      --color-warning: #bb653b;
+      --color-blue: #5591c7;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 12px 36px rgba(0, 0, 0, 0.3);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at top right, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 28%),
+        linear-gradient(180deg, var(--color-bg), var(--color-surface));
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button { font: inherit; cursor: pointer; }
+
+    .container {
+      width: min(var(--content), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -3rem;
+      background: var(--color-primary);
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      z-index: 100;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 64%, white));
+      color: white;
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .nav-links a,
+    .theme-toggle {
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      padding: 0.55rem 0.9rem;
+      border-radius: var(--radius-full);
+      border: 1px solid transparent;
+      background: transparent;
+    }
+
+    .nav-links a:hover,
+    .theme-toggle:hover {
+      color: var(--color-text);
+      background: var(--color-surface-offset);
+      border-color: color-mix(in srgb, var(--color-text) 10%, transparent);
+    }
+
+    main {
+      padding: var(--space-10) 0 var(--space-20);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-8);
+      align-items: stretch;
+      margin-bottom: var(--space-12);
+    }
+
+    .hero-card,
+    .panel,
+    .topic-card,
+    .table-card,
+    .week-card,
+    .formula-box,
+    .checklist,
+    .mini-card {
+      background: color-mix(in srgb, var(--color-surface) 92%, white 8%);
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-card {
+      padding: clamp(1.5rem, 2vw, 2.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      width: fit-content;
+      background: var(--color-primary-highlight);
+      color: var(--color-primary-hover);
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1, h2, h3, h4 {
+      line-height: 1.12;
+      text-wrap: balance;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      max-width: 12ch;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-4);
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-3);
+    }
+
+    p { color: var(--color-text-muted); max-width: 70ch; }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-3);
+      margin-top: var(--space-2);
+    }
+
+    .stat {
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      background: var(--color-surface-offset);
+      border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: var(--text-lg);
+      color: var(--color-text);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .panel {
+      padding: 1.25rem;
+    }
+
+    .bullet-list,
+    .topic-list,
+    .compact-list {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .bullet-list li,
+    .compact-list li {
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+      color: var(--color-text-muted);
+    }
+
+    .bullet-list li::before,
+    .compact-list li::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      margin-top: 0.45rem;
+      border-radius: 999px;
+      background: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    .section {
+      margin-top: var(--space-12);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .section-kicker {
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-5);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+
+    .topic-card,
+    .week-card,
+    .table-card,
+    .formula-box,
+    .checklist,
+    .mini-card {
+      padding: 1.25rem;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin: 0.9rem 0 0.5rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.7rem;
+      border-radius: var(--radius-full);
+      background: var(--color-surface-offset);
+      color: var(--color-text);
+      border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .chip.high { background: color-mix(in srgb, var(--color-warning) 12%, var(--color-surface)); color: var(--color-warning); }
+    .chip.core { background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface)); color: var(--color-primary-hover); }
+    .chip.daily { background: color-mix(in srgb, var(--color-success) 12%, var(--color-surface)); color: var(--color-success); }
+    .chip.pyq { background: color-mix(in srgb, var(--color-blue) 12%, var(--color-surface)); color: var(--color-blue); }
+
+    .topic-card h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .score {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--color-primary);
+      background: var(--color-primary-highlight);
+      padding: 0.3rem 0.65rem;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+    }
+
+    .topic-meta {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .topic-meta div {
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--color-divider);
+    }
+
+    .label {
+      display: block;
+      color: var(--color-text-faint);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-lg);
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+    }
+
+    th, td {
+      padding: 0.95rem 1rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    th {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-faint);
+      background: var(--color-surface-offset);
+    }
+
+    td { color: var(--color-text-muted); }
+    td strong { color: var(--color-text); }
+
+    .week-card {
+      display: grid;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .week-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -40px auto;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+      pointer-events: none;
+    }
+
+    .week-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .week-no {
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-primary-highlight);
+      color: var(--color-primary-hover);
+      font-weight: 700;
+    }
+
+    .formula-box {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--color-primary) 6%, var(--color-surface)), var(--color-surface));
+    }
+
+    .checklist .compact-list li::before { background: var(--color-success); }
+
+    .footer-note {
+      margin-top: var(--space-12);
+      padding: 1.1rem 1.25rem;
+      border-radius: var(--radius-xl);
+      background: var(--color-surface-offset);
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      color: var(--color-text-muted);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .section-head,
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .nav-links {
+        justify-content: flex-start;
+      }
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(var(--content), calc(100% - 1rem)); }
+      main { padding-top: var(--space-6); }
+      .hero-card,
+      .panel,
+      .topic-card,
+      .table-card,
+      .week-card,
+      .formula-box,
+      .checklist,
+      .mini-card { padding: 1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="SSC CGL Phase 1 guide home">
+        <span class="logo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 4h14v16H5z"></path>
+            <path d="M8 8h8"></path>
+            <path d="M8 12h8"></path>
+            <path d="M8 16h5"></path>
+          </svg>
+        </span>
+        <span>SSC CGL Phase 1</span>
+      </a>
+      <nav class="nav-links" aria-label="Section navigation">
+        <a href="#subjects">Subjects</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#mocks">Mocks</a>
+        <a href="#targets">Targets</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode">Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="container hero" id="top">
+      <article class="hero-card">
+        <span class="eyebrow">Weeks 1–3 Foundation</span>
+        <h1>SSC CGL 2026 Phase 1 built for scoring, revision, and PYQs from Day 1</h1>
+        <p>This file is your Phase 1 study guide only. It turns the older foundation plan into a sharper 3-week roadmap with better Quant core topics, clearer English targets, earlier sectional mocks, revision discipline, and measurable score goals.</p>
+        <div class="hero-stats" aria-label="Phase 1 summary">
+          <div class="stat"><strong>3 weeks</strong><span>Focused foundation block</span></div>
+          <div class="stat"><strong>4 subjects</strong><span>Reasoning, Quant, English, GA</span></div>
+          <div class="stat"><strong>PYQs daily</strong><span>Concept to practice loop</span></div>
+        </div>
+        <div class="chip-row" aria-label="Key tags">
+          <span class="chip core">High ROI topics first</span>
+          <span class="chip daily">Daily English fixed</span>
+          <span class="chip pyq">PYQs from Day 1</span>
+          <span class="chip high">Friday revision night</span>
+        </div>
+      </article>
+
+      <aside class="hero-side" aria-label="Study principles">
+        <section class="panel">
+          <h3>How to use this file</h3>
+          <ul class="bullet-list">
+            <li>Study topic in the order given, not randomly.</li>
+            <li>After each topic, solve PYQs the same day.</li>
+            <li>Use Friday night only for revision and error log review.</li>
+            <li>Check your scores at the end of each week.</li>
+          </ul>
+        </section>
+        <section class="panel">
+          <h3>Why this version is stronger</h3>
+          <ul class="bullet-list">
+            <li>Simplification and Number System are now added to Quant core.</li>
+            <li>Alphabet Series and Missing Number are added for easy Reasoning marks.</li>
+            <li>English is measurable: vocabulary, grammar, reading, and PYQs daily.</li>
+            <li>Week 3 now includes sectional mock expansion instead of only passive study.</li>
+          </ul>
+        </section>
+      </aside>
+    </section>
+
+    <section class="container section" id="subjects">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Study order</div>
+          <h2>Phase 1 priorities</h2>
+          <p>Use these priorities to protect time and score early. Reasoning gives the fastest return, Quant builds calculation strength, English must run every day, and GA should follow a compact sequence instead of endless reading.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <article class="mini-card">
+          <h3>Priority order</h3>
+          <div class="chip-row">
+            <span class="chip core">1. Reasoning</span>
+            <span class="chip core">2. Quant</span>
+            <span class="chip daily">3. English daily</span>
+            <span class="chip pyq">4. GA block study</span>
+          </div>
+          <p>Do not try to finish the entire syllabus here. Phase 1 is for locking repeated topics, strengthening exam reflexes, and creating a repeatable system.</p>
+        </article>
+        <article class="formula-box">
+          <h3>Golden workflow</h3>
+          <ul class="compact-list">
+            <li>Concept</li>
+            <li>20 PYQs the same day</li>
+            <li>Short notes</li>
+            <li>48-hour revision</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Reasoning</div>
+          <h2>Core topics and solving approach</h2>
+          <p>These Reasoning topics were chosen because they repeat often and can become quick marks with the right method. The main target is to move toward 20+ correct by the end of Week 3.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <article class="topic-card">
+          <h3>Analogy <span class="score">High importance</span></h3>
+          <p>Always identify the relation type first: meaning, function, part-whole, category, or numerical relation.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Find one clean relation before checking options.</div>
+            <div><span class="label">Common mistake</span>Guessing from similarity without knowing the exact relation.</div>
+            <div><span class="label">Practice</span>20 PYQs after concept completion.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Classification <span class="score">High importance</span></h3>
+          <p>Look for the one hidden mismatch only. Most questions are simple when you avoid overthinking.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Check group, property, use, and sequence quickly.</div>
+            <div><span class="label">Common mistake</span>Trying too many logic patterns at once.</div>
+            <div><span class="label">Practice</span>Odd-one-out sets in timed mode.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Series <span class="score">High importance</span></h3>
+          <p>SSC often rewards simple pattern recognition here, especially number and letter patterns.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Check difference, second difference, multiplication, and alternation in that order.</div>
+            <div><span class="label">Common mistake</span>Skipping the easiest arithmetic pattern and jumping to complex logic.</div>
+            <div><span class="label">Practice</span>20–30 questions in one sitting.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Alphabet Series <span class="score">High importance</span></h3>
+          <p>This is repetitive and highly scoreable if alphabet positions are automatic.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Memorize A=1 to Z=26 and reverse positions too.</div>
+            <div><span class="label">Common mistake</span>Forgetting reverse alphabet checks.</div>
+            <div><span class="label">Practice</span>Fast drills, not long theory sessions.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Missing Number Series <span class="score">High importance</span></h3>
+          <p>This gives easy marks when you build speed at spotting the pattern family.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Check difference, multiplication, square relation, and alternate chains.</div>
+            <div><span class="label">Common mistake</span>Wasting too much time on a single stubborn question.</div>
+            <div><span class="label">Practice</span>Timed mini sets.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Coding-Decoding <span class="score">High importance</span></h3>
+          <p>This is one of the most repeated SSC Reasoning topics and should become a strength.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Test shift, reverse, direct mapping, and word pattern one by one.</div>
+            <div><span class="label">Common mistake</span>Mixing all possible methods together without structure.</div>
+            <div><span class="label">Practice</span>20 PYQs the same day.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Blood Relation <span class="score">Medium importance</span></h3>
+          <p>Usually direct, but chain questions become risky without a diagram.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Draw a quick family tree every time.</div>
+            <div><span class="label">Common mistake</span>Trying to solve relation chains only in your head.</div>
+            <div><span class="label">Practice</span>Short and long relation sets.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Direction <span class="score">Medium importance</span></h3>
+          <p>Direction becomes easy when every turn is diagrammed instead of imagined loosely.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Use arrows and right-left turns on paper.</div>
+            <div><span class="label">Common mistake</span>Confusing left and right after multiple turns.</div>
+            <div><span class="label">Practice</span>Diagram-heavy drills.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Order Ranking <span class="score">Medium importance</span></h3>
+          <p>These questions reward clean formula use rather than intuition.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Use total = left rank + right rank - 1 when required.</div>
+            <div><span class="label">Common mistake</span>Mixing position with final rank.</div>
+            <div><span class="label">Practice</span>Formula-based repetition sets.</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Quant</div>
+          <h2>Core arithmetic for Phase 1</h2>
+          <p>The Quant mix here is narrower than broad syllabus coverage on purpose. Simplification and Number System were added because they support fast solving across SSC arithmetic and make the rest of the section easier.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <article class="topic-card">
+          <h3>Simplification <span class="score">Very high</span></h3>
+          <p>This is one of the fastest scoring areas and strengthens raw calculation speed.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Master BODMAS, fraction-decimal-percent conversion, and square tables.</div>
+            <div><span class="label">Common mistake</span>Slow basics creating time pressure in easy questions.</div>
+            <div><span class="label">Practice</span>Daily timed drills.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Number System <span class="score">Very high</span></h3>
+          <p>Strong Number System improves divisibility, factor logic, remainders, and mental comfort across Quant.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Learn divisibility rules, unit digits, LCM-HCF, factors, and remainder patterns.</div>
+            <div><span class="label">Common mistake</span>Using long arithmetic where pattern logic is enough.</div>
+            <div><span class="label">Practice</span>Short PYQ clusters with concept tagging.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Percentage <span class="score">Very high</span></h3>
+          <p>This topic supports Profit and Loss, SI-CI, Average, and data interpretation later.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Memorize common fraction-percentage conversions.</div>
+            <div><span class="label">Common mistake</span>Slow mental conversion.</div>
+            <div><span class="label">Practice</span>Repeated short sets with oral calculation.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Ratio &amp; Proportion <span class="score">High importance</span></h3>
+          <p>Directly asked and also useful later in comparison and distribution questions.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Equalize ratios cleanly and reduce unnecessary algebra.</div>
+            <div><span class="label">Common mistake</span>Mixing percentage and ratio base values.</div>
+            <div><span class="label">Practice</span>Chapterwise PYQs same day.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Average <span class="score">High importance</span></h3>
+          <p>Simple once total-sum logic is internalized.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Think total first, average second.</div>
+            <div><span class="label">Common mistake</span>Forgetting sum changes when values are added or removed.</div>
+            <div><span class="label">Practice</span>20 mixed average problems.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Profit &amp; Loss <span class="score">High importance</span></h3>
+          <p>A consistent SSC favorite and one of the most useful scoring chapters.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Keep CP, SP, MP, discount, and profit base values separate.</div>
+            <div><span class="label">Common mistake</span>Applying percent on the wrong base.</div>
+            <div><span class="label">Practice</span>Concept plus same-day PYQs.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>SI / CI <span class="score">Medium importance</span></h3>
+          <p>Usually formula-friendly and not hard if the basics are clean.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Write principal, rate, and time before substitution.</div>
+            <div><span class="label">Common mistake</span>Substituting quickly without reading the interest condition properly.</div>
+            <div><span class="label">Practice</span>Small focused sets.</div>
+          </div>
+        </article>
+        <article class="topic-card">
+          <h3>Time &amp; Work <span class="score">Medium importance</span></h3>
+          <p>This chapter gets easier when you switch from raw time to efficiency thinking.</p>
+          <div class="topic-meta">
+            <div><span class="label">Trick</span>Use LCM and work efficiency method.</div>
+            <div><span class="label">Common mistake</span>Solving everything with direct fractions and getting stuck.</div>
+            <div><span class="label">Practice</span>Pattern-based sets with worker combinations.</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">English and GA</div>
+          <h2>Daily English and weekly GA order</h2>
+          <p>English should not stay vague in a roadmap. It needs fixed daily output, while GA should move by block: Science in Week 1, History in Week 2, and Polity basics in Week 3.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <article class="table-card">
+          <h3>English daily block</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Daily target</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Vocabulary</strong></td>
+                  <td>10 words</td>
+                  <td>Retention with revision, not overload</td>
+                </tr>
+                <tr>
+                  <td><strong>Grammar</strong></td>
+                  <td>15 questions</td>
+                  <td>Error spotting and rule application</td>
+                </tr>
+                <tr>
+                  <td><strong>Reading</strong></td>
+                  <td>1 passage</td>
+                  <td>Comprehension and attention control</td>
+                </tr>
+                <tr>
+                  <td><strong>PYQs</strong></td>
+                  <td>10 questions</td>
+                  <td>Exam pattern familiarity</td>
+                </tr>
+                <tr>
+                  <td><strong>Total time</strong></td>
+                  <td>30–40 minutes</td>
+                  <td>Daily consistency without fatigue</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="table-card">
+          <h3>GA sequence</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Week</th>
+                  <th>Focus</th>
+                  <th>Key areas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Week 1</strong></td>
+                  <td>Science</td>
+                  <td>Physics basics, chemistry basics, biology basics, direct facts</td>
+                </tr>
+                <tr>
+                  <td><strong>Week 2</strong></td>
+                  <td>History</td>
+                  <td>Ancient overview, selective medieval, stronger modern coverage</td>
+                </tr>
+                <tr>
+                  <td><strong>Week 3</strong></td>
+                  <td>Polity basics</td>
+                  <td>Articles, Rights, DPSP, Parliament, President, PM</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section" id="schedule">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Week plan</div>
+          <h2>Step-by-step three-week schedule</h2>
+          <p>This weekly layout is designed so that new learning, PYQs, revision, and test pressure all start early. Use it as your exact Phase 1 study sequence.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="week-card">
+          <div class="week-top">
+            <div class="week-no">1</div>
+            <span class="chip core">Build base</span>
+          </div>
+          <div>
+            <h3>Week 1</h3>
+            <ul class="bullet-list">
+              <li><strong>Reasoning:</strong> Analogy, Classification, Series, Alphabet Series</li>
+              <li><strong>Quant:</strong> Simplification, Number System, Percentage</li>
+              <li><strong>English:</strong> Start daily 30–40 min block</li>
+              <li><strong>GA:</strong> Science</li>
+              <li><strong>Practice:</strong> Topic-wise PYQs from Day 1, no formal mock yet</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="week-card">
+          <div class="week-top">
+            <div class="week-no">2</div>
+            <span class="chip pyq">Add test pressure</span>
+          </div>
+          <div>
+            <h3>Week 2</h3>
+            <ul class="bullet-list">
+              <li><strong>Reasoning:</strong> Missing Number Series, Coding-Decoding, Blood Relation</li>
+              <li><strong>Quant:</strong> Ratio &amp; Proportion, Average, Profit &amp; Loss</li>
+              <li><strong>English:</strong> Continue daily system</li>
+              <li><strong>GA:</strong> History</li>
+              <li><strong>Practice:</strong> 2 sectional mocks</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="week-card">
+          <div class="week-top">
+            <div class="week-no">3</div>
+            <span class="chip high">Consolidate</span>
+          </div>
+          <div>
+            <h3>Week 3</h3>
+            <ul class="bullet-list">
+              <li><strong>Reasoning:</strong> Direction, Order Ranking, full revision</li>
+              <li><strong>Quant:</strong> SI / CI, Time &amp; Work, arithmetic revision</li>
+              <li><strong>English:</strong> Continue daily system</li>
+              <li><strong>GA:</strong> Polity basics</li>
+              <li><strong>Practice:</strong> 4 sectional mocks — Quant, Reasoning, English, Mixed</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section" id="mocks">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Mocks and revision</div>
+          <h2>Testing, review, and weekly reset</h2>
+          <p>Sectional mocks are not just for checking marks. They show whether your method is working, whether your speed is usable, and which mistakes keep repeating.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <article class="checklist">
+          <h3>Mock plan</h3>
+          <ul class="compact-list">
+            <li>Week 1: no formal mock, only topic drills and PYQs.</li>
+            <li>Week 2: 2 sectional mocks minimum.</li>
+            <li>Week 3: 4 sectional mocks — Quant, Reasoning, English, Mixed.</li>
+            <li>After each mock, write errors in an error log the same day.</li>
+          </ul>
+        </article>
+        <article class="checklist">
+          <h3>Friday night revision rule</h3>
+          <ul class="compact-list">
+            <li>Revise formulas.</li>
+            <li>Revise vocabulary.</li>
+            <li>Revise weak questions.</li>
+            <li>Review error log.</li>
+            <li>No new topics on Friday night.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section" id="targets">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Targets</div>
+          <h2>Weekly score checkpoints</h2>
+          <p>Targets keep the roadmap real. Without them, Phase 1 feels productive even when it is not actually improving exam performance.</p>
+        </div>
+      </div>
+
+      <article class="table-card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Checkpoint</th>
+                <th>Target</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>End of Week 1</strong></td>
+                <td>Reasoning 15 / 25</td>
+                <td>You are recognizing patterns and solving clean basics.</td>
+              </tr>
+              <tr>
+                <td><strong>End of Week 2</strong></td>
+                <td>Reasoning 18 / 25</td>
+                <td>Core pattern questions should feel familiar and faster.</td>
+              </tr>
+              <tr>
+                <td><strong>End of Week 3</strong></td>
+                <td>Reasoning 20+ / 25</td>
+                <td>Reasoning should become a serious scoring section.</td>
+              </tr>
+              <tr>
+                <td><strong>End of Week 3</strong></td>
+                <td>Quant 15+ / 25</td>
+                <td>Arithmetic base is working and calculation speed is improving.</td>
+              </tr>
+              <tr>
+                <td><strong>End of Week 3</strong></td>
+                <td>English 15+ / 25</td>
+                <td>Daily system is producing stable output.</td>
+              </tr>
+              <tr>
+                <td><strong>End of Week 3</strong></td>
+                <td>GA 10+ / 25</td>
+                <td>Compact block study is giving usable static GK recall.</td>
+              </tr>
+              <tr>
+                <td><strong>Overall mock</strong></td>
+                <td>60–65+ / 100</td>
+                <td>The roadmap is moving in the right direction.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="container section">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Daily routine</div>
+          <h2>Simple study flow to repeat every day</h2>
+          <p>Keep the order fixed so your effort stays consistent and your revision never gets skipped. The structure matters as much as the topics.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <article class="formula-box">
+          <h3>Daily order</h3>
+          <ul class="compact-list">
+            <li>One concept block</li>
+            <li>15–20 PYQs immediately after</li>
+            <li>Short note making</li>
+            <li>English daily block</li>
+            <li>Small GA block</li>
+            <li>End-of-day revision</li>
+          </ul>
+        </article>
+        <article class="checklist">
+          <h3>Avoid these mistakes</h3>
+          <ul class="compact-list">
+            <li>Do not postpone PYQs for later weeks.</li>
+            <li>Do not learn 50 new words per day and forget them.</li>
+            <li>Do not keep adding new topics without revision.</li>
+            <li>Do not judge progress only by hours studied.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="footer-note">
+        This guide is meant to function as a complete Phase 1 reference page. Read the topic blocks, follow the week order, solve PYQs the same day, and track your weekly scores. Once these three weeks are stable, Phase 2 becomes much easier to build around real performance instead of guesswork.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+
+      function updateLabel() {
+        btn.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+
+      updateLabel();
+      btn.addEventListener('click', function () {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        updateLabel();
+      });
+    })();
+  </script>
+</body>
+</html>
