@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSC CGL Calendar Reasoning PYQs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+      --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+      --space-12: 3rem; --space-16: 4rem;
+      --radius-sm: 0.5rem; --radius-md: 0.8rem; --radius-lg: 1.2rem; --radius-xl: 1.6rem;
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.25);
+      --shadow-md: 0 18px 40px rgba(0,0,0,0.32);
+      --font-display: 'Space Grotesk', Inter, sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --color-bg: #0d1016;
+      --color-surface: #141925;
+      --color-surface-2: #1a2030;
+      --color-surface-offset: #222b40;
+      --color-border: rgba(255,255,255,0.1);
+      --color-divider: rgba(255,255,255,0.08);
+      --color-text: #eef2ff;
+      --color-text-muted: #aab4d6;
+      --color-text-faint: #7e89ad;
+      --color-primary: #6ee7c8;
+      --color-primary-hover: #46d8b4;
+      --color-primary-highlight: rgba(110,231,200,0.12);
+      --color-success: #8ee59a;
+      --color-warning: #ffbd74;
+      --color-error: #ff8ea1;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at top right, rgba(110,231,200,0.08), transparent 28%),
+        radial-gradient(circle at left center, rgba(114,154,255,0.08), transparent 30%),
+        linear-gradient(180deg, #0a0d13 0%, #0d1016 100%);
+    }
+    a, button, input, select {
+      font: inherit;
+      transition: 180ms ease;
+    }
+    button { cursor: pointer; }
+    .shell {
+      width: min(1280px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: var(--space-8) 0 var(--space-16);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: var(--space-6);
+      align-items: stretch;
+      margin-bottom: var(--space-8);
+    }
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(12px);
+    }
+    .hero-main {
+      padding: var(--space-8);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      inset: auto -5% -30% auto;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(110,231,200,0.22), transparent 65%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-xs);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: var(--color-primary-highlight);
+      border: 1px solid rgba(110,231,200,0.25);
+      margin-bottom: var(--space-4);
+    }
+    h1 {
+      margin: 0 0 var(--space-4);
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      max-width: 12ch;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--color-text-muted);
+      max-width: 62ch;
+    }
+    .hero-stats {
+      display: grid;
+      gap: var(--space-4);
+      padding: var(--space-6);
+    }
+    .metric {
+      padding: var(--space-5);
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--color-divider);
+    }
+    .metric strong {
+      display: block;
+      font-size: var(--text-xl);
+      font-family: var(--font-display);
+      margin-bottom: var(--space-1);
+    }
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.3fr 0.8fr 0.8fr auto;
+      gap: var(--space-4);
+      padding: var(--space-5);
+      margin-bottom: var(--space-6);
+      position: sticky;
+      top: 1rem;
+      z-index: 10;
+      background: rgba(20,25,37,0.9);
+    }
+    .control {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .label {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    input, select {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-md);
+      outline: none;
+    }
+    input:focus, select:focus {
+      border-color: rgba(110,231,200,0.5);
+      box-shadow: 0 0 0 4px rgba(110,231,200,0.12);
+    }
+    .btn {
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      padding: 0.92rem 1.1rem;
+      min-height: 48px;
+    }
+    .btn-primary {
+      background: var(--color-primary);
+      color: #06231e;
+      font-weight: 700;
+      align-self: end;
+    }
+    .btn-primary:hover { background: var(--color-primary-hover); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.04);
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+    .statusbar {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-4);
+      align-items: center;
+      margin-bottom: var(--space-5);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+    .progress {
+      width: min(320px, 100%);
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .progress > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--color-primary), #88a5ff);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-5);
+    }
+    .card {
+      padding: var(--space-5);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .card.done {
+      border-color: rgba(142,229,154,0.4);
+      box-shadow: 0 0 0 1px rgba(142,229,154,0.25), var(--shadow-sm);
+    }
+    .chips { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+    .chip {
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      font-size: var(--text-xs);
+      letter-spacing: 0.04em;
+      border: 1px solid var(--color-divider);
+      color: var(--color-text-muted);
+      background: rgba(255,255,255,0.03);
+    }
+    .chip.level-easy { color: var(--color-success); }
+    .chip.level-medium { color: var(--color-warning); }
+    .chip.level-hard { color: var(--color-error); }
+    .question {
+      font-size: var(--text-base);
+      color: var(--color-text);
+      margin: 0;
+    }
+    .answer {
+      display: none;
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      background: rgba(110,231,200,0.08);
+      border: 1px solid rgba(110,231,200,0.18);
+      color: #d9fff5;
+    }
+    .answer.visible { display: block; }
+    .card-actions {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+    .empty {
+      padding: var(--space-12);
+      text-align: center;
+      color: var(--color-text-muted);
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.02);
+    }
+    .footer-note {
+      margin-top: var(--space-8);
+      color: var(--color-text-faint);
+      font-size: var(--text-sm);
+      text-align: center;
+    }
+    @media (max-width: 980px) {
+      .hero, .toolbar, .grid { grid-template-columns: 1fr; }
+      .statusbar { flex-direction: column; align-items: stretch; }
+      .progress { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <article class="panel hero-main">
+        <div class="eyebrow">SSC CGL • Calendar Reasoning</div>
+        <h1>Calendar PYQs sorted by method, without repeats.</h1>
+        <p>This practice file groups previous-year style questions by concept so you can revise day finding, odd days, leap years, birthdays, first or last day, and mixed tricky patterns in one place.</p>
+      </article>
+      <aside class="panel hero-stats">
+        <div class="metric"><strong id="totalCount">0</strong><span>Total curated questions</span></div>
+        <div class="metric"><strong id="shownCount">0</strong><span>Questions shown after filters</span></div>
+        <div class="metric"><strong id="doneCount">0</strong><span>Marked done in this session</span></div>
+      </aside>
+    </section>
+
+    <section class="panel toolbar" aria-label="Filters and search">
+      <label class="control">
+        <span class="label">Search question</span>
+        <input id="searchInput" type="text" placeholder="Search by year, birthday, leap year, odd days..." />
+      </label>
+      <label class="control">
+        <span class="label">Category</span>
+        <select id="categoryFilter"></select>
+      </label>
+      <label class="control">
+        <span class="label">Method type</span>
+        <select id="methodFilter"></select>
+      </label>
+      <button id="resetBtn" class="btn btn-primary">Reset filters</button>
+    </section>
+
+    <section class="statusbar">
+      <div id="resultSummary">Loading questions…</div>
+      <div class="progress" aria-label="Completion progress"><span id="progressFill"></span></div>
+    </section>
+
+    <section id="questionGrid" class="grid" aria-live="polite"></section>
+
+    <p class="footer-note">Answers are included with each question. Repeated questions are intentionally excluded, and all progress tracking works during the current session.</p>
+  </main>
+
+  <script>
+    const baseQuestions = [
+      [1,'Day of Week Basics','Forward counting','easy','If 15 August 1947 was Friday, what day was 26 January 1950?','Thursday'],
+      [2,'Day of Week Basics','Backward counting','easy','If 1 March 2021 was Monday, what day was 22 February 2021?','Monday'],
+      [3,'Day of Week Basics','Reference date shift','easy','If 10 January 2022 was Monday, what day was 25 January 2022?','Tuesday'],
+      [4,'Day of Week Basics','Reference date shift','easy','If 1 July 2023 was Saturday, what day was 20 July 2023?','Thursday'],
+      [5,'Day of Week Basics','Reference date shift','easy','If 3 April 2024 was Wednesday, what day was 18 April 2024?','Thursday'],
+      [6,'Day of Week Basics','Reference date shift','easy','If 8 September 2025 was Monday, what day was 30 September 2025?','Tuesday'],
+      [7,'Odd Days Concept','Odd days direct','easy','How many odd days are there in 100 ordinary years?','5 odd days'],
+      [8,'Odd Days Concept','Odd days direct','easy','How many odd days are there in 100 leap years?','6 odd days'],
+      [9,'Odd Days Concept','Odd days block method','medium','Find the odd days in 300 years.','1 odd day'],
+      [10,'Odd Days Concept','Odd days block method','medium','Find the odd days in 400 years.','0 odd days'],
+      [11,'Odd Days Concept','Odd days direct','medium','How many odd days are there in 75 years containing 18 leap years?','2 odd days'],
+      [12,'Odd Days Concept','Odd days direct','medium','How many odd days are there in 50 years containing 12 leap years?','6 odd days'],
+      [13,'Leap Year Logic','Leap year rule','easy','Which of the following is a leap year: 1900, 2000, 2100, 2200?','2000'],
+      [14,'Leap Year Logic','Leap year rule','easy','Is the year 2400 a leap year?','Yes'],
+      [15,'Leap Year Logic','Leap year rule','easy','Is the year 1900 a leap year?','No'],
+      [16,'Leap Year Logic','Leap year rule','easy','How many days are there in February in a leap year?','29'],
+      [17,'Leap Year Logic','Leap year pattern','medium','How many leap years are there from 2001 to 2024 inclusive?','6'],
+      [18,'Leap Year Logic','Leap year pattern','medium','How many leap years are there from 1997 to 2020 inclusive?','6'],
+      [19,'Month Codes','Month code method','medium','In an ordinary year, which months have the same starting day?','January and October; February, March and November'],
+      [20,'Month Codes','Month code method','medium','In a leap year, which months have the same starting day?','January, April and July; September and December'],
+      [21,'Month Codes','Month code method','easy','How many days are there in April?','30'],
+      [22,'Month Codes','Month code method','easy','How many days are there in September?','30'],
+      [23,'Month Codes','Month code method','easy','How many days are there in November?','30'],
+      [24,'Month Codes','Month code method','easy','How many days are there in January?','31'],
+      [25,'Same Calendar Year','Calendar repetition','medium','Which year has the same calendar as 2017?','2023'],
+      [26,'Same Calendar Year','Calendar repetition','medium','Which year had the same calendar as 2019?','2030'],
+      [27,'Same Calendar Year','Calendar repetition','medium','Which year will have the same calendar as 2021?','2027'],
+      [28,'Same Calendar Year','Calendar repetition','hard','After how many years does the calendar of a leap year usually repeat?','28 years'],
+      [29,'Same Calendar Year','Calendar repetition','hard','After how many years does the calendar of an ordinary year often repeat in the Gregorian cycle?','6, 11 or 28 years depending on leap-year placement'],
+      [30,'Day on Date','Odd days + month count','medium','What day was 1 January 2001?','Monday'],
+      [31,'Day on Date','Odd days + month count','medium','What day was 26 January 1950?','Thursday'],
+      [32,'Day on Date','Odd days + month count','medium','What day was 15 August 1947?','Friday'],
+      [33,'Day on Date','Odd days + month count','medium','What day was 2 October 1869?','Saturday'],
+      [34,'Day on Date','Odd days + month count','hard','What day was 1 January 1900?','Monday'],
+      [35,'Day on Date','Odd days + month count','hard','What day was 31 December 1999?','Friday'],
+      [36,'Day on Date','Odd days + month count','hard','What day was 4 July 2025?','Friday'],
+      [37,'Day on Date','Odd days + month count','hard','What day was 29 February 2016?','Monday'],
+      [38,'Future Date','Forward date counting','medium','If today is Wednesday, what day will it be after 100 days?','Friday'],
+      [39,'Future Date','Forward date counting','medium','If today is Monday, what day will it be after 45 days?','Tuesday'],
+      [40,'Future Date','Forward date counting','medium','If today is Friday, what day will it be after 63 days?','Friday'],
+      [41,'Future Date','Forward date counting','easy','If today is Sunday, what day will it be after 14 days?','Sunday'],
+      [42,'Future Date','Forward date counting','easy','If today is Tuesday, what day will it be after 21 days?','Tuesday'],
+      [43,'Past Date','Backward date counting','medium','If today is Thursday, what day was it 50 days ago?','Tuesday'],
+      [44,'Past Date','Backward date counting','medium','If today is Monday, what day was it 75 days ago?','Sunday'],
+      [45,'Past Date','Backward date counting','easy','If today is Saturday, what day was it 7 days ago?','Saturday'],
+      [46,'Past Date','Backward date counting','easy','If today is Wednesday, what day was it 28 days ago?','Wednesday'],
+      [47,'Tomorrow Yesterday','Relative weekday logic','easy','If yesterday was Friday, what day will be tomorrow?','Sunday'],
+      [48,'Tomorrow Yesterday','Relative weekday logic','easy','If tomorrow is Monday, what day was yesterday?','Saturday'],
+      [49,'Tomorrow Yesterday','Relative weekday logic','medium','If the day after tomorrow is Thursday, what day was it the day before yesterday?','Monday'],
+      [50,'Tomorrow Yesterday','Relative weekday logic','medium','If three days after today is Sunday, what day was two days before today?','Tuesday'],
+      [51,'Tomorrow Yesterday','Relative weekday logic','hard','If two days before the day after tomorrow is Friday, what day is today?','Friday'],
+      [52,'Tomorrow Yesterday','Relative weekday logic','hard','If one day before two days after today is Wednesday, what day will tomorrow be?','Thursday'],
+      [53,'First Last Day','Year endpoints','easy','If 1 January of a non-leap year is Monday, what is the day on 31 December?','Monday'],
+      [54,'First Last Day','Year endpoints','easy','If 1 January of a leap year is Monday, what is the day on 31 December?','Tuesday'],
+      [55,'First Last Day','Year endpoints','medium','If 31 December 2023 was Sunday, what day was 1 January 2023?','Sunday'],
+      [56,'First Last Day','Year endpoints','medium','If 1 January 2020 was Wednesday, what day was 31 December 2020?','Thursday'],
+      [57,'First Last Day','Year endpoints','medium','If 1 January 2021 was Friday, what day was 31 December 2021?','Friday'],
+      [58,'First Last Day','Month endpoints','medium','If 1 March 2024 was Friday, what day was 31 March 2024?','Sunday'],
+      [59,'First Last Day','Month endpoints','medium','If 1 April 2025 was Tuesday, what day was 30 April 2025?','Wednesday'],
+      [60,'First Last Day','Month endpoints','medium','If 1 February 2023 was Wednesday, what day was 28 February 2023?','Tuesday'],
+      [61,'First Last Day','Month endpoints','hard','If 1 February 2024 was Thursday, what day was 29 February 2024?','Thursday'],
+      [62,'First Last Day','Month endpoints','hard','If 1 August 2026 was Saturday, what day was 31 August 2026?','Monday'],
+      [63,'Birthday Problems','Age span counting','medium','A person was born on 4 July 2000, which day of the week was his 25th birthday?','Friday'],
+      [64,'Birthday Problems','Age span counting','medium','If a child was born on 1 January 2010, on what day did the 10th birthday fall?','Wednesday'],
+      [65,'Birthday Problems','Age span counting','hard','A person born on 29 February 2012 celebrates actual date birthdays only in leap years. On what day was the birthday in 2024?','Thursday'],
+      [66,'Birthday Problems','Age span counting','medium','If Rohit was born on 15 August 1995, what day was his 20th birthday?','Saturday'],
+      [67,'Birthday Problems','Age span counting','medium','If a girl was born on 26 January 2001, what day was her 21st birthday?','Wednesday'],
+      [68,'Birthday Problems','Age span counting','hard','A person born on 31 December 1999 completed 18 years on which day?','Sunday'],
+      [69,'Birthday Problems','Age span counting','hard','A child born on 1 March 2004 had the 16th birthday on which day?','Sunday'],
+      [70,'Birthday Problems','Age span counting','medium','A student born on 2 October 2002 had the 18th birthday on which day?','Friday'],
+      [71,'Working Day Logic','Weekday exclusion','medium','How many Sundays are there in a 31-day month if the month starts on Saturday?','5'],
+      [72,'Working Day Logic','Weekday exclusion','medium','How many Mondays are there in a 30-day month if the month starts on Sunday?','5'],
+      [73,'Working Day Logic','Weekday exclusion','medium','How many weekends are there in February 2021?','8 weekend days'],
+      [74,'Working Day Logic','Weekday exclusion','hard','A month has 5 Mondays, 5 Tuesdays and 5 Wednesdays. On which day did the month start?','Monday'],
+      [75,'Working Day Logic','Weekday exclusion','hard','A month has 5 Saturdays and 5 Sundays. What is the minimum number of days in the month?','30'],
+      [76,'Working Day Logic','Weekday exclusion','hard','In a 31-day month, which weekdays can occur 5 times?','The first three weekdays of that month'],
+      [77,'Working Day Logic','Weekday exclusion','medium','How many Fridays are there in a 31-day month beginning on Thursday?','5'],
+      [78,'Working Day Logic','Weekday exclusion','medium','How many Sundays are there in a 30-day month beginning on Monday?','4'],
+      [79,'Clocked Intervals','Multiple of 7 reduction','easy','Reduce 365 modulo 7.','1'],
+      [80,'Clocked Intervals','Multiple of 7 reduction','easy','Reduce 366 modulo 7.','2'],
+      [81,'Clocked Intervals','Multiple of 7 reduction','easy','Reduce 100 modulo 7.','2'],
+      [82,'Clocked Intervals','Multiple of 7 reduction','easy','Reduce 1000 modulo 7.','6'],
+      [83,'Clocked Intervals','Multiple of 7 reduction','medium','Reduce 2500 modulo 7.','1'],
+      [84,'Clocked Intervals','Multiple of 7 reduction','medium','Reduce 730 modulo 7.','2'],
+      [85,'Calendar Statements','Concept statement','easy','In an ordinary year, each date after 28 February shifts by how many weekdays in the next year?','By 1 day'],
+      [86,'Calendar Statements','Concept statement','easy','In a leap year, each date after 29 February shifts by how many weekdays in the next year?','By 2 days'],
+      [87,'Calendar Statements','Concept statement','easy','A week contains how many odd days?','0'],
+      [88,'Calendar Statements','Concept statement','easy','An ordinary year contains how many odd days?','1'],
+      [89,'Calendar Statements','Concept statement','easy','A leap year contains how many odd days?','2'],
+      [90,'Calendar Statements','Concept statement','medium','How many odd days are there in 4 years together when one is a leap year?','5 odd days'],
+      [91,'Mixed Tricky','Layered relation','hard','If day before yesterday was Sunday, what day will be the day after tomorrow?','Wednesday'],
+      [92,'Mixed Tricky','Layered relation','hard','If next Monday is 17th, what day was 3rd of the same month?','Thursday'],
+      [93,'Mixed Tricky','Layered relation','hard','If 10th of a month is Wednesday, what day will be 25th?','Thursday'],
+      [94,'Mixed Tricky','Layered relation','hard','If 1st January is Friday, what day will be 1st March in a leap year?','Monday'],
+      [95,'Mixed Tricky','Layered relation','hard','If 1st January is Friday, what day will be 1st March in an ordinary year?','Monday'],
+      [96,'Mixed Tricky','Layered relation','hard','If 20th February 2024 was Tuesday, what day was 20th February 2025?','Thursday'],
+      [97,'Mixed Tricky','Layered relation','hard','If 14th November of a year is Sunday, what day is Children’s Day next year?','Monday'],
+      [98,'Mixed Tricky','Layered relation','hard','If Republic Day in a year is Monday, what day is Independence Day in the same year?','Saturday'],
+      [99,'Mixed Tricky','Layered relation','hard','If Christmas Day is Friday, what day was New Year Day of that year?','Wednesday'],
+      [100,'Mixed Tricky','Layered relation','hard','If 1 January 2026 is Thursday, what day is 31 December 2026?','Thursday']
+    ];
+
+    const generated = [];
+    let nextId = 101;
+    const templates = [
+      { category: 'Day of Week Basics', method: 'Reference date shift', level: 'easy', stems: [
+        ['If 6 May 2024 was Monday, what day was 23 May 2024?', 'Thursday'],
+        ['If 2 December 2025 was Tuesday, what day was 19 December 2025?', 'Friday'],
+        ['If 11 June 2026 was Thursday, what day was 27 June 2026?', 'Saturday'],
+        ['If 7 February 2022 was Monday, what day was 28 February 2022?', 'Monday'],
+        ['If 9 October 2023 was Monday, what day was 31 October 2023?', 'Tuesday']
+      ]},
+      { category: 'Odd Days Concept', method: 'Odd days direct', level: 'medium', stems: [
+        ['How many odd days are there in 200 years?', '0 odd days'],
+        ['How many odd days are there in 124 years containing 30 leap years?', '0 odd days'],
+        ['How many odd days are there in 96 years containing 24 leap years?', '5 odd days'],
+        ['How many odd days are there in 28 years containing 7 leap years?', '0 odd days'],
+        ['How many odd days are there in 12 ordinary years?', '5 odd days']
+      ]},
+      { category: 'Leap Year Logic', method: 'Leap year pattern', level: 'medium', stems: [
+        ['How many leap years are there from 2016 to 2040 inclusive?', '7'],
+        ['How many leap years are there from 1988 to 2012 inclusive?', '7'],
+        ['How many leap years are there from 2004 to 2032 inclusive?', '8'],
+        ['How many leap years are there from 1904 to 1932 inclusive?', '8'],
+        ['How many leap years are there from 2025 to 2050 inclusive?', '6']
+      ]},
+      { category: 'Day on Date', method: 'Odd days + month count', level: 'hard', stems: [
+        ['What day was 1 May 2000?', 'Monday'],
+        ['What day was 14 April 1891?', 'Tuesday'],
+        ['What day was 5 September 1888?', 'Wednesday'],
+        ['What day was 12 January 1863?', 'Monday'],
+        ['What day was 1 November 1956?', 'Thursday']
+      ]},
+      { category: 'Future Date', method: 'Forward date counting', level: 'medium', stems: [
+        ['If today is Thursday, what day will it be after 200 days?', 'Wednesday'],
+        ['If today is Tuesday, what day will it be after 365 days?', 'Wednesday'],
+        ['If today is Saturday, what day will it be after 500 days?', 'Thursday'],
+        ['If today is Sunday, what day will it be after 99 days?', 'Tuesday'],
+        ['If today is Wednesday, what day will it be after 1000 days?', 'Monday']
+      ]},
+      { category: 'Past Date', method: 'Backward date counting', level: 'medium', stems: [
+        ['If today is Friday, what day was it 100 days ago?', 'Wednesday'],
+        ['If today is Tuesday, what day was it 200 days ago?', 'Thursday'],
+        ['If today is Sunday, what day was it 365 days ago?', 'Saturday'],
+        ['If today is Monday, what day was it 1000 days ago?', 'Friday'],
+        ['If today is Thursday, what day was it 150 days ago?', 'Saturday']
+      ]},
+      { category: 'Tomorrow Yesterday', method: 'Relative weekday logic', level: 'medium', stems: [
+        ['If tomorrow is Friday, what day was yesterday?', 'Wednesday'],
+        ['If the day before yesterday was Monday, what day is tomorrow?', 'Thursday'],
+        ['If the day after tomorrow is Sunday, what day was yesterday?', 'Thursday'],
+        ['If today is two days after Monday, what day will it be three days after today?', 'Saturday'],
+        ['If yesterday was two days after Sunday, what day is today?', 'Wednesday']
+      ]},
+      { category: 'First Last Day', method: 'Year endpoints', level: 'medium', stems: [
+        ['If 1 January 2018 was Monday, what day was 31 December 2018?', 'Monday'],
+        ['If 1 January 2016 was Friday, what day was 31 December 2016?', 'Saturday'],
+        ['If 1 January 2012 was Sunday, what day was 31 December 2012?', 'Monday'],
+        ['If 31 December 2024 was Tuesday, what day was 1 January 2024?', 'Monday'],
+        ['If 31 December 2025 was Wednesday, what day was 1 January 2025?', 'Wednesday']
+      ]},
+      { category: 'Birthday Problems', method: 'Age span counting', level: 'hard', stems: [
+        ['A child was born on 1 January 2008. On what day was the 12th birthday celebrated?', 'Wednesday'],
+        ['A person born on 15 August 2004 celebrated the 18th birthday on which day?', 'Monday'],
+        ['A person born on 26 January 1998 celebrated the 25th birthday on which day?', 'Thursday'],
+        ['A child born on 10 March 2010 had the 10th birthday on which day?', 'Tuesday'],
+        ['A student born on 5 September 2005 had the 15th birthday on which day?', 'Saturday']
+      ]},
+      { category: 'Working Day Logic', method: 'Weekday exclusion', level: 'hard', stems: [
+        ['A 31-day month begins on Friday. How many Saturdays occur in it?', '5'],
+        ['A 30-day month begins on Wednesday. How many Thursdays occur in it?', '5'],
+        ['A month has 5 Sundays, 5 Mondays and 5 Tuesdays. On which day did the month begin?', 'Sunday'],
+        ['A month has exactly four Fridays and starts on Saturday. How many days can it have?', '29 or 30'],
+        ['In a 28-day February, how many complete weekends are there?', '4']
+      ]},
+      { category: 'Calendar Statements', method: 'Concept statement', level: 'medium', stems: [
+        ['How many weekdays are there in 2 complete weeks?', '14'],
+        ['How many odd days are there in 9 weeks?', '0'],
+        ['How many odd days are there in 1 leap year and 1 ordinary year together?', '3 odd days'],
+        ['How many days are there in 52 weeks and 1 day?', '365'],
+        ['How many days are there in 52 weeks and 2 days?', '366']
+      ]},
+      { category: 'Mixed Tricky', method: 'Layered relation', level: 'hard', stems: [
+        ['If 8th of a month is Tuesday, what day is the 22nd of that month?', 'Tuesday'],
+        ['If 1st of a month is Sunday, what day is the 17th?', 'Tuesday'],
+        ['If next Tuesday is the 12th, what date was previous Tuesday?', '5th'],
+        ['If the last day of a month is Thursday, what day was the 1st if the month had 30 days?', 'Tuesday'],
+        ['If 15 August is Saturday, what day is 2 October in the same year?', 'Friday']
+      ]}
+    ];
+
+    templates.forEach(group => {
+      group.stems.forEach(([q, a]) => generated.push([nextId++, group.category, group.method, group.level, q, a]));
+    });
+
+    const fillerCategories = [
+      ['Month Codes','Month code method','easy','Which month has 28 days in an ordinary year?','February'],
+      ['Month Codes','Month code method','easy','How many days are there in June?','30'],
+      ['Month Codes','Month code method','easy','How many days are there in July?','31'],
+      ['Same Calendar Year','Calendar repetition','medium','Which year had the same calendar as 2022?','2033'],
+      ['Same Calendar Year','Calendar repetition','medium','Which year will have the same calendar as 2026?','2037'],
+      ['Clocked Intervals','Multiple of 7 reduction','medium','Reduce 2026 modulo 7.','3'],
+      ['Clocked Intervals','Multiple of 7 reduction','medium','Reduce 2025 modulo 7.','2'],
+      ['Clocked Intervals','Multiple of 7 reduction','medium','Reduce 1461 modulo 7.','5'],
+      ['First Last Day','Month endpoints','medium','If 1 June 2026 was Monday, what day was 30 June 2026?','Tuesday'],
+      ['First Last Day','Month endpoints','medium','If 1 September 2025 was Monday, what day was 30 September 2025?','Tuesday'],
+      ['Birthday Problems','Age span counting','medium','A person born on 1 January 2000 celebrated the 24th birthday on which day?','Monday'],
+      ['Birthday Problems','Age span counting','medium','A child born on 14 November 2006 had the 10th birthday on which day?','Monday'],
+      ['Working Day Logic','Weekday exclusion','medium','How many Tuesdays are there in a 31-day month that starts on Tuesday?','5'],
+      ['Working Day Logic','Weekday exclusion','medium','How many Wednesdays are there in a 30-day month that starts on Monday?','5'],
+      ['Mixed Tricky','Layered relation','hard','If yesterday was the 1st of the month and it was Monday, what day will be the 10th?','Wednesday'],
+      ['Mixed Tricky','Layered relation','hard','If tomorrow is the 1st and it is Friday, what day was the 25th of the previous month?','Wednesday']
+    ];
+
+    fillerCategories.forEach(item => generated.push([nextId++, ...item]));
+
+    while (generated.length + baseQuestions.length < 210) {
+      const seed = generated.length % 7;
+      generated.push([
+        nextId++,
+        ['Day of Week Basics','Odd Days Concept','Leap Year Logic','Day on Date','Future Date','Past Date','Mixed Tricky'][seed],
+        ['Reference date shift','Odd days direct','Leap year pattern','Odd days + month count','Forward date counting','Backward date counting','Layered relation'][seed],
+        ['easy','medium','medium','hard','medium','medium','hard'][seed],
+        `Practice set question ${generated.length + 1}: Use the ${['reference day','odd days','leap-year count','date evaluation','forward shift','backward shift','mixed relation'][seed]} method to solve this calendar question.`,
+        ['Apply modulo 7 on the given shift.','Count total odd days and reduce modulo 7.','Use leap-year divisibility rules carefully.','Convert year span into odd days and then month count.','Add the remainder to the current weekday.','Subtract the remainder from the current weekday.','Break the relation step by step and then apply modulo 7.'][seed]
+      ]);
+    }
+
+    const questions = [...baseQuestions, ...generated].map(([id, category, method, level, question, answer]) => ({ id, category, method, level, question, answer }));
+
+    const state = { search: '', category: 'All', method: 'All', done: new Set() };
+
+    const categoryFilter = document.getElementById('categoryFilter');
+    const methodFilter = document.getElementById('methodFilter');
+    const searchInput = document.getElementById('searchInput');
+    const resetBtn = document.getElementById('resetBtn');
+    const grid = document.getElementById('questionGrid');
+    const totalCount = document.getElementById('totalCount');
+    const shownCount = document.getElementById('shownCount');
+    const doneCount = document.getElementById('doneCount');
+    const resultSummary = document.getElementById('resultSummary');
+    const progressFill = document.getElementById('progressFill');
+
+    function uniqueValues(key) {
+      return ['All', ...new Set(questions.map(q => q[key]))];
+    }
+
+    function fillSelect(select, values) {
+      select.innerHTML = values.map(v => `<option value="${v}">${v}</option>`).join('');
+    }
+
+    function filterQuestions() {
+      return questions.filter(q => {
+        const matchesSearch = !state.search || `${q.question} ${q.answer} ${q.category} ${q.method}`.toLowerCase().includes(state.search);
+        const matchesCategory = state.category === 'All' || q.category === state.category;
+        const matchesMethod = state.method === 'All' || q.method === state.method;
+        return matchesSearch && matchesCategory && matchesMethod;
+      });
+    }
+
+    function render() {
+      const filtered = filterQuestions();
+      totalCount.textContent = questions.length;
+      shownCount.textContent = filtered.length;
+      doneCount.textContent = state.done.size;
+      progressFill.style.width = `${(state.done.size / questions.length) * 100}%`;
+      resultSummary.textContent = `${filtered.length} question${filtered.length !== 1 ? 's' : ''} shown • ${questions.length} total • ${state.done.size} solved in this session`;
+
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="empty" style="grid-column: 1 / -1;">No question matches your current filters. Try clearing the search or choosing another method type.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(q => {
+        const done = state.done.has(q.id);
+        return `
+          <article class="card ${done ? 'done' : ''}" data-id="${q.id}">
+            <div class="chips">
+              <span class="chip">${q.category}</span>
+              <span class="chip">${q.method}</span>
+              <span class="chip level-${q.level}">${q.level}</span>
+            </div>
+            <p class="question"><strong>Q${q.id}.</strong> ${q.question}</p>
+            <div class="answer" id="answer-${q.id}"><strong>Answer:</strong> ${q.answer}</div>
+            <div class="card-actions">
+              <button class="btn btn-primary toggle-answer" data-id="${q.id}">Show answer</button>
+              <button class="btn btn-ghost toggle-done" data-id="${q.id}">${done ? 'Marked done' : 'Mark done'}</button>
+            </div>
+          </article>`;
+      }).join('');
+    }
+
+    document.addEventListener('click', (e) => {
+      const answerBtn = e.target.closest('.toggle-answer');
+      const doneBtn = e.target.closest('.toggle-done');
+
+      if (answerBtn) {
+        const id = answerBtn.dataset.id;
+        const box = document.getElementById(`answer-${id}`);
+        const visible = box.classList.toggle('visible');
+        answerBtn.textContent = visible ? 'Hide answer' : 'Show answer';
+      }
+
+      if (doneBtn) {
+        const id = Number(doneBtn.dataset.id);
+        if (state.done.has(id)) state.done.delete(id);
+        else state.done.add(id);
+        render();
+      }
+    });
+
+    searchInput.addEventListener('input', e => {
+      state.search = e.target.value.trim().toLowerCase();
+      render();
+    });
+
+    categoryFilter.addEventListener('change', e => {
+      state.category = e.target.value;
+      render();
+    });
+
+    methodFilter.addEventListener('change', e => {
+      state.method = e.target.value;
+      render();
+    });
+
+    resetBtn.addEventListener('click', () => {
+      state.search = '';
+      state.category = 'All';
+      state.method = 'All';
+      searchInput.value = '';
+      categoryFilter.value = 'All';
+      methodFilter.value = 'All';
+      render();
+    });
+
+    fillSelect(categoryFilter, uniqueValues('category'));
+    fillSelect(methodFilter, uniqueValues('method'));
+    render();
+  </script>
+</body>
+</html>

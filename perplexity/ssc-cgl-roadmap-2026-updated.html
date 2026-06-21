@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSC CGL 2026 Updated Roadmap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(.75rem,.7rem + .25vw,.875rem);
+      --text-sm: clamp(.875rem,.8rem + .35vw,1rem);
+      --text-base: clamp(1rem,.95rem + .25vw,1.125rem);
+      --text-lg: clamp(1.125rem,1rem + .75vw,1.5rem);
+      --text-xl: clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+      --text-2xl: clamp(2rem,1.2rem + 2.5vw,3.5rem);
+      --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem;
+      --bg: #f7f6f2; --surface: #f9f8f5; --surface-2:#fbfbf9; --surface-3:#edeae5; --text:#25231c; --muted:#6f6d67; --border:#d7d2ca; --primary:#01696f; --primary-2:#d9ece8; --accent:#d19900; --good:#437a22; --warn:#964219; --bad:#a13544;
+      --shadow: 0 8px 24px rgba(37,35,28,.08);
+      --radius: 18px;
+    }
+    [data-theme="dark"] {
+      --bg: #171614; --surface:#1d1b19; --surface-2:#23211f; --surface-3:#2a2724; --text:#e7e2da; --muted:#b0aca6; --border:#3a3734; --primary:#5db0bb; --primary-2:#1f302f; --accent:#e8af34; --good:#7db05d; --warn:#ce8959; --bad:#dd6974; --shadow: 0 12px 36px rgba(0,0,0,.28);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(180deg,var(--bg),var(--surface));color:var(--text);line-height:1.6;font-size:var(--text-base)}
+    a{color:inherit}
+    .wrap{max-width:1200px;margin:0 auto;padding:var(--space-6)}
+    .hero{padding:var(--space-8) 0 var(--space-10);display:grid;gap:var(--space-6)}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);margin-bottom:var(--space-6)}
+    .brand{display:flex;align-items:center;gap:.85rem;font-weight:800}
+    .logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--accent));display:grid;place-items:center;color:white;font-weight:800;box-shadow:var(--shadow)}
+    .theme{border:1px solid var(--border);background:var(--surface);padding:.75rem 1rem;border-radius:999px;cursor:pointer}
+    .eyebrow{display:inline-flex;gap:.5rem;align-items:center;background:var(--primary-2);color:var(--primary);padding:.45rem .8rem;border-radius:999px;font-size:var(--text-sm);font-weight:700;width:max-content}
+    h1{font-family:"Instrument Serif",serif;font-size:var(--text-2xl);line-height:1.02;max-width:12ch;font-weight:400}
+    .lead{max-width:70ch;color:var(--muted)}
+    .hero-grid,.grid-4,.grid-3,.grid-2{display:grid;gap:var(--space-4)}
+    .hero-grid{grid-template-columns:1.4fr .9fr}
+    .grid-4{grid-template-columns:repeat(4,1fr)}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .card{background:color-mix(in srgb,var(--surface) 92%, white 8%);border:1px solid var(--border);border-radius:var(--radius);padding:var(--space-5);box-shadow:var(--shadow)}
+    .metric .num{font-size:var(--text-xl);font-weight:800;line-height:1}
+    .metric .label{color:var(--muted);font-size:var(--text-sm);margin-top:.35rem}
+    .section{padding:var(--space-8) 0}
+    .section h2{font-size:var(--text-xl);margin-bottom:var(--space-3)}
+    .section p.sub{color:var(--muted);max-width:72ch;margin-bottom:var(--space-5)}
+    .callout{border-left:4px solid var(--primary);background:var(--primary-2)}
+    .chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:var(--space-3)}
+    .chip{padding:.5rem .8rem;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);font-size:var(--text-sm);font-weight:600}
+    .phase{display:grid;gap:var(--space-3)}
+    .phase h3{font-size:1.15rem}
+    ul{padding-left:1.1rem}
+    li+li{margin-top:.4rem}
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:18px;background:var(--surface);border:1px solid var(--border)}
+    th,td{padding:1rem;border-bottom:1px solid var(--border);vertical-align:top;text-align:left}
+    th{font-size:var(--text-sm);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--surface-2)}
+    tr:last-child td{border-bottom:none}
+    .badge{display:inline-block;padding:.3rem .6rem;border-radius:999px;font-size:.8rem;font-weight:700}
+    .high{background:rgba(67,122,34,.14);color:var(--good)} .mid{background:rgba(209,153,0,.16);color:#8a6500} .low{background:rgba(161,53,68,.14);color:var(--bad)}
+    .tracker{display:grid;gap:1rem}
+    .score-row{display:grid;grid-template-columns:140px 1fr 120px;gap:1rem;align-items:center}
+    .bar{height:14px;background:var(--surface-3);border-radius:999px;overflow:hidden;border:1px solid var(--border)}
+    .fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:999px}
+    .mini{font-size:var(--text-sm);color:var(--muted)}
+    .footer{padding:var(--space-8) 0 var(--space-10);color:var(--muted)}
+    @media (max-width: 980px){.hero-grid,.grid-4,.grid-3,.grid-2,.score-row{grid-template-columns:1fr}.wrap{padding:1rem}h1{max-width:none}.score-row{gap:.5rem}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="topbar">
+        <div class="brand"><div class="logo">SC</div><span>SSC CGL 2026 — Updated Roadmap</span></div>
+        <button class="theme" data-theme-toggle aria-label="Toggle theme">🌙 Theme</button>
+      </div>
+      <span class="eyebrow">Date-based plan · From today to 26 Sep 2026</span>
+      <div class="hero-grid">
+        <div class="card">
+          <h1>Polished, realistic SSC CGL plan for a working aspirant.</h1>
+          <p class="lead" style="margin-top:1rem">This updated roadmap replaces the older 17-week, late-mock, broad-syllabus approach with an exam-first system: earlier mocks, stronger Reasoning priority, high-frequency Quant focus, static GK-first GA flow, structured revision, score tracking, PYQ tracking, and a weak-topic dashboard.</p>
+          <div class="chips">
+            <span class="chip">Sectional mocks from Week 2</span>
+            <span class="chip">Full mocks from Week 5</span>
+            <span class="chip">3 hrs weekdays</span>
+            <span class="chip">6 hrs Sat + 6 hrs Sun</span>
+            <span class="chip">Final 6 weeks = performance phase</span>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card metric"><div class="num">100</div><div class="label">Questions in Tier 1</div></div>
+          <div class="card metric"><div class="num">200</div><div class="label">Total marks</div></div>
+          <div class="card metric"><div class="num">60</div><div class="label">Minutes in exam</div></div>
+          <div class="card metric"><div class="num">27 hrs</div><div class="label">Weekly sustainable study time</div></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>What changed</h2>
+      <p class="sub">The earlier version was attractive but methodologically weak for SSC CGL 2026. It delayed serious mocks, spread Reasoning too thin, gave too much space to low-return Quant chapters, used an unrealistic vocabulary load, and lacked a proper score-tracking and weak-topic system.</p>
+      <div class="grid-3">
+        <div class="card callout">
+          <h3>Mock timing fixed</h3>
+          <ul>
+            <li>Sectional mocks start in Week 2.</li>
+            <li>First full mock starts in Week 5.</li>
+            <li>From Week 10 onward: minimum 2 full mocks each week.</li>
+            <li>Last 6 weeks: 3–5 full mocks every week.</li>
+          </ul>
+        </div>
+        <div class="card callout">
+          <h3>Priority order fixed</h3>
+          <ul>
+            <li>Reasoning first for fastest return on time.</li>
+            <li>English daily for stable scoring.</li>
+            <li>Quant focused on high-frequency chapters.</li>
+            <li>GA sequence: Science → History → Polity → Geography → CA → Economy.</li>
+          </ul>
+        </div>
+        <div class="card callout">
+          <h3>Tracking added</h3>
+          <ul>
+            <li>Score tracker with phase targets.</li>
+            <li>Error log categories for every mock.</li>
+            <li>Weak-topic dashboard.</li>
+            <li>PYQ completion tracker and revision prompts.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Preparation framework</h2>
+      <p class="sub">Build your preparation around sustainability, not fantasy. The target is not “maximum hours”; the target is repeatable weeks with strong mocks, strong review, and clear movement from concepts to exam performance.</p>
+      <div class="grid-4">
+        <div class="card"><h3>Weekdays</h3><p class="mini">3 hours total</p><ul><li>1 hour concept / revision</li><li>1.5 hours practice / PYQs</li><li>30 minutes vocab, GA, or error-log review</li></ul></div>
+        <div class="card"><h3>Saturday</h3><p class="mini">6 hours</p><ul><li>Topic completion block</li><li>1 mock or 2 sectional tests</li><li>Error analysis</li></ul></div>
+        <div class="card"><h3>Sunday</h3><p class="mini">6 hours</p><ul><li>Weak-area repair</li><li>PYQ reattempt</li><li>Static GK / revision block</li></ul></div>
+        <div class="card"><h3>Daily habits</h3><p class="mini">Small but non-negotiable</p><ul><li>10–15 new words only</li><li>Daily revision of old words</li><li>5–10 GA facts</li><li>Error log update after every test</li></ul></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Weekly roadmap</h2>
+      <p class="sub">This revised weekly plan moves faster into test mode while keeping concept-building focused on what SSC repeatedly asks.</p>
+      <table>
+        <thead>
+          <tr><th>Phase</th><th>Weeks</th><th>Main focus</th><th>Mock plan</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Phase 1</strong></td>
+            <td>Weeks 1–3</td>
+            <td>Reasoning core: analogy, classification, series, coding-decoding, blood relation, direction, order ranking. Quant core: percentage, ratio, average, profit &amp; loss, SI/CI, time &amp; work. English starts daily. GA begins with Lucent Science, then History.</td>
+            <td>Sectional mocks start in Week 2. Minimum 2 sectional tests per week.</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 2</strong></td>
+            <td>Weeks 4–6</td>
+            <td>Reasoning expansion: syllogism, Venn diagram, statement-based questions, non-verbal basics. Quant: TSD, geometry, trigonometry, basic DI. English PYQ grammar patterns. GA: Polity then Geography.</td>
+            <td>First full mock in Week 5. Continue sectionals.</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 3</strong></td>
+            <td>Weeks 7–10</td>
+            <td>Performance shift begins. Reasoning target moves toward 22+/25. Quant remains 70% focused on high-frequency topics only. GA adds monthly current-affairs capsule plus PYQ current-affairs revision.</td>
+            <td>1–2 full mocks per week. Section timing review after each mock.</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 4</strong></td>
+            <td>Weeks 11–14</td>
+            <td>Deep mock phase. Weak topics repaired through targeted practice. Formula sheets, grammar revision, Lucent revision, and PYQ pattern recognition become central.</td>
+            <td>Minimum 2 full mocks per week, with same-day analysis.</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 5</strong></td>
+            <td>Final 6 weeks</td>
+            <td>Exam temperament, accuracy, speed, and revision. No broad topic expansion. Only high-yield revision, weak-zone correction, and timed performance work.</td>
+            <td>3–5 full mocks per week, plus PYQ reattempts.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+
+
+    <section class="section">
+      <h2>Phase 1 master plan</h2>
+      <p class="sub">This upgraded Phase 1 is built to be complete enough that you should not need a separate explanation page for what to study, why to study it, how to practice it, and what score level to expect by the end of the first 3 weeks.</p>
+      <div class="card" style="margin-bottom:1rem">
+        <h3>Phase 1 goal: Weeks 1–3</h3>
+        <ul>
+          <li>Build fast-scoring Reasoning strength from the very beginning.</li>
+          <li>Create Quant base through SSC-friendly arithmetic plus simplification and number system.</li>
+          <li>Make English measurable every single day instead of vague.</li>
+          <li>Finish static GK in a tight order: Science, then History, then Polity basics.</li>
+          <li>Start topic-wise PYQs from Day 1, not after theory ends.</li>
+          <li>End Week 3 with section-level score targets and sectional test exposure.</li>
+        </ul>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Reasoning topics in order</h3>
+          <table>
+            <thead><tr><th>Topic</th><th>Importance</th><th>How to approach</th></tr></thead>
+            <tbody>
+              <tr><td>Analogy</td><td><span class="badge high">High</span></td><td>Do verbal + non-verbal both. Build relation spotting speed, not theory overload.</td></tr>
+              <tr><td>Classification</td><td><span class="badge high">High</span></td><td>Focus on one distinct logic difference quickly. Avoid overthinking odd-one-out questions.</td></tr>
+              <tr><td>Series</td><td><span class="badge high">High</span></td><td>Number, letter, mixed pattern practice. Learn gap checking and alternate-pattern spotting.</td></tr>
+              <tr><td>Alphabet Series</td><td><span class="badge high">High</span></td><td>Memorize alphabet positions firmly. Use forward-backward position tricks.</td></tr>
+              <tr><td>Missing Number Series</td><td><span class="badge high">High</span></td><td>Practice difference, second difference, multiplication-addition patterns.</td></tr>
+              <tr><td>Coding-Decoding</td><td><span class="badge high">High</span></td><td>Handle letter shift, number coding, word logic separately; do pattern classification first.</td></tr>
+              <tr><td>Blood Relation</td><td><span class="badge mid">Medium</span></td><td>Use family tree diagrams instantly. Never solve mentally for complex chains.</td></tr>
+              <tr><td>Direction</td><td><span class="badge mid">Medium</span></td><td>Use quick arrow diagrams and left-right turn discipline.</td></tr>
+              <tr><td>Order Ranking</td><td><span class="badge mid">Medium</span></td><td>Train direct formula-style handling for left-right-total type questions.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Quant topics in order</h3>
+          <table>
+            <thead><tr><th>Topic</th><th>Importance</th><th>How to approach</th></tr></thead>
+            <tbody>
+              <tr><td>Simplification</td><td><span class="badge high">High</span></td><td>Speed-first topic. Practice BODMAS, fractions, decimals, squares, percentage-fraction conversion.</td></tr>
+              <tr><td>Number System</td><td><span class="badge high">High</span></td><td>Cover divisibility, remainders, factors, multiples, unit digits, basic surds.</td></tr>
+              <tr><td>Percentage</td><td><span class="badge high">High</span></td><td>Memorize fraction-percentage table and common increase/decrease conversion shortcuts.</td></tr>
+              <tr><td>Ratio &amp; Proportion</td><td><span class="badge high">High</span></td><td>Use ratio balancing, scaling, and partnership-style logic.</td></tr>
+              <tr><td>Average</td><td><span class="badge high">High</span></td><td>Think deviation and total sum, not long formulas.</td></tr>
+              <tr><td>Profit &amp; Loss</td><td><span class="badge high">High</span></td><td>Master marked price, discount, profit percent relationships with shortcut formula use.</td></tr>
+              <tr><td>SI / CI</td><td><span class="badge mid">Medium</span></td><td>Strong enough for direct SSC questions; do not over-invest in rare advanced forms now.</td></tr>
+              <tr><td>Time &amp; Work</td><td><span class="badge mid">Medium</span></td><td>Use efficiency method and LCM method early.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:1rem">
+        <div class="card">
+          <h3>English daily system</h3>
+          <p class="mini">Daily 30–40 minutes minimum</p>
+          <ul>
+            <li>10 vocabulary words, but revise old words on the same day.</li>
+            <li>15 grammar questions focused on error spotting, fill in the blanks, and sentence correction.</li>
+            <li>1 short reading passage to keep comprehension active.</li>
+            <li>10 previous-year English questions daily.</li>
+            <li>Keep a tiny notebook of repeated grammar rules and repeated vocab traps.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>GA weekly order</h3>
+          <ul>
+            <li><strong>Week 1:</strong> Science — Physics, Chemistry, Biology basics and repeated factual areas.</li>
+            <li><strong>Week 2:</strong> History — Ancient overview, Medieval selective, Modern more important.</li>
+            <li><strong>Week 3:</strong> Polity basics — Articles, Fundamental Rights, DPSP, Parliament, President, PM, constitutional basics.</li>
+            <li>Do not try to finish all Lucent randomly. Read only what matches the week target and revise it with PYQs.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1rem">
+        <h3>Step-by-step method for every topic</h3>
+        <ol style="padding-left:1.2rem">
+          <li>Read concept from one source only.</li>
+          <li>Solve 15–20 topic-wise SSC PYQs the same day.</li>
+          <li>Write short notes: formula, pattern, common trap, shortcut.</li>
+          <li>Mark wrong questions by reason: concept, speed, calculation, reading.</li>
+          <li>Reattempt the same weak questions after 48 hours.</li>
+          <li>At week end, solve one mixed practice set from all completed topics.</li>
+        </ol>
+      </div>
+
+      <div class="card" style="margin-top:1rem">
+        <h3>Topic-wise quick tricks</h3>
+        <div class="grid-2">
+          <div>
+            <ul>
+              <li><strong>Analogy:</strong> first identify relation type — number, word meaning, function, class, part-whole.</li>
+              <li><strong>Series:</strong> check difference, second difference, alternating pattern, multiplication, prime pattern.</li>
+              <li><strong>Alphabet series:</strong> memorize A=1 to Z=26 and reverse positions; this alone saves time.</li>
+              <li><strong>Blood relation:</strong> draw tree symbols, avoid mental chain solving.</li>
+              <li><strong>Direction:</strong> always start with north-facing arrow and update only after turns.</li>
+              <li><strong>Order ranking:</strong> use total = left + right - 1 formula in direct questions.</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li><strong>Simplification:</strong> fraction-to-percentage conversions and square tables make SSC arithmetic much faster.</li>
+              <li><strong>Number system:</strong> divisibility rules and remainder patterns remove many long methods.</li>
+              <li><strong>Percentage:</strong> memorize 1/2, 1/3, 1/4, 1/5 type conversions permanently.</li>
+              <li><strong>Ratio:</strong> equalize ratios instead of using long algebra where possible.</li>
+              <li><strong>Average:</strong> total = average × number of items should become automatic.</li>
+              <li><strong>Time &amp; Work:</strong> work with efficiency units, not raw time statements.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1rem">
+        <h3>Week-by-week Phase 1 plan</h3>
+        <table>
+          <thead><tr><th>Week</th><th>Study target</th><th>Practice target</th><th>Test target</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Week 1</td>
+              <td>Reasoning: Analogy, Classification, Series, Alphabet Series. Quant: Simplification, Number System, Percentage. English daily. GA: Science.</td>
+              <td>Every completed topic followed by 15–20 PYQs on same day.</td>
+              <td>No formal sectional mock yet; use mini timed sets only.</td>
+            </tr>
+            <tr>
+              <td>Week 2</td>
+              <td>Reasoning: Missing Number, Coding-Decoding, Blood Relation. Quant: Ratio, Average, Profit &amp; Loss, SI/CI. GA: History.</td>
+              <td>Continue same-day PYQ practice and make short notes.</td>
+              <td>2 sectional mocks this week.</td>
+            </tr>
+            <tr>
+              <td>Week 3</td>
+              <td>Reasoning: Direction, Order Ranking, revision of all Phase 1 topics. Quant: Time &amp; Work plus revision of all arithmetic core. GA: Polity basics.</td>
+              <td>Mixed PYQ sets from all topics completed in Weeks 1–2.</td>
+              <td>4 sectional mocks: Quant × 1, Reasoning × 1, English × 1, Mixed × 1.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-2" style="margin-top:1rem">
+        <div class="card">
+          <h3>Revision structure</h3>
+          <ul>
+            <li><strong>Friday night:</strong> no new topic.</li>
+            <li>Revise all formulas studied that week.</li>
+            <li>Revise all vocabulary and grammar rules.</li>
+            <li>Revisit weak questions and marked PYQs.</li>
+            <li>Review the error log for repeated mistakes.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>End-of-Phase 1 targets</h3>
+          <ul>
+            <li><strong>End Week 1:</strong> Reasoning should move toward 15/25 level on covered topics.</li>
+            <li><strong>End Week 2:</strong> Reasoning should move toward 18/25 level on covered topics.</li>
+            <li><strong>End Week 3:</strong> Reasoning 20+/25.</li>
+            <li><strong>End Week 3:</strong> Quant 15+/25, English 15+/25, GA 10+/25.</li>
+            <li><strong>Overall sectional/mixed level:</strong> 60–65+/100.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1rem">
+        <h3>Why this Phase 1 is better</h3>
+        <ul>
+          <li>It adds simplification and number system, which support many SSC Quant questions indirectly and directly.</li>
+          <li>It upgrades Reasoning with alphabet series and missing number series, both common SSC scoring areas.</li>
+          <li>It turns English into a measurable daily block instead of a vague reminder.</li>
+          <li>It improves GA order by inserting Polity basics in Week 3 for high return.</li>
+          <li>It starts PYQs from Day 1, which matches how serious SSC aspirants learn pattern recognition early.</li>
+          <li>It adds revision and score targets, so the roadmap can actually be checked against output.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Subject priority</h2>
+      <p class="sub">Use time where SSC gives the best return. Not every chapter deserves equal effort.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Quant</h3>
+          <div class="chips">
+            <span class="badge high">Must master</span>
+          </div>
+          <ul style="margin-top:1rem">
+            <li>Percentage</li><li>Ratio &amp; proportion</li><li>Average</li><li>Profit &amp; loss</li><li>SI/CI</li><li>Time &amp; work</li><li>Time, speed &amp; distance</li><li>Geometry</li><li>Trigonometry</li>
+          </ul>
+          <div class="chips" style="margin-top:1rem"><span class="badge mid">Lower priority</span></div>
+          <ul style="margin-top:1rem">
+            <li>Statistics</li><li>Algebra</li><li>Advanced DI</li><li>Rare miscellaneous chapters</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Reasoning + English + GA</h3>
+          <ul>
+            <li><strong>Reasoning:</strong> treat as fastest scoring section; target 22+/25 before late phase.</li>
+            <li><strong>English:</strong> do it daily; focus on error spotting, vocab retention, idioms, sentence improvement, cloze, PYQs.</li>
+            <li><strong>GA:</strong> Lucent Science → History → Polity → Geography, then current affairs capsule, then economy only after static base is stable.</li>
+            <li><strong>Current affairs:</strong> use monthly capsules, last 6 months focus, last 3 months revision, previous-year CA questions.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Mock tracker</h2>
+      <p class="sub">Mocks are not just tests. They are the engine of speed, accuracy, and score realism.</p>
+      <div class="grid-3">
+        <div class="card"><h3>Week 2 onward</h3><p>Sectional mocks begin. Use them for Reasoning speed, English accuracy, and Quant pacing.</p></div>
+        <div class="card"><h3>Week 5 onward</h3><p>Full mocks begin. One full mock per week minimum in the early transition phase.</p></div>
+        <div class="card"><h3>Week 10 onward</h3><p>At least 2 full mocks/week. Final 6 weeks: 3–5 full mocks/week with review.</p></div>
+      </div>
+      <div class="card" style="margin-top:1rem">
+        <h3>Every mock must be analyzed on these 5 labels</h3>
+        <div class="chips">
+          <span class="chip">Concept mistake</span>
+          <span class="chip">Calculation mistake</span>
+          <span class="chip">Reading mistake</span>
+          <span class="chip">Guess mistake</span>
+          <span class="chip">Time-pressure mistake</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Score tracker</h2>
+      <p class="sub">These targets keep you honest. If your score is below the phase band, reduce new learning and increase mocks plus revision.</p>
+      <div class="card tracker">
+        <div class="score-row"><div><strong>Week 5</strong></div><div class="bar"><div class="fill" style="width:45%"></div></div><div>80–90</div></div>
+        <div class="score-row"><div><strong>Week 8</strong></div><div class="bar"><div class="fill" style="width:55%"></div></div><div>100–110</div></div>
+        <div class="score-row"><div><strong>Week 12</strong></div><div class="bar"><div class="fill" style="width:65%"></div></div><div>120–130</div></div>
+        <div class="score-row"><div><strong>Week 15</strong></div><div class="bar"><div class="fill" style="width:72%"></div></div><div>135–145</div></div>
+        <div class="score-row"><div><strong>Final stretch</strong></div><div class="bar"><div class="fill" style="width:78%"></div></div><div>145+</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Weak-topic dashboard</h2>
+      <p class="sub">Update this weekly after your mocks. Red means urgent repair, yellow means unstable, green means revision-only.</p>
+      <table>
+        <thead><tr><th>Subject</th><th>Topic</th><th>Status</th><th>Repair action</th></tr></thead>
+        <tbody>
+          <tr><td>Reasoning</td><td>Analogy / Series / Coding-decoding</td><td><span class="badge high">Green</span></td><td>Maintain speed drills and PYQ revision.</td></tr>
+          <tr><td>Reasoning</td><td>Syllogism / Statement-based</td><td><span class="badge mid">Yellow</span></td><td>2 practice sets + 1 sectional in the same week.</td></tr>
+          <tr><td>Quant</td><td>Percentage / Ratio / Average / P&amp;L</td><td><span class="badge high">Green</span></td><td>Keep accuracy above 85%.</td></tr>
+          <tr><td>Quant</td><td>Geometry / Trigonometry</td><td><span class="badge mid">Yellow</span></td><td>Formula revision + 30 mixed PYQs.</td></tr>
+          <tr><td>Quant</td><td>Algebra / Statistics / Advanced DI</td><td><span class="badge low">Low ROI</span></td><td>Do only after core topics become stable.</td></tr>
+          <tr><td>English</td><td>Error spotting / vocab / idioms</td><td><span class="badge high">Green</span></td><td>Daily revision cycle and PYQ sets.</td></tr>
+          <tr><td>GA</td><td>Science / History / Polity</td><td><span class="badge high">Green</span></td><td>Lucent + PYQ recall revision.</td></tr>
+          <tr><td>GA</td><td>Current affairs / Economy</td><td><span class="badge mid">Yellow</span></td><td>Use capsule revision, not deep reading.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>PYQ and exam method</h2>
+      <p class="sub">SSC rewards familiarity and execution. PYQs should not be an afterthought.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>PYQ tracker</h3>
+          <ul>
+            <li>Start chapterwise PYQs early, not just full papers.</li>
+            <li>By mid-phase, shift to timed mixed papers.</li>
+            <li>Keep a reattempt list of previously wrong PYQs.</li>
+            <li>Prioritize recent years more heavily.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>SSC 2026 trend logic</h3>
+          <ul>
+            <li>Questions are usually more direct than banking-style puzzle exams.</li>
+            <li>PYQ repetition and theme repetition remain important.</li>
+            <li>Speed matters more than showing very advanced difficulty handling.</li>
+            <li>Accuracy matters more than chasing 100 attempts blindly because of negative marking.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Final reminders</h2>
+      <p class="sub">This plan is designed to be sustainable till the exam, not exciting for three days and abandoned after two weeks.</p>
+      <div class="grid-3">
+        <div class="card"><h3>Do this</h3><ul><li>Review every mock properly.</li><li>Revise small notes daily.</li><li>Protect sleep in the final phase.</li><li>Keep Reasoning and English active throughout.</li></ul></div>
+        <div class="card"><h3>Do not do this</h3><ul><li>No 50-word daily vocab targets.</li><li>No random new books in the last phase.</li><li>No over-investment in low-yield Quant chapters early.</li><li>No newspaper-heavy current-affairs routine.</li></ul></div>
+        <div class="card"><h3>Target mindset</h3><ul><li>Attempt smart, not reckless.</li><li>Build 145+ capability gradually.</li><li>Use trackers every week.</li><li>Let mocks decide your next week’s priorities.</li></ul></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Updated roadmap for SSC CGL 2026 Tier 1 — rebuilt into a more realistic, date-based, mock-driven plan for working aspirants.
+    </footer>
+  </div>
+  <script>
+    (function(){
+      const root=document.documentElement;
+      const btn=document.querySelector('[data-theme-toggle]');
+      let dark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'dark' : 'light');
+      btn.textContent = dark ? '☀️ Theme' : '🌙 Theme';
+      btn.addEventListener('click',()=>{
+        const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+        root.setAttribute('data-theme',next);
+        btn.textContent = next==='dark' ? '☀️ Theme' : '🌙 Theme';
+      });
+    })();
+  </script>
+</body>
+</html>

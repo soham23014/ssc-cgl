@@ -1,0 +1,280 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.tab-bar { display: flex; gap: 6px; flex-wrap: wrap; padding: 1rem 0 0.75rem; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.25rem; }
+.tab { padding: 6px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); font-size: 13px; cursor: pointer; background: transparent; color: var(--color-text-secondary); }
+.tab.active { background: #185FA5; color: #fff; border-color: #185FA5; }
+.section { display: none; }
+.section.active { display: block; }
+.badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+.b-blue { background: #E6F1FB; color: #0C447C; }
+.b-green { background: #EAF3DE; color: #27500A; }
+.b-amber { background: #FAEEDA; color: #633806; }
+.b-red { background: #FCEBEB; color: #791F1F; }
+.b-purple { background: #EEEDFE; color: #3C3489; }
+.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 0.85rem; }
+.card-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.card-sub { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.phase-head { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin: 1.25rem 0 0.5rem; }
+.week-row { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.week-num { min-width: 60px; font-size: 12px; font-weight: 500; color: var(--color-text-secondary); padding-top: 2px; }
+.week-content { flex: 1; }
+.week-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+.week-detail { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
+.subject-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 1rem; }
+.subject-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.1rem; }
+.subject-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.subject-name { font-size: 14px; font-weight: 500; }
+.topic-row { font-size: 12px; color: var(--color-text-secondary); padding: 4px 0; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; justify-content: space-between; }
+.topic-row:last-child { border: none; }
+.hot { color: #A32D2D; font-weight: 500; font-size: 11px; }
+.warm { color: #854F0B; font-weight: 500; font-size: 11px; }
+.sched-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 1rem; }
+.sched-box { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.1rem; border: 0.5px solid var(--color-border-tertiary); }
+.sched-label { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 8px; }
+.time-slot { font-size: 12px; color: var(--color-text-primary); padding: 4px 0; display: flex; gap: 8px; }
+.time { min-width: 90px; font-weight: 500; color: #185FA5; }
+.res-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 0.9rem 1.1rem; margin-bottom: 0.7rem; }
+.res-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 6px; line-height: 1.6; }
+.res-link { color: #185FA5; font-size: 12px; cursor: pointer; text-decoration: underline; }
+.pyq-bar-wrap { margin-bottom: 0.5rem; }
+.pyq-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--color-text-secondary); margin-bottom: 3px; }
+.pyq-bar { height: 8px; border-radius: 4px; background: var(--color-border-tertiary); }
+.pyq-fill { height: 8px; border-radius: 4px; }
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+.stat-box { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; text-align: center; }
+.stat-num { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.stat-lbl { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+</style>
+
+<div style="padding: 0.5rem 0 1.5rem;">
+<div class="stat-row">
+  <div class="stat-box"><div class="stat-num">17</div><div class="stat-lbl">weeks left</div></div>
+  <div class="stat-box"><div class="stat-num">100</div><div class="stat-lbl">Qs in Tier 1</div></div>
+  <div class="stat-box"><div class="stat-num">200</div><div class="stat-lbl">total marks</div></div>
+  <div class="stat-box"><div class="stat-num">60</div><div class="stat-lbl">minutes exam</div></div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab active" onclick="show('roadmap')">📅 Roadmap</button>
+  <button class="tab" onclick="show('topics')">🎯 Top topics</button>
+  <button class="tab" onclick="show('schedule')">⏰ Daily schedule</button>
+  <button class="tab" onclick="show('pyq')">📊 PYQ analysis</button>
+  <button class="tab" onclick="show('resources')">🔗 Resources</button>
+</div>
+
+<div id="roadmap" class="section active">
+  <div class="phase-head">Phase 1 — Foundation (Weeks 1–5)</div>
+
+  <div class="week-row"><div class="week-num">Week 1</div><div class="week-content"><div class="week-title">Quant basics + Reasoning intro <span class="badge b-blue" style="margin-left:6px">concepts</span></div><div class="week-detail">Number system, simplification, percentage, ratio · Analogy, classification, series · Weekend: 2 PYQ sets (Quant only)</div></div></div>
+  <div class="week-row"><div class="week-num">Week 2</div><div class="week-content"><div class="week-title">Quant: Profit/Loss, SI/CI, Time-Work <span class="badge b-blue">concepts</span></div><div class="week-detail">Most repeated quant topics · Reasoning: coding-decoding, blood relations · Weekend: 2 PYQ sets (mixed Tier 1)</div></div></div>
+  <div class="week-row"><div class="week-num">Week 3</div><div class="week-content"><div class="week-title">Geometry + Trigonometry (high-yield) <span class="badge b-amber">important</span></div><div class="week-detail">Triangles, circles, basic identities, heights & distances · Reasoning: direction sense, seating arrangement · Weekend: mock test 1</div></div></div>
+  <div class="week-row"><div class="week-num">Week 4</div><div class="week-content"><div class="week-title">English foundation — vocab + grammar <span class="badge b-blue">concepts</span></div><div class="week-detail">Spotting errors, fill in blanks, synonyms/antonyms (50 words/day) · Reasoning: puzzle, matrix · Weekend: English PYQs (2 years)</div></div></div>
+  <div class="week-row"><div class="week-num">Week 5</div><div class="week-content"><div class="week-title">GA/GK: History + Polity <span class="badge b-blue">concepts</span></div><div class="week-detail">Static GK anchors — most asked GA topics in last 5 years · Quant: DI (tables + bar graphs) · Weekend: GA PYQ filter + mock 2</div></div></div>
+
+  <div class="phase-head">Phase 2 — Deep Practice (Weeks 6–11)</div>
+
+  <div class="week-row"><div class="week-num">Week 6</div><div class="week-content"><div class="week-title">Quant: Speed/Distance, Pipes, Algebra <span class="badge b-amber">practice</span></div><div class="week-detail">Shortcut tricks for time-speed · English: reading comprehension + idioms/phrases · Weekend: full mock test 3 + analysis</div></div></div>
+  <div class="week-row"><div class="week-num">Week 7</div><div class="week-content"><div class="week-title">Reasoning: advanced puzzles + Venn diagrams <span class="badge b-amber">practice</span></div><div class="week-detail">Syllogism, statement–conclusion, inequality · GA: Geography + Science basics · Weekend: PYQ paper 2022 + 2023 full</div></div></div>
+  <div class="week-row"><div class="week-num">Week 8</div><div class="week-content"><div class="week-title">English: cloze test + sentence improvement <span class="badge b-amber">practice</span></div><div class="week-detail">Error detection (most asked) · Quant: mensuration, statistics mean/mode/median · Weekend: mock 4 + full paper review</div></div></div>
+  <div class="week-row"><div class="week-num">Week 9</div><div class="week-content"><div class="week-title">GA: Economy + Science (Physics, Chem, Bio) <span class="badge b-amber">practice</span></div><div class="week-detail">Budget/economic terms · Science MCQs from PYQs only · Reasoning: figure-based series, paper folding · Weekend: PYQ 2021 + 2020</div></div></div>
+  <div class="week-row"><div class="week-num">Week 10</div><div class="week-content"><div class="week-title">Full subject revision — Quant + Reasoning <span class="badge b-purple">revision</span></div><div class="week-detail">Formula sheet creation · Speed improvement drills · Weekend: mock 5 + 6 (timed, 60 min strict)</div></div></div>
+  <div class="week-row"><div class="week-num">Week 11</div><div class="week-content"><div class="week-title">Full subject revision — English + GA <span class="badge b-purple">revision</span></div><div class="week-detail">Vocabulary flashcards · Current affairs March–July 2026 (capsule) · Weekend: mock 7 + error analysis sheet</div></div></div>
+
+  <div class="phase-head">Phase 3 — Mock Marathon (Weeks 12–16)</div>
+
+  <div class="week-row"><div class="week-num">Week 12</div><div class="week-content"><div class="week-title">2 mocks/week + weak subject focus <span class="badge b-red">mock phase</span></div><div class="week-detail">Fix weakest subject this week · Time each section (15 min per section target) · Weekend: mock 8 + 9</div></div></div>
+  <div class="week-row"><div class="week-num">Week 13–14</div><div class="week-content"><div class="week-title">3 mocks/week — speed + accuracy balance <span class="badge b-red">mock phase</span></div><div class="week-detail">Track accuracy %, attempt count, cut-off tracking · Current affairs August 2026 capsule · Weekend: 2 mocks/day</div></div></div>
+  <div class="week-row"><div class="week-num">Week 15</div><div class="week-content"><div class="week-title">PYQ reattempt — last 5 years shift-wise <span class="badge b-red">mock phase</span></div><div class="week-detail">Identify patterns in question framing · GA: static GK final read · Weekend: 2 full mocks</div></div></div>
+  <div class="week-row"><div class="week-num">Week 16</div><div class="week-content"><div class="week-title">Rapid revision — notes only, no new topics <span class="badge b-purple">final rev</span></div><div class="week-detail">Formula sheets, vocabulary notes, GA facts · 1 mock/day for speed · Attempt order: GA → English → Reasoning → Quant</div></div></div>
+
+  <div class="phase-head">Exam Week</div>
+  <div class="week-row"><div class="week-num">Week 17</div><div class="week-content"><div class="week-title">Only revision + 1 light mock <span class="badge b-green">exam week</span></div><div class="week-detail">No new topics · Sleep 7+ hrs · Revise formula sheet each morning · Exam: Sep 26 🎯</div></div></div>
+</div>
+
+<div id="topics" class="section">
+  <div class="subject-grid">
+    <div class="subject-card">
+      <div class="subject-head"><span class="subject-name">Quantitative aptitude</span><span class="badge b-blue">25 Qs · 50 marks</span></div>
+      <div class="topic-row"><span>Profit, loss & discount</span><span class="hot">🔥 5–6 Qs/year</span></div>
+      <div class="topic-row"><span>Geometry (triangles, circles)</span><span class="hot">🔥 4–5 Qs/year</span></div>
+      <div class="topic-row"><span>Trigonometry + heights/distance</span><span class="hot">🔥 3–4 Qs/year</span></div>
+      <div class="topic-row"><span>SI & CI</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Time, work & pipes</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Ratio, proportion & mixture</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Data interpretation</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Number system & simplification</span><span style="font-size:11px;color:var(--color-text-secondary)">1–2 Qs/year</span></div>
+      <div class="topic-row"><span>Speed, distance & time</span><span style="font-size:11px;color:var(--color-text-secondary)">1–2 Qs/year</span></div>
+      <div class="topic-row"><span>Statistics (mean/median/mode)</span><span style="font-size:11px;color:var(--color-text-secondary)">1–2 Qs/year</span></div>
+    </div>
+    <div class="subject-card">
+      <div class="subject-head"><span class="subject-name">Reasoning</span><span class="badge b-purple">25 Qs · 50 marks</span></div>
+      <div class="topic-row"><span>Analogy (verbal + non-verbal)</span><span class="hot">🔥 4–5 Qs/year</span></div>
+      <div class="topic-row"><span>Series (number + letter)</span><span class="hot">🔥 3–4 Qs/year</span></div>
+      <div class="topic-row"><span>Coding-decoding</span><span class="hot">🔥 3–4 Qs/year</span></div>
+      <div class="topic-row"><span>Puzzle + seating arrangement</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Classification</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Venn diagram + syllogism</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Direction sense</span><span style="font-size:11px;color:var(--color-text-secondary)">1–2 Qs/year</span></div>
+      <div class="topic-row"><span>Blood relations</span><span style="font-size:11px;color:var(--color-text-secondary)">1–2 Qs/year</span></div>
+      <div class="topic-row"><span>Non-verbal (paper folding)</span><span style="font-size:11px;color:var(--color-text-secondary)">2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Statement & conclusions</span><span style="font-size:11px;color:var(--color-text-secondary)">1–2 Qs/year</span></div>
+    </div>
+    <div class="subject-card">
+      <div class="subject-head"><span class="subject-name">English comprehension</span><span class="badge b-amber">25 Qs · 50 marks</span></div>
+      <div class="topic-row"><span>Spotting errors (grammar)</span><span class="hot">🔥 4–5 Qs/year</span></div>
+      <div class="topic-row"><span>Synonyms & antonyms</span><span class="hot">🔥 4–5 Qs/year</span></div>
+      <div class="topic-row"><span>Idioms & phrases</span><span class="hot">🔥 3–4 Qs/year</span></div>
+      <div class="topic-row"><span>Fill in the blanks (vocab)</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Cloze test</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Reading comprehension</span><span class="warm">⚡ 2 Qs/year</span></div>
+      <div class="topic-row"><span>One-word substitution</span><span style="font-size:11px;color:var(--color-text-secondary)">1–2 Qs/year</span></div>
+      <div class="topic-row"><span>Spelling correction</span><span style="font-size:11px;color:var(--color-text-secondary)">1–2 Qs/year</span></div>
+    </div>
+    <div class="subject-card">
+      <div class="subject-head"><span class="subject-name">General awareness</span><span class="badge b-green">25 Qs · 50 marks</span></div>
+      <div class="topic-row"><span>History (Medieval + Modern)</span><span class="hot">🔥 4–5 Qs/year</span></div>
+      <div class="topic-row"><span>Polity & Constitution</span><span class="hot">🔥 3–4 Qs/year</span></div>
+      <div class="topic-row"><span>Science (Physics, Chem, Bio)</span><span class="hot">🔥 5–6 Qs/year</span></div>
+      <div class="topic-row"><span>Current affairs (last 6 months)</span><span class="warm">⚡ 4–5 Qs/year</span></div>
+      <div class="topic-row"><span>Geography (India + World)</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Economy (basic + Budget)</span><span class="warm">⚡ 2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Awards, sports, art & culture</span><span style="font-size:11px;color:var(--color-text-secondary)">2–3 Qs/year</span></div>
+      <div class="topic-row"><span>Computer awareness</span><span style="font-size:11px;color:var(--color-text-secondary)">1–2 Qs/year</span></div>
+    </div>
+  </div>
+  <div class="card" style="border-left: 3px solid #185FA5;">
+    <div class="card-title">🧠 Attempt strategy for Tier 1</div>
+    <div class="card-sub">Recommended order → <strong>GA (12–14 min)</strong> → <strong>English (12–14 min)</strong> → <strong>Reasoning (15 min)</strong> → <strong>Quant (16–18 min)</strong><br>Target: attempt 85–90 Qs with 90%+ accuracy. Do NOT attempt if unsure — negative marking of 0.5.</div>
+  </div>
+</div>
+
+<div id="schedule" class="section">
+  <div class="sched-grid">
+    <div class="sched-box">
+      <div class="sched-label">📅 Weekday (Mon–Fri) — ~2.5 hrs</div>
+      <div class="time-slot"><span class="time">5:30–6:30 AM</span><span>One subject — concept/theory</span></div>
+      <div class="time-slot"><span class="time">9:00–10:30 PM</span><span>Second subject — practice Qs</span></div>
+      <div class="time-slot"><span class="time">Lunch break</span><span>GA/vocab flashcards (10–15 min)</span></div>
+      <div class="time-slot" style="padding-top:8px; border-top: 0.5px solid var(--color-border-tertiary); margin-top:6px"><span style="font-size:11px; color:var(--color-text-secondary)">If can't do morning → shift both to 8:30–11:00 PM</span></div>
+    </div>
+    <div class="sched-box">
+      <div class="sched-label">📅 Weekend (Sat + Sun) — ~10 hrs total</div>
+      <div class="time-slot"><span class="time">6:00–9:00 AM</span><span>New topic deep dive / PYQs</span></div>
+      <div class="time-slot"><span class="time">10:00 AM–1 PM</span><span>Mock test (full 60-min) + analysis</span></div>
+      <div class="time-slot"><span class="time">3:00–6:00 PM</span><span>Weak area targeted practice</span></div>
+      <div class="time-slot"><span class="time">8:00–9:30 PM</span><span>GA current affairs / vocabulary</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">🗓 Weekly subject rotation (weekdays)</div>
+    <div style="display:grid; grid-template-columns: repeat(5,1fr); gap:8px; margin-top:8px;">
+      <div style="text-align:center; font-size:12px;"><div style="font-weight:500; color: #185FA5; margin-bottom:4px;">Mon</div><div class="card-sub">Quant<br>concept</div></div>
+      <div style="text-align:center; font-size:12px;"><div style="font-weight:500; color: #3C3489; margin-bottom:4px;">Tue</div><div class="card-sub">Reasoning<br>practice</div></div>
+      <div style="text-align:center; font-size:12px;"><div style="font-weight:500; color: #854F0B; margin-bottom:4px;">Wed</div><div class="card-sub">English<br>grammar</div></div>
+      <div style="text-align:center; font-size:12px;"><div style="font-weight:500; color: #27500A; margin-bottom:4px;">Thu</div><div class="card-sub">GA/GK<br>static</div></div>
+      <div style="text-align:center; font-size:12px;"><div style="font-weight:500; color: #A32D2D; margin-bottom:4px;">Fri</div><div class="card-sub">Revision<br>+ weak Qs</div></div>
+    </div>
+  </div>
+  <div class="card" style="border-left:3px solid #3B6D11;">
+    <div class="card-title">✅ Non-negotiable daily habits</div>
+    <div class="card-sub">• 10 vocab words daily (SSC word list — sticky notes/app)<br>• 5 GA facts before bed (from Lucent's or capsule)<br>• 1 timing drill per week — solve 25 Qs in 15 min strict<br>• After every mock: error log → note WHY you got it wrong</div>
+  </div>
+</div>
+
+<div id="pyq" class="section">
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="card-title">📊 PYQ frequency map — Tier 1 (last 5 years)</div>
+    <div style="margin-top: 10px;">
+      <div class="pyq-bar-wrap"><div class="pyq-label"><span>Profit/Loss/Discount (Quant)</span><span style="color:#A32D2D; font-weight:500">~22%</span></div><div class="pyq-bar"><div class="pyq-fill" style="width:88%; background:#E24B4A;"></div></div></div>
+      <div class="pyq-bar-wrap"><div class="pyq-label"><span>Analogy & series (Reasoning)</span><span style="color:#A32D2D; font-weight:500">~20%</span></div><div class="pyq-bar"><div class="pyq-fill" style="width:80%; background:#E24B4A;"></div></div></div>
+      <div class="pyq-bar-wrap"><div class="pyq-label"><span>History (GA)</span><span style="color:#854F0B; font-weight:500">~18%</span></div><div class="pyq-bar"><div class="pyq-fill" style="width:72%; background:#EF9F27;"></div></div></div>
+      <div class="pyq-bar-wrap"><div class="pyq-label"><span>Error spotting (English)</span><span style="color:#854F0B; font-weight:500">~18%</span></div><div class="pyq-bar"><div class="pyq-fill" style="width:72%; background:#EF9F27;"></div></div></div>
+      <div class="pyq-bar-wrap"><div class="pyq-label"><span>Science MCQs (GA)</span><span style="color:#854F0B; font-weight:500">~16%</span></div><div class="pyq-bar"><div class="pyq-fill" style="width:64%; background:#EF9F27;"></div></div></div>
+      <div class="pyq-bar-wrap"><div class="pyq-label"><span>Geometry/Trigonometry (Quant)</span><span style="color:#185FA5; font-weight:500">~15%</span></div><div class="pyq-bar"><div class="pyq-fill" style="width:60%; background:#378ADD;"></div></div></div>
+      <div class="pyq-bar-wrap"><div class="pyq-label"><span>Synonyms/Antonyms (English)</span><span style="color:#185FA5; font-weight:500">~15%</span></div><div class="pyq-bar"><div class="pyq-fill" style="width:60%; background:#378ADD;"></div></div></div>
+      <div class="pyq-bar-wrap"><div class="pyq-label"><span>Coding-decoding (Reasoning)</span><span style="color:#185FA5; font-weight:500">~13%</span></div><div class="pyq-bar"><div class="pyq-fill" style="width:52%; background:#378ADD;"></div></div></div>
+      <div class="pyq-bar-wrap"><div class="pyq-label"><span>Current affairs (GA)</span><span style="color:#3B6D11; font-weight:500">~12%</span></div><div class="pyq-bar"><div class="pyq-fill" style="width:48%; background:#639922;"></div></div></div>
+      <div class="pyq-bar-wrap"><div class="pyq-label"><span>Idioms & phrases (English)</span><span style="color:#3B6D11; font-weight:500">~12%</span></div><div class="pyq-bar"><div class="pyq-fill" style="width:48%; background:#639922;"></div></div></div>
+    </div>
+  </div>
+  <div class="card" style="border-left:3px solid #185FA5;">
+    <div class="card-title">🎯 Smart PYQ strategy for a working person</div>
+    <div class="card-sub">
+      1. <strong>Don't do full papers first</strong> — solve topic-wise PYQs by chapter (e.g., all Profit/Loss Qs from 2019–2024)<br>
+      2. <strong>Kiran's Chapterwise PYQ book</strong> is your bible — 8000+ Qs sorted by topic<br>
+      3. After Week 8, switch to <strong>full timed papers</strong> (shift-wise from Testbook/Oliveboard)<br>
+      4. Maintain an <strong>error log</strong> — note wrong Qs + reason → review every Sunday<br>
+      5. Focus on <strong>last 3 years</strong> most — pattern repeats heavily after 2021
+    </div>
+  </div>
+</div>
+
+<div id="resources" class="section">
+  <div style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin-bottom:8px;">YouTube resources — free & best for each subject</div>
+
+  <div class="res-card">
+    <div style="display:flex; justify-content:space-between; align-items:center;"><span class="card-title">Quantitative aptitude</span><span class="badge b-blue">YT + Book</span></div>
+    <div class="res-sub">
+      <strong>Gagan Pratap Sir</strong> — best for tricks, fast-solving, concept clarity (channel: Gagan Pratap Maths)<br>
+      <strong>Abhinay Sharma</strong> — great for geometry + profit/loss deep dives<br>
+      <strong>Rakesh Yadav (RY) 7300 book</strong> — top practice book (must-have)<br>
+      <strong>Advance Maths by RY</strong> — for geometry/mensuration/trig
+    </div>
+  </div>
+
+  <div class="res-card">
+    <div style="display:flex; justify-content:space-between; align-items:center;"><span class="card-title">Reasoning</span><span class="badge b-purple">YT + Book</span></div>
+    <div class="res-sub">
+      <strong>Deepak Sir (Study Smart)</strong> — excellent structured playlist for SSC CGL reasoning<br>
+      <strong>Sachin Gupta (SG Sir)</strong> — good for puzzle and non-verbal topics<br>
+      <strong>RS Aggarwal Reasoning book</strong> — standard reference for practice
+    </div>
+  </div>
+
+  <div class="res-card">
+    <div style="display:flex; justify-content:space-between; align-items:center;"><span class="card-title">English</span><span class="badge b-amber">YT + Book</span></div>
+    <div class="res-sub">
+      <strong>Neetu Singh Ma'am (KD Campus)</strong> — grammar rules + error detection (best available)<br>
+      <strong>Vishal Parihar Sir</strong> — vocab and comprehension focused playlists<br>
+      <strong>Plinth to Paramount (by Neetu Singh)</strong> — top book for SSC English<br>
+      <strong>Word Power Made Easy (Norman Lewis)</strong> — read 1 chapter/week for vocab
+    </div>
+  </div>
+
+  <div class="res-card">
+    <div style="display:flex; justify-content:space-between; align-items:center;"><span class="card-title">General awareness</span><span class="badge b-green">YT + Book</span></div>
+    <div class="res-sub">
+      <strong>Khan Sir (Patna)</strong> — History, Polity, Geography (very engaging, Hindi medium)<br>
+      <strong>Nitin Gupta (CG Sir)</strong> — current affairs monthly capsule (very popular)<br>
+      <strong>Lucent's GK book</strong> — cover to cover, essential static GK bible<br>
+      <strong>Adda247 / Testbook monthly CA PDF</strong> — free, download monthly
+    </div>
+  </div>
+
+  <div class="res-card">
+    <div style="display:flex; justify-content:space-between; align-items:center;"><span class="card-title">Mock tests & PYQs</span><span class="badge b-red">Platforms</span></div>
+    <div class="res-sub">
+      <strong>Testbook</strong> — best mock test platform, SSC CGL specific, shift-wise PYQs<br>
+      <strong>Oliveboard</strong> — good analytics, free mocks available<br>
+      <strong>Kiran SSC CGL Chapterwise PYQ</strong> — 8000+ questions sorted by chapter (must buy)<br>
+      <strong>SSC Official website (ssc.gov.in)</strong> — always check latest notice/dates
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid #185FA5; margin-top:1rem;">
+    <div class="card-title">💡 Working professional tip</div>
+    <div class="card-sub">Use Testbook/Oliveboard mobile app during commute for 10-Q mini quizzes. Enable SSC CGL daily quiz notifications — 10 min during travel = 70 min/week extra practice!</div>
+  </div>
+</div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
