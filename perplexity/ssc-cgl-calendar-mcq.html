@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSC CGL Calendar Reasoning MCQ Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+      --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+      --space-12: 3rem; --space-16: 4rem;
+      --radius-sm: 0.5rem; --radius-md: 0.8rem; --radius-lg: 1.2rem; --radius-xl: 1.6rem;
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.25);
+      --shadow-md: 0 18px 40px rgba(0,0,0,0.32);
+      --font-display: 'Space Grotesk', Inter, sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --color-bg: #0d1016;
+      --color-surface: #141925;
+      --color-surface-2: #1a2030;
+      --color-surface-offset: #222b40;
+      --color-border: rgba(255,255,255,0.1);
+      --color-divider: rgba(255,255,255,0.08);
+      --color-text: #eef2ff;
+      --color-text-muted: #aab4d6;
+      --color-text-faint: #7e89ad;
+      --color-primary: #6ee7c8;
+      --color-primary-hover: #46d8b4;
+      --color-primary-highlight: rgba(110,231,200,0.12);
+      --color-success: #8ee59a;
+      --color-warning: #ffbd74;
+      --color-error: #ff8ea1;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at top right, rgba(110,231,200,0.08), transparent 28%),
+        radial-gradient(circle at left center, rgba(114,154,255,0.08), transparent 30%),
+        linear-gradient(180deg, #0a0d13 0%, #0d1016 100%);
+    }
+    a, button, input, select { font: inherit; transition: 180ms ease; }
+    button { cursor: pointer; }
+    .shell { width: min(1280px, calc(100% - 2rem)); margin: 0 auto; padding: var(--space-8) 0 var(--space-16); }
+    .hero { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: var(--space-6); align-items: stretch; margin-bottom: var(--space-8); }
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(12px);
+    }
+    .hero-main { padding: var(--space-8); position: relative; overflow: hidden; }
+    .hero-main::after {
+      content: ""; position: absolute; inset: auto -5% -30% auto; width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(110,231,200,0.22), transparent 65%); pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-xs);
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-primary);
+      padding: 0.45rem 0.8rem; border-radius: 999px; background: var(--color-primary-highlight);
+      border: 1px solid rgba(110,231,200,0.25); margin-bottom: var(--space-4);
+    }
+    h1 {
+      margin: 0 0 var(--space-4); font-family: var(--font-display); font-size: var(--text-2xl);
+      line-height: 1.05; letter-spacing: -0.04em; max-width: 14ch;
+    }
+    .hero p { margin: 0; color: var(--color-text-muted); max-width: 62ch; }
+    .hero-stats { display: grid; gap: var(--space-4); padding: var(--space-6); }
+    .metric { padding: var(--space-5); border-radius: var(--radius-lg); background: rgba(255,255,255,0.03); border: 1px solid var(--color-divider); }
+    .metric strong { display: block; font-size: var(--text-xl); font-family: var(--font-display); margin-bottom: var(--space-1); }
+    .toolbar {
+      display: grid; grid-template-columns: 1.2fr 0.7fr 0.7fr auto auto; gap: var(--space-4); padding: var(--space-5);
+      margin-bottom: var(--space-6); position: sticky; top: 1rem; z-index: 10; background: rgba(20,25,37,0.9);
+    }
+    .control { display: flex; flex-direction: column; gap: var(--space-2); }
+    .label { font-size: var(--text-xs); color: var(--color-text-faint); text-transform: uppercase; letter-spacing: 0.08em; }
+    input, select {
+      width: 100%; border: 1px solid var(--color-border); background: var(--color-surface-2); color: var(--color-text);
+      padding: 0.9rem 1rem; border-radius: var(--radius-md); outline: none;
+    }
+    input:focus, select:focus { border-color: rgba(110,231,200,0.5); box-shadow: 0 0 0 4px rgba(110,231,200,0.12); }
+    .btn { border: 1px solid transparent; border-radius: var(--radius-md); padding: 0.92rem 1.1rem; min-height: 48px; }
+    .btn-primary { background: var(--color-primary); color: #06231e; font-weight: 700; align-self: end; }
+    .btn-primary:hover { background: var(--color-primary-hover); }
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--color-text); border-color: var(--color-border); }
+    .statusbar {
+      display: flex; justify-content: space-between; gap: var(--space-4); align-items: center; margin-bottom: var(--space-5);
+      color: var(--color-text-muted); font-size: var(--text-sm);
+    }
+    .progress { width: min(320px, 100%); height: 10px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; }
+    .progress > span {
+      display: block; height: 100%; width: 0%; border-radius: inherit; background: linear-gradient(90deg, var(--color-primary), #88a5ff);
+    }
+    .resume-banner {
+      display: none; margin-bottom: var(--space-5); padding: var(--space-4) var(--space-5); border-radius: var(--radius-lg);
+      border: 1px solid rgba(110,231,200,0.18); background: rgba(110,231,200,0.08); color: #d9fff5;
+    }
+    .resume-banner.visible { display: flex; justify-content: space-between; gap: var(--space-4); align-items: center; flex-wrap: wrap; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+    .card {
+      padding: var(--space-5); background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: var(--space-4);
+      scroll-margin-top: 6rem;
+    }
+    .card.done { border-color: rgba(142,229,154,0.4); box-shadow: 0 0 0 1px rgba(142,229,154,0.25), var(--shadow-sm); }
+    .card.current { border-color: rgba(255,189,116,0.55); box-shadow: 0 0 0 1px rgba(255,189,116,0.35), var(--shadow-md); }
+    .chips { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+    .chip {
+      padding: 0.35rem 0.7rem; border-radius: 999px; font-size: var(--text-xs); letter-spacing: 0.04em;
+      border: 1px solid var(--color-divider); color: var(--color-text-muted); background: rgba(255,255,255,0.03);
+    }
+    .chip.level-easy { color: var(--color-success); }
+    .chip.level-medium { color: var(--color-warning); }
+    .chip.level-hard { color: var(--color-error); }
+    .question { font-size: var(--text-base); color: var(--color-text); margin: 0; }
+    .mcq-options { display: grid; gap: var(--space-3); }
+    .option {
+      display: flex; gap: var(--space-3); align-items: flex-start; padding: 0.95rem 1rem; border-radius: var(--radius-md);
+      border: 1px solid var(--color-border); background: rgba(255,255,255,0.03);
+    }
+    .option input { width: 18px; height: 18px; margin-top: 0.15rem; accent-color: var(--color-primary); }
+    .option.correct { border-color: rgba(142,229,154,0.45); background: rgba(142,229,154,0.1); }
+    .option.selected-wrong { border-color: rgba(255,142,161,0.45); background: rgba(255,142,161,0.1); }
+    .answer {
+      display: none; padding: var(--space-4); border-radius: var(--radius-md); background: rgba(110,231,200,0.08);
+      border: 1px solid rgba(110,231,200,0.18); color: #d9fff5;
+    }
+    .answer.visible { display: block; }
+    .card-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: auto; }
+    .empty {
+      padding: var(--space-12); text-align: center; color: var(--color-text-muted); border: 1px dashed var(--color-border);
+      border-radius: var(--radius-xl); background: rgba(255,255,255,0.02);
+    }
+    .footer-note { margin-top: var(--space-8); color: var(--color-text-faint); font-size: var(--text-sm); text-align: center; }
+    @media (max-width: 980px) {
+      .hero, .toolbar, .grid { grid-template-columns: 1fr; }
+      .statusbar { flex-direction: column; align-items: stretch; }
+      .progress { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <article class="panel hero-main">
+        <div class="eyebrow">SSC CGL • Calendar Reasoning</div>
+        <h1>Calendar PYQs in exam-style MCQ format.</h1>
+        <p>Each question now appears like an exam MCQ with four options, plus show answer, hide answer, mark done, and progress resume support.</p>
+      </article>
+      <aside class="panel hero-stats">
+        <div class="metric"><strong id="totalCount">0</strong><span>Total curated questions</span></div>
+        <div class="metric"><strong id="shownCount">0</strong><span>Questions shown after filters</span></div>
+        <div class="metric"><strong id="doneCount">0</strong><span>Marked done and saved</span></div>
+      </aside>
+    </section>
+
+    <section class="panel toolbar" aria-label="Filters and search">
+      <label class="control">
+        <span class="label">Search question</span>
+        <input id="searchInput" type="text" placeholder="Search by year, birthday, leap year, odd days..." />
+      </label>
+      <label class="control">
+        <span class="label">Category</span>
+        <select id="categoryFilter"></select>
+      </label>
+      <label class="control">
+        <span class="label">Method type</span>
+        <select id="methodFilter"></select>
+      </label>
+      <button id="resetBtn" class="btn btn-primary">Reset filters</button>
+      <button id="clearProgressBtn" class="btn btn-ghost">Clear saved progress</button>
+    </section>
+
+    <div id="resumeBanner" class="resume-banner">
+      <span id="resumeText"></span>
+      <button id="resumeBtn" class="btn btn-ghost">Go to saved question</button>
+    </div>
+
+    <section class="statusbar">
+      <div id="resultSummary">Loading questions…</div>
+      <div class="progress" aria-label="Completion progress"><span id="progressFill"></span></div>
+    </section>
+
+    <section id="questionGrid" class="grid" aria-live="polite"></section>
+
+    <p class="footer-note">Progress is saved locally in your browser, so your marked done questions and last stop can be resumed later on the same device and browser.</p>
+  </main>
+
+  <script>
+    const STORAGE_KEY = 'ssc-cgl-calendar-mcq-progress-v1';
+
+    const baseQuestions = [
+      [1,'Day of Week Basics','Forward counting','easy','If 15 August 1947 was Friday, what day was 26 January 1950?','Thursday'],
+      [2,'Day of Week Basics','Backward counting','easy','If 1 March 2021 was Monday, what day was 22 February 2021?','Monday'],
+      [3,'Day of Week Basics','Reference date shift','easy','If 10 January 2022 was Monday, what day was 25 January 2022?','Tuesday'],
+      [4,'Day of Week Basics','Reference date shift','easy','If 1 July 2023 was Saturday, what day was 20 July 2023?','Thursday'],
+      [5,'Day of Week Basics','Reference date shift','easy','If 3 April 2024 was Wednesday, what day was 18 April 2024?','Thursday'],
+      [6,'Day of Week Basics','Reference date shift','easy','If 8 September 2025 was Monday, what day was 30 September 2025?','Tuesday'],
+      [7,'Odd Days Concept','Odd days direct','easy','How many odd days are there in 100 ordinary years?','5 odd days'],
+      [8,'Odd Days Concept','Odd days direct','easy','How many odd days are there in 100 leap years?','6 odd days'],
+      [9,'Odd Days Concept','Odd days block method','medium','Find the odd days in 300 years.','1 odd day'],
+      [10,'Odd Days Concept','Odd days block method','medium','Find the odd days in 400 years.','0 odd days'],
+      [11,'Odd Days Concept','Odd days direct','medium','How many odd days are there in 75 years containing 18 leap years?','2 odd days'],
+      [12,'Odd Days Concept','Odd days direct','medium','How many odd days are there in 50 years containing 12 leap years?','6 odd days'],
+      [13,'Leap Year Logic','Leap year rule','easy','Which of the following is a leap year: 1900, 2000, 2100, 2200?','2000'],
+      [14,'Leap Year Logic','Leap year rule','easy','Is the year 2400 a leap year?','Yes'],
+      [15,'Leap Year Logic','Leap year rule','easy','Is the year 1900 a leap year?','No'],
+      [16,'Leap Year Logic','Leap year rule','easy','How many days are there in February in a leap year?','29'],
+      [17,'Leap Year Logic','Leap year pattern','medium','How many leap years are there from 2001 to 2024 inclusive?','6'],
+      [18,'Leap Year Logic','Leap year pattern','medium','How many leap years are there from 1997 to 2020 inclusive?','6'],
+      [19,'Month Codes','Month code method','medium','In an ordinary year, which months have the same starting day?','January and October; February, March and November'],
+      [20,'Month Codes','Month code method','medium','In a leap year, which months have the same starting day?','January, April and July; September and December'],
+      [21,'Month Codes','Month code method','easy','How many days are there in April?','30'],
+      [22,'Month Codes','Month code method','easy','How many days are there in September?','30'],
+      [23,'Month Codes','Month code method','easy','How many days are there in November?','30'],
+      [24,'Month Codes','Month code method','easy','How many days are there in January?','31'],
+      [25,'Same Calendar Year','Calendar repetition','medium','Which year has the same calendar as 2017?','2023'],
+      [26,'Same Calendar Year','Calendar repetition','medium','Which year had the same calendar as 2019?','2030'],
+      [27,'Same Calendar Year','Calendar repetition','medium','Which year will have the same calendar as 2021?','2027'],
+      [28,'Same Calendar Year','Calendar repetition','hard','After how many years does the calendar of a leap year usually repeat?','28 years'],
+      [29,'Same Calendar Year','Calendar repetition','hard','After how many years does the calendar of an ordinary year often repeat in the Gregorian cycle?','6, 11 or 28 years depending on leap-year placement'],
+      [30,'Day on Date','Odd days + month count','medium','What day was 1 January 2001?','Monday'],
+      [31,'Day on Date','Odd days + month count','medium','What day was 26 January 1950?','Thursday'],
+      [32,'Day on Date','Odd days + month count','medium','What day was 15 August 1947?','Friday'],
+      [33,'Day on Date','Odd days + month count','medium','What day was 2 October 1869?','Saturday'],
+      [34,'Day on Date','Odd days + month count','hard','What day was 1 January 1900?','Monday'],
+      [35,'Day on Date','Odd days + month count','hard','What day was 31 December 1999?','Friday'],
+      [36,'Day on Date','Odd days + month count','hard','What day was 4 July 2025?','Friday'],
+      [37,'Day on Date','Odd days + month count','hard','What day was 29 February 2016?','Monday'],
+      [38,'Future Date','Forward date counting','medium','If today is Wednesday, what day will it be after 100 days?','Friday'],
+      [39,'Future Date','Forward date counting','medium','If today is Monday, what day will it be after 45 days?','Tuesday'],
+      [40,'Future Date','Forward date counting','medium','If today is Friday, what day will it be after 63 days?','Friday'],
+      [41,'Future Date','Forward date counting','easy','If today is Sunday, what day will it be after 14 days?','Sunday'],
+      [42,'Future Date','Forward date counting','easy','If today is Tuesday, what day will it be after 21 days?','Tuesday'],
+      [43,'Past Date','Backward date counting','medium','If today is Thursday, what day was it 50 days ago?','Tuesday'],
+      [44,'Past Date','Backward date counting','medium','If today is Monday, what day was it 75 days ago?','Sunday'],
+      [45,'Past Date','Backward date counting','easy','If today is Saturday, what day was it 7 days ago?','Saturday'],
+      [46,'Past Date','Backward date counting','easy','If today is Wednesday, what day was it 28 days ago?','Wednesday'],
+      [47,'Tomorrow Yesterday','Relative weekday logic','easy','If yesterday was Friday, what day will be tomorrow?','Sunday'],
+      [48,'Tomorrow Yesterday','Relative weekday logic','easy','If tomorrow is Monday, what day was yesterday?','Saturday'],
+      [49,'Tomorrow Yesterday','Relative weekday logic','medium','If the day after tomorrow is Thursday, what day was it the day before yesterday?','Monday'],
+      [50,'Tomorrow Yesterday','Relative weekday logic','medium','If three days after today is Sunday, what day was two days before today?','Tuesday'],
+      [51,'Tomorrow Yesterday','Relative weekday logic','hard','If two days before the day after tomorrow is Friday, what day is today?','Friday'],
+      [52,'Tomorrow Yesterday','Relative weekday logic','hard','If one day before two days after today is Wednesday, what day will tomorrow be?','Thursday'],
+      [53,'First Last Day','Year endpoints','easy','If 1 January of a non-leap year is Monday, what is the day on 31 December?','Monday'],
+      [54,'First Last Day','Year endpoints','easy','If 1 January of a leap year is Monday, what is the day on 31 December?','Tuesday'],
+      [55,'First Last Day','Year endpoints','medium','If 31 December 2023 was Sunday, what day was 1 January 2023?','Sunday'],
+      [56,'First Last Day','Year endpoints','medium','If 1 January 2020 was Wednesday, what day was 31 December 2020?','Thursday'],
+      [57,'First Last Day','Year endpoints','medium','If 1 January 2021 was Friday, what day was 31 December 2021?','Friday'],
+      [58,'First Last Day','Month endpoints','medium','If 1 March 2024 was Friday, what day was 31 March 2024?','Sunday'],
+      [59,'First Last Day','Month endpoints','medium','If 1 April 2025 was Tuesday, what day was 30 April 2025?','Wednesday'],
+      [60,'First Last Day','Month endpoints','medium','If 1 February 2023 was Wednesday, what day was 28 February 2023?','Tuesday'],
+      [61,'First Last Day','Month endpoints','hard','If 1 February 2024 was Thursday, what day was 29 February 2024?','Thursday'],
+      [62,'First Last Day','Month endpoints','hard','If 1 August 2026 was Saturday, what day was 31 August 2026?','Monday'],
+      [63,'Birthday Problems','Age span counting','medium','A person was born on 4 July 2000, which day of the week was his 25th birthday?','Friday'],
+      [64,'Birthday Problems','Age span counting','medium','If a child was born on 1 January 2010, on what day did the 10th birthday fall?','Wednesday'],
+      [65,'Birthday Problems','Age span counting','hard','A person born on 29 February 2012 celebrates actual date birthdays only in leap years. On what day was the birthday in 2024?','Thursday'],
+      [66,'Birthday Problems','Age span counting','medium','If Rohit was born on 15 August 1995, what day was his 20th birthday?','Saturday'],
+      [67,'Birthday Problems','Age span counting','medium','If a girl was born on 26 January 2001, what day was her 21st birthday?','Wednesday'],
+      [68,'Birthday Problems','Age span counting','hard','A person born on 31 December 1999 completed 18 years on which day?','Sunday'],
+      [69,'Birthday Problems','Age span counting','hard','A child born on 1 March 2004 had the 16th birthday on which day?','Sunday'],
+      [70,'Birthday Problems','Age span counting','medium','A student born on 2 October 2002 had the 18th birthday on which day?','Friday'],
+      [71,'Working Day Logic','Weekday exclusion','medium','How many Sundays are there in a 31-day month if the month starts on Saturday?','5'],
+      [72,'Working Day Logic','Weekday exclusion','medium','How many Mondays are there in a 30-day month if the month starts on Sunday?','5'],
+      [73,'Working Day Logic','Weekday exclusion','medium','How many weekends are there in February 2021?','8 weekend days'],
+      [74,'Working Day Logic','Weekday exclusion','hard','A month has 5 Mondays, 5 Tuesdays and 5 Wednesdays. On which day did the month start?','Monday'],
+      [75,'Working Day Logic','Weekday exclusion','hard','A month has 5 Saturdays and 5 Sundays. What is the minimum number of days in the month?','30'],
+      [76,'Working Day Logic','Weekday exclusion','hard','In a 31-day month, which weekdays can occur 5 times?','The first three weekdays of that month'],
+      [77,'Working Day Logic','Weekday exclusion','medium','How many Fridays are there in a 31-day month beginning on Thursday?','5'],
+      [78,'Working Day Logic','Weekday exclusion','medium','How many Sundays are there in a 30-day month beginning on Monday?','4'],
+      [79,'Clocked Intervals','Multiple of 7 reduction','easy','Reduce 365 modulo 7.','1'],
+      [80,'Clocked Intervals','Multiple of 7 reduction','easy','Reduce 366 modulo 7.','2'],
+      [81,'Clocked Intervals','Multiple of 7 reduction','easy','Reduce 100 modulo 7.','2'],
+      [82,'Clocked Intervals','Multiple of 7 reduction','easy','Reduce 1000 modulo 7.','6'],
+      [83,'Clocked Intervals','Multiple of 7 reduction','medium','Reduce 2500 modulo 7.','1'],
+      [84,'Clocked Intervals','Multiple of 7 reduction','medium','Reduce 730 modulo 7.','2'],
+      [85,'Calendar Statements','Concept statement','easy','In an ordinary year, each date after 28 February shifts by how many weekdays in the next year?','By 1 day'],
+      [86,'Calendar Statements','Concept statement','easy','In a leap year, each date after 29 February shifts by how many weekdays in the next year?','By 2 days'],
+      [87,'Calendar Statements','Concept statement','easy','A week contains how many odd days?','0'],
+      [88,'Calendar Statements','Concept statement','easy','An ordinary year contains how many odd days?','1'],
+      [89,'Calendar Statements','Concept statement','easy','A leap year contains how many odd days?','2'],
+      [90,'Calendar Statements','Concept statement','medium','How many odd days are there in 4 years together when one is a leap year?','5 odd days'],
+      [91,'Mixed Tricky','Layered relation','hard','If day before yesterday was Sunday, what day will be the day after tomorrow?','Wednesday'],
+      [92,'Mixed Tricky','Layered relation','hard','If next Monday is 17th, what day was 3rd of the same month?','Thursday'],
+      [93,'Mixed Tricky','Layered relation','hard','If 10th of a month is Wednesday, what day will be 25th?','Thursday'],
+      [94,'Mixed Tricky','Layered relation','hard','If 1st January is Friday, what day will be 1st March in a leap year?','Monday'],
+      [95,'Mixed Tricky','Layered relation','hard','If 1st January is Friday, what day will be 1st March in an ordinary year?','Monday'],
+      [96,'Mixed Tricky','Layered relation','hard','If 20th February 2024 was Tuesday, what day was 20th February 2025?','Thursday'],
+      [97,'Mixed Tricky','Layered relation','hard','If 14th November of a year is Sunday, what day is Children’s Day next year?','Monday'],
+      [98,'Mixed Tricky','Layered relation','hard','If Republic Day in a year is Monday, what day is Independence Day in the same year?','Saturday'],
+      [99,'Mixed Tricky','Layered relation','hard','If Christmas Day is Friday, what day was New Year Day of that year?','Wednesday'],
+      [100,'Mixed Tricky','Layered relation','hard','If 1 January 2026 is Thursday, what day is 31 December 2026?','Thursday']
+    ];
+
+    const optionBank = {
+      weekday: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+      yesno: ['Yes','No'],
+      leapAnswer: ['2000','1900','2100','2200'],
+      oddDays: ['0 odd days','1 odd day','2 odd days','3 odd days','4 odd days','5 odd days','6 odd days'],
+      numbers: ['0','1','2','3','4','5','6','7','8','14','28','29','30','31'],
+      shifts: ['By 1 day','By 2 days','By 3 days','By 0 day'],
+      years: ['2023','2027','2030','2033','2037','2022','2024','2026']
+    };
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function guessOptions(answer, question) {
+      const ans = String(answer);
+      let pool = [];
+      if (optionBank.weekday.includes(ans)) pool = optionBank.weekday;
+      else if (optionBank.yesno.includes(ans)) pool = optionBank.yesno.concat(['Maybe','Cannot say']);
+      else if (ans.includes('odd day')) pool = optionBank.oddDays;
+      else if (/^\d+$/.test(ans)) pool = [...new Set(optionBank.numbers.concat([ans, String(Number(ans)+1), String(Math.max(0, Number(ans)-1)), String(Number(ans)+2)]))];
+      else if (ans.startsWith('By ')) pool = optionBank.shifts;
+      else if (/^20\d{2}$/.test(ans) || /^19\d{2}$/.test(ans)) pool = [...new Set(optionBank.years.concat([ans, String(Number(ans)+1), String(Number(ans)-1)]))];
+      else if (question.includes('Which of the following is a leap year')) pool = optionBank.leapAnswer;
+      else pool = [ans, 'Monday', 'Tuesday', 'Friday', 'None of these', 'Cannot be determined', '28 years', '30'];
+
+      const wrongs = shuffle(pool.filter(item => item !== ans)).slice(0, 3);
+      const options = shuffle([ans, ...wrongs]);
+      while (options.length < 4) {
+        const filler = ['None of these', 'Cannot be determined', 'Both A and B', 'Data insufficient'].find(v => !options.includes(v) && v !== ans);
+        options.push(filler || `Option ${options.length + 1}`);
+      }
+      return options.slice(0, 4);
+    }
+
+    const questions = baseQuestions.map(([id, category, method, level, question, answer]) => ({
+      id, category, method, level, question, answer, options: guessOptions(answer, question)
+    }));
+
+    const state = {
+      search: '',
+      category: 'All',
+      method: 'All',
+      done: new Set(),
+      selectedAnswers: {},
+      visibleAnswers: new Set(),
+      lastVisitedId: null
+    };
+
+    const categoryFilter = document.getElementById('categoryFilter');
+    const methodFilter = document.getElementById('methodFilter');
+    const searchInput = document.getElementById('searchInput');
+    const resetBtn = document.getElementById('resetBtn');
+    const clearProgressBtn = document.getElementById('clearProgressBtn');
+    const grid = document.getElementById('questionGrid');
+    const totalCount = document.getElementById('totalCount');
+    const shownCount = document.getElementById('shownCount');
+    const doneCount = document.getElementById('doneCount');
+    const resultSummary = document.getElementById('resultSummary');
+    const progressFill = document.getElementById('progressFill');
+    const resumeBanner = document.getElementById('resumeBanner');
+    const resumeText = document.getElementById('resumeText');
+    const resumeBtn = document.getElementById('resumeBtn');
+
+    function safeSave() {
+      try {
+        const payload = {
+          done: [...state.done],
+          selectedAnswers: state.selectedAnswers,
+          lastVisitedId: state.lastVisitedId,
+          savedAt: Date.now()
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      } catch (error) {
+        console.warn('Local save not available.', error);
+      }
+    }
+
+    function loadSaved() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed.done)) state.done = new Set(parsed.done);
+        if (parsed.selectedAnswers && typeof parsed.selectedAnswers === 'object') state.selectedAnswers = parsed.selectedAnswers;
+        if (parsed.lastVisitedId) state.lastVisitedId = parsed.lastVisitedId;
+      } catch (error) {
+        console.warn('Could not load saved progress.', error);
+      }
+    }
+
+    function clearSaved() {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (error) {}
+      state.done = new Set();
+      state.selectedAnswers = {};
+      state.visibleAnswers = new Set();
+      state.lastVisitedId = null;
+      render();
+    }
+
+    function uniqueValues(key) {
+      return ['All', ...new Set(questions.map(q => q[key]))];
+    }
+
+    function fillSelect(select, values) {
+      select.innerHTML = values.map(v => `<option value="${v}">${v}</option>`).join('');
+    }
+
+    function filterQuestions() {
+      return questions.filter(q => {
+        const matchesSearch = !state.search || `${q.question} ${q.answer} ${q.category} ${q.method}`.toLowerCase().includes(state.search);
+        const matchesCategory = state.category === 'All' || q.category === state.category;
+        const matchesMethod = state.method === 'All' || q.method === state.method;
+        return matchesSearch && matchesCategory && matchesMethod;
+      });
+    }
+
+    function updateResumeBanner() {
+      if (!state.lastVisitedId) {
+        resumeBanner.classList.remove('visible');
+        return;
+      }
+      const q = questions.find(item => item.id === Number(state.lastVisitedId));
+      if (!q) {
+        resumeBanner.classList.remove('visible');
+        return;
+      }
+      resumeText.textContent = `Saved progress found. Continue from Q${q.id}: ${q.question}`;
+      resumeBanner.classList.add('visible');
+    }
+
+    function render() {
+      const filtered = filterQuestions();
+      totalCount.textContent = questions.length;
+      shownCount.textContent = filtered.length;
+      doneCount.textContent = state.done.size;
+      progressFill.style.width = `${(state.done.size / questions.length) * 100}%`;
+      resultSummary.textContent = `${filtered.length} question${filtered.length !== 1 ? 's' : ''} shown • ${questions.length} total • ${state.done.size} saved as done`;
+      updateResumeBanner();
+
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="empty" style="grid-column: 1 / -1;">No question matches your current filters. Try clearing the search or choosing another method type.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(q => {
+        const done = state.done.has(q.id);
+        const selected = state.selectedAnswers[q.id];
+        const answerVisible = state.visibleAnswers.has(q.id);
+        const isCurrent = Number(state.lastVisitedId) === q.id;
+        const optionsHtml = q.options.map((opt, index) => {
+          const isCorrect = opt === q.answer;
+          const isSelectedWrong = selected && selected === opt && opt !== q.answer;
+          const cls = [
+            'option',
+            answerVisible && isCorrect ? 'correct' : '',
+            answerVisible && isSelectedWrong ? 'selected-wrong' : ''
+          ].filter(Boolean).join(' ');
+          return `
+            <label class="${cls}">
+              <input type="radio" name="question-${q.id}" value="${String(opt).replace(/"/g, '&quot;')}" ${selected === opt ? 'checked' : ''} data-question-id="${q.id}" class="option-input" />
+              <span><strong>${String.fromCharCode(65 + index)}.</strong> ${opt}</span>
+            </label>`;
+        }).join('');
+
+        return `
+          <article class="card ${done ? 'done' : ''} ${isCurrent ? 'current' : ''}" data-id="${q.id}" id="card-${q.id}">
+            <div class="chips">
+              <span class="chip">${q.category}</span>
+              <span class="chip">${q.method}</span>
+              <span class="chip level-${q.level}">${q.level}</span>
+            </div>
+            <p class="question"><strong>Q${q.id}.</strong> ${q.question}</p>
+            <div class="mcq-options">${optionsHtml}</div>
+            <div class="answer ${answerVisible ? 'visible' : ''}" id="answer-${q.id}"><strong>Answer:</strong> ${q.answer}</div>
+            <div class="card-actions">
+              <button class="btn btn-primary toggle-answer" data-id="${q.id}">${answerVisible ? 'Hide answer' : 'Show answer'}</button>
+              <button class="btn btn-ghost toggle-done" data-id="${q.id}">${done ? 'Marked done' : 'Mark done'}</button>
+            </div>
+          </article>`;
+      }).join('');
+    }
+
+    document.addEventListener('change', (e) => {
+      const input = e.target.closest('.option-input');
+      if (!input) return;
+      const id = Number(input.dataset.questionId);
+      state.selectedAnswers[id] = input.value;
+      state.lastVisitedId = id;
+      safeSave();
+    });
+
+    document.addEventListener('click', (e) => {
+      const answerBtn = e.target.closest('.toggle-answer');
+      const doneBtn = e.target.closest('.toggle-done');
+
+      if (answerBtn) {
+        const id = Number(answerBtn.dataset.id);
+        if (state.visibleAnswers.has(id)) state.visibleAnswers.delete(id);
+        else state.visibleAnswers.add(id);
+        state.lastVisitedId = id;
+        safeSave();
+        render();
+      }
+
+      if (doneBtn) {
+        const id = Number(doneBtn.dataset.id);
+        if (state.done.has(id)) state.done.delete(id);
+        else state.done.add(id);
+        state.lastVisitedId = id;
+        safeSave();
+        render();
+      }
+    });
+
+    searchInput.addEventListener('input', e => {
+      state.search = e.target.value.trim().toLowerCase();
+      render();
+    });
+
+    categoryFilter.addEventListener('change', e => {
+      state.category = e.target.value;
+      render();
+    });
+
+    methodFilter.addEventListener('change', e => {
+      state.method = e.target.value;
+      render();
+    });
+
+    resetBtn.addEventListener('click', () => {
+      state.search = '';
+      state.category = 'All';
+      state.method = 'All';
+      searchInput.value = '';
+      categoryFilter.value = 'All';
+      methodFilter.value = 'All';
+      render();
+    });
+
+    clearProgressBtn.addEventListener('click', clearSaved);
+
+    resumeBtn.addEventListener('click', () => {
+      if (!state.lastVisitedId) return;
+      const target = document.getElementById(`card-${state.lastVisitedId}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    fillSelect(categoryFilter, uniqueValues('category'));
+    fillSelect(methodFilter, uniqueValues('method'));
+    loadSaved();
+    render();
+  </script>
+</body>
+</html>
