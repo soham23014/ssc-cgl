@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SSC CGL Reasoning Deep Study Page</title>
+<style>
+:root{
+  --bg:#f7f6f2;
+  --card:#ffffff;
+  --ink:#1f1b16;
+  --muted:#635d56;
+  --line:#ddd7cf;
+  --brand:#0b6b72;
+  --brand2:#0d4e54;
+  --soft:#e7f2f1;
+  --soft2:#f4efe7;
+  --warn:#9a4d1d;
+  --good:#266d32;
+  --radius:18px;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#fff);
+  color:var(--ink);
+  line-height:1.6;
+}
+.container{max-width:1240px;margin:0 auto;padding:18px}
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(12px);
+  background:rgba(247,246,242,.92);
+  border-bottom:1px solid var(--line);
+}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.brand{font-weight:900;color:var(--brand2);letter-spacing:.01em}
+.nav{display:flex;flex-wrap:wrap;gap:8px}
+.nav a{
+  text-decoration:none;
+  color:var(--ink);
+  background:#fff;
+  border:1px solid var(--line);
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:14px;
+}
+.nav a:hover{border-color:var(--brand);color:var(--brand2)}
+.hero{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:16px;
+  margin-top:16px;
+}
+.card{
+  background:rgba(255,255,255,.95);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+}
+h1{margin:0 0 10px;font-size:clamp(1.9rem,3vw,3.1rem);line-height:1.1}
+h2{margin:0 0 12px;font-size:1.55rem}
+h3{margin:0 0 8px;font-size:1.08rem}
+p{margin:8px 0}
+.muted{color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  background:var(--soft);
+  border:1px solid #d2e7e5;
+  color:var(--brand2);
+  font-size:13px;
+  font-weight:700;
+}
+.btnbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btnbar a{
+  display:inline-block;
+  text-decoration:none;
+  background:var(--brand);
+  color:#fff;
+  padding:9px 12px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:14px;
+}
+.btnbar a.secondary{
+  background:#fff;
+  color:var(--brand2);
+  border:1px solid var(--line);
+}
+.note{
+  background:#f3fbfa;
+  border:1px solid #d9ece9;
+  border-radius:12px;
+  padding:12px 14px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-top:16px;
+}
+.topic{scroll-margin-top:92px}
+.tag{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  background:var(--soft2);
+  border:1px solid var(--line);
+  color:var(--warn);
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:10px;
+}
+.rulebox,.solvebox,.pyqbox,.shortcut,.examplebox,.mistakebox{
+  margin-top:10px;
+  border-radius:12px;
+  padding:12px 14px;
+}
+.rulebox{background:#fbfbfb;border:1px solid var(--line)}
+.solvebox{background:#f4fbf5;border:1px solid #d9eadc}
+.pyqbox{background:#fff8ef;border:1px solid #f0dfc6;border-left:4px solid #e2a14a}
+.shortcut{background:#eef5ff;border:1px solid #d7e4ff}
+.examplebox{background:#f7f2ff;border:1px solid #e3d8ff}
+.mistakebox{background:#fff3f3;border:1px solid #f2d4d4}
+ul{margin:8px 0 0 18px;padding:0}
+li{margin:6px 0}
+.small{font-size:14px;color:var(--muted)}
+.tablewrap{
+  overflow-x:auto;
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:900px;
+  background:#fff;
+}
+th,td{
+  text-align:left;
+  vertical-align:top;
+  border-bottom:1px solid var(--line);
+  padding:12px;
+}
+th{
+  background:#faf7f2;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#756d66;
+}
+.footer{margin:22px 0 10px;color:var(--muted);font-size:14px}
+@media (max-width:960px){
+  .hero,.grid{grid-template-columns:1fr}
+  .container{padding:14px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container top">
+    <div class="brand">SSC CGL Reasoning Deep Study Page</div>
+    <nav class="nav">
+      <a href="#analogy">Analogy</a>
+      <a href="#classification">Classification</a>
+      <a href="#series">Series</a>
+      <a href="#alphabet">Alphabet</a>
+      <a href="#missing">Missing</a>
+      <a href="#coding">Coding</a>
+      <a href="#blood">Blood</a>
+      <a href="#direction">Direction</a>
+      <a href="#ranking">Ranking</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <article class="card">
+      <h1>Reasoning with full topic data, tricks, patterns, and solving steps</h1>
+      <p class="muted">This version adds more useful content for every topic so it works like a real study page, not only a short revision list.</p>
+      <div class="chips">
+        <span class="chip">High value content</span>
+        <span class="chip">PYQ style</span>
+        <span class="chip">How to solve</span>
+        <span class="chip">Common traps</span>
+      </div>
+      <div class="btnbar">
+        <a href="#analogy">Start study</a>
+        <a class="secondary" href="#question-map">Open question map</a>
+      </div>
+    </article>
+
+    <aside class="card note">
+      <h3>Use this page like this</h3>
+      <ul>
+        <li>Read the question shape first.</li>
+        <li>Use the solving rule next.</li>
+        <li>See the traps and shortcuts.</li>
+        <li>Practice from the example set.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="card" id="question-map" style="margin-top:16px;">
+    <h2>Topic map with solving style</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Topic</th>
+            <th>Question type</th>
+            <th>Primary trick</th>
+            <th>Main error to avoid</th>
+            <th>What to look for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Analogy</strong></td>
+            <td>A : B :: C : ?</td>
+            <td>Name the relation first</td>
+            <td>Matching only by similarity</td>
+            <td>Meaning, function, part-whole, number, category, sequence</td>
+          </tr>
+          <tr>
+            <td><strong>Classification</strong></td>
+            <td>Odd one out</td>
+            <td>Check one property at a time</td>
+            <td>Trying multiple patterns together</td>
+            <td>Group, use, form, sequence, value</td>
+          </tr>
+          <tr>
+            <td><strong>Series</strong></td>
+            <td>Next number or letter</td>
+            <td>Check difference first</td>
+            <td>Skipping easy arithmetic</td>
+            <td>Difference, second difference, multiply, alternate chain</td>
+          </tr>
+          <tr>
+            <td><strong>Alphabet Series</strong></td>
+            <td>Letter shifts and missing letters</td>
+            <td>Convert letters to positions</td>
+            <td>Forgetting reverse order</td>
+            <td>A=1 to Z=26, forward and reverse shift</td>
+          </tr>
+          <tr>
+            <td><strong>Missing Number Series</strong></td>
+            <td>Find missing term</td>
+            <td>Search pattern family</td>
+            <td>Spending too long on one term</td>
+            <td>AP, square, cube, multiply, alternate chain</td>
+          </tr>
+          <tr>
+            <td><strong>Coding-Decoding</strong></td>
+            <td>Code or decode word</td>
+            <td>Test one method at a time</td>
+            <td>Mixing methods randomly</td>
+            <td>Shift, reverse, direct mapping, letter pattern</td>
+          </tr>
+          <tr>
+            <td><strong>Blood Relation</strong></td>
+            <td>Find relation in family</td>
+            <td>Draw family tree</td>
+            <td>Solving only in mind</td>
+            <td>Generation, gender, direct link, chain relation</td>
+          </tr>
+          <tr>
+            <td><strong>Direction</strong></td>
+            <td>Find end point or facing</td>
+            <td>Track every turn</td>
+            <td>Confusing left and right</td>
+            <td>Start point, turns, distance, final direction</td>
+          </tr>
+          <tr>
+            <td><strong>Order Ranking</strong></td>
+            <td>Rank from left/right</td>
+            <td>Use total formula</td>
+            <td>Mixing position and final rank</td>
+            <td>Left rank, right rank, total people</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="grid" id="analogy">
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Analogy</h2>
+
+      <div class="rulebox">
+        <strong>Question shape:</strong> A : B :: C : ?
+        <br><strong>Goal:</strong> keep the same relation from the first pair into the second pair.
+      </div>
+
+      <div class="solvebox">
+        <strong>How to solve:</strong>
+        <ul>
+          <li>Read both words or numbers carefully.</li>
+          <li>Identify the relation type: meaning, function, part-whole, category, number, sequence, opposite, or worker-tool relation.</li>
+          <li>Test the same relation on the third term and every option.</li>
+          <li>Keep the one option that preserves the exact relation, not just a loose similarity.</li>
+        </ul>
+      </div>
+
+      <div class="shortcut">
+        <strong>Fast shortcut:</strong> Say the relation aloud in one phrase, such as “tool used by person”, “young one of animal”, “opposite meaning”, or “same arithmetic change”.
+      </div>
+
+      <div class="examplebox">
+        <strong>Relation patterns you must know:</strong>
+        <ul>
+          <li><strong>Meaning relation:</strong> doctor : hospital.</li>
+          <li><strong>Function relation:</strong> pen : write.</li>
+          <li><strong>Part-whole relation:</strong> wheel : car.</li>
+          <li><strong>Category relation:</strong> rose : flower.</li>
+          <li><strong>Young one relation:</strong> cat : kitten.</li>
+          <li><strong>Opposite relation:</strong> north : south.</li>
+          <li><strong>Number relation:</strong> 2 : 4, 3 : 9.</li>
+          <li><strong>Alphabet relation:</strong> A : C, B : D.</li>
+        </ul>
+      </div>
+
+      <div class="pyqbox">
+        <strong>PYQ-style practice forms:</strong>
+        <ul>
+          <li>Person : place :: person : place.</li>
+          <li>Animal : young one :: animal : young one.</li>
+          <li>Object : use :: object : use.</li>
+          <li>Number : number :: number : number.</li>
+          <li>Opposite word pairs.</li>
+          <li>Letter positions and matching shifts.</li>
+        </ul>
+      </div>
+
+      <div class="mistakebox">
+        <strong>Common mistakes:</strong>
+        <ul>
+          <li>Choosing an answer because it is related, but not in the same way.</li>
+          <li>Forgetting the direction of relation.</li>
+          <li>Not checking whether the pair is word-based or number-based.</li>
+          <li>Jumping to options before naming the relation.</li>
+        </ul>
+      </div>
+
+      <p class="small"><strong>Trick:</strong> always identify the relation type first, then search for the same relation in the answer choice.</p>
+    </article>
+
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>What SSC usually asks in Analogy</h2>
+
+      <div class="solvebox">
+        <strong>Question families:</strong>
+        <ul>
+          <li>Word relation analogy.</li>
+          <li>Number analogy.</li>
+          <li>Letter analogy.</li>
+          <li>Object-to-function analogy.</li>
+          <li>Animal-young-one analogy.</li>
+          <li>Profession-place analogy.</li>
+        </ul>
+      </div>
+
+      <div class="pyqbox">
+        <strong>How to answer each family:</strong>
+        <ul>
+          <li><strong>Word relation:</strong> find the exact semantic link.</li>
+          <li><strong>Number relation:</strong> check square, double, addition, subtraction, product.</li>
+          <li><strong>Letter relation:</strong> convert letters to positions and compare the shift.</li>
+          <li><strong>Function relation:</strong> ask “what does it do?”</li>
+          <li><strong>Young one relation:</strong> find the child form of the animal.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Training examples with logic:</strong>
+        <ul>
+          <li><strong>Doctor : Hospital :: Teacher : School</strong> — profession to workplace.</li>
+          <li><strong>Cat : Kitten :: Dog : Puppy</strong> — adult to young one.</li>
+          <li><strong>2 : 4 :: 3 : 9</strong> — square relation.</li>
+          <li><strong>North : South :: East : West</strong> — opposite direction.</li>
+          <li><strong>Pen : Write :: Knife : Cut</strong> — tool and function.</li>
+        </ul>
+      </div>
+
+      <p class="small"><strong>Best habit:</strong> write the relation in your head as a short label before checking answers.</p>
+    </article>
+  </section>
+
+  <section class="grid" id="classification">
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Classification</h2>
+
+      <div class="rulebox">
+        <strong>Question shape:</strong> choose the item that does not belong.
+      </div>
+
+      <div class="solvebox">
+        <strong>How to solve:</strong>
+        <ul>
+          <li>First check whether the items belong to one group.</li>
+          <li>Then compare one property only: category, use, shape, value, position, or sequence.</li>
+          <li>Look for the single item that breaks the group rule.</li>
+        </ul>
+      </div>
+
+      <div class="shortcut">
+        <strong>Fast shortcut:</strong> Do not force many logic patterns. Ask one question: “What is common in the 3 correct items?”
+      </div>
+
+      <div class="pyqbox">
+        <strong>Common PYQ forms:</strong>
+        <ul>
+          <li>One odd word out.</li>
+          <li>One odd number out.</li>
+          <li>One odd figure out.</li>
+          <li>One odd alphabet out.</li>
+          <li>One odd place or object out.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Example logic:</strong>
+        <ul>
+          <li>Apple, Mango, Banana, Carrot → carrot is a vegetable, others are fruits.</li>
+          <li>2, 3, 5, 9 → 9 is not prime.</li>
+          <li>Square, Circle, Triangle, Table → table is not a shape.</li>
+          <li>Delhi, Mumbai, India, Kolkata → India is a country, others are cities.</li>
+        </ul>
+      </div>
+
+      <div class="mistakebox">
+        <strong>Common mistakes:</strong>
+        <ul>
+          <li>Trying to find multiple answers.</li>
+          <li>Using a hidden logic that is not actually needed.</li>
+          <li>Ignoring a simple property like prime, odd/even, or category.</li>
+          <li>Thinking too long instead of checking the basic mismatch.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Classification: quick method</h2>
+
+      <div class="solvebox">
+        <strong>Step method:</strong>
+        <ol>
+          <li>Group the items by form.</li>
+          <li>Group the items by value or use.</li>
+          <li>Group the items by sequence or order.</li>
+          <li>If one item fails all simple groups, it is the answer.</li>
+        </ol>
+      </div>
+
+      <div class="examplebox">
+        <strong>Data checks often used in SSC:</strong>
+        <ul>
+          <li>Prime numbers vs composite numbers.</li>
+          <li>Even vs odd numbers.</li>
+          <li>Squares and cubes.</li>
+          <li>Animals, fruits, countries, tools, shapes.</li>
+          <li>Alphabet order and reverse order.</li>
+        </ul>
+      </div>
+
+      <div class="pyqbox">
+        <strong>Timed practice idea:</strong>
+        <ul>
+          <li>Do 10 odd-one-out questions in one sitting.</li>
+          <li>Stop after 15 seconds per question.</li>
+          <li>Use the simplest grouping rule first.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="grid" id="series">
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Series</h2>
+
+      <div class="rulebox">
+        <strong>Question shape:</strong> find next number, next letter, or missing term.
+      </div>
+
+      <div class="solvebox">
+        <strong>How to solve:</strong>
+        <ul>
+          <li>Check the difference between consecutive terms.</li>
+          <li>If that fails, check second difference.</li>
+          <li>Then check multiplication, division, or alternating terms.</li>
+          <li>For letters, convert to positions and repeat the same test.</li>
+        </ul>
+      </div>
+
+      <div class="shortcut">
+        <strong>Fast shortcut:</strong> The easiest pattern is usually the right one. Do not jump to complex patterns before checking arithmetic.
+      </div>
+
+      <div class="pyqbox">
+        <strong>Common patterns in SSC:</strong>
+        <ul>
+          <li>Arithmetic progression.</li>
+          <li>Increasing or decreasing difference.</li>
+          <li>Multiplication chain.</li>
+          <li>Square/cube based pattern.</li>
+          <li>Alternate chain pattern.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Practice logic:</strong>
+        <ul>
+          <li>2, 5, 8, 11, ? → add 3 each time.</li>
+          <li>3, 6, 12, 24, ? → multiply by 2.</li>
+          <li>1, 4, 9, 16, ? → squares.</li>
+          <li>A, C, F, J, ? → letter shifts are increasing.</li>
+        </ul>
+      </div>
+
+      <div class="mistakebox">
+        <strong>Common mistakes:</strong>
+        <ul>
+          <li>Skipping the simplest arithmetic pattern.</li>
+          <li>Forgetting to check every alternate term.</li>
+          <li>Mixing series and coding logic too early.</li>
+          <li>Not writing the pattern clearly.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Series: pattern family</h2>
+
+      <div class="solvebox">
+        <strong>Pattern family checklist:</strong>
+        <ul>
+          <li>Difference pattern.</li>
+          <li>Second difference pattern.</li>
+          <li>Multiply or divide pattern.</li>
+          <li>Square/cube pattern.</li>
+          <li>Odd-even alternate pattern.</li>
+        </ul>
+      </div>
+
+      <div class="pyqbox">
+        <strong>How to read quickly:</strong>
+        <ul>
+          <li>Write 3 gaps, not only the numbers.</li>
+          <li>Look at change in gaps.</li>
+          <li>If one sequence is too regular, use the regular rule.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Short practice set:</strong>
+        <ul>
+          <li>7, 10, 13, 16, ?</li>
+          <li>5, 10, 20, 40, ?</li>
+          <li>1, 3, 6, 10, ?</li>
+          <li>2, 6, 18, 54, ?</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="grid" id="alphabet">
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Alphabet Series</h2>
+
+      <div class="rulebox">
+        <strong>Question shape:</strong> missing letter, next letter, or shifted letter.
+      </div>
+
+      <div class="solvebox">
+        <strong>How to solve:</strong>
+        <ul>
+          <li>Convert letters into numbers.</li>
+          <li>Find the shift size.</li>
+          <li>Check if the shift is constant or increasing.</li>
+          <li>Also check reverse alphabet if needed.</li>
+        </ul>
+      </div>
+
+      <div class="shortcut">
+        <strong>Fast shortcut:</strong> A=1, B=2, ..., Z=26 must become automatic. Reverse alphabet is also important.
+      </div>
+
+      <div class="pyqbox">
+        <strong>Common forms:</strong>
+        <ul>
+          <li>Forward alphabetical sequence.</li>
+          <li>Backward alphabetical sequence.</li>
+          <li>Fixed shift sequence.</li>
+          <li>Increasing shift sequence.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Practice logic:</strong>
+        <ul>
+          <li>A, D, G, J, ? → shift by 3.</li>
+          <li>Z, X, V, T, ? → shift backward by 2.</li>
+          <li>B, E, H, K, ? → shift by 3.</li>
+        </ul>
+      </div>
+
+      <div class="mistakebox">
+        <strong>Common mistakes:</strong>
+        <ul>
+          <li>Forgetting reverse positions.</li>
+          <li>Counting letters incorrectly.</li>
+          <li>Mixing forward and backward shifts.</li>
+          <li>Not checking whether the shift changes.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Alphabet: deeper use</h2>
+
+      <div class="solvebox">
+        <strong>Advanced checks:</strong>
+        <ul>
+          <li>Use position sum or difference.</li>
+          <li>Use reverse alphabet positions.</li>
+          <li>Use pairwise letter movement.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Examples of hidden logic:</strong>
+        <ul>
+          <li>Same gap between letters.</li>
+          <li>Two gaps increasing step by step.</li>
+          <li>Letters mirrored from the end of alphabet.</li>
+        </ul>
+      </div>
+
+      <div class="pyqbox">
+        <strong>Practice tip:</strong>
+        <ul>
+          <li>Say the position of each letter fast.</li>
+          <li>Turn the positions into simple math.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="grid" id="missing">
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Missing Number Series</h2>
+
+      <div class="rulebox">
+        <strong>Question shape:</strong> find the missing term in a number chain.
+      </div>
+
+      <div class="solvebox">
+        <strong>How to solve:</strong>
+        <ul>
+          <li>Check if the chain is arithmetic.</li>
+          <li>Check if the chain is multiplicative.</li>
+          <li>Check if the terms are square or cube based.</li>
+          <li>Check if two chains are alternating.</li>
+        </ul>
+      </div>
+
+      <div class="shortcut">
+        <strong>Fast shortcut:</strong> Do not stay stuck on one term. First test the common families: AP, GP, squares, cubes, alternating.
+      </div>
+
+      <div class="pyqbox">
+        <strong>Question families:</strong>
+        <ul>
+          <li>Simple missing term.</li>
+          <li>Square or cube missing term.</li>
+          <li>Alternate chain missing term.</li>
+          <li>Increasing gap pattern.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Practice logic:</strong>
+        <ul>
+          <li>2, 6, 12, ?, 30</li>
+          <li>1, 8, 27, ?, 125</li>
+          <li>4, 9, 16, ?, 36</li>
+          <li>10, 20, 15, 30, 25, ?</li>
+        </ul>
+      </div>
+
+      <div class="mistakebox">
+        <strong>Common mistakes:</strong>
+        <ul>
+          <li>Trying many patterns at once.</li>
+          <li>Not testing square/cube logic.</li>
+          <li>Ignoring alternating chains.</li>
+          <li>Wasting time on one stubborn question.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Missing Number: quick attack</h2>
+
+      <div class="solvebox">
+        <strong>Attack order:</strong>
+        <ol>
+          <li>Difference.</li>
+          <li>Ratio/multiplication.</li>
+          <li>Square relation.</li>
+          <li>Cube relation.</li>
+          <li>Alternate chain.</li>
+        </ol>
+      </div>
+
+      <div class="pyqbox">
+        <strong>Why this works:</strong>
+        <ul>
+          <li>SSC often uses simple families.</li>
+          <li>The answer is usually hidden in the gap pattern.</li>
+          <li>Fast filtering saves time in the exam.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="grid" id="coding">
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Coding-Decoding</h2>
+
+      <div class="rulebox">
+        <strong>Question shape:</strong> find the code or decode the word.
+      </div>
+
+      <div class="solvebox">
+        <strong>How to solve:</strong>
+        <ul>
+          <li>Check if each letter is shifted by a fixed number.</li>
+          <li>Check whether the word is reversed.</li>
+          <li>Check whether letters are mapped directly.</li>
+          <li>Check whether the whole word pattern repeats.</li>
+        </ul>
+      </div>
+
+      <div class="shortcut">
+        <strong>Fast shortcut:</strong> test shift, reverse, direct mapping, and word pattern in that order.
+      </div>
+
+      <div class="pyqbox">
+        <strong>Common forms:</strong>
+        <ul>
+          <li>Letter shift code.</li>
+          <li>Reverse word code.</li>
+          <li>Pattern substitution code.</li>
+          <li>Position-based code.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Practice examples:</strong>
+        <ul>
+          <li>CAT → DBU type shift code.</li>
+          <li>WORD → DROW type reverse code.</li>
+          <li>Same-step letter movement.</li>
+          <li>Repeated word structure mapping.</li>
+        </ul>
+      </div>
+
+      <div class="mistakebox">
+        <strong>Common mistakes:</strong>
+        <ul>
+          <li>Mixing all possible methods at once.</li>
+          <li>Missing the direction of shift.</li>
+          <li>Not checking reverse order.</li>
+          <li>Forgetting exact letter position change.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card topic">
+      <div class="tag">High importance</div>
+      <h2>Coding-Decoding: deeper set</h2>
+
+      <div class="solvebox">
+        <strong>Extra checks:</strong>
+        <ul>
+          <li>Alphabet gap check.</li>
+          <li>Reverse order check.</li>
+          <li>Odd-even position rule.</li>
+          <li>Same code for repeated similar words.</li>
+        </ul>
+      </div>
+
+      <div class="pyqbox">
+        <strong>Practice route:</strong>
+        <ul>
+          <li>First decode one word.</li>
+          <li>Then test the same rule on the second word.</li>
+          <li>If both fit, the rule is correct.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="grid" id="blood">
+    <article class="card topic">
+      <div class="tag">Medium importance</div>
+      <h2>Blood Relation</h2>
+
+      <div class="rulebox">
+        <strong>Question shape:</strong> find family relation from statements.
+      </div>
+
+      <div class="solvebox">
+        <strong>How to solve:</strong>
+        <ul>
+          <li>Draw a family tree.</li>
+          <li>Mark each person with generation level.</li>
+          <li>Mark gender when the statement says son, daughter, brother, sister, father, mother, uncle, aunt, husband, or wife.</li>
+          <li>Read the final relation from the diagram.</li>
+        </ul>
+      </div>
+
+      <div class="shortcut">
+        <strong>Fast shortcut:</strong> If you do not draw it, you can easily mix up parent, sibling, and cousin relations.
+      </div>
+
+      <div class="pyqbox">
+        <strong>Common forms:</strong>
+        <ul>
+          <li>Direct family relation.</li>
+          <li>Two-step relation.</li>
+          <li>Three-step chain relation.</li>
+          <li>Male-female mixed relation.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Practice examples:</strong>
+        <ul>
+          <li>A is the son of B, B is the father of C. Find relation of A to C.</li>
+          <li>Who is the mother’s brother?</li>
+          <li>Who is the sister’s son?</li>
+          <li>Find relation after two links in the chain.</li>
+        </ul>
+      </div>
+
+      <div class="mistakebox">
+        <strong>Common mistakes:</strong>
+        <ul>
+          <li>Solving without a diagram.</li>
+          <li>Missing generation direction.</li>
+          <li>Confusing brother with cousin.</li>
+          <li>Forgetting gender clues.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card topic">
+      <div class="tag">Medium importance</div>
+      <h2>Blood Relation: drawing method</h2>
+
+      <div class="solvebox">
+        <strong>Drawing steps:</strong>
+        <ol>
+          <li>Write the starting person.</li>
+          <li>Move up for parents.</li>
+          <li>Move sideways for siblings.</li>
+          <li>Move down for children.</li>
+          <li>Use arrows and labels for clarity.</li>
+        </ol>
+      </div>
+
+      <div class="pyqbox">
+        <strong>Why it matters:</strong>
+        <ul>
+          <li>Long relation questions become simple.</li>
+          <li>Visual map removes confusion.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="grid" id="direction">
+    <article class="card topic">
+      <div class="tag">Medium importance</div>
+      <h2>Direction</h2>
+
+      <div class="rulebox">
+        <strong>Question shape:</strong> find final direction or final position.
+      </div>
+
+      <div class="solvebox">
+        <strong>How to solve:</strong>
+        <ul>
+          <li>Fix the starting point.</li>
+          <li>Use arrows for each move.</li>
+          <li>Turn exactly as the question says.</li>
+          <li>Calculate final distance or facing direction from the diagram.</li>
+        </ul>
+      </div>
+
+      <div class="shortcut">
+        <strong>Fast shortcut:</strong> draw every step. Do not imagine the path loosely.
+      </div>
+
+      <div class="pyqbox">
+        <strong>Common forms:</strong>
+        <ul>
+          <li>Turn-based movement.</li>
+          <li>Final facing direction.</li>
+          <li>Shortest distance from start.</li>
+          <li>Complicated path with multiple turns.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Practice examples:</strong>
+        <ul>
+          <li>Walk 5 m north, turn right, walk 3 m.</li>
+          <li>Turn left twice and find final facing.</li>
+          <li>Find shortest distance from origin after a path.</li>
+        </ul>
+      </div>
+
+      <div class="mistakebox">
+        <strong>Common mistakes:</strong>
+        <ul>
+          <li>Confusing left and right.</li>
+          <li>Forgetting the starting direction.</li>
+          <li>Skipping the turn in the diagram.</li>
+          <li>Mixing facing direction with final position.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card topic">
+      <div class="tag">Medium importance</div>
+      <h2>Direction: quick map</h2>
+
+      <div class="solvebox">
+        <strong>Quick map rule:</strong>
+        <ul>
+          <li>Use north, south, east, west clearly.</li>
+          <li>Mark left and right according to current facing, not page side.</li>
+        </ul>
+      </div>
+
+      <div class="pyqbox">
+        <strong>Best practice style:</strong>
+        <ul>
+          <li>Always draw small compass marks.</li>
+          <li>Write each move step by step.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="grid" id="ranking">
+    <article class="card topic">
+      <div class="tag">Medium importance</div>
+      <h2>Order Ranking</h2>
+
+      <div class="rulebox">
+        <strong>Question shape:</strong> find rank from left, rank from right, or total number of people.
+      </div>
+
+      <div class="solvebox">
+        <strong>How to solve:</strong>
+        <ul>
+          <li>Check whether the rank is from left or right.</li>
+          <li>If both ranks are given, use the total formula.</li>
+          <li>Remember total = left rank + right rank - 1.</li>
+          <li>Check whether the question asks position or actual count.</li>
+        </ul>
+      </div>
+
+      <div class="shortcut">
+        <strong>Fast shortcut:</strong> never mix position with final rank. First identify the side.
+      </div>
+
+      <div class="pyqbox">
+        <strong>Common forms:</strong>
+        <ul>
+          <li>Rank from left.</li>
+          <li>Rank from right.</li>
+          <li>Total number of students.</li>
+          <li>Rank after one person changes position.</li>
+        </ul>
+      </div>
+
+      <div class="examplebox">
+        <strong>Practice examples:</strong>
+        <ul>
+          <li>A is 7th from left and 10th from right. Find total.</li>
+          <li>B is 5th from left in a row. Find right rank if total is known.</li>
+          <li>Find position after adding one person to the row.</li>
+        </ul>
+      </div>
+
+      <div class="mistakebox">
+        <strong>Common mistakes:</strong>
+        <ul>
+          <li>Mixing left and right ranks.</li>
+          <li>Forgetting -1 in total formula.</li>
+          <li>Thinking position and rank are same.</li>
+          <li>Not reading the side carefully.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card topic">
+      <div class="tag">Medium importance</div>
+      <h2>Ranking: quick formula use</h2>
+
+      <div class="solvebox">
+        <strong>Formula rule:</strong>
+        <ul>
+          <li>Total people = left rank + right rank - 1.</li>
+          <li>If total is given and one side is known, the other side can be found directly.</li>
+        </ul>
+      </div>
+
+      <div class="pyqbox">
+        <strong>Practice style:</strong>
+        <ul>
+          <li>Write both ranks clearly before solving.</li>
+          <li>Check whether the row is fixed or changed by conditions.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="card" style="margin-top:16px;">
+    <h2>Full revision bullets</h2>
+    <ul>
+      <li><strong>Analogy:</strong> relation first, option later.</li>
+      <li><strong>Classification:</strong> one mismatch only.</li>
+      <li><strong>Series:</strong> arithmetic before advanced logic.</li>
+      <li><strong>Alphabet Series:</strong> positions must be automatic.</li>
+      <li><strong>Missing Number Series:</strong> test pattern families fast.</li>
+      <li><strong>Coding-Decoding:</strong> test one rule at a time.</li>
+      <li><strong>Blood Relation:</strong> tree diagram every time.</li>
+      <li><strong>Direction:</strong> arrows and turns on paper.</li>
+      <li><strong>Order Ranking:</strong> total formula and correct side.</li>
+    </ul>
+  </section>
+
+  <div class="footer">This HTML is designed as a deeper SSC CGL Reasoning study page with full topic content, solving logic, and practice patterns.</div>
+</main>
+</body>
+</html>
