@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSC Reasoning Dark Dashboard</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --bg2:#0f1730;
+      --card:#121a33;
+      --card2:#10182e;
+      --text:#edf1ff;
+      --muted:#aab3da;
+      --accent:#7c5cff;
+      --accent2:#19d3da;
+      --good:#6ee7a8;
+      --warn:#ffcc66;
+      --border:rgba(255,255,255,.08);
+      --shadow:0 20px 50px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      background:radial-gradient(circle at top, #18265a 0%, var(--bg) 40%);
+      color:var(--text);
+    }
+    .wrap{
+      max-width:1280px;
+      margin:0 auto;
+      padding:28px;
+    }
+    .hero{
+      background:linear-gradient(135deg, rgba(124,92,255,.24), rgba(25,211,218,.10));
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:34px;
+      line-height:1.15;
+    }
+    .sub{
+      color:var(--muted);
+      margin:0;
+      line-height:1.65;
+      max-width:950px;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+    .stat{
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+    }
+    .stat .k{color:var(--muted); font-size:13px; margin-bottom:8px;}
+    .stat .v{font-size:18px; font-weight:700;}
+    .section{
+      margin-top:22px;
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-size:24px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:16px;
+    }
+    .card{
+      background:linear-gradient(180deg, var(--card), var(--card2));
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    h3{
+      margin:0;
+      font-size:20px;
+    }
+    .tier{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(124,92,255,.3);
+      background:rgba(124,92,255,.15);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .label{
+      color:var(--muted);
+      font-size:13px;
+      margin-top:12px;
+    }
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
+    }
+    .tag{
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      font-size:12px;
+      color:var(--text);
+    }
+    .box{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      margin-top:16px;
+    }
+    .box p, .card p, li{
+      color:var(--text);
+      line-height:1.65;
+      margin:8px 0;
+    }
+    ul{
+      margin:10px 0 0;
+      padding-left:18px;
+    }
+    .note{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .two{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:16px;
+    }
+    @media (max-width:900px){
+      .two{grid-template-columns:1fr}
+    }
+    .highlight{
+      color:var(--good);
+      font-weight:700;
+    }
+    .warn{
+      color:var(--warn);
+      font-weight:700;
+    }
+    .footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+      padding-bottom:8px;
+    }
+    .mini{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.55;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>SSC Reasoning Dark Theme Dashboard</h1>
+      <p class="sub">
+        This study dashboard is built for the 9 SSC reasoning topics you listed. It combines high-frequency topic priority, quick tricks, common mistakes, and daily study targets in one browser-friendly dark layout.
+      </p>
+      <div class="stats">
+        <div class="stat"><div class="k">Tier A Topics</div><div class="v">6 Must-Strong Areas</div></div>
+        <div class="stat"><div class="k">Tier B Topics</div><div class="v">3 Important Areas</div></div>
+        <div class="stat"><div class="k">Best Method</div><div class="v">PYQ + Timed Drill</div></div>
+        <div class="stat"><div class="k">Study Target</div><div class="v">80–100 Questions/Topic</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Priority Order</h2>
+      <div class="two">
+        <div class="box">
+          <p><span class="highlight">Tier A:</span> Analogy, Classification, Series, Alphabet Series, Coding-Decoding, Missing Number Series.</p>
+          <p>These should be your fastest scoring areas. Build speed here first, then move to mixed practice.</p>
+          <p><span class="highlight">Tier B:</span> Blood Relation, Direction, Order Ranking.</p>
+          <p>These are important, but they become easy only when you use diagrams and formulas consistently.</p>
+        </div>
+        <div class="box">
+          <p><span class="warn">Daily rule:</span> 2 Tier A topics + 1 Tier B topic + 20 mixed questions.</p>
+          <p><span class="warn">Time rule:</span> If a question does not show a pattern in 20 seconds, mark it and move on.</p>
+          <p><span class="warn">Revision rule:</span> Revisit formulas, then PYQs, then timed tests.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Topic Cards</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="top"><h3>Analogy</h3><span class="tier">Tier A</span></div>
+          <p>Check relation type first: meaning, function, part-whole, cause-effect, tool-user, number relation.</p>
+          <div class="label">Shortcut</div>
+          <div class="tags">
+            <span class="tag">Relation first</span>
+            <span class="tag">Then options</span>
+            <span class="tag">Avoid similarity guessing</span>
+          </div>
+          <p class="mini">Practice target: 50+ PYQs.</p>
+        </div>
+
+        <div class="card">
+          <div class="top"><h3>Classification</h3><span class="tier">Tier A</span></div>
+          <p>Look for one hidden mismatch by checking category, function, property, number pattern, and letter pattern.</p>
+          <div class="label">Shortcut</div>
+          <div class="tags">
+            <span class="tag">Odd one out</span>
+            <span class="tag">Property check</span>
+            <span class="tag">Pattern check</span>
+          </div>
+          <p class="mini">Practice target: 40–50 PYQs.</p>
+        </div>
+
+        <div class="card">
+          <div class="top"><h3>Series</h3><span class="tier">Tier A</span></div>
+          <p>Check difference, second difference, multiplication, division, square/cube, alternate series, and mixed pattern.</p>
+          <div class="label">Shortcut</div>
+          <div class="tags">
+            <span class="tag">Difference</span>
+            <span class="tag">Second difference</span>
+            <span class="tag">Alternate chain</span>
+          </div>
+          <p class="mini">Practice target: 70–80 questions total.</p>
+        </div>
+
+        <div class="card">
+          <div class="top"><h3>Alphabet Series</h3><span class="tier">Tier A</span></div>
+          <p>Use A=1 to Z=26, reverse positions, and alternating letters until it becomes automatic.</p>
+          <div class="label">Shortcut</div>
+          <div class="tags">
+            <span class="tag">A=1</span>
+            <span class="tag">Z=26</span>
+            <span class="tag">Reverse order</span>
+          </div>
+          <p class="mini">Practice target: daily 10-minute drill.</p>
+        </div>
+
+        <div class="card">
+          <div class="top"><h3>Coding-Decoding</h3><span class="tier">Tier A</span></div>
+          <p>Test direct shift, reverse alphabet, position value, rearrangement, and symbol coding one by one.</p>
+          <div class="label">Shortcut</div>
+          <div class="tags">
+            <span class="tag">Direct shift</span>
+            <span class="tag">Reverse alphabet</span>
+            <span class="tag">Word pattern</span>
+          </div>
+          <p class="mini">Practice target: 50+ PYQs.</p>
+        </div>
+
+        <div class="card">
+          <div class="top"><h3>Missing Number Series</h3><span class="tier">Tier A</span></div>
+          <p>Check difference, multiplication, square, cube, alternate chains, and sum-based patterns.</p>
+          <div class="label">Shortcut</div>
+          <div class="tags">
+            <span class="tag">Fast pattern check</span>
+            <span class="tag">Skip if stuck</span>
+            <span class="tag">Return later</span>
+          </div>
+          <p class="mini">Practice target: 70–80 questions total.</p>
+        </div>
+
+        <div class="card">
+          <div class="top"><h3>Blood Relation</h3><span class="tier">Tier B</span></div>
+          <p>Never solve mentally. Draw a rough family tree and mark gender and generation clearly.</p>
+          <div class="label">Shortcut</div>
+          <div class="tags">
+            <span class="tag">Family tree</span>
+            <span class="tag">Anchor person</span>
+            <span class="tag">Coded relation</span>
+          </div>
+          <p class="mini">Practice target: 30–40 diagram sets.</p>
+        </div>
+
+        <div class="card">
+          <div class="top"><h3>Direction</h3><span class="tier">Tier B</span></div>
+          <p>Use arrows and right-left turns on paper, then cancel opposite moves logically.</p>
+          <div class="label">Shortcut</div>
+          <div class="tags">
+            <span class="tag">Arrow diagram</span>
+            <span class="tag">Right/left turns</span>
+            <span class="tag">Net displacement</span>
+          </div>
+          <p class="mini">Practice target: 30–40 diagram questions.</p>
+        </div>
+
+        <div class="card">
+          <div class="top"><h3>Order Ranking</h3><span class="tier">Tier B</span></div>
+          <p>Use Total = Left Rank + Right Rank - 1 and convert left/right carefully.</p>
+          <div class="label">Shortcut</div>
+          <div class="tags">
+            <span class="tag">Rank formula</span>
+            <span class="tag">End conversion</span>
+            <span class="tag">Line diagram</span>
+          </div>
+          <p class="mini">Practice target: 30–40 formula sets.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>10-Day Drill Plan</h2>
+      <div class="box">
+        <ul>
+          <li>Day 1: Analogy + Classification.</li>
+          <li>Day 2: Series + Alphabet Series.</li>
+          <li>Day 3: Coding-Decoding basics + reverse alphabet.</li>
+          <li>Day 4: Missing Number Series + mixed number patterns.</li>
+          <li>Day 5: Blood Relation + family-tree diagrams.</li>
+          <li>Day 6: Direction + turn-based questions.</li>
+          <li>Day 7: Order Ranking + formula drills.</li>
+          <li>Day 8: Mixed Tier A test.</li>
+          <li>Day 9: Mixed Tier B test.</li>
+          <li>Day 10: Full revision + timed mock.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Coding-Decoding Master Tricks</h2>
+      <div class="box">
+        <ul>
+          <li>Try direct letter shift first.</li>
+          <li>Then check reverse alphabet using 27 - position.</li>
+          <li>Then convert letters to numbers with A=1 to Z=26.</li>
+          <li>Then test word order or rearrangement.</li>
+          <li>Finally, check symbol coding or mixed patterns.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      Open this file in any browser. Use it as a revision dashboard, not just a note page.
+    </div>
+  </div>
+</body>
+</html>
