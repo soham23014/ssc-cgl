@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSC CGL 2026 — Reasoning Command Centre</title>
+<style>
+:root{--bg:#08080F;--surf:#0E0E1C;--card:#141428;--bord:#1E1E38;--bord2:#2A2A48;--txt:#E0E0F4;--mute:#6868A0;--acc:#7C68EE;--teal:#3ECFBF;--amber:#F6C549;--grn:#52D68A;--red:#FF6B6B;--blue:#5BA4FF;--pur:#A78BFA}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;font-size:14px;line-height:1.6}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:var(--surf)}::-webkit-scrollbar-thumb{background:var(--bord2);border-radius:4px}
+/* SIDEBAR */
+#sb{width:252px;min-height:100vh;background:var(--surf);border-right:1px solid var(--bord);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;z-index:100;transition:transform .3s}
+.sb-logo{padding:18px 16px 14px;border-bottom:1px solid var(--bord)}
+.sb-logo .tag{font-size:9px;font-weight:800;letter-spacing:2.5px;color:var(--acc);text-transform:uppercase;margin-bottom:3px}
+.sb-logo h1{font-size:15px;font-weight:800;line-height:1.3;color:var(--txt)}
+.sb-logo .edate{font-size:11px;color:var(--amber);margin-top:3px}
+.sb-sec{padding:12px 14px 4px;font-size:9px;font-weight:800;letter-spacing:2px;color:var(--mute);text-transform:uppercase}
+.ni{display:flex;align-items:center;gap:9px;padding:9px 14px;cursor:pointer;border-radius:8px;margin:1px 8px;transition:all .15s;color:var(--mute);font-size:12.5px;font-weight:500;user-select:none}
+.ni:hover{background:var(--card);color:var(--txt)}
+.ni.active{background:var(--card);color:var(--txt);border-left:2px solid var(--acc);padding-left:12px}
+.ni .ic{font-size:15px;width:20px;flex-shrink:0}
+.ni .lbl{flex:1}
+.ni .badge{font-size:9px;background:var(--bg);border:1px solid var(--bord2);border-radius:8px;padding:1px 6px;color:var(--mute)}
+.ni.active .badge{background:var(--acc);color:#fff;border-color:var(--acc)}
+.ni .spill{font-size:10px;background:var(--grn);color:#000;border-radius:6px;padding:1px 5px;font-weight:700}
+.sb-foot{padding:14px 16px;border-top:1px solid var(--bord);margin-top:auto}
+.sb-foot div{font-size:11px;color:var(--mute);margin-bottom:2px}
+.sb-foot b{color:var(--txt)}
+/* MAIN */
+#main{margin-left:252px;flex:1;min-height:100vh}
+.page{display:none}.page.active{display:block}
+/* DASHBOARD */
+.dh{padding:28px 28px 20px;border-bottom:1px solid var(--bord);background:linear-gradient(135deg,var(--surf) 0%,#0A0A18 100%)}
+.dh h2{font-size:24px;font-weight:900;margin-bottom:6px;letter-spacing:-.3px}
+.dh p{color:var(--mute);font-size:13px}
+.dh .sub-acc{color:var(--acc);font-weight:700}
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:20px 28px}
+.sc{background:var(--card);border:1px solid var(--bord);border-radius:10px;padding:16px}
+.sc .sl{font-size:9px;color:var(--mute);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+.sc .sv{font-size:26px;font-weight:900}
+.sc .ss{font-size:11px;color:var(--mute);margin-top:2px}
+.sc.c-acc .sv{color:var(--acc)}.sc.c-grn .sv{color:var(--grn)}.sc.c-amb .sv{color:var(--amber)}.sc.c-red .sv{color:var(--red)}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:0 28px 28px}
+.tc{background:var(--card);border:1px solid var(--bord);border-radius:10px;padding:18px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--tc-color,var(--acc));transition:height .2s}
+.tc:hover{transform:translateY(-2px);border-color:var(--bord2)}.tc:hover::before{height:4px}
+.tc .tch{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.tc .tic{font-size:22px}.tc .tier{font-size:9px;font-weight:800;border-radius:5px;padding:2px 7px;letter-spacing:.5px}
+.tc .tier.ta{background:rgba(255,107,107,.2);color:#FF8A8A;border:1px solid var(--red)}
+.tc .tier.tb{background:rgba(246,197,73,.2);color:#F6D97A;border:1px solid var(--amber)}
+.tc h3{font-size:14px;font-weight:800;margin-bottom:2px}
+.tc .tmeta{font-size:11px;color:var(--mute);margin-bottom:12px}
+.pb{height:3px;background:var(--bord);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.pf{height:100%;border-radius:3px;transition:width .4s;background:var(--grn)}
+.tpl{font-size:10px;color:var(--mute)}
+/* TOPIC PAGE */
+.tph{padding:24px 28px 18px;border-bottom:1px solid var(--bord);background:var(--surf)}
+.tpbc{font-size:11px;color:var(--mute);margin-bottom:10px;cursor:pointer}
+.tpbc span{color:var(--acc)}
+.tptr{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.tptr .big-ic{font-size:32px}
+.tptr h2{font-size:22px;font-weight:900;letter-spacing:-.2px}
+.tptr .sub{font-size:12px;color:var(--mute);margin-top:1px}
+.tptags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:10px;font-weight:700;border-radius:5px;padding:2px 8px;border:1px solid}
+.tag-tier{background:rgba(124,104,238,.15);color:#9C8FFF;border-color:var(--acc)}
+.tag-imp{background:rgba(255,107,107,.15);color:#FF8A8A;border-color:var(--red)}
+.tag-q{background:rgba(62,207,191,.15);color:#5FD9CC;border-color:var(--teal)}
+.tag-pt{background:rgba(246,197,73,.15);color:#F6D97A;border-color:var(--amber)}
+/* HEAT GAUGE — signature element */
+.heat-gauge{margin:14px 28px 0;background:var(--card);border:1px solid var(--bord);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:16px}
+.hg-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--mute);white-space:nowrap}
+.hg-track{flex:1;height:8px;background:var(--bord);border-radius:8px;overflow:hidden}
+.hg-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,#FF6B6B,#F6C549,#52D68A);transition:width .5s ease}
+.hg-pct{font-size:12px;font-weight:800;color:var(--grn);white-space:nowrap;min-width:36px;text-align:right}
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--bord);padding:0 28px;background:var(--surf)}
+.tab{padding:11px 18px;font-size:12.5px;font-weight:700;color:var(--mute);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.tab:hover{color:var(--txt)}.tab.active{color:var(--txt);border-bottom-color:var(--acc)}
+.tbc{display:none;padding:24px 28px}.tbc.active{display:block}
+/* CONCEPT STYLES */
+.cs{background:var(--card);border:1px solid var(--bord);border-radius:10px;padding:20px;margin-bottom:18px}
+.cs h3{font-size:14px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.cs p{font-size:13px;color:var(--txt);line-height:1.7}
+.ib{border-radius:7px;padding:12px 14px;margin-bottom:10px;border-left:3px solid}
+.ib.trick{background:rgba(62,207,191,.07);border-color:var(--teal)}
+.ib.warn{background:rgba(246,197,73,.07);border-color:var(--amber)}
+.ib.succ{background:rgba(82,214,138,.07);border-color:var(--grn)}
+.ib.info{background:rgba(124,104,238,.08);border-color:var(--acc)}
+.ib .bl{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px}
+.ib.trick .bl{color:var(--teal)}.ib.warn .bl{color:var(--amber)}.ib.succ .bl{color:var(--grn)}.ib.info .bl{color:var(--acc)}
+.ib p{font-size:12.5px;color:var(--txt)}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.ti{background:var(--surf);border:1px solid var(--bord);border-radius:7px;padding:12px}
+.ti .tn{font-size:9px;font-weight:800;color:var(--acc);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.ti .te{font-size:12px;font-family:'Courier New',monospace;color:var(--txt);margin-bottom:2px}
+.ti .ta2{font-size:11px;color:var(--grn)}
+.fbox{background:var(--surf);border:1px solid var(--bord);border-radius:7px;padding:14px;margin:10px 0;font-family:'Courier New',monospace;font-size:14px;color:var(--teal);text-align:center;letter-spacing:.5px}
+.steps{list-style:none;counter-reset:step}
+.steps li{counter-increment:step;padding:8px 0 8px 36px;position:relative;font-size:12.5px;border-bottom:1px solid var(--bord);color:var(--txt)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{content:counter(step);position:absolute;left:0;top:8px;width:22px;height:22px;background:var(--acc);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff}
+/* MCQ */
+.mcq-ctrl{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;background:var(--card);border:1px solid var(--bord);border-radius:10px;padding:12px 16px}
+.msd{display:flex;gap:18px;align-items:center}
+.mss{text-align:center}.mss .msv{font-size:20px;font-weight:900}.mss .msl{font-size:9px;color:var(--mute);text-transform:uppercase;letter-spacing:1px}
+.mss.mc .msv{color:var(--grn)}.mss.mw .msv{color:var(--red)}.mss.ms .msv{color:var(--amber)}
+.mbtn{background:var(--surf);border:1px solid var(--bord);border-radius:7px;color:var(--txt);padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s}
+.mbtn:hover{background:var(--card)}.mbtn.pri{background:var(--acc);border-color:var(--acc);color:#fff}.mbtn.pri:hover{opacity:.85}
+.mcard{background:var(--card);border:1px solid var(--bord);border-radius:10px;margin-bottom:14px;overflow:hidden;transition:border-color .2s}
+.mcard.ac{border-color:var(--grn)}.mcard.aw{border-color:var(--red)}
+.mtop{padding:14px 18px 12px;border-bottom:1px solid var(--bord);display:flex;gap:10px;align-items:flex-start}
+.mnum{width:26px;height:26px;border-radius:5px;background:var(--surf);border:1px solid var(--bord);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--mute);flex-shrink:0;margin-top:1px}
+.mnum.nc{background:rgba(82,214,138,.15);border-color:var(--grn);color:var(--grn)}.mnum.nw{background:rgba(255,107,107,.15);border-color:var(--red);color:var(--red)}
+.mq{font-size:13px;font-weight:500;color:var(--txt);line-height:1.65}
+.mopts{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:10px 18px}
+.mopt{background:var(--surf);border:1.5px solid var(--bord);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--txt);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px;text-align:left}
+.mopt:hover:not([disabled]){background:var(--card);border-color:var(--acc)}
+.mopt .ol{font-weight:800;color:var(--mute);font-size:11px;width:16px;flex-shrink:0}
+.mopt.oc{border-color:var(--grn);background:rgba(82,214,138,.1)}.mopt.oc .ol{color:var(--grn)}
+.mopt.ow{border-color:var(--red);background:rgba(255,107,107,.08)}.mopt.ow .ol{color:var(--red)}
+.mopt[disabled]{cursor:default;opacity:.8}
+.mexp{display:none;padding:10px 18px 14px;border-top:1px solid var(--bord);background:var(--surf)}
+.mexp.vis{display:block}
+.mel{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin-bottom:4px}
+.met{font-size:12px;color:var(--mute);line-height:1.6}
+/* TABLE */
+.ptable{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
+.ptable th{text-align:left;padding:9px 12px;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--mute);border-bottom:1px solid var(--bord)}
+.ptable td{padding:9px 12px;border-bottom:1px solid var(--bord);color:var(--txt)}
+.ptable tr:last-child td{border-bottom:none}
+.imp-vh{color:var(--red);font-weight:800}.imp-h{color:var(--amber);font-weight:700}.imp-m{color:var(--teal);font-weight:600}
+/* hamburger */
+.ham{display:none;position:fixed;top:10px;left:10px;z-index:200;background:var(--card);border:1px solid var(--bord);border-radius:7px;padding:7px 9px;cursor:pointer;color:var(--txt);font-size:17px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
+.overlay.vis{display:block}
+@media(max-width:800px){
+  #sb{transform:translateX(-100%)}.#sb.open{transform:translateX(0)}
+  #main{margin-left:0}
+  .ham{display:block}
+  .sr{grid-template-columns:1fr 1fr}
+  .tg{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .mopts{grid-template-columns:1fr}
+  .dh,.tbc,.tph,.tabs{padding-left:16px;padding-right:16px}
+  .sr,.tg{padding-left:16px;padding-right:16px}
+  .heat-gauge{margin:10px 16px 0}
+}
+</style>
+</head>
+<body>
+<button class="ham" id="hamBtn" onclick="toggleSB()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSB()"></div>
+
+<nav id="sb">
+  <div class="sb-logo">
+    <div class="tag">SSC CGL 2026</div>
+    <h1>Reasoning<br>Command Centre</h1>
+    <div class="edate">📅 Target: Sept 2026 · Tier-1</div>
+  </div>
+  <div class="sb-sec">Navigation</div>
+  <div class="ni active" id="nav-dashboard" onclick="showPage('dashboard')">
+    <span class="ic">📊</span><span class="lbl">Dashboard</span>
+  </div>
+  <div class="sb-sec">Tier A — Must Master</div>
+  <div id="sb-topics-a"></div>
+  <div class="sb-sec">Medium Priority</div>
+  <div id="sb-topics-b"></div>
+  <div class="sb-foot">
+    <div>Total MCQs: <b>84</b></div>
+    <div>Topics: <b>9</b></div>
+    <div style="margin-top:6px;font-size:10px;color:var(--acc)">Progress auto-saved ✓</div>
+  </div>
+</nav>
+
+<main id="main">
+  <div id="page-dashboard" class="page active">
+    <div class="dh">
+      <h2>Reasoning — Tier 1 Command Centre</h2>
+      <p>9 topics · <span class="sub-acc">84 PYQ-style MCQs</span> · Track progress per topic · Dark theme optimised for focus</p>
+    </div>
+    <div class="sr" id="dash-stats"></div>
+    <div style="padding:4px 28px 12px;font-size:9px;font-weight:800;color:var(--mute);letter-spacing:2px;text-transform:uppercase">Tier A — Must Master First</div>
+    <div class="tg" id="topic-grid-a"></div>
+    <div style="padding:4px 28px 12px;font-size:9px;font-weight:800;color:var(--mute);letter-spacing:2px;text-transform:uppercase">Medium Priority</div>
+    <div class="tg" id="topic-grid-b"></div>
+  </div>
+  <div id="topic-pages"></div>
+</main>
+
+<script>
+// ==================== DATA ====================
+const TOPICS = [
+{
+  id:'analogy',title:'Analogy',sub:'Identify & Apply the Relationship',
+  tier:'A',ic:'🔗',imp:'Very High',expQ:'2–4',pt:'150+',col:'#FF6B6B',
+  overview:`<div class="cs"><h3>📌 SSC Reality Check</h3>
+  <p>Analogy is one of the highest-scoring Reasoning topics. SSC rarely asks complex analogies — master 6 relation types and you can solve 90% of questions accurately.</p>
+  <div class="ib trick"><div class="bl">🎯 Core Strategy</div><p>Find <b>one clean relation</b> between the first pair. Apply the EXACT same relation to the second pair. Never guess from vague similarity.</p></div>
+  <div class="ib warn"><div class="bl">⚠️ SSC's Favourite Trap</div><p>Doctor → Hospital asks for <b>Workplace</b>, NOT Subject (Medicine). Options like 'Medicine' or 'Patient' are planted distractors. Identify the relation TYPE first.</p></div>
+  <div class="ib succ"><div class="bl">✅ Negative Marking Strategy (−0.5)</div><p>Eliminate 2 options confidently → attempt. If 3 options seem equally valid → skip. Never guess when you haven't identified the relation.</p></div>
+  </div>
+  <div class="cs"><h3>📊 Priority at a Glance</h3>
+  <table class="ptable"><thead><tr><th>Relation Type</th><th>Frequency</th><th>Difficulty</th></tr></thead><tbody>
+  <tr><td>Workplace</td><td class="imp-vh">Very High</td><td>Easy</td></tr>
+  <tr><td>Tool-Function</td><td class="imp-vh">Very High</td><td>Easy</td></tr>
+  <tr><td>Part-Whole</td><td class="imp-h">High</td><td>Easy</td></tr>
+  <tr><td>Category</td><td class="imp-h">High</td><td>Easy</td></tr>
+  <tr><td>Number Analogy</td><td class="imp-h">High</td><td>Medium</td></tr>
+  <tr><td>Letter Analogy</td><td class="imp-m">Medium</td><td>Medium</td></tr>
+  </tbody></table></div>`,
+  concepts:`<div class="cs"><h3>🗂️ 6 Relation Types to Master</h3>
+  <div class="tgrid">
+  <div class="ti"><div class="tn">Workplace</div><div class="te">Doctor : Hospital :: Teacher : ?</div><div class="ta2">→ School (where they work)</div></div>
+  <div class="ti"><div class="tn">Tool-Function</div><div class="te">Pen : Write :: Knife : ?</div><div class="ta2">→ Cut (primary function)</div></div>
+  <div class="ti"><div class="tn">Part-Whole</div><div class="te">Chapter : Book :: Wheel : ?</div><div class="ta2">→ Vehicle (what it belongs to)</div></div>
+  <div class="ti"><div class="tn">Category</div><div class="te">Tiger : Mammal :: Eagle : ?</div><div class="ta2">→ Bird (general category)</div></div>
+  <div class="ti"><div class="tn">Number Analogy</div><div class="te">3 : 9 :: 5 : ?  →  25</div><div class="ta2">→ n² pattern here</div></div>
+  <div class="ti"><div class="tn">Letter Analogy</div><div class="te">ACE : BDF :: MOQ : ?</div><div class="ta2">→ NPR (+1 each letter)</div></div>
+  <div class="ti"><div class="tn">Storage</div><div class="te">Aeroplane : Hangar :: Car : ?</div><div class="ta2">→ Garage (storage place)</div></div>
+  <div class="ti"><div class="tn">Collective Noun</div><div class="te">Lion : Pride :: Fish : ?</div><div class="ta2">→ School (group name)</div></div>
+  </div></div>
+  <div class="cs"><h3>🧠 Step-by-Step Method</h3>
+  <ul class="steps">
+  <li>Identify what the first word IS — person / tool / part / letter / number</li>
+  <li>State exactly how it relates to the second word in one line</li>
+  <li>Apply the SAME relation to the third word</li>
+  <li>Match with options — eliminate distractors that use a different relation type</li>
+  </ul>
+  <div class="ib info" style="margin-top:12px"><div class="bl">💡 Quick Test</div><p>If two different relation types both seem to work → pick the one that is MORE SPECIFIC and direct. SSC prefers the closest, most direct relation.</p></div>
+  </div>`,
+  questions:[
+  {q:'Doctor : Hospital :: Teacher : ?',opts:['Book','School','Student','Knowledge'],ans:1,exp:'Workplace relation. Doctor works at Hospital; Teacher works at School.'},
+  {q:'Clock : Time :: Thermometer : ?',opts:['Heat','Temperature','Fever','Mercury'],ans:1,exp:'Instrument → what it measures. Clock measures Time; Thermometer measures Temperature.'},
+  {q:'AZ : BY :: CX : ?',opts:['EV','DW','DV','EW'],ans:1,exp:'First letter advances (A,B,C,D…), second retreats (Z,Y,X,W…). Each pair sums to 27.'},
+  {q:'16 : 48 :: 25 : ?',opts:['75','100','60','50'],ans:0,exp:'Multiply by 3: 16×3=48, 25×3=75.'},
+  {q:'Pen : Write :: Knife : ?',opts:['Cut','Sharp','Steel','Wound'],ans:0,exp:'Tool → its primary function. Pen is used to Write; Knife is used to Cut.'},
+  {q:'Moon : Satellite :: Earth : ?',opts:['Sun','Star','Planet','Galaxy'],ans:2,exp:'Category relation. Moon is a Satellite; Earth is a Planet.'},
+  {q:'Aeroplane : Hangar :: Car : ?',opts:['Road','Garage','Station','Track'],ans:1,exp:'Vehicle → its storage place. Planes stored in Hangars; Cars stored in Garages.'},
+  {q:'3 : 12 :: 5 : ?',opts:['25','30','35','20'],ans:1,exp:'n × (n+1): 3×4=12, 5×6=30.'},
+  {q:'Author : Novel :: Poet : ?',opts:['Story','Poem','Song','Drama'],ans:1,exp:'Creator → their creation. Author creates Novels; Poet creates Poems.'},
+  {q:'ACE : BDF :: MOQ : ?',opts:['NPR','OPR','NPS','LNP'],ans:0,exp:'Each letter +1: A→B, C→D, E→F; similarly M→N, O→P, Q→R = NPR.'}
+  ]
+},
+{
+  id:'classification',title:'Classification',sub:'Find the Odd One Out',
+  tier:'A',ic:'🏷️',imp:'Very High',expQ:'1–3',pt:'100+',col:'#FF9F43',
+  overview:`<div class="cs"><h3>📌 SSC Reality Check</h3>
+  <p>Classification (Odd One Out) is extremely scoring when approached with method. Most questions are simple once you avoid overthinking — SSC tests one hidden mismatch only.</p>
+  <div class="ib trick"><div class="bl">🎯 Fast 4-Point Check</div><p>Check in this order: <b>(1) Category</b> (wild/domestic, living/non-living) → <b>(2) Property</b> (prime/composite, even/odd) → <b>(3) Use</b> (food crop/cash crop) → <b>(4) Letter pattern</b> (even/odd positions).</p></div>
+  <div class="ib warn"><div class="bl">⚠️ Common Mistake</div><p>Trying too many logic patterns at once causes confusion. Commit to ONE check at a time. If Category doesn't work cleanly, move to Property. Don't mix them.</p></div>
+  </div>
+  <div class="cs"><h3>📊 Most Common SSC Classification Types</h3>
+  <table class="ptable"><thead><tr><th>Type</th><th>Example</th><th>Key to spot</th></tr></thead><tbody>
+  <tr><td>Animal groups</td><td>Tiger, Lion, Cow, Leopard</td><td>Wild vs Domestic</td></tr>
+  <tr><td>Number groups</td><td>4, 9, 16, 23</td><td>Perfect square vs not</td></tr>
+  <tr><td>Profession groups</td><td>Judge, Lawyer, Criminal, Prosecutor</td><td>Court professional vs not</td></tr>
+  <tr><td>Plant/food groups</td><td>Wheat, Rice, Maize, Cotton</td><td>Food crop vs cash crop</td></tr>
+  <tr><td>Letter groups</td><td>BDFH, LNPR, TVXZ, KMOQ</td><td>Even vs odd positions</td></tr>
+  <tr><td>Sports groups</td><td>Football, Cricket, Chess, Hockey</td><td>Indoor vs outdoor</td></tr>
+  </tbody></table></div>`,
+  concepts:`<div class="cs"><h3>🧠 The Fast Elimination Method</h3>
+  <ul class="steps">
+  <li><b>Glance at all 4 options</b> — what do 3 of them clearly share?</li>
+  <li><b>Test Category first</b>: animal type, profession, crop type, sport type</li>
+  <li><b>If no clean category</b>: test Number property (prime, square, cube, even, odd)</li>
+  <li><b>If letters</b>: check position values (A=1 to Z=26) — all even? All odd? Gap pattern?</li>
+  <li><b>Pick the one that doesn't fit</b> the shared property of the other three</li>
+  </ul></div>
+  <div class="cs"><h3>🔢 Number Classification — Quick Reference</h3>
+  <div class="tgrid">
+  <div class="ti"><div class="tn">Prime Numbers</div><div class="te">2,3,5,7,11,13,17,19,23,29,31,37,41,43,47</div><div class="ta2">→ Divisible only by 1 and itself</div></div>
+  <div class="ti"><div class="tn">Perfect Squares</div><div class="te">1,4,9,16,25,36,49,64,81,100,121,144</div><div class="ta2">→ n² series</div></div>
+  <div class="ti"><div class="tn">Perfect Cubes</div><div class="te">1,8,27,64,125,216,343,512</div><div class="ta2">→ n³ series</div></div>
+  <div class="ti"><div class="tn">Fibonacci</div><div class="te">1,1,2,3,5,8,13,21,34,55</div><div class="ta2">→ Each = sum of previous two</div></div>
+  </div></div>`,
+  questions:[
+  {q:'Find the odd one out: Tiger, Lion, Leopard, Cow',opts:['Tiger','Lion','Leopard','Cow'],ans:3,exp:'Tiger, Lion, Leopard are wild animals (big cats). Cow is a domestic animal — the odd one out.'},
+  {q:'Find the odd one out: Rose, Lotus, Jasmine, Mango',opts:['Rose','Lotus','Jasmine','Mango'],ans:3,exp:'Rose, Lotus, Jasmine are flowers. Mango is a fruit — the odd one out.'},
+  {q:'Find the odd one out: 8, 27, 64, 100',opts:['8','27','64','100'],ans:3,exp:'8=2³, 27=3³, 64=4³ are perfect cubes. 100 is not a perfect cube (100=4.64…³) — the odd one out.'},
+  {q:'Find the odd one out: BDFH, LNPR, TVXZ, KMOQ',opts:['BDFH','LNPR','TVXZ','KMOQ'],ans:3,exp:'BDFH(2,4,6,8), LNPR(12,14,16,18), TVXZ(20,22,24,26) — all even positions. KMOQ(11,13,15,17) — odd positions. KMOQ is the odd one out.'},
+  {q:'Find the odd one out: Judge, Lawyer, Criminal, Prosecutor',opts:['Judge','Lawyer','Criminal','Prosecutor'],ans:2,exp:'Judge, Lawyer, Prosecutor are court professionals. Criminal is not a court professional — the odd one out.'},
+  {q:'Find the odd one out: 3, 5, 7, 9',opts:['3','5','7','9'],ans:3,exp:'3, 5, 7 are prime numbers. 9 = 3×3 is not a prime number — the odd one out.'},
+  {q:'Find the odd one out: Football, Cricket, Chess, Hockey',opts:['Football','Cricket','Chess','Hockey'],ans:2,exp:'Football, Cricket, Hockey are outdoor sports. Chess is an indoor board game — the odd one out.'},
+  {q:'Find the odd one out: Wheat, Rice, Maize, Cotton',opts:['Wheat','Rice','Maize','Cotton'],ans:3,exp:'Wheat, Rice, Maize are food crops. Cotton is a cash/fibre crop — the odd one out.'},
+  {q:'Find the odd one out: 17, 19, 23, 25',opts:['17','19','23','25'],ans:3,exp:'17, 19, 23 are prime numbers. 25 = 5×5 is not prime — the odd one out.'},
+  {q:'Find the odd one out: 4, 9, 16, 23',opts:['4','9','16','23'],ans:3,exp:'4=2², 9=3², 16=4² are perfect squares. 23 is not a perfect square — the odd one out.'}
+  ]
+},
+{
+  id:'series',title:'Number Series',sub:'Spot the Pattern, Fill the Gap',
+  tier:'A',ic:'🔢',imp:'Very High',expQ:'2–4',pt:'200+',col:'#F6C549',
+  overview:`<div class="cs"><h3>📌 SSC Reality Check</h3>
+  <p>Number Series is one of the easiest scoring topics in SSC Reasoning. Patterns are almost always one of 5 types. SSC 2023–2025 data shows at least 2–4 questions per shift.</p>
+  <div class="ib trick"><div class="bl">🎯 Check Order — Always Follow This</div><p>1. Simple difference (AP) → 2. Difference of differences → 3. Multiplication/Division → 4. Perfect squares/cubes → 5. Mixed (×n+k) or Fibonacci</p></div>
+  <div class="ib warn"><div class="bl">⚠️ #1 Mistake</div><p>Jumping to complex logic when the answer is simple arithmetic. Always check differences FIRST. 80% of SSC series questions are solved at step 1 or 2.</p></div>
+  <div class="ib succ"><div class="bl">✅ Time Rule</div><p>If not solved in 25 seconds → skip and return. Never spend 90+ seconds on one series question — it costs you 2 easier questions.</p></div>
+  </div>`,
+  concepts:`<div class="cs"><h3>🗂️ 5 Pattern Families — Master All</h3>
+  <div class="tgrid">
+  <div class="ti"><div class="tn">Type 1: AP (Arithmetic)</div><div class="te">5, 10, 15, 20, ? → 25</div><div class="ta2">→ Constant difference (+5)</div></div>
+  <div class="ti"><div class="tn">Type 2: Diff of Diff</div><div class="te">5, 10, 17, 26, ? → 37</div><div class="ta2">→ Diffs: 5,7,9,11 (AP)</div></div>
+  <div class="ti"><div class="tn">Type 3: Multiplication</div><div class="te">3, 6, 12, 24, ? → 48</div><div class="ta2">→ ×2 pattern</div></div>
+  <div class="ti"><div class="tn">Type 4: Squares/Cubes</div><div class="te">1, 4, 9, 16, ? → 25</div><div class="ta2">→ 1²,2²,3²,4²,5²</div></div>
+  <div class="ti"><div class="tn">Type 5: Mixed (×n+k)</div><div class="te">3, 7, 15, 31, ? → 63</div><div class="ta2">→ ×2+1 each step</div></div>
+  <div class="ti"><div class="tn">Type 6: Fibonacci</div><div class="te">1, 1, 2, 3, 5, 8, ? → 13</div><div class="ta2">→ Each = prev two sum</div></div>
+  </div></div>
+  <div class="cs"><h3>🧠 How to Attack Any Series Question</h3>
+  <ul class="steps">
+  <li>Write differences between consecutive terms</li>
+  <li>Check if differences form an AP (constant second difference)</li>
+  <li>Check ×2, ×3, ×0.5 pattern</li>
+  <li>Check if terms are n², n³, or n²±k</li>
+  <li>Try ×n+k formula: if term×2+1 or ×2−1 gives next term</li>
+  </ul>
+  <div class="fbox">Key formula: n(n+1) series → 2,6,12,20,30,42… (differences: 4,6,8,10,12)</div>
+  </div>`,
+  questions:[
+  {q:'2, 4, 8, 16, 32, ?',opts:['64','48','56','72'],ans:0,exp:'×2 pattern: 2×2=4, 4×2=8, …, 32×2=64.'},
+  {q:'5, 10, 17, 26, 37, ?',opts:['48','50','52','55'],ans:1,exp:'Differences: 5,7,9,11,13 (odd numbers in AP). 37+13=50.'},
+  {q:'3, 6, 11, 18, 27, ?',opts:['35','36','38','40'],ans:2,exp:'Differences: 3,5,7,9,11 (odd numbers). 27+11=38.'},
+  {q:'1, 4, 9, 16, 25, ?',opts:['30','35','36','49'],ans:2,exp:'Perfect squares: 1²,2²,3²,4²,5²,6²=36.'},
+  {q:'2, 3, 5, 8, 13, 21, ?',opts:['29','31','34','35'],ans:2,exp:'Fibonacci: each = sum of previous two. 13+21=34.'},
+  {q:'7, 14, 28, 56, ?',opts:['84','112','120','98'],ans:1,exp:'×2 pattern: 7×2=14, 14×2=28, 28×2=56, 56×2=112.'},
+  {q:'100, 96, 89, 79, 66, ?',opts:['50','52','54','48'],ans:0,exp:'Differences: 4,7,10,13,16 (increases by 3 each step). 66−16=50.'},
+  {q:'3, 7, 15, 31, 63, ?',opts:['127','125','126','128'],ans:0,exp:'×2+1 pattern: 3×2+1=7, 7×2+1=15, 15×2+1=31, 31×2+1=63, 63×2+1=127.'},
+  {q:'6, 11, 21, 36, 56, ?',opts:['81','82','80','83'],ans:0,exp:'Differences: 5,10,15,20,25 (+5 each step). 56+25=81.'},
+  {q:'1, 1, 2, 6, 24, ?',opts:['120','100','96','48'],ans:0,exp:'Factorial: 0!=1, 1!=1, 2!=2, 3!=6, 4!=24, 5!=120.'}
+  ]
+},
+{
+  id:'alphaseries',title:'Alphabet Series',sub:'A=1 to Z=26, Automatic',
+  tier:'A',ic:'🔤',imp:'Very High',expQ:'1–2',pt:'100+',col:'#52D68A',
+  overview:`<div class="cs"><h3>📌 SSC Reality Check</h3>
+  <p>Alphabet Series = <b>free marks</b> for anyone who has memorised A=1 to Z=26 AND reverse Z=1 to A=26. Questions are repetitive, fast to solve, and scoring.</p>
+  <div class="ib trick"><div class="bl">🎯 The Golden Investment</div><p>Spend 30 minutes memorising alphabet positions. Every single Alphabet Series question becomes solvable in under 15 seconds. Best ROI of all Reasoning topics.</p></div>
+  <div class="ib warn"><div class="bl">⚠️ Reverse Alphabet Trap</div><p>SSC frequently uses reverse positions (Z=1, Y=2, X=3…). Always check both forward AND reverse position if the forward position doesn't yield a clean pattern.</p></div>
+  </div>
+  <div class="cs"><h3>🗒️ Alphabet Position Quick Reference</h3>
+  <div class="fbox">A=1 B=2 C=3 D=4 E=5 F=6 G=7 H=8 I=9 J=10 K=11 L=12 M=13<br>N=14 O=15 P=16 Q=17 R=18 S=19 T=20 U=21 V=22 W=23 X=24 Y=25 Z=26</div>
+  <div class="fbox" style="color:var(--amber)">Reverse: Z=1 Y=2 X=3 W=4 V=5 U=6 T=7 S=8 R=9 Q=10 P=11 O=12 N=13<br>M=14 L=15 K=16 J=17 I=18 H=19 G=20 F=21 E=22 D=23 C=24 B=25 A=26</div>
+  </div>`,
+  concepts:`<div class="cs"><h3>🗂️ 5 Common SSC Alphabet Series Types</h3>
+  <div class="tgrid">
+  <div class="ti"><div class="tn">Type 1: Skip +n</div><div class="te">A, C, E, G, ? → I</div><div class="ta2">→ +2 each step</div></div>
+  <div class="ti"><div class="tn">Type 2: Reverse Skip</div><div class="te">Z, X, V, T, ? → R</div><div class="ta2">→ −2 each step</div></div>
+  <div class="ti"><div class="tn">Type 3: Pair Pattern</div><div class="te">AZ, BY, CX, ? → DW</div><div class="ta2">→ First+1, Second−1</div></div>
+  <div class="ti"><div class="tn">Type 4: Group Jump</div><div class="te">AB, DE, GH, JK, ? → MN</div><div class="ta2">→ Skip 1 letter between groups</div></div>
+  <div class="ti"><div class="tn">Type 5: Large Skip</div><div class="te">Z, U, P, K, ? → F</div><div class="ta2">→ −5 each step</div></div>
+  <div class="ti"><div class="tn">Type 6: Square Positions</div><div class="te">A, D, I, P, ? → Y</div><div class="ta2">→ Positions: 1,4,9,16,25</div></div>
+  </div></div>
+  <div class="cs"><h3>🧠 Method for Group Series (BEH, KNQ, TWZ, ?)</h3>
+  <ul class="steps">
+  <li>Write the position values of first letters: B=2, K=11, T=20 → differences = 9</li>
+  <li>Next first letter = 20+9=29 → wrap: 29−26=3=C</li>
+  <li>Within group: B(2),E(5),H(8) → +3 each → C(3),F(6),I(9) = CFI</li>
+  </ul></div>`,
+  questions:[
+  {q:'A, C, E, G, ?',opts:['H','I','J','K'],ans:1,exp:'+2 each step: A(1),C(3),E(5),G(7),I(9).'},
+  {q:'Z, X, V, T, ?',opts:['R','S','Q','P'],ans:0,exp:'−2 each step: Z(26),X(24),V(22),T(20),R(18).'},
+  {q:'AZ, BY, CX, DW, ?',opts:['EV','EW','FV','EU'],ans:0,exp:'First letter +1 (A→B→C→D→E), second −1 (Z→Y→X→W→V). Pair sums always equal 27.'},
+  {q:'B, E, H, K, ?',opts:['M','N','O','P'],ans:1,exp:'+3 each step: B(2),E(5),H(8),K(11),N(14).'},
+  {q:'AB, DE, GH, JK, ?',opts:['MN','NO','LM','OP'],ans:0,exp:'Skip one letter between each pair: AB(skip C)DE(skip F)GH(skip I)JK(skip L)MN.'},
+  {q:'Z, U, P, K, ?',opts:['F','G','E','H'],ans:0,exp:'−5 each step: Z(26),U(21),P(16),K(11),F(6).'},
+  {q:'BEH, KNQ, TWZ, ?',opts:['CFI','ADG','BDF','DGJ'],ans:0,exp:'First letters: B(2),K(11),T(20) — +9 each group. Next: 29→3=C. Within group +3: C,F,I = CFI.'},
+  {q:'A, D, I, P, ?',opts:['W','X','Y','Z'],ans:2,exp:'Positions are perfect squares: A=1(1²),D=4(2²),I=9(3²),P=16(4²),Y=25(5²).'}
+  ]
+},
+{
+  id:'missingnum',title:'Missing Number',sub:'Matrix & Grid Pattern Spotting',
+  tier:'A',ic:'❓',imp:'Very High',expQ:'1–3',pt:'150+',col:'#3ECFBF',
+  overview:`<div class="cs"><h3>📌 SSC Reality Check</h3>
+  <p>Missing Number (matrix/grid type) is asked almost every shift in SSC CGL. These give easy marks once you recognise the pattern family quickly.</p>
+  <div class="ib trick"><div class="bl">🎯 Check Order for Matrix Questions</div><p>1. Row-wise addition/subtraction → 2. Row-wise multiplication → 3. Column-wise relations → 4. Diagonal relation → 5. Square/cube of row/column</p></div>
+  <div class="ib warn"><div class="bl">⚠️ Time Trap</div><p>If you don't see the pattern in 20 seconds → skip. Come back at the end. A single stubborn matrix question costs you 2 easy marks elsewhere.</p></div>
+  </div>`,
+  concepts:`<div class="cs"><h3>🗂️ Common Matrix/Grid Patterns</h3>
+  <div class="tgrid">
+  <div class="ti"><div class="tn">Row Addition</div><div class="te">5+4=9 | 7+3=10 | 6+?=11 → 5</div><div class="ta2">→ col1+col2=col3</div></div>
+  <div class="ti"><div class="tn">Row Multiplication</div><div class="te">4×5=20 | 3×6=18 | 7×8=? → 56</div><div class="ta2">→ col1×col2=col3</div></div>
+  <div class="ti"><div class="tn">Row Subtraction</div><div class="te">12−8=4 | 24−18=6 | 15−10=? → 5</div><div class="ta2">→ col2−col1=col3</div></div>
+  <div class="ti"><div class="tn">Power Pattern</div><div class="te">3,9,27 | 2,4,8 | 4,?,64 → 16</div><div class="ta2">→ n, n², n³</div></div>
+  <div class="ti"><div class="tn">Perfect Squares</div><div class="te">36,49,64,81,? → 100</div><div class="ta2">→ 6²,7²,8²,9²,10²</div></div>
+  <div class="ti"><div class="tn">n(n+1) Series</div><div class="te">2,6,12,20,30,? → 42</div><div class="ta2">→ 1×2,2×3,3×4…</div></div>
+  </div></div>
+  <div class="cs"><h3>🧠 Fast Attack Method</h3>
+  <ul class="steps">
+  <li>Look at the row/column that has NO missing number to identify the pattern</li>
+  <li>Verify on a second complete row/column</li>
+  <li>Apply to the row/column with the missing number</li>
+  <li>Match with options — if answer is not in options, you misidentified the pattern; try column-wise</li>
+  </ul></div>`,
+  questions:[
+  {q:'Grid: Row1: 3,9,27 | Row2: 2,4,8 | Row3: 4,?,64. Find ?',opts:['16','12','20','8'],ans:0,exp:'Pattern: n, n², n³ for each row. Row3: 4, 4²=16, 4³=64. Answer: 16.'},
+  {q:'Grid: Row1: 4,5,20 | Row2: 3,6,18 | Row3: 7,8,?. Find ?',opts:['15','56','48','64'],ans:1,exp:'col1 × col2 = col3: 4×5=20, 3×6=18, 7×8=56.'},
+  {q:'36, 49, 64, 81, ?',opts:['90','95','100','121'],ans:2,exp:'Perfect squares: 6²=36, 7²=49, 8²=64, 9²=81, 10²=100.'},
+  {q:'Grid: Row1: 5,4,9 | Row2: 7,3,10 | Row3: 6,?,11. Find ?',opts:['5','7','4','6'],ans:0,exp:'col1 + col2 = col3: 5+4=9, 7+3=10, 6+5=11. Answer: 5.'},
+  {q:'2, 6, 12, 20, 30, ?',opts:['40','42','44','36'],ans:1,exp:'n(n+1) pattern: 1×2=2, 2×3=6, 3×4=12, 4×5=20, 5×6=30, 6×7=42.'},
+  {q:'Grid: Row1: 3,5,15 | Row2: 4,7,28 | Row3: 6,?,54. Find ?',opts:['8','9','7','10'],ans:1,exp:'col1 × col2 = col3: 3×5=15, 4×7=28, 6×9=54. Answer: 9.'},
+  {q:'1, 8, 27, 64, 125, ?',opts:['196','200','216','225'],ans:2,exp:'Perfect cubes: 1³,2³,3³,4³,5³,6³=216.'},
+  {q:'Grid: Row1: 8,12,4 | Row2: 18,24,6 | Row3: 10,15,?. Find ?',opts:['5','6','4','7'],ans:0,exp:'col2 − col1 = col3: 12−8=4, 24−18=6, 15−10=5.'},
+  {q:'144, 169, 196, 225, ?',opts:['240','256','250','289'],ans:1,exp:'Perfect squares: 12²,13²,14²,15²,16²=256.'},
+  {q:'4, 9, 16, 25, 36, 49, ?',opts:['56','64','60','72'],ans:1,exp:'Perfect squares: 2²,3²,4²,5²,6²,7²,8²=64.'}
+  ]
+},
+{
+  id:'coding',title:'Coding-Decoding',sub:'Crack the Letter/Number Code',
+  tier:'A',ic:'🔐',imp:'Very High',expQ:'2–4',pt:'200+',col:'#5BA4FF',
+  overview:`<div class="cs"><h3>📌 SSC Reality Check</h3>
+  <p>Coding-Decoding has become MORE important in recent SSC CGL papers (2023–2025). It is one of the most repeated topics and should be your strength, not just a topic you know.</p>
+  <div class="ib trick"><div class="bl">🎯 Test in This Exact Order</div><p>1. Letter shift (+n or −n) → 2. Complement coding (position sum = 27) → 3. Reverse coding → 4. Direct position (A=1, B=2…) → 5. Word rearrangement (alphabetical sort)</p></div>
+  <div class="ib warn"><div class="bl">⚠️ Most Common Mistake</div><p>Mixing all methods together without structure. Apply ONE method at a time. If +2 shift gives MANGO→OCPIQ, verify all letters before proceeding.</p></div>
+  </div>
+  <div class="cs"><h3>📊 Code Types by Frequency</h3>
+  <table class="ptable"><thead><tr><th>Type</th><th>Example</th><th>Method</th></tr></thead><tbody>
+  <tr><td>Letter Shift</td><td>CAT → DBU (+1)</td><td class="imp-vh">Most common</td></tr>
+  <tr><td>Direct Position</td><td>CAT = 3-1-20</td><td class="imp-vh">Very common</td></tr>
+  <tr><td>Reverse</td><td>DOG → GOD</td><td class="imp-h">Common</td></tr>
+  <tr><td>Complement (sum=27)</td><td>A→Z, B→Y…</td><td class="imp-h">Common</td></tr>
+  <tr><td>Alphabetical sort</td><td>ORANGE→AEGNOR</td><td class="imp-m">Medium</td></tr>
+  </tbody></table></div>`,
+  concepts:`<div class="cs"><h3>🗂️ Decoding Methods with Examples</h3>
+  <div class="tgrid">
+  <div class="ti"><div class="tn">+1 Shift</div><div class="te">BOOK=CPPL → B+1=C, O+1=P…</div><div class="ta2">→ Each letter shifted by 1</div></div>
+  <div class="ti"><div class="tn">+2 Shift</div><div class="te">MANGO=OCPIQ → M+2=O, A+2=C…</div><div class="ta2">→ Each letter shifted by 2</div></div>
+  <div class="ti"><div class="tn">Complement</div><div class="te">A↔Z, B↔Y, C↔X (each pair = 27)</div><div class="ta2">→ TABLE=GZYOV</div></div>
+  <div class="ti"><div class="tn">Reverse Word</div><div class="te">DOG → GOD (letters reversed)</div><div class="ta2">→ Reverse order only</div></div>
+  <div class="ti"><div class="tn">Position Code</div><div class="te">A=1,B=2…Z=26 → CAT=3-1-20</div><div class="ta2">→ Direct alphabet positions</div></div>
+  <div class="ti"><div class="tn">Alpha Sort</div><div class="te">ORANGE → AEGNOR (sorted)</div><div class="ta2">→ Letters in A-Z order</div></div>
+  </div></div>
+  <div class="cs"><h3>🧠 Quick Verification Steps</h3>
+  <ul class="steps">
+  <li>Apply suspected rule to ALL letters in the given example (not just first 2)</li>
+  <li>If the rule doesn't hold for ALL letters — try the next method</li>
+  <li>Verify your answer by applying the same rule to the question word</li>
+  <li>Cross-check against options — if your answer matches, confirm and move on</li>
+  </ul></div>`,
+  questions:[
+  {q:'If CAT = 3-1-20, then DOG = ?',opts:['4-16-7','4-15-7','5-15-8','3-14-6'],ans:1,exp:'Direct alphabetical positions: D=4, O=15, G=7.'},
+  {q:'If ROAD is coded as URDG (+3 shift), then PATH = ?',opts:['SDWK','QDWJ','SDVK','SEWK'],ans:0,exp:'Each letter +3: P(16)+3=S(19), A(1)+3=D(4), T(20)+3=W(23), H(8)+3=K(11) = SDWK.'},
+  {q:'If MANGO is coded as OCPIQ (+2 shift), then APPLE = ?',opts:['CRRNG','CRRNF','CRQNF','BQQMF'],ans:0,exp:'Each letter +2: A→C, P→R, P→R, L→N, E→G = CRRNG.'},
+  {q:'If DOG is coded as GOD (reverse), then LION = ?',opts:['NOIL','NOLI','NIOL','LION'],ans:0,exp:'Reverse the letters: L-I-O-N reversed = N-O-I-L = NOIL.'},
+  {q:'If TABLE = GZYOV (complement: position+code=27), then CHAIR = ?',opts:['XSZRI','YSZRI','XSYRI','XSZRJ'],ans:0,exp:'Complement: C(3)→X(24), H(8)→S(19), A(1)→Z(26), I(9)→R(18), R(18)→I(9) = XSZRI.'},
+  {q:'If BOOK = CPPL (+1 each letter), then NOON = ?',opts:['OPPO','OOPP','POPP','OPOP'],ans:0,exp:'Each letter +1: N→O, O→P, O→P, N→O = OPPO.'},
+  {q:'If ORANGE is coded as AEGNOR (alphabetical sort), then GRAPE = ?',opts:['AEGPR','EGRPA','PRGAE','AGERP'],ans:0,exp:'Letters sorted A-Z: G,R,A,P,E → A,E,G,P,R = AEGPR.'},
+  {q:'If FIRE = 6-9-18-5 (direct positions), then WATER = ?',opts:['23-1-20-5-18','24-2-21-6-19','22-26-19-4-17','23-2-20-4-17'],ans:0,exp:'Direct positions: W=23, A=1, T=20, E=5, R=18.'},
+  {q:'If PENCIL = 16-5-14-3-9-12, then ERASER = ?',opts:['5-18-1-19-5-18','4-17-26-18-4-17','6-19-2-20-6-19','5-17-1-19-5-17'],ans:0,exp:'Direct positions: E=5, R=18, A=1, S=19, E=5, R=18.'},
+  {q:'If NORTH = 14-15-18-20-8, then SOUTH = ?',opts:['19-15-21-20-8','18-14-20-19-7','20-16-22-21-9','19-16-21-20-8'],ans:0,exp:'Direct positions: S=19, O=15, U=21, T=20, H=8.'},
+  {q:'If APPLE = BQQMF (+1 shift), then MANGO = ?',opts:['NBOHP','NBOHO','OBOHP','MBNHP'],ans:0,exp:'+1 shift: M→N, A→B, N→O, G→H, O→P = NBOHP.'},
+  {q:'In a code: 25=BE, 53=EC. Then 35 = ?',opts:['CE','EC','BD','DE'],ans:0,exp:'Number → corresponding letter (1=A,2=B,3=C,4=D,5=E): 3→C, 5→E = CE.'}
+  ]
+},
+{
+  id:'bloodrel',title:'Blood Relation',sub:'Draw the Family Tree',
+  tier:'B',ic:'👨‍👩‍👧',imp:'Medium',expQ:'1–2',pt:'50–70',col:'#A78BFA',
+  overview:`<div class="cs"><h3>📌 SSC Reality Check</h3>
+  <p>Blood Relation usually has 1–2 questions per shift. Not the highest weightage but they're easy marks IF you draw a diagram. Attempting these in your head leads to careless errors.</p>
+  <div class="ib trick"><div class="bl">🎯 One Non-Negotiable Rule</div><p>ALWAYS draw a quick family tree diagram for every blood relation question. No exceptions. Even simple 2-step questions benefit from a diagram.</p></div>
+  <div class="ib warn"><div class="bl">⚠️ Top Trap</div><p>"Grandfather's only son" = your father (not an uncle). "Mother's husband" = your father. "Father's sister's son" = your cousin. Memorise these 2-step shortcuts.</p></div>
+  </div>
+  <div class="cs"><h3>🗒️ Key Relation Shortcuts</h3>
+  <table class="ptable"><thead><tr><th>Phrase</th><th>Means</th></tr></thead><tbody>
+  <tr><td>Mother's brother</td><td>Maternal Uncle</td></tr>
+  <tr><td>Father's sister</td><td>Paternal Aunt</td></tr>
+  <tr><td>Uncle/Aunt's child</td><td>Cousin</td></tr>
+  <tr><td>Grandfather's only son</td><td>Your Father</td></tr>
+  <tr><td>Mother's husband</td><td>Your Father</td></tr>
+  <tr><td>Father's brother's son</td><td>Cousin (Paternal)</td></tr>
+  </tbody></table></div>`,
+  concepts:`<div class="cs"><h3>🧠 How to Draw a Family Tree Quickly</h3>
+  <ul class="steps">
+  <li>Write each person as a letter/name in a box</li>
+  <li>Use → for "parent of", — for "sibling", = for "spouse"</li>
+  <li>Work top to bottom: grandparents → parents → children</li>
+  <li>Mark gender when stated: ♂ for male (father/brother/son), ♀ for female (mother/sister/daughter)</li>
+  <li>Now read off the required relation from the diagram</li>
+  </ul></div>
+  <div class="cs"><h3>🗂️ Relation Chain Examples</h3>
+  <div class="tgrid">
+  <div class="ti"><div class="tn">2-step chain</div><div class="te">X is brother of Y.<br>Y is daughter of Z.</div><div class="ta2">→ X is Z's son</div></div>
+  <div class="ti"><div class="tn">3-step chain</div><div class="te">A is father of B.<br>B is sister of C.<br>C is son of D.</div><div class="ta2">→ A is D's husband</div></div>
+  <div class="ti"><div class="tn">Pointing photo</div><div class="te">"She is daughter of my grandfather's only son"</div><div class="ta2">→ She is your sister</div></div>
+  <div class="ti"><div class="tn">Aunt relation</div><div class="te">"Your mother's husband's sister is my aunt"</div><div class="ta2">→ We are siblings</div></div>
+  </div></div>`,
+  questions:[
+  {q:'A is the father of B. B is the sister of C. C is the son of D. How is A related to D?',opts:['Father','Brother','Husband','Son'],ans:2,exp:'A is B\'s father. B and C are siblings (both children of A and D). C is D\'s son → D is C\'s parent. Since A is the father (male parent), A is D\'s husband.'},
+  {q:'X is the brother of Y. Y is the daughter of Z. How is X related to Z?',opts:['Son','Grandson','Nephew','Uncle'],ans:0,exp:'Z has a daughter (Y). X is Y\'s brother → X is also Z\'s child (son).'},
+  {q:'P is the mother of Q. Q is the brother of R. S is the father of R. How is P related to S?',opts:['Sister','Daughter','Wife','Mother'],ans:2,exp:'S is R\'s father. Q and R are siblings → same parents. P is Q\'s mother → P is R\'s mother too. P(mother) + S(father) of R → P is S\'s wife.'},
+  {q:'Pointing to a photograph, a man says "She is the daughter of my grandfather\'s only son." How is she related to the man?',opts:['Mother','Sister','Aunt','Cousin'],ans:1,exp:'Grandfather\'s only son = the man\'s father. Father\'s daughter = the man\'s sister.'},
+  {q:'A woman says "Your mother\'s husband\'s sister is my aunt." How is the woman related to the man?',opts:['Daughter','Granddaughter','Sister','Niece'],ans:2,exp:'Man\'s mother\'s husband = Man\'s father. Father\'s sister = Aunt (to both). They share the same paternal aunt → they are siblings (sister).'},
+  {q:'A woman introduces a man as "the son of the brother of my mother." How is the man related to the woman?',opts:['Uncle','Cousin','Nephew','Brother'],ans:1,exp:'Mother\'s brother = maternal uncle. Uncle\'s son = cousin.'},
+  {q:'A is husband of B. C is son of A. D is sister of C. E is mother of B. How is D related to E?',opts:['Granddaughter','Niece','Daughter','Sister'],ans:0,exp:'A–B are spouses; C and D are their children. E is B\'s mother → E is D\'s maternal grandmother. So D is E\'s granddaughter.'},
+  {q:'A says to B: "Your father is the only son of my grandfather." How is B related to A?',opts:['Uncle','Father','Brother','Grandfather'],ans:2,exp:'My grandfather\'s only son = my father. So B\'s father = A\'s father → they share the same father → they are siblings. B is A\'s brother.'}
+  ]
+},
+{
+  id:'direction',title:'Direction & Distance',sub:'Draw Every Turn, Never Imagine',
+  tier:'B',ic:'🧭',imp:'Medium',expQ:'1–3',pt:'100+',col:'#F87171',
+  overview:`<div class="cs"><h3>📌 SSC Reality Check</h3>
+  <p>Direction & Distance questions have 1–3 questions per shift. They are easy marks for students who diagram — and traps for those who solve mentally.</p>
+  <div class="ib trick"><div class="bl">🎯 Core Rule</div><p>Draw EVERY step on paper with a compass rose (N/S/E/W). Mark each movement as an arrow. Never imagine turns in your head — left/right confusion after 2 turns costs the question.</p></div>
+  <div class="ib warn"><div class="bl">⚠️ Common Confusion</div><p>When facing South: your LEFT is East and RIGHT is West (opposite of normal). Always redraw your orientation after each turn rather than assuming.</p></div>
+  </div>
+  <div class="cs"><h3>📐 Key Formulas</h3>
+  <div class="fbox">Straight-line distance = √(horizontal² + vertical²)  [Pythagoras]</div>
+  <div class="fbox" style="color:var(--amber)">Rotation rules: 90°CW (right) | 90°ACW (left) | 180° = opposite direction</div>
+  <table class="ptable" style="margin-top:12px"><thead><tr><th>Facing</th><th>Turn Left</th><th>Turn Right</th></tr></thead><tbody>
+  <tr><td>North</td><td>West</td><td>East</td></tr>
+  <tr><td>South</td><td>East</td><td>West</td></tr>
+  <tr><td>East</td><td>North</td><td>South</td></tr>
+  <tr><td>West</td><td>South</td><td>North</td></tr>
+  </tbody></table></div>`,
+  concepts:`<div class="cs"><h3>🧠 Step-by-Step Diagram Method</h3>
+  <ul class="steps">
+  <li>Draw a cross (+) with N,S,E,W labeled at start</li>
+  <li>Mark start as point O at origin (0,0)</li>
+  <li>Track (x,y): East=+x, West=−x, North=+y, South=−y</li>
+  <li>After all moves, find final (x,y) coordinates</li>
+  <li>Distance = √(x²+y²). Direction: check quadrant of final point from origin</li>
+  </ul></div>
+  <div class="cs"><h3>🗂️ Direction Quadrants</h3>
+  <div class="tgrid">
+  <div class="ti"><div class="tn">x+, y+ (Q1)</div><div class="te">Final point: East of North</div><div class="ta2">→ Direction: North-East</div></div>
+  <div class="ti"><div class="tn">x−, y+ (Q2)</div><div class="te">Final point: West of North</div><div class="ta2">→ Direction: North-West</div></div>
+  <div class="ti"><div class="tn">x+, y− (Q4)</div><div class="te">Final point: East of South</div><div class="ta2">→ Direction: South-East</div></div>
+  <div class="ti"><div class="tn">x−, y− (Q3)</div><div class="te">Final point: West of South</div><div class="ta2">→ Direction: South-West</div></div>
+  </div></div>`,
+  questions:[
+  {q:'A man walks 5 km North, turns right (East) 3 km, then turns right (South) 5 km. How far from start and in which direction?',opts:['3 km East','5 km South','3 km West','8 km North'],ans:0,exp:'Path: (0,0)→(0,5)→(3,5)→(3,0). Final point (3,0): 3 km due East of start.'},
+  {q:'Mohan goes 2 km East, turns left 1 km North, turns right 3 km East. Direction from start?',opts:['North-East','East','South-East','North'],ans:0,exp:'Path: (0,0)→(2,0)→(2,1)→(5,1). Point (5,1): mostly East with slight North = North-East direction.'},
+  {q:'Sunita walks 10 km North, right 4 km East, right 10 km South. Distance from start?',opts:['4 km','8 km','10 km','14 km'],ans:0,exp:'Path: (0,0)→(0,10)→(4,10)→(4,0). Distance from origin = 4 km due East.'},
+  {q:'A man faces North. He turns 90° clockwise, then 180° anticlockwise. Which direction?',opts:['North','East','West','South'],ans:2,exp:'North +90°CW = East. East +180°ACW = West (opposite).'},
+  {q:'Ram: 20m East, left 10m North, left 35m West, right 5m North. Which direction from start?',opts:['North-West','North-East','South-West','South-East'],ans:0,exp:'Path: (0,0)→(20,0)→(20,10)→(−15,10)→(−15,15). Point (−15,15): West and North = North-West.'},
+  {q:'If South-East becomes East and North becomes North-West (45° ACW rotation), what does West become?',opts:['South-West','South','North-West','North-East'],ans:0,exp:'45° anticlockwise rotation: West(270°)−45°=225°=South-West.'},
+  {q:'A girl walks 4 km South, 3 km East, 4 km North, 3 km West. Where is she relative to start?',opts:['3 km East of start','At starting point','4 km North of start','3 km West of start'],ans:1,exp:'Path: (0,0)→(0,−4)→(3,−4)→(3,0)→(0,0). Returns exactly to start.'},
+  {q:'A man walks 8 km East and 6 km South. Shortest distance from start?',opts:['14 km','10 km','8 km','12 km'],ans:1,exp:'Pythagoras: √(8²+6²)=√(64+36)=√100=10 km.'}
+  ]
+},
+{
+  id:'ranking',title:'Order & Ranking',sub:'Formula-First, Intuition Never',
+  tier:'B',ic:'🏆',imp:'High',expQ:'1–2',pt:'100+',col:'#60B8F5',
+  overview:`<div class="cs"><h3>📌 SSC Reality Check</h3>
+  <p>Order & Ranking questions are frequently asked and very fast to solve once you know the formula. These are pure formula questions — intuition leads to errors.</p>
+  <div class="ib trick"><div class="bl">🎯 The Master Formula</div><p>Total = Rank from Left + Rank from Right − 1 (when there's no overlap). This is the only formula you need for 80% of ranking questions.</p></div>
+  <div class="ib warn"><div class="bl">⚠️ Position vs Rank</div><p>Rank from RIGHT = Total − Rank from LEFT + 1. Never forget the "+1". Missing this costs 0.5 marks on what should be a free-mark question.</p></div>
+  </div>
+  <div class="cs"><h3>📐 All Ranking Formulas</h3>
+  <div class="fbox">Total = Rank_from_Left + Rank_from_Right − 1</div>
+  <div class="fbox" style="color:var(--amber)">Rank_from_Right = Total − Rank_from_Left + 1</div>
+  <div class="fbox" style="color:var(--blue)">People between A and B = |Pos_A − Pos_B| − 1</div>
+  <div class="ib info" style="margin-top:10px"><div class="bl">After shifting n places</div><p>New position from left = Original + n (if shifted right) or − n (if shifted left). Then apply Total formula.</p></div>
+  </div>`,
+  concepts:`<div class="cs"><h3>🧠 Worked Examples</h3>
+  <div class="tgrid">
+  <div class="ti"><div class="tn">Basic Total</div><div class="te">12th from left, 9th from right<br>Total = 12+9−1 = 20</div><div class="ta2">→ 20 students</div></div>
+  <div class="ti"><div class="tn">Find Right Rank</div><div class="te">Row of 40, 15th from left<br>Right = 40−15+1 = 26</div><div class="ta2">→ 26th from right</div></div>
+  <div class="ti"><div class="tn">After Shift</div><div class="te">25th from left, shift 5 right<br>New left = 30, right = 29<br>Total = 30+29−1 = 58</div><div class="ta2">→ 58 total</div></div>
+  <div class="ti"><div class="tn">Between A & B</div><div class="te">A=10th, B=6th from front<br>Between = 10−6−1 = 3</div><div class="ta2">→ 3 persons between</div></div>
+  </div></div>`,
+  questions:[
+  {q:'In a row of 40 students, Ravi is 15th from the left. What is his position from the right?',opts:['25','26','27','24'],ans:1,exp:'Position from right = Total − Left + 1 = 40−15+1 = 26.'},
+  {q:'Mohan is 12th from the left and 9th from the right in a row. How many students are there?',opts:['20','21','22','19'],ans:0,exp:'Total = Left + Right − 1 = 12+9−1 = 20.'},
+  {q:'Seema is 8th from the top and 28th from the bottom in class. How many students?',opts:['35','36','34','37'],ans:0,exp:'Total = Top + Bottom − 1 = 8+28−1 = 35.'},
+  {q:'A is 10th from front, B is 15th from back in a queue of 20. How many people are between A and B?',opts:['3','4','5','2'],ans:0,exp:'A = position 10. B from front = 20−15+1 = 6. Between = 10−6−1 = 3 people.'},
+  {q:'Order of marks: C>A>D>B>E (A higher than B but lower than C, D between A and B). What is D\'s rank?',opts:['2nd','3rd','4th','5th'],ans:1,exp:'Order: C(1st) > A(2nd) > D(3rd) > B(4th) > E(5th). D is 3rd from top.'},
+  {q:'Rajesh is 25th from left. Shifted 5 right, he is 29th from right. How many boys in the row?',opts:['55','58','60','57'],ans:1,exp:'New left position = 25+5 = 30. Total = 30+29−1 = 58.'},
+  {q:'In a row of 30 girls, Priya is 7th from the right. What is her position from the left?',opts:['22','23','24','25'],ans:2,exp:'Position from left = Total − Right + 1 = 30−7+1 = 24.'},
+  {q:'Ram is 9th from front and 17th from back in a queue. How many persons total?',opts:['24','25','26','27'],ans:1,exp:'Total = Front + Back − 1 = 9+17−1 = 25.'}
+  ]
+}
+];
+
+// ==================== STATE ====================
+let savedProgress = {};
+try { savedProgress = JSON.parse(localStorage.getItem('ssc_rsnv2')||'{}'); } catch(e){ savedProgress={}; }
+
+function getTP(id){ return savedProgress[id]||{answered:{},score:0}; }
+function saveTP(id,data){ savedProgress[id]=data; try{localStorage.setItem('ssc_rsnv2',JSON.stringify(savedProgress));}catch(e){} }
+
+function totalAttempted(id){ return Object.keys(getTP(id).answered).length; }
+function topicScore(id){ return getTP(id).score||0; }
+function topicPct(id){ const t=TOPICS.find(x=>x.id===id); if(!t) return 0; const tot=t.questions.length; return tot?Math.round((topicScore(id)/tot)*100):0; }
+
+function overallAttempted(){ return TOPICS.reduce((a,t)=>a+totalAttempted(t.id),0); }
+function overallCorrect(){ return TOPICS.reduce((a,t)=>a+topicScore(t.id),0); }
+function totalQ(){ return TOPICS.reduce((a,t)=>a+t.questions.length,0); }
+
+// ==================== RENDER ====================
+function toggleSB(){
+  const sb=document.getElementById('sb'),ov=document.getElementById('overlay');
+  sb.classList.toggle('open');
+  ov.classList.toggle('vis');
+}
+
+function showPage(page,tid){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  if(page==='dashboard'){
+    document.getElementById('page-dashboard').classList.add('active');
+    document.getElementById('nav-dashboard').classList.add('active');
+    renderDash();
+  } else if(page==='topic' && tid){
+    const pg=document.getElementById('tpage-'+tid);
+    if(pg){pg.classList.add('active');}
+    const ni=document.getElementById('nav-'+tid);
+    if(ni) ni.classList.add('active');
+    updateHeatGauge(tid);
+    updateMCQScore(tid);
+  }
+  if(window.innerWidth<=800){
+    const sb=document.getElementById('sb');
+    if(sb.classList.contains('open')){
+      sb.classList.remove('open');
+      document.getElementById('overlay').classList.remove('vis');
+    }
+  }
+}
+
+function showTab(tid,tab){
+  document.querySelectorAll('#tpage-'+tid+' .tbc').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#tpage-'+tid+' .tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+tid+'-'+tab).classList.add('active');
+  document.getElementById('tc-'+tid+'-'+tab).classList.add('active');
+}
+
+function updateHeatGauge(tid){
+  const pct=topicPct(tid);
+  const fill=document.getElementById('hg-'+tid);
+  const lbl=document.getElementById('hgp-'+tid);
+  if(fill) fill.style.width=pct+'%';
+  if(lbl) lbl.textContent=pct+'%';
+}
+
+function updateMCQScore(tid){
+  const tp=getTP(tid);
+  const t=TOPICS.find(x=>x.id===tid);
+  const tot=t.questions.length;
+  const att=Object.keys(tp.answered).length;
+  const corr=tp.score||0;
+  const wrong=att-corr;
+  const skip=tot-att;
+  const el=document.getElementById('mscore-'+tid);
+  if(el) el.innerHTML=`
+    <div class="mss mc"><div class="msv">${corr}</div><div class="msl">Correct</div></div>
+    <div class="mss mw"><div class="msv">${wrong}</div><div class="msl">Wrong</div></div>
+    <div class="mss ms"><div class="msv">${skip}</div><div class="msl">Remaining</div></div>
+  `;
+  // update sidebar badge
+  const nb=document.getElementById('nb-'+tid);
+  if(nb){ nb.innerHTML=corr>0?`<span class="spill">${corr}/${tot}</span>`:`<span class="badge">${tot}Q</span>`; }
+  updateHeatGauge(tid);
+  updateDashCard(tid);
+}
+
+function handleAnswer(tid,qi,sel){
+  const t=TOPICS.find(x=>x.id===tid);
+  const q=t.questions[qi];
+  const tp=getTP(tid);
+  if(tp.answered[qi]!==undefined) return; // already answered
+  const correct=(sel===q.ans);
+  tp.answered[qi]=sel;
+  if(correct) tp.score=(tp.score||0)+1;
+  saveTP(tid,tp);
+
+  // update UI
+  const card=document.getElementById('mq-'+tid+'-'+qi);
+  if(!card) return;
+  card.classList.add(correct?'ac':'aw');
+  const num=card.querySelector('.mnum');
+  if(num) num.classList.add(correct?'nc':'nw');
+
+  // mark options
+  card.querySelectorAll('.mopt').forEach((o,i)=>{
+    o.setAttribute('disabled','true');
+    if(i===q.ans) o.classList.add('oc');
+    else if(i===sel && !correct) o.classList.add('ow');
+  });
+
+  // show explanation
+  const exp=card.querySelector('.mexp');
+  if(exp) exp.classList.add('vis');
+
+  updateMCQScore(tid);
+}
+
+function resetTopic(tid){
+  saveTP(tid,{answered:{},score:0});
+  // re-render MCQ section
+  const tc=document.getElementById('tc-'+tid+'-practice');
+  if(tc) tc.innerHTML=buildMCQHTML(tid);
+  updateMCQScore(tid);
+  updateHeatGauge(tid);
+}
+
+// ==================== BUILD HTML ====================
+function buildMCQHTML(tid){
+  const t=TOPICS.find(x=>x.id===tid);
+  const tp=getTP(tid);
+  let html=`<div class="mcq-ctrl">
+    <div class="msd" id="mscore-${tid}"></div>
+    <button class="mbtn" onclick="resetTopic('${tid}')">↺ Reset</button>
+  </div>`;
+  t.questions.forEach((q,i)=>{
+    const ans=tp.answered[i];
+    const answered=(ans!==undefined);
+    const correct=answered&&(ans===q.ans);
+    html+=`<div class="mcard${answered?(correct?' ac':' aw'):''}" id="mq-${tid}-${i}">
+      <div class="mtop">
+        <div class="mnum${answered?(correct?' nc':' nw'):''}">Q${i+1}</div>
+        <div class="mq">${q.q}</div>
+      </div>
+      <div class="mopts">`;
+    const labels=['A','B','C','D'];
+    q.opts.forEach((opt,j)=>{
+      let cls='mopt';
+      if(answered){
+        if(j===q.ans) cls+=' oc';
+        else if(j===ans&&!correct) cls+=' ow';
+      }
+      html+=`<button class="${cls}"${answered?' disabled="true"':''} onclick="handleAnswer('${tid}',${i},${j})">
+        <span class="ol">${labels[j]}</span>${opt}</button>`;
+    });
+    html+=`</div>
+      <div class="mexp${answered?' vis':''}">
+        <div class="mel">💡 Explanation</div>
+        <div class="met">${q.exp}</div>
+      </div>
+    </div>`;
+  });
+  return html;
+}
+
+function buildTopicPage(t){
+  const tierClass=t.tier==='A'?'ta':'tb';
+  return `<div id="tpage-${t.id}" class="page">
+    <div class="tph">
+      <div class="tpbc" onclick="showPage('dashboard')">← <span>Dashboard</span> / ${t.title}</div>
+      <div class="tptr">
+        <div class="big-ic">${t.ic}</div>
+        <div><h2>${t.title}</h2><div class="sub">${t.sub}</div></div>
+      </div>
+      <div class="tptags">
+        <span class="tag tag-tier">Tier ${t.tier}</span>
+        <span class="tag tag-imp">⚡ ${t.imp}</span>
+        <span class="tag tag-q">Expected: ${t.expQ}Q</span>
+        <span class="tag tag-pt">Practice Target: ${t.pt}</span>
+      </div>
+    </div>
+    <div class="heat-gauge">
+      <div class="hg-label">Topic Mastery</div>
+      <div class="hg-track"><div class="hg-fill" id="hg-${t.id}" style="width:0%"></div></div>
+      <div class="hg-pct" id="hgp-${t.id}">0%</div>
+    </div>
+    <div class="tabs">
+      <div class="tab active" id="tab-${t.id}-overview" onclick="showTab('${t.id}','overview')">📋 Overview</div>
+      <div class="tab" id="tab-${t.id}-concepts" onclick="showTab('${t.id}','concepts')">📚 Concepts</div>
+      <div class="tab" id="tab-${t.id}-practice" onclick="showTab('${t.id}','practice')">⚡ Practice (${t.questions.length}Q)</div>
+    </div>
+    <div class="tbc active" id="tc-${t.id}-overview">${t.overview}</div>
+    <div class="tbc" id="tc-${t.id}-concepts">${t.concepts}</div>
+    <div class="tbc" id="tc-${t.id}-practice">${buildMCQHTML(t.id)}</div>
+  </div>`;
+}
+
+function buildSBItem(t){
+  const tp=getTP(t.id);
+  const corr=tp.score||0;
+  const tot=t.questions.length;
+  return `<div class="ni" id="nav-${t.id}" onclick="showPage('topic','${t.id}')">
+    <span class="ic">${t.ic}</span>
+    <span class="lbl">${t.title}</span>
+    <span id="nb-${t.id}">${corr>0?`<span class="spill">${corr}/${tot}</span>`:`<span class="badge">${tot}Q</span>`}</span>
+  </div>`;
+}
+
+function updateDashCard(tid){
+  const card=document.getElementById('dc-'+tid);
+  if(!card) return;
+  const pct=topicPct(tid);
+  const fill=card.querySelector('.pf');
+  const lbl=card.querySelector('.tpl');
+  if(fill) fill.style.width=pct+'%';
+  if(lbl){
+    const t=TOPICS.find(x=>x.id===tid);
+    const att=totalAttempted(tid);
+    lbl.textContent=pct>0?`${pct}% mastery (${att}/${t.questions.length} attempted)`:`${t.questions.length} MCQs ready`;
+  }
+}
+
+function renderDash(){
+  // Stats
+  const att=overallAttempted(),corr=overallCorrect(),tot=totalQ();
+  const pct=att>0?Math.round(corr/att*100):0;
+  document.getElementById('dash-stats').innerHTML=`
+    <div class="sc c-acc"><div class="sl">Total MCQs</div><div class="sv">${tot}</div><div class="ss">Across 9 topics</div></div>
+    <div class="sc c-grn"><div class="sl">Attempted</div><div class="sv">${att}</div><div class="ss">of ${tot} questions</div></div>
+    <div class="sc c-amb"><div class="sl">Correct</div><div class="sv">${corr}</div><div class="ss">Accuracy: ${pct}%</div></div>
+    <div class="sc c-red"><div class="sl">Remaining</div><div class="sv">${tot-att}</div><div class="ss">Questions pending</div></div>
+  `;
+
+  const tierA=TOPICS.filter(t=>t.tier==='A');
+  const tierB=TOPICS.filter(t=>t.tier==='B');
+
+  function cardHTML(t){
+    const pct=topicPct(t.id);
+    const att=totalAttempted(t.id);
+    const tierClass=t.tier==='A'?'ta':'tb';
+    return `<div class="tc" id="dc-${t.id}" style="--tc-color:${t.col}" onclick="showPage('topic','${t.id}')">
+      <div class="tch"><div class="tic">${t.ic}</div><div class="tier ${tierClass}">Tier ${t.tier}</div></div>
+      <h3>${t.title}</h3>
+      <div class="tmeta">${t.expQ} questions expected · ${t.questions.length} MCQs</div>
+      <div class="pb"><div class="pf" style="width:${pct}%;background:${t.col}"></div></div>
+      <div class="tpl">${pct>0?`${pct}% mastery (${att}/${t.questions.length} attempted)`:`${t.questions.length} MCQs ready`}</div>
+    </div>`;
+  }
+
+  document.getElementById('topic-grid-a').innerHTML=tierA.map(cardHTML).join('');
+  document.getElementById('topic-grid-b').innerHTML=tierB.map(cardHTML).join('');
+}
+
+// ==================== INIT ====================
+function init(){
+  // Build sidebar
+  const tierA=TOPICS.filter(t=>t.tier==='A');
+  const tierB=TOPICS.filter(t=>t.tier==='B');
+  document.getElementById('sb-topics-a').innerHTML=tierA.map(buildSBItem).join('');
+  document.getElementById('sb-topics-b').innerHTML=tierB.map(buildSBItem).join('');
+
+  // Build topic pages
+  const container=document.getElementById('topic-pages');
+  container.innerHTML=TOPICS.map(buildTopicPage).join('');
+
+  // Initial dashboard render
+  renderDash();
+
+  // Update heat gauges and scores for already-answered topics
+  TOPICS.forEach(t=>{
+    updateHeatGauge(t.id);
+  });
+}
+
+init();
+</script>
+</body>
+</html>
