@@ -1736,8 +1736,17 @@ function renderMCQs(filter) {
 }
 
 function renderMCQCard(q, displayNum) {
-  const opts = q.opts.map((o,i) => `<div class="opt" id="opt-${q.id}-${i}" onclick="selectOpt(${q.id},${i},${q.ans})">`+
-    `<span class="opt-label">${String.fromCharCode(65+i)}.</span>${o}</div>`).join('');
+  const savedAnswers = JSON.parse(localStorage.getItem('mcqAnswers') || '{}');
+  const userAns = savedAnswers[q.id];
+  const opts = q.opts.map((o,i) => {
+    let cls = 'opt';
+    if(userAns !== undefined) {
+      if(i === q.ans) cls += ' correct';
+      else if(i === userAns) cls += ' wrong';
+    }
+    return `<div class="${cls}" id="opt-${q.id}-${i}" onclick="selectOpt(${q.id},${i},${q.ans})">`+
+      `<span class="opt-label">${String.fromCharCode(65+i)}.</span>${o}</div>`;
+  }).join('');
   return `<div class="mcq-card" data-diff="${q.diff}" data-type="${q.type}" data-id="${q.id}">
     <div class="mcq-head" onclick="toggleMCQ(${q.id})">
       <span class="mcq-num">Q${displayNum}</span>
@@ -1745,7 +1754,7 @@ function renderMCQCard(q, displayNum) {
       <span class="diff-badge diff-${q.diff}">${q.diff==='E'?'Easy':q.diff==='M'?'Medium':'Hard'}</span>
     </div>
     <div class="mcq-options" id="opts-${q.id}">${opts}</div>
-    <div class="mcq-body" id="body-${q.id}">
+    <div class="mcq-body${userAns !== undefined ? ' open' : ''}" id="body-${q.id}">
       <div class="exp-box">
         <div class="label">Explanation</div><div class="val">${q.exp}</div>
         <div class="label">Shortcut</div><div class="val">${q.sc}</div>
@@ -1782,6 +1791,10 @@ function selectOpt(qid, optIdx, correctIdx) {
   // Auto-expand explanation
   const body = document.getElementById('body-'+qid);
   if(body) body.classList.add('open');
+
+  let saved = JSON.parse(localStorage.getItem('mcqAnswers') || '{}');
+  saved[qid] = optIdx;
+  localStorage.setItem('mcqAnswers', JSON.stringify(saved));
 }
 
 function filterMCQ(filter, btn) {
