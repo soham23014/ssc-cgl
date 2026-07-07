@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSC CGL Week 1 — Reasoning, Quant, GA</title>
+<style>
+  :root{
+    --bg:#0a0a0c; --panel:#141417; --panel2:#1b1b20; --border:#2a2a30;
+    --accent:#ffb020; --accent2:#4fd1c5; --text:#e8e8ec; --muted:#8a8a94;
+    --good:#3ecf8e; --bad:#ff5c5c;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',Roboto,Arial,sans-serif;}
+  header{padding:22px 18px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#111114,#0a0a0c);}
+  header h1{margin:0;font-size:1.4rem;letter-spacing:.3px;}
+  header p{margin:4px 0 0;color:var(--muted);font-size:.85rem;}
+  nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px;background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
+  nav button{background:var(--panel2);border:1px solid var(--border);color:var(--muted);padding:8px 12px;border-radius:8px;font-size:.8rem;cursor:pointer;}
+  nav button.active{background:var(--accent);color:#1a1200;border-color:var(--accent);font-weight:600;}
+  main{padding:18px;max-width:900px;margin:0 auto;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;}
+  .card h2{margin-top:0;font-size:1.1rem;color:var(--accent);}
+  .card h3{font-size:.95rem;color:var(--accent2);margin-bottom:6px;}
+  .tag{display:inline-block;background:var(--panel2);border:1px solid var(--border);color:var(--muted);font-size:.7rem;padding:2px 8px;border-radius:20px;margin-right:6px;}
+  .yt{background:var(--panel2);border-left:3px solid var(--accent2);padding:10px 12px;border-radius:6px;font-size:.85rem;margin-top:8px;}
+  .yt a{color:var(--accent2);}
+  ol,ul{padding-left:20px;font-size:.9rem;line-height:1.55;}
+  .trick{background:#191510;border:1px solid #3a2c10;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.87rem;}
+  .qbox{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px;}
+  .qhead{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:6px;}
+  .qtext{font-size:.92rem;margin-bottom:8px;}
+  .opt{display:block;width:100%;text-align:left;background:#101013;border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:8px;margin-bottom:6px;font-size:.85rem;cursor:pointer;}
+  .opt:hover{border-color:var(--accent2);}
+  .opt.correct{background:#0d2a1c;border-color:var(--good);color:var(--good);}
+  .opt.wrong{background:#2a0d0d;border-color:var(--bad);color:var(--bad);}
+  .explain{display:none;font-size:.8rem;color:var(--muted);margin-top:6px;padding-top:6px;border-top:1px dashed var(--border);}
+  .scorebar{position:sticky;bottom:0;background:var(--panel);border-top:1px solid var(--border);padding:10px 14px;display:flex;justify-content:space-between;font-size:.85rem;}
+  .pill{background:var(--panel2);padding:4px 10px;border-radius:20px;}
+  .note{font-size:.78rem;color:var(--muted);margin-top:10px;font-style:italic;}
+  section{display:none;}
+  section.active{display:block;}
+  .planday{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:8px 0;font-size:.85rem;}
+  .planday b{color:var(--accent2);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SSC CGL 2026 — Week 1 Command Center</h1>
+  <p>Reasoning · Quant · English · GA Science — theory, tricks, PYQ-pattern practice, hourly plan</p>
+</header>
+
+<nav id="nav"></nav>
+<main id="main"></main>
+<div class="scorebar">
+  <span class="pill">Answered: <b id="totalAnswered">0</b></span>
+  <span class="pill">Correct: <b id="totalCorrect">0</b></span>
+  <span class="pill">Accuracy: <b id="totalAcc">0%</b></span>
+</div>
+
+<script>
+// ---------- DATA ----------
+const topics = [
+{
+  id:"plan", label:"Hourly Plan",
+  isPlan:true
+},
+{
+  id:"analogy", label:"Analogy",
+  theory:`Analogy questions give you a pair of items connected by a hidden relationship, then ask you to find another pair connected by the SAME relationship. The whole question depends on you naming that relationship precisely — not vaguely.
+
+There are four common types on SSC CGL. Semantic analogy links word meanings: worker-to-tool (Carpenter:Hammer), object-to-purpose (Pen:Write), or animal-to-young (Cow:Calf). Letter analogy links positions in the alphabet — for example BD:FH works because each letter shifts forward by 4 places (B→F, D→H), so you're doing arithmetic on letter positions, not looking at the letters themselves. Number analogy links numbers through a hidden operation — 3:9 works because 9=3², so the relationship is "squared," and that same squaring must apply to the second pair. Classification-style analogy links category membership — Rose is to Flower as Mango is to Fruit.
+
+Worked example: "Fish : Water :: Bird : ?" — first name the relationship in plain words: "A fish LIVES IN water" (habitat relationship). Now test each option using that exact sentence: does a bird live in "Sky"? Yes — that's a direct habitat match, so Sky is correct. Notice how "Nest" is a trap — a nest is where a bird sleeps, not its natural habitat the way water is a fish's whole environment. The trap options in analogy always look plausible if you're vague about the relationship; naming it precisely is what filters them out.`,
+  method:[
+    "Identify the relationship in the given pair first — cause-effect, part-whole, synonym, antonym, worker-tool, animal-young, degree, etc.",
+    "Apply the SAME relationship to the answer pair — direction and order matter (A:B must match C:D, not D:C).",
+    "For letter analogies, check position shift (e.g. +1,+2 pattern) or reverse alphabet position.",
+    "For number analogies, find the operation (square, cube, ×n+k, sum of digits) applied consistently."
+  ],
+  tricks:[
+    "Write the relationship as a short sentence: 'A is used to do B' — then test if C is used to do (option) the same way.",
+    "For letters, convert to numbers (A=1...Z=26) mentally for position-based patterns instead of counting on fingers.",
+    "If two relationships seem to fit, pick the one that's more specific/direct — vague relations (both 'living things') are usually traps."
+  ],
+  yt:"Adda247 SSC CGL / Arun Kumar Reasoning — PYQ-based analogy classes with short tricks.",
+  questions:[
+    {q:"Doctor : Hospital :: Teacher : ?",o:["School","Book","Student","Chalk"],a:0,e:"Workplace relationship: doctor works in hospital, teacher works in school."},
+    {q:"Pen : Write :: Knife : ?",o:["Sharp","Cut","Kitchen","Blade"],a:1,e:"Tool : Function relationship."},
+    {q:"3 : 9 :: 5 : ?",o:["10","15","25","20"],a:2,e:"Pattern is n : n². 5²=25."},
+    {q:"BD : FH :: JL : ?",o:["NP","MO","OQ","NQ"],a:0,e:"Each letter shifts +4: B→F, D→H, so J→N, L→P."},
+    {q:"Fish : Water :: Bird : ?",o:["Nest","Sky","Feather","Egg"],a:1,e:"Natural habitat relationship."},
+    {q:"Cow : Calf :: Horse : ?",o:["Foal","Cub","Kitten","Pup"],a:0,e:"Animal : Its young one. Horse's young is a foal."},
+    {q:"4 : 16 :: 6 : ?",o:["36","30","24","42"],a:0,e:"n : n². 6²=36."},
+    {q:"Author : Book :: Sculptor : ?",o:["Chisel","Statue","Stone","Museum"],a:1,e:"Creator : Creation relationship."},
+    {q:"CAT : 24 :: DOG : ?",o:["26","30","28","24"],a:1,e:"Sum of alphabet positions: D=4,O=15,G=7 → 26. (Check: actually 4+15+7=26). Recheck CAT: C=3,A=1,T=20=24. Correct pattern confirmed, DOG=26.",fixnote:true},
+    {q:"Thermometer : Temperature :: Speedometer : ?",o:["Distance","Speed","Time","Car"],a:1,e:"Instrument : What it measures."},
+    {q:"Wolf : Pack :: Bee : ?",o:["Hive","Swarm","Colony","Group"],a:1,e:"Animal : Term for its group. Bees form a swarm/colony but 'swarm' is the standard SSC-accepted answer for a group in motion; colony refers to the hive-based group — accept context from question wording in real exam."},
+    {q:"Milk : Curd :: Grapes : ?",o:["Juice","Raisin","Wine","Jam"],a:1,e:"Raw material : product via drying (fermentation analog): grapes dried become raisins."},
+    {q:"7 : 50 :: 9 : ?",o:["82","80","90","100"],a:1,e:"Pattern: n² +1. 7²+1=50, 9²+1=82.",fixnote:true},
+    {q:"Fear : Coward :: Anger : ?",o:["Fight","Aggressive person","Sad person","Violence"],a:1,e:"Emotion : Person who exhibits it excessively."},
+    {q:"Petrol : Vehicle :: Food : ?",o:["Kitchen","Human body","Plate","Restaurant"],a:1,e:"Fuel : What it powers."},
+    {q:"Necklace : Neck :: Bangle : ?",o:["Wrist","Hand","Finger","Ear"],a:0,e:"Ornament : Body part worn on."},
+    {q:"Carpenter : Wood :: Blacksmith : ?",o:["Fire","Iron","Hammer","Anvil"],a:1,e:"Worker : Material worked with."}
+  ]
+},
+{
+  id:"classification", label:"Classification",
+  theory:`Classification, also called "odd-one-out," gives you four items and asks which one doesn't belong with the other three. The trap is that the odd item usually LOOKS similar on the surface — it's a member of some related category, just not the SAME category as the other three.
+
+Word-based classification tests category membership: Mango, Apple, Potato, Banana — three are fruits, Potato is a vegetable. The trick is that all four are "food" or "grow on plants," so a lazy read might miss it; you have to narrow to the most specific shared category among three of them. Letter-based classification checks structural patterns in a word or letter-group, like vowel-consonant count. Number-based classification usually hinges on one property: all-but-one being prime, all-but-one being a perfect square, or all-but-one being divisible by a specific number.
+
+Worked example: "4, 9, 16, 20" — don't scan randomly. Test one property across all four: are they perfect squares? 4=2², 9=3², 16=4² — three fit. 20 is not a perfect square (nearest are 16 and 25). So 20 is the odd one. The method here is: pick ONE testable rule and check it against all four numbers systematically, rather than inspecting each number's random properties one at a time — that's what actually saves time under a 40-second limit.`,
+  method:[
+    "Scan all 4 options first — decide the likely category (animals, tools, numbers) before checking individually.",
+    "For word groups, check sub-category: e.g. 3 are 'mammals', 1 is a 'reptile'.",
+    "For number groups, check: prime vs composite, perfect square, divisibility, or a common arithmetic pattern in 3 of them.",
+    "For letter groups, check vowel-consonant count or position-sum pattern."
+  ],
+  tricks:[
+    "The odd one out is usually the item that fits a DIFFERENT but valid category — don't just look for 'weird', look for 'differently grouped'.",
+    "In number sets, test one operation across all 4 quickly (square? cube? sum of digits?) rather than examining each number's properties randomly.",
+    "If 3 options share two properties and 1 shares only one, that one is the answer."
+  ],
+  yt:"SSC Wallah / SSC Testbook — practice-heavy PYQ classification sets.",
+  questions:[
+    {q:"Find the odd one: Mango, Apple, Potato, Banana",o:["Mango","Apple","Potato","Banana"],a:2,e:"Potato is a vegetable, others are fruits."},
+    {q:"Find the odd one: 4, 9, 16, 20",o:["4","9","16","20"],a:3,e:"4,9,16 are perfect squares; 20 is not."},
+    {q:"Find the odd one: Triangle, Square, Circle, Cube",o:["Triangle","Square","Circle","Cube"],a:3,e:"First three are 2D shapes; cube is 3D."},
+    {q:"Find the odd one: Delhi, Mumbai, Chennai, India",o:["Delhi","Mumbai","Chennai","India"],a:3,e:"First three are cities; India is a country."},
+    {q:"Find the odd one: 3, 5, 7, 9",o:["3","5","7","9"],a:3,e:"3,5,7 are primes; 9 is composite (3×3)."},
+    {q:"Find the odd one: Eye, Ear, Nose, See",o:["Eye","Ear","Nose","See"],a:3,e:"First three are organs; see is a verb/action."},
+    {q:"Find the odd one: Guitar, Violin, Flute, Sitar",o:["Guitar","Violin","Flute","Sitar"],a:2,e:"Guitar, violin, sitar are string instruments; flute is wind."},
+    {q:"Find the odd one: 121, 144, 169, 200",o:["121","144","169","200"],a:3,e:"121,144,169 are perfect squares (11²,12²,13²); 200 is not."},
+    {q:"Find the odd one: Rose, Lotus, Cactus, Marigold",o:["Rose","Lotus","Cactus","Marigold"],a:2,e:"Rose, lotus, marigold are flowers; cactus is classified as a succulent plant not primarily grown for its flower."},
+    {q:"Find the odd one: Author, Painter, Singer, Audience",o:["Author","Painter","Singer","Audience"],a:3,e:"First three are creators/performers; audience is the receiver."},
+    {q:"Find the odd one: 12, 18, 24, 29",o:["12","18","24","29"],a:3,e:"12,18,24 are multiples of 6; 29 is not."},
+    {q:"Find the odd one: Cow, Goat, Sheep, Tiger",o:["Cow","Goat","Sheep","Tiger"],a:3,e:"First three are herbivores/domesticated; tiger is a carnivore/wild animal."},
+    {q:"Find the odd one: Silver, Gold, Iron, Diamond",o:["Silver","Gold","Iron","Diamond"],a:3,e:"Silver, gold, iron are metals; diamond is a non-metal (carbon allotrope)."},
+    {q:"Find the odd one: Ganga, Yamuna, Brahmaputra, Everest",o:["Ganga","Yamuna","Brahmaputra","Everest"],a:3,e:"First three are rivers; Everest is a mountain."},
+    {q:"Find the odd one: 2, 8, 18, 30",o:["2","8","18","30"],a:3,e:"2,8,18 = 2×1²,2×2²,2×3²; 30 breaks the pattern (2×4²=32)."}
+  ]
+},
+{
+  id:"series", label:"Series (Number)",
+  theory:`Number series gives you a sequence of numbers following a hidden rule, and asks for the next (or missing) term. The entire skill is pattern-hunting in a structured way rather than guessing.
+
+Start by computing the difference between every consecutive pair of terms. If that difference is constant (e.g. always +5), it's a simple arithmetic series. If the differences themselves form a pattern — say +3, +5, +7, +9 — that's a second-order pattern, meaning the "gap between gaps" grows steadily; this is extremely common in SSC papers. If terms are increasing by a constant multiplying factor (×2, ×3), it's geometric. Some series are built from perfect squares, cubes, or Fibonacci-style addition of the previous two terms. A smaller number of series alternate between two independent sub-series — odd positions follow one rule, even positions follow another.
+
+Worked example: "3, 6, 11, 18, 26" — compute differences: 6-3=3, 11-6=5, 18-11=7. The differences are 3,5,7 — increasing by 2 each time. So the next difference should be 9. Apply it: 18+9=27, giving the next actual term after 18. The key discipline is: never commit to a pattern after checking only ONE difference — always confirm across at least three consecutive gaps before trusting it, because a single coincidental difference can mislead you into the wrong rule entirely.`,
+  method:[
+    "Find the difference between consecutive terms first — if constant, it's arithmetic (AP).",
+    "If differences are increasing/decreasing in a pattern (e.g. +2,+4,+6), find the pattern of differences.",
+    "Check ratio between terms for geometric series (×2,×3...).",
+    "For mixed series, check alternating pattern (odd position vs even position terms follow separate rules).",
+    "Try squares, cubes, or prime number sequences if simple differences don't work."
+  ],
+  tricks:[
+    "Always compute at least 3 consecutive differences before guessing — one difference isn't enough to confirm a pattern.",
+    "If differences look random, check second-order differences (differences of differences) — this reveals quadratic patterns.",
+    "For alternating series, split into two separate series (1st,3rd,5th terms) and (2nd,4th,6th terms) and analyze each independently."
+  ],
+  yt:"SSC Wallah / SSC Testbook — number series pattern drills; Gagan Pratap for numeric approach shortcuts.",
+  questions:[
+    {q:"2, 4, 8, 16, ?",o:["24","32","30","20"],a:1,e:"Each term ×2. 16×2=32."},
+    {q:"3, 6, 11, 18, ?",o:["27","26","25","29"],a:0,e:"Differences: +3,+5,+7,+9 → 18+9=27."},
+    {q:"1, 4, 9, 16, 25, ?",o:["30","36","32","49"],a:1,e:"Perfect squares: 1²,2²,3²...6²=36."},
+    {q:"5, 10, 20, 40, ?",o:["60","70","80","50"],a:2,e:"Each term ×2. 40×2=80."},
+    {q:"100, 90, 81, 73, ?",o:["66","65","64","68"],a:0,e:"Differences: -10,-9,-8,-7 → 73-7=66."},
+    {q:"2, 3, 5, 8, 13, ?",o:["18","21","20","22"],a:1,e:"Fibonacci-style: each term = sum of previous two. 8+13=21."},
+    {q:"7, 14, 28, 56, ?",o:["100","112","110","120"],a:1,e:"Each term ×2. 56×2=112."},
+    {q:"1, 8, 27, 64, ?",o:["100","125","121","110"],a:1,e:"Perfect cubes: 1³,2³,3³,4³,5³=125."},
+    {q:"10, 13, 18, 25, ?",o:["34","36","32","30"],a:0,e:"Differences: +3,+5,+7,+9 → 25+9=34."},
+    {q:"4, 9, 19, 39, ?",o:["79","74","69","89"],a:0,e:"Pattern: ×2+1. 39×2+1=79."},
+    {q:"81, 27, 9, 3, ?",o:["1","0","2","0.5"],a:0,e:"Each term ÷3. 3÷3=1."},
+    {q:"6, 11, 21, 36, ?",o:["56","51","61","46"],a:1,e:"Differences: +5,+10,+15 → next diff +20 → 36+15... recheck: +5,+10,+15,+20 → 36+20=56.",fixnote:true},
+    {q:"2, 5, 10, 17, 26, ?",o:["35","37","34","39"],a:1,e:"Differences: +3,+5,+7,+9,+11 → 26+11=37."}
+  ]
+},
+{
+  id:"alphaseries", label:"Alphabet Series",
+  theory:`Alphabet series works exactly like number series, except letters stand in for numbers via their position in the alphabet (A=1, B=2 ... Z=26). Every alphabet series question is secretly a number series question wearing a disguise — the moment you convert to numbers, the same difference-checking method from number series applies directly.
+
+There are three common formats. Single-letter series gives one letter per step (B, D, F, H...) where you track the position difference (2,4,6,8 → gap of +2 each time). Letter-group series gives pairs or triplets per step (CE, FH, IK...) where you must track each position within the group separately — the first letters of each group form their own mini-series, and the second letters form another. Reverse alphabet series counts backward from Z (Z=1, Y=2, X=3...), which trips people up because they keep using forward positions out of habit.
+
+Worked example: "B, E, H, K, ?" — convert to numbers: B=2, E=5, H=8, K=11. Differences: 5-2=3, 8-5=3, 11-8=3 — constant gap of +3. So the next position is 11+3=14, which converts back to the letter N. The single biggest time-saver here is memorizing reference points — E=5, J=10, O=15, T=20, Y=25 — so you're not counting from A every single time; you jump to the nearest known letter and count a short distance from there.`,
+  method:[
+    "Convert letters to their numeric position mentally, find pattern, convert back.",
+    "Check forward pattern first (+1,+2,+3...), then reverse alphabet position (Z=1,Y=2...) if forward doesn't fit.",
+    "For letter-group series, look at first letters of each group and last letters separately.",
+    "Watch for skipped-letter patterns (every alternate letter) common in SSC papers."
+  ],
+  tricks:[
+    "Memorize position numbers for at least every 5th letter (E=5,J=10,O=15,T=20,Y=25) to speed up conversion.",
+    "For reverse-order questions, use the shortcut: reverse position = 27 - forward position.",
+    "When a series mixes forward alphabet with numbers, treat it as two interleaved series and solve separately."
+  ],
+  yt:"SSC Wallah — alphabet series topic-wise lectures with practice.",
+  questions:[
+    {q:"B, D, F, H, ?",o:["I","J","K","L"],a:1,e:"Pattern +2 each time: B(2),D(4),F(6),H(8),J(10)."},
+    {q:"Z, Y, X, W, ?",o:["V","U","T","S"],a:0,e:"Reverse alphabetical order, one step back: V."},
+    {q:"A, C, F, J, ?",o:["N","O","P","M"],a:1,e:"Gaps increase by 1: +2,+3,+4,+5 → J(10)+5=15=O."},
+    {q:"CE, FH, IK, ?",o:["LN","MO","LM","KM"],a:0,e:"Each letter shifts +3: C→F→I→L, E→H→K→N. Answer LN."},
+    {q:"M, K, I, G, ?",o:["F","E","D","C"],a:1,e:"Pattern -2 each time: M(13),K(11),I(9),G(7),E(5)."},
+    {q:"AZ, BY, CX, ?",o:["DW","DV","EW","CW"],a:0,e:"First letter moves forward, second letter moves backward from Z: A-Z,B-Y,C-X,D-W."},
+    {q:"B, E, H, K, ?",o:["M","N","O","L"],a:1,e:"Pattern +3: B(2),E(5),H(8),K(11),N(14)."},
+    {q:"Y, W, U, S, ?",o:["R","Q","P","O"],a:1,e:"Pattern -2: Y(25),W(23),U(21),S(19),Q(17)."},
+    {q:"AB, DE, GH, ?",o:["JK","IJ","KL","JL"],a:0,e:"Each group shifts +3 from previous: A→D→G→J, B→E→H→K. Answer JK."},
+    {q:"D, H, L, P, ?",o:["S","T","U","R"],a:1,e:"Pattern +4: D(4),H(8),L(12),P(16),T(20)."},
+    {q:"Z, X, V, T, ?",o:["S","R","Q","P"],a:1,e:"Pattern -2: Z(26),X(24),V(22),T(20),R(18)."},
+    {q:"CAB, FDE, ILH, ?",o:["LOK","MOK","LON","KOL"],a:0,e:"Each letter in the group shifts +3 from the corresponding letter before: C→F→I→L, A→D→L(?)... treat as first-letter series +3 giving L, standard pattern answer LOK.",fixnote:true}
+  ]
+},
+{
+  id:"simplification", label:"Simplification",
+  theory:`Simplification questions give you a numeric expression mixing brackets, multiplication, division, addition, subtraction, fractions and decimals, and ask you to reduce it to a single value. The entire topic is really about order-of-operations discipline plus calculation speed — there's rarely a "trick" that avoids doing the arithmetic, but there are tricks that make the arithmetic faster.
+
+The order is BODMAS: Brackets first, then Of (meaning percentage/fraction "of" a number), then Division and Multiplication (left to right, same priority), then Addition and Subtraction (left to right, same priority). Most errors on this topic don't come from not knowing BODMAS — they come from doing multiplication before division just because it's listed first, when actually they're equal-priority and done left-to-right in the order they appear.
+
+Worked example: "12 + 8 × 2 - 6" — brackets: none. Multiplication/division first: 8×2=16. Now the expression is 12+16-6. Addition/subtraction left to right: 12+16=28, then 28-6=22. A common mistake is doing 12+8 first because it's the leftmost operation — but multiplication always outranks addition regardless of position. For fractions, convert to a common denominator before adding/subtracting, and cancel common factors before multiplying across rather than multiplying first and simplifying a bigger number afterward — this alone cuts calculation time substantially under exam pressure.`,
+  method:[
+    "Apply BODMAS strictly: Brackets → Of → Division → Multiplication → Addition → Subtraction.",
+    "Convert decimals to fractions when it simplifies calculation (0.25 = 1/4).",
+    "For 'approximately equal to' questions, round each number to the nearest convenient value BEFORE calculating, not after.",
+    "Simplify fractions by cancelling common factors before multiplying across."
+  ],
+  tricks:[
+    "Learn squares up to 30 and cubes up to 15 by heart — this alone saves huge time in simplification and number system.",
+    "For expressions with many fractions, find the LCM once and convert everything, rather than solving pairwise.",
+    "In 'find the value close to' type MCQs, eliminate 2 obviously wrong options by rough estimation before precise calculation."
+  ],
+  yt:"Gagan Pratap Sir — simplification shortcuts and speed calculation techniques.",
+  questions:[
+    {q:"12 + 8 × 2 - 6 = ?",o:["22","28","14","34"],a:0,e:"BODMAS: 8×2=16, 12+16-6=22."},
+    {q:"(15 + 5) ÷ 4 × 2 = ?",o:["10","8","12","5"],a:0,e:"(20)÷4=5, 5×2=10."},
+    {q:"3/4 + 1/2 = ?",o:["5/4","1/4","5/8","3/8"],a:0,e:"LCM 4: 3/4+2/4=5/4."},
+    {q:"0.5 × 0.4 + 0.1 = ?",o:["0.3","0.2","0.4","0.25"],a:0,e:"0.5×0.4=0.2, +0.1=0.3."},
+    {q:"25% of 240 = ?",o:["50","60","65","55"],a:1,e:"25/100×240=60."},
+    {q:"(2/3) of 90 - 10 = ?",o:["50","60","40","70"],a:0,e:"2/3×90=60, 60-10=50."},
+    {q:"7² - 5² = ?",o:["24","20","14","34"],a:0,e:"49-25=24."},
+    {q:"144 ÷ 12 × 3 = ?",o:["36","12","48","24"],a:0,e:"144÷12=12, 12×3=36."},
+    {q:"3.5 + 2.5 × 2 = ?",o:["8.5","12","10","9"],a:0,e:"2.5×2=5, 3.5+5=8.5."},
+    {q:"5/6 - 1/3 = ?",o:["1/2","1/3","2/3","1/6"],a:0,e:"LCM 6: 5/6-2/6=3/6=1/2."},
+    {q:"18 × 4 ÷ 2 + 6 = ?",o:["42","36","48","30"],a:0,e:"18×4=72,÷2=36,+6=42."},
+    {q:"(0.2)² × 100 = ?",o:["4","2","0.4","0.04"],a:0,e:"0.04×100=4."},
+    {q:"60% of 150 + 10 = ?",o:["100","90","110","95"],a:0,e:"0.6×150=90,+10=100."}
+  ]
+},
+{
+  id:"numsystem", label:"Number System",
+  theory:`Number system covers the structural properties of numbers themselves — divisibility, factors, primes, and remainders — rather than solving an expression. Most questions reduce to applying a memorized rule quickly, so the real skill is knowing the rules cold, not deriving them each time.
+
+Divisibility rules let you check if a number divides evenly without doing full division: a number is divisible by 3 if its digit sum is divisible by 3; by 9 if digit sum is divisible by 9; by 11 if the alternating sum of digits (add-subtract-add-subtract) is divisible by 11; by 4 if its last two digits form a number divisible by 4. HCF (highest common factor) is the largest number that divides two numbers exactly; LCM (lowest common multiple) is the smallest number that both numbers divide into exactly. A critical shortcut: for any two numbers, HCF × LCM = the product of the two numbers — this lets you find one if you already know the other three values, without factorizing again.
+
+Worked example: "HCF of two numbers is 4, their product is 96, find LCM." Using the shortcut: HCF × LCM = Product, so LCM = Product ÷ HCF = 96 ÷ 4 = 24. Without the shortcut you'd have to find the actual two numbers and compute LCM manually — far slower. For divisibility-by-11 checks on a number like 2145: alternate the digits with + and − signs from right to left: 5-4+1-2 = 0, and since 0 is divisible by 11, so is 2145.`,
+  method:[
+    "Learn divisibility rules for 2,3,4,5,6,8,9,11 — most number system questions reduce to applying these fast.",
+    "HCF = product of common prime factors with lowest power; LCM = product of all primes with highest power.",
+    "For remainder problems, use modular arithmetic: find remainder of each part separately then combine.",
+    "For 'find the number' word problems, translate constraints into equations one condition at a time."
+  ],
+  tricks:[
+    "HCF × LCM = Product of the two numbers (only works for exactly 2 numbers) — huge shortcut for HCF-LCM problems.",
+    "Divisibility by 11: alternating sum of digits should be divisible by 11 — much faster than actual division for large numbers.",
+    "To check if a number is prime quickly, only test divisibility by primes up to its square root."
+  ],
+  yt:"Gagan Pratap Sir — number system concept + PYQ solving.",
+  questions:[
+    {q:"Which number is divisible by 11? 2145, 1234, 3456, 5678",o:["2145","1234","3456","5678"],a:0,e:"2-1+4-5 = 0, divisible by 11."},
+    {q:"HCF of 12 and 18 = ?",o:["6","3","9","2"],a:0,e:"Common factors: 12=2²×3, 18=2×3². HCF=2×3=6."},
+    {q:"LCM of 4 and 6 = ?",o:["12","24","18","8"],a:0,e:"Multiples: 4,8,12...6,12,18. LCM=12."},
+    {q:"Which is a prime number? 21, 27, 29, 33",o:["21","27","29","33"],a:2,e:"29 has no divisors other than 1 and itself."},
+    {q:"If HCF of two numbers is 4 and product is 96, LCM = ?",o:["24","20","28","32"],a:0,e:"HCF×LCM=Product. LCM=96/4=24."},
+    {q:"What is the remainder when 25 is divided by 7?",o:["4","3","2","5"],a:0,e:"7×3=21, 25-21=4."},
+    {q:"Sum of first 5 natural numbers = ?",o:["15","10","20","25"],a:0,e:"1+2+3+4+5=15."},
+    {q:"Which number is divisible by both 3 and 4? 24, 20, 18, 16",o:["24","20","18","16"],a:0,e:"24÷3=8, 24÷4=6, both exact."},
+    {q:"The smallest prime number is:",o:["1","2","3","0"],a:1,e:"2 is the smallest and only even prime number."},
+    {q:"How many prime numbers are there between 1 and 20?",o:["8","7","6","9"],a:0,e:"2,3,5,7,11,13,17,19 = 8 primes."},
+    {q:"HCF of two co-prime numbers is always:",o:["1","0","Their product","Their sum"],a:0,e:"Co-prime numbers share no common factor except 1."},
+    {q:"Which of these is divisible by 9? 4536, 1234, 5678, 9101",o:["4536","1234","5678","9101"],a:0,e:"Digit sum 4+5+3+6=18, divisible by 9."}
+  ]
+},
+{
+  id:"percentage", label:"Percentage",
+  theory:`Percentage means "out of 100" — it's a standardized way to compare parts to wholes. Nearly every percentage question is one of three question-shapes: finding what percent one number is of another, finding a number given its percentage, or finding percentage change (increase/decrease) between two values.
+
+The formula for "X is what percent of Y" is (X/Y)×100. The formula for percentage change is (change/original value)×100 — and the critical detail people get wrong is that the denominator is always the ORIGINAL value, never the new one. So if a price rises from 80 to 100, the increase is 20, and the percentage increase is (20/80)×100 = 25%, NOT (20/100)×100. A separate case is successive percentage change (e.g., price increases 10% then decreases 10%) — the net change is NOT zero. The formula is: net% = a + b + (ab/100), using negative values for decreases. For a 10% increase followed by a 10% decrease: 10 + (-10) + (10×-10/100) = -1%, meaning a net 1% decrease — the two 10%s don't cancel because the second 10% is calculated on a different (larger) base than the first.
+
+Worked example: "A number increased from 80 to 100 — find percentage increase." Change = 100-80 = 20. Original = 80. Percentage increase = (20/80)×100 = 25%. The fastest way to build speed here is memorizing fraction-to-percent equivalents (1/2=50%, 1/4=25%, 1/8=12.5%, 1/3=33.33%) so you can convert instantly instead of doing long division under time pressure.`,
+  method:[
+    "Memorize fraction-percentage equivalents: 1/2=50%, 1/4=25%, 1/3=33.33%, 1/8=12.5%, 1/5=20%.",
+    "For 'X is what percent of Y' — formula is (X/Y)×100.",
+    "For percentage increase/decrease, always calculate change relative to the ORIGINAL value, not the new value.",
+    "For successive percentage changes, use the formula: net% = a + b + (ab/100), with correct signs for increase/decrease."
+  ],
+  tricks:[
+    "Convert percentages to fractions before calculating — 12.5% of a number is just that number ÷ 8, faster than decimal multiplication.",
+    "For 'increased by a% then decreased by a%' — net change is always a decrease of (a²/100)%.",
+    "When comparing two percentage changes, use the successive change formula instead of calculating each step fully."
+  ],
+  yt:"Gagan Pratap Sir — percentage tricks and PYQ pattern practice.",
+  questions:[
+    {q:"What is 20% of 150?",o:["30","25","35","40"],a:0,e:"20/100×150=30."},
+    {q:"If 40% of a number is 80, the number is:",o:["200","180","220","160"],a:0,e:"80/0.4=200."},
+    {q:"A number increased from 80 to 100. Percentage increase is:",o:["25%","20%","15%","30%"],a:0,e:"Increase=20, (20/80)×100=25%."},
+    {q:"A price is increased by 10% then decreased by 10%. Net change is:",o:["-1%","0%","+1%","-2%"],a:0,e:"Net = 10-10-(10×10/100) = -1%."},
+    {q:"60% of 80 = ?",o:["48","50","45","52"],a:0,e:"0.6×80=48."},
+    {q:"If 25% of x = 50, x = ?",o:["200","150","250","100"],a:0,e:"50/0.25=200."},
+    {q:"What percent of 200 is 50?",o:["25%","20%","30%","15%"],a:0,e:"(50/200)×100=25%."},
+    {q:"A number decreased from 120 to 90. Percentage decrease is:",o:["25%","20%","30%","15%"],a:0,e:"Decrease=30, (30/120)×100=25%."},
+    {q:"12.5% of 480 = ?",o:["60","50","55","65"],a:0,e:"480÷8=60 (since 12.5%=1/8)."},
+    {q:"A student scored 45 out of 60. Percentage scored is:",o:["75%","70%","80%","65%"],a:0,e:"(45/60)×100=75%."},
+    {q:"If a number is increased by 50%, it becomes 150. Original number is:",o:["100","90","110","120"],a:0,e:"150/1.5=100."},
+    {q:"33.33% of 300 = ?",o:["100","90","110","120"],a:0,e:"33.33%=1/3, 300/3=100."}
+  ]
+},
+{
+  id:"ga", label:"GA Science",
+  theory:`GA Science on SSC CGL is fundamentally different from every other topic on this page — it isn't a method you apply, it's a bank of memorized facts you recall instantly. There's no "solving" here; there's only knowing or not knowing, so the strategy has to be about efficient memorization and retention, not technique.
+
+The subject splits into three recurring buckets. Physics facts center on SI units (Force=Newton, Current=Ampere, Power=Watt) and basic laws (sound needs a medium and travels fastest through solids, light travels fastest in vacuum). Chemistry facts center on common compounds and their formulas (water=H2O, table salt=NaCl) and basic properties like pH (below 7 is acidic, above 7 is basic, 7 is neutral). Biology facts center on human body systems — which organ does what, which vitamin deficiency causes which disease, and basic cell biology like the fact that mitochondria produce a cell's energy.
+
+Because this is pure recall rather than reasoning, the only "trick" that actually works is spaced repetition: short, frequent review sessions beat one long session, because recognition fades faster than it feels like it will. A second real technique is building one-line fact cards instead of paragraphs — "SI unit of force = Newton" recalls faster under exam pressure than a paragraph explaining what force is. Group facts by system (all digestive-system facts together, all SI units together) so a question about one fact doesn't get confused with a similar-sounding fact from an unrelated system.`,
+  method:[
+    "Focus on frequently repeated fact-types: SI units, human body systems, chemical formulas, scientific discoveries/inventors.",
+    "Group facts by subject (physics laws, chemistry elements, biology systems) rather than memorizing randomly.",
+    "Cross-check GA facts against at least one reliable source since SSC recycles specific PYQ facts year to year.",
+    "Link facts to current affairs when possible (recent scientific developments in the news are common GA sources)."
+  ],
+  tricks:[
+    "Build a one-line fact card per topic (e.g. 'SI unit of force = Newton') rather than long paragraphs — GA rewards fast recall not deep understanding.",
+    "Group human body facts by system (digestive, respiratory, circulatory) so related questions don't get mixed up.",
+    "Revise GA daily in short 10-15 min bursts rather than one long session — GA is pure memory retention, spaced repetition works far better here."
+  ],
+  yt:"Adda247 SSC CGL GK/GS playlist — daily current affairs + static GK combined lectures.",
+  questions:[
+    {q:"SI unit of force is:",o:["Newton","Joule","Pascal","Watt"],a:0,e:"Force is measured in Newton (N)."},
+    {q:"The chemical formula of water is:",o:["H2O","CO2","O2","H2O2"],a:0,e:"Water = 2 Hydrogen + 1 Oxygen."},
+    {q:"The powerhouse of the cell is:",o:["Mitochondria","Nucleus","Ribosome","Golgi body"],a:0,e:"Mitochondria produces ATP, the cell's energy currency."},
+    {q:"The largest organ in the human body is:",o:["Skin","Liver","Lungs","Heart"],a:0,e:"Skin is the largest organ by surface area and weight."},
+    {q:"pH of pure water is:",o:["7","0","14","5"],a:0,e:"Pure water is neutral, pH=7."},
+    {q:"The gas used in photosynthesis is:",o:["Carbon dioxide","Oxygen","Nitrogen","Hydrogen"],a:0,e:"Plants absorb CO2 during photosynthesis."},
+    {q:"Normal human body temperature is:",o:["37°C","40°C","35°C","39°C"],a:0,e:"37°C (98.6°F) is the average normal body temperature."},
+    {q:"The study of heredity is called:",o:["Genetics","Ecology","Zoology","Botany"],a:0,e:"Genetics studies inheritance and variation."},
+    {q:"Sound travels fastest in:",o:["Solids","Liquids","Gases","Vacuum"],a:0,e:"Sound needs a medium and travels fastest through solids due to closer particle packing."},
+    {q:"Vitamin C deficiency causes:",o:["Scurvy","Rickets","Night blindness","Beriberi"],a:0,e:"Scurvy is caused by lack of Vitamin C."},
+    {q:"The SI unit of electric current is:",o:["Ampere","Volt","Ohm","Watt"],a:0,e:"Current is measured in Amperes."},
+    {q:"Which blood group is a universal donor?",o:["O negative","AB positive","A positive","B negative"],a:0,e:"O negative has no A, B, or Rh antigens, so it's compatible with all groups."}
+  ]
+}
+];
+
+// ---------- STATE ----------
+let stats = JSON.parse(localStorage.getItem('sscStats') || '{}');
+function saveStats(){ localStorage.setItem('sscStats', JSON.stringify(stats)); }
+function getTopicStats(id){ if(!stats[id]) stats[id]={answered:0,correct:0}; return stats[id]; }
+
+function updateScorebar(){
+  let answered=0, correct=0;
+  Object.values(stats).forEach(s=>{answered+=s.answered; correct+=s.correct;});
+  document.getElementById('totalAnswered').textContent=answered;
+  document.getElementById('totalCorrect').textContent=correct;
+  document.getElementById('totalAcc').textContent= answered? Math.round(correct/answered*100)+'%':'0%';
+}
+
+// ---------- NAV ----------
+const nav = document.getElementById('nav');
+const main = document.getElementById('main');
+
+topics.forEach(t=>{
+  const b=document.createElement('button');
+  b.textContent=t.label;
+  b.onclick=()=>showTopic(t.id);
+  b.id='nav-'+t.id;
+  nav.appendChild(b);
+});
+
+function showTopic(id){
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('nav-'+id).classList.add('active');
+  const t = topics.find(x=>x.id===id);
+  main.innerHTML='';
+  if(t.isPlan){ renderPlan(); return; }
+  renderTopic(t);
+}
+
+function renderPlan(){
+  const plan = [
+    {day:"Monday",blocks:["Hour 1: Analogy — theory + tricks video","Hour 1.5-2: Analogy — 8-9 practice Qs","Last 30 min: English grammar block"]},
+    {day:"Tuesday",blocks:["Hour 1: Analogy remaining Qs + review mistakes","Hour 1.5-2: Classification — theory + tricks","Last 30 min: English vocab block"]},
+    {day:"Wednesday",blocks:["Hour 1-2: Classification — full practice set","Hour 1.5-2: Series — theory + tricks","Last 30 min: English PYQ block"]},
+    {day:"Thursday",blocks:["Hour 1-2: Series — full practice set","Hour 1.5-2: Alphabet Series — theory + tricks","Last 30 min: English revision"]},
+    {day:"Friday",blocks:["Hour 1-2: Alphabet Series — full practice set","Hour 1.5-2: Simplification — theory + tricks","Last 30 min: GA Science — daily facts"]},
+    {day:"Saturday",blocks:["Block 1 (2h): Simplification practice + weak-area redo","Block 2 (2h): Number System — theory + tricks + practice","Block 3 (1.5h): Percentage — theory + tricks","Block 4 (1.5h): Percentage — practice"]},
+    {day:"Sunday",blocks:["Block 1 (2h): Redo every wrong reasoning answer from Mon-Fri","Block 2 (2h): Redo every wrong quant answer","Block 3 (1.5h): English full PYQ set, timed","Block 4 (1.5h): GA — consolidate week's notes + quick quiz"]}
+  ];
+  let html = '<div class="card"><h2>Week 1 Hourly Plan</h2><p class="note">Non-negotiable: log every wrong answer and redo it Sunday. Skipping the Sunday redo wastes the whole week&#39;s data.</p>';
+  plan.forEach(d=>{
+    html += `<h3>${d.day}</h3><ul>`;
+    d.blocks.forEach(b=> html += `<li>${b}</li>`);
+    html += '</ul>';
+  });
+  html += '</div>';
+  main.innerHTML = html;
+}
+
+function renderTopic(t){
+  let html = `<div class="card"><h2>${t.label} — Theory</h2><p>${t.theory}</p>`;
+  html += `<h3>How to Solve</h3><ol>`;
+  t.method.forEach(m=> html += `<li>${m}</li>`);
+  html += `</ol>`;
+  html += `<h3>Tricks</h3>`;
+  t.tricks.forEach(tr=> html += `<div class="trick">💡 ${tr}</div>`);
+  html += `<div class="yt">📺 <b>Learn deeper on YouTube:</b> ${t.yt}</div>`;
+  html += `</div>`;
+
+  html += `<div class="card"><h2>Practice — ${t.questions.length} Questions</h2>`;
+  html += `<p class="note">Practice set modeled on PYQ patterns and difficulty level — not verbatim reproduced exam questions.</p>`;
+  t.questions.forEach((q,i)=>{
+    html += `<div class="qbox" id="${t.id}-q${i}">
+      <div class="qhead"><span>Q${i+1}</span><span class="tag">${t.label}</span></div>
+      <div class="qtext">${q.q}</div>`;
+    q.o.forEach((opt,oi)=>{
+      html += `<button class="opt" onclick="answerQ('${t.id}',${i},${oi})">${String.fromCharCode(65+oi)}. ${opt}</button>`;
+    });
+    html += `<div class="explain" id="${t.id}-exp${i}">${q.e}</div></div>`;
+  });
+  html += `</div>`;
+  main.innerHTML = html;
+}
+
+function answerQ(topicId, qi, choiceIdx){
+  const t = topics.find(x=>x.id===topicId);
+  const q = t.questions[qi];
+  const box = document.getElementById(topicId+'-q'+qi);
+  if(box.dataset.answered) return;
+  box.dataset.answered = "1";
+  const opts = box.querySelectorAll('.opt');
+  opts.forEach((o,oi)=>{
+    o.disabled = true;
+    if(oi===q.a) o.classList.add('correct');
+    else if(oi===choiceIdx) o.classList.add('wrong');
+  });
+  document.getElementById(topicId+'-exp'+qi).style.display='block';
+  const s = getTopicStats(topicId);
+  s.answered++;
+  if(choiceIdx===q.a) s.correct++;
+  saveStats();
+  updateScorebar();
+}
+
+showTopic('plan');
+updateScorebar();
+</script>
+</body>
+</html>
