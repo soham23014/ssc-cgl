@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSC CGL Preparation Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --panel-2: #1c2128;
+      --line: #30363d;
+      --text: #ffffff;
+      --muted: #9ca3af;
+      --blue: #3b82f6;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Inter, sans-serif; }
+    body { min-height: 100vh; }
+    .app { padding: 20px; max-width: 1680px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; gap: 16px; }
+    .title h1 { margin: 0; font-size: 28px; }
+    .title p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+    .pillbar { display: flex; gap: 10px; flex-wrap: wrap; }
+    .pill { background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; color: var(--muted); font-size: 13px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .section { margin-bottom: 16px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+    .card-header h2, .card-header h3 { margin: 0; font-size: 17px; }
+    .card-header p { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+    .card-body { padding: 16px; }
+    .metric { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+    .metric-label { color: var(--muted); font-size: 12px; margin-bottom: 8px; }
+    .metric-value { font-size: 30px; font-weight: 800; }
+    .metric-note { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .progress { width: 100%; height: 10px; background: #0a0f14; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+    .progress > span { display: block; height: 100%; background: var(--blue); }
+    .progress.green > span { background: var(--green); }
+    .progress.amber > span { background: var(--amber); }
+    .progress.red > span { background: var(--red); }
+    .label-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; margin-bottom: 6px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid var(--line); padding: 10px; vertical-align: top; text-align: left; }
+    th { background: #11161d; color: #dbe3ee; }
+    .mini-table td, .mini-table th { padding: 8px; }
+    .check-list { display: grid; gap: 8px; }
+    .check { display: flex; align-items: flex-start; gap: 10px; color: #d1d5db; font-size: 14px; }
+    .check input { margin-top: 2px; transform: scale(1.05); accent-color: var(--blue); }
+    .subtle { color: var(--muted); font-size: 13px; }
+    .topic-block { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: var(--panel-2); }
+    .topic-block h4 { margin: 0 0 10px; font-size: 15px; }
+    .stack { display: grid; gap: 12px; }
+    .badge { display: inline-block; padding: 5px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-size: 11px; margin-right: 6px; margin-bottom: 6px; }
+    .two-col-list { columns: 2; column-gap: 24px; }
+    .two-col-list .check { break-inside: avoid; margin-bottom: 8px; }
+    .small { font-size: 12px; }
+    .strong { color: var(--green); }
+    .weak { color: var(--red); }
+    .mid { color: var(--amber); }
+    .footer-note { color: var(--muted); font-size: 12px; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <div class="title">
+        <h1>SSC CGL Study Dashboard</h1>
+        <p>Tier 1 foundation + Tier 2 connection tracker built for daily execution, PYQs, revision, and accuracy improvement.</p>
+      </div>
+      <div class="pillbar">
+        <div class="pill">Tier 1: 100 Questions · 200 Marks</div>
+        <div class="pill">Tier 2 Paper I: 450 Marks</div>
+        <div class="pill">Tier 1 is qualifying</div>
+        <div class="pill">Tier 2 decides merit</div>
+      </div>
+    </div>
+
+    <div class="section grid-4">
+      <div class="metric">
+        <div class="metric-label">Total study hours</div>
+        <div class="metric-value">168</div>
+        <div class="metric-note">Working-person pace: 2 to 3 hrs weekday, 4 to 6 hrs weekend</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Total questions solved</div>
+        <div class="metric-value">4,280</div>
+        <div class="metric-note">Includes topic practice, PYQs, and revision MCQs</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Overall accuracy</div>
+        <div class="metric-value">74%</div>
+        <div class="metric-note">Target 80%+ before mock-heavy phase</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Pending high-priority topics</div>
+        <div class="metric-value">11</div>
+        <div class="metric-note">Main load: Quant, GA science, PYQ reinforcement</div>
+      </div>
+    </div>
+
+    <div class="section card">
+      <div class="card-header">
+        <h2>1. Daily Study Time Tracker</h2>
+        <p>Daily execution structure with subject blocks, PYQ-first practice, and completion monitoring.</p>
+      </div>
+      <div class="card-body stack">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Total study hours target</th>
+              <th>Actual completed hours</th>
+              <th>Completion %</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>09 Jul 2026</td>
+              <td>3.5 hrs</td>
+              <td>2.8 hrs</td>
+              <td>80%</td>
+              <td>Quant completed; English done; GA revision partial.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="grid-2">
+          <div class="topic-block">
+            <h4>Daily blocks</h4>
+            <table class="mini-table">
+              <thead>
+                <tr><th>Block</th><th>Target time</th><th>Topics covered</th><th>Questions solved</th><th>Accuracy</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Reasoning</td><td>45 min</td><td>Analogy, Series</td><td>35</td><td>82%</td></tr>
+                <tr><td>Quant</td><td>60 min</td><td>Simplification, Percentage</td><td>42</td><td>71%</td></tr>
+                <tr><td>English</td><td>35 min</td><td>Vocabulary, Grammar, Reading</td><td>26</td><td>85%</td></tr>
+                <tr><td>General Awareness</td><td>35 min</td><td>Physics: Motion + revision</td><td>22</td><td>68%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="topic-block">
+            <h4>PYQ practice from Day 1</h4>
+            <table class="mini-table">
+              <thead>
+                <tr><th>Topic</th><th>Total PYQs solved</th><th>Correct</th><th>Wrong</th><th>Accuracy</th><th>Mistake notes</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Analogy</td><td>120</td><td>96</td><td>24</td><td>80%</td><td>Confusion in relationship mapping</td></tr>
+                <tr><td>Simplification</td><td>150</td><td>101</td><td>49</td><td>67%</td><td>BODMAS speed and fraction errors</td></tr>
+                <tr><td>Vocabulary</td><td>90</td><td>72</td><td>18</td><td>80%</td><td>One-word substitution weak</td></tr>
+                <tr><td>Science GA</td><td>140</td><td>91</td><td>49</td><td>65%</td><td>Fact retention issue</td></tr>
+              </tbody>
+            </table>
+            <div class="footer-note">Beginning phase focus: topic-wise PYQs only, no full mock test pressure yet. Tier 1 has four sections of 25 questions and 50 marks each, and Tier 2 Paper I is compulsory for all posts. [page:1][web:25]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section card">
+      <div class="card-header">
+        <h2>2. Reasoning Complete Tracker</h2>
+        <p>Track concepts, PYQ completion, weak patterns, and revision readiness for current reasoning topics.</p>
+      </div>
+      <div class="card-body stack">
+        <div class="grid-3">
+          <div class="topic-block">
+            <h4>A) Analogy</h4>
+            <div class="two-col-list">
+              <label class="check"><input type="checkbox"> Meaning based analogy</label>
+              <label class="check"><input type="checkbox"> Number analogy</label>
+              <label class="check"><input type="checkbox" checked> Letter analogy</label>
+              <label class="check"><input type="checkbox"> Word relationship</label>
+              <label class="check"><input type="checkbox"> Object-function</label>
+              <label class="check"><input type="checkbox"> Part-whole relation</label>
+              <label class="check"><input type="checkbox"> Cause-effect relation</label>
+              <label class="check"><input type="checkbox"> Classification based analogy</label>
+            </div>
+            <div class="subtle" style="margin:12px 0 6px;">Practice</div>
+            <div class="check-list">
+              <label class="check"><input type="checkbox" checked> SSC CGL PYQ 2020</label>
+              <label class="check"><input type="checkbox" checked> SSC CGL PYQ 2021</label>
+              <label class="check"><input type="checkbox"> SSC CGL PYQ 2022</label>
+              <label class="check"><input type="checkbox"> SSC CGL PYQ 2023</label>
+              <label class="check"><input type="checkbox"> SSC CGL PYQ 2024</label>
+              <label class="check"><input type="checkbox"> Latest pattern questions</label>
+            </div>
+            <table class="mini-table" style="margin-top:12px;">
+              <tr><th>Questions attempted</th><td>165</td></tr>
+              <tr><th>Accuracy</th><td>81%</td></tr>
+              <tr><th>Weak patterns</th><td>Cause-effect and mixed analogy</td></tr>
+              <tr><th>Revision date</th><td>10 Jul 2026</td></tr>
+            </table>
+          </div>
+
+          <div class="topic-block">
+            <h4>B) Classification</h4>
+            <div class="check-list">
+              <label class="check"><input type="checkbox" checked> Number classification</label>
+              <label class="check"><input type="checkbox" checked> Letter classification</label>
+              <label class="check"><input type="checkbox"> Word classification</label>
+              <label class="check"><input type="checkbox"> Odd one out</label>
+              <label class="check"><input type="checkbox"> Logic based classification</label>
+            </div>
+            <div class="subtle" style="margin:12px 0 6px;">PYQ tracker</div>
+            <table class="mini-table">
+              <tr><th>PYQ years covered</th><td>2020, 2021</td></tr>
+              <tr><th>Questions attempted</th><td>88</td></tr>
+              <tr><th>Accuracy</th><td>77%</td></tr>
+              <tr><th>Weak area</th><td>Word-classification logic</td></tr>
+              <tr><th>Revision date</th><td>11 Jul 2026</td></tr>
+            </table>
+          </div>
+
+          <div class="topic-block">
+            <h4>C) Series</h4>
+            <div class="subtle">Number Series</div>
+            <div class="two-col-list">
+              <label class="check"><input type="checkbox" checked> Addition pattern</label>
+              <label class="check"><input type="checkbox"> Subtraction pattern</label>
+              <label class="check"><input type="checkbox"> Multiplication pattern</label>
+              <label class="check"><input type="checkbox"> Square pattern</label>
+              <label class="check"><input type="checkbox"> Cube pattern</label>
+              <label class="check"><input type="checkbox"> Prime number pattern</label>
+              <label class="check"><input type="checkbox"> Mixed series</label>
+            </div>
+            <div class="subtle" style="margin-top:10px;">Alphabet Series</div>
+            <div class="two-col-list">
+              <label class="check"><input type="checkbox" checked> Forward order</label>
+              <label class="check"><input type="checkbox"> Reverse order</label>
+              <label class="check"><input type="checkbox"> Letter gap</label>
+              <label class="check"><input type="checkbox"> Position value</label>
+              <label class="check"><input type="checkbox"> Missing letter</label>
+              <label class="check"><input type="checkbox"> Combination series</label>
+            </div>
+            <table class="mini-table" style="margin-top:12px;">
+              <tr><th>Concept status</th><td>60%</td></tr>
+              <tr><th>Practice status</th><td>54%</td></tr>
+              <tr><th>PYQ completion</th><td>42%</td></tr>
+              <tr><th>Accuracy</th><td>69%</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="footer-note">The official reasoning syllabus includes analogies, classification, number series, coding-decoding, Venn diagrams, drawing inferences, critical thinking, and related verbal/non-verbal topics. [page:1]</div>
+      </div>
+    </div>
+
+    <div class="section card">
+      <div class="card-header">
+        <h2>3. Quant Complete Tracker</h2>
+        <p>Build arithmetic speed first, then strengthen exam-level question handling with PYQs and timed drilling.</p>
+      </div>
+      <div class="card-body stack">
+        <div class="grid-3">
+          <div class="topic-block">
+            <h4>A) Simplification</h4>
+            <div class="two-col-list">
+              <label class="check"><input type="checkbox" checked> BODMAS</label>
+              <label class="check"><input type="checkbox" checked> Fraction</label>
+              <label class="check"><input type="checkbox"> Decimal calculation</label>
+              <label class="check"><input type="checkbox"> Approximation</label>
+              <label class="check"><input type="checkbox"> Square</label>
+              <label class="check"><input type="checkbox"> Cube</label>
+              <label class="check"><input type="checkbox"> Square root</label>
+              <label class="check"><input type="checkbox"> Percentage based simplification</label>
+              <label class="check"><input type="checkbox"> Fast calculation tricks</label>
+            </div>
+            <table class="mini-table" style="margin-top:12px;">
+              <tr><th>Easy</th><td>Done</td></tr>
+              <tr><th>Medium</th><td>Ongoing</td></tr>
+              <tr><th>SSC level</th><td>Start this week</td></tr>
+              <tr><th>Previous year</th><td>Partial</td></tr>
+              <tr><th>Questions solved</th><td>210</td></tr>
+              <tr><th>Time/question</th><td>54 sec</td></tr>
+              <tr><th>Accuracy</th><td>67%</td></tr>
+            </table>
+          </div>
+
+          <div class="topic-block">
+            <h4>B) Number System</h4>
+            <div class="two-col-list">
+              <label class="check"><input type="checkbox" checked> Natural numbers</label>
+              <label class="check"><input type="checkbox" checked> Whole numbers</label>
+              <label class="check"><input type="checkbox" checked> Integers</label>
+              <label class="check"><input type="checkbox"> Prime numbers</label>
+              <label class="check"><input type="checkbox"> Composite numbers</label>
+              <label class="check"><input type="checkbox"> Divisibility rules</label>
+              <label class="check"><input type="checkbox"> Factors</label>
+              <label class="check"><input type="checkbox"> Multiples</label>
+              <label class="check"><input type="checkbox"> HCF</label>
+              <label class="check"><input type="checkbox"> LCM</label>
+              <label class="check"><input type="checkbox"> Remainder theorem</label>
+              <label class="check"><input type="checkbox"> Unit digit</label>
+              <label class="check"><input type="checkbox"> Last two digit</label>
+              <label class="check"><input type="checkbox"> Digital sum</label>
+            </div>
+            <table class="mini-table" style="margin-top:12px;">
+              <tr><th>Tier 1 PYQ</th><td>76 solved</td></tr>
+              <tr><th>Tier 2 PYQ</th><td>18 solved</td></tr>
+              <tr><th>Accuracy</th><td>72%</td></tr>
+              <tr><th>Main issue</th><td>Remainder and unit digit shortcuts</td></tr>
+            </table>
+          </div>
+
+          <div class="topic-block">
+            <h4>C) Percentage</h4>
+            <div class="two-col-list">
+              <label class="check"><input type="checkbox" checked> Basic percentage</label>
+              <label class="check"><input type="checkbox" checked> Fraction to percentage conversion</label>
+              <label class="check"><input type="checkbox"> Percentage increase</label>
+              <label class="check"><input type="checkbox"> Percentage decrease</label>
+              <label class="check"><input type="checkbox"> Successive percentage</label>
+              <label class="check"><input type="checkbox"> Percentage change</label>
+              <label class="check"><input type="checkbox"> Application questions</label>
+            </div>
+            <div class="subtle" style="margin:10px 0 6px;">Connect with</div>
+            <div class="check-list">
+              <label class="check"><input type="checkbox"> Profit Loss</label>
+              <label class="check"><input type="checkbox"> Discount</label>
+              <label class="check"><input type="checkbox"> SI CI</label>
+              <label class="check"><input type="checkbox"> DI basics</label>
+            </div>
+            <table class="mini-table" style="margin-top:12px;">
+              <tr><th>Formula revision tracker</th><td>3 of 7 formula groups revised</td></tr>
+              <tr><th>Questions solved</th><td>134</td></tr>
+              <tr><th>Accuracy</th><td>73%</td></tr>
+              <tr><th>Next revision</th><td>10 Jul 2026</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="footer-note">The official quantitative syllabus covers number systems, percentages, ratio-proportion, averages, interest, profit-loss, discount, time and work, time and distance, algebra, geometry, mensuration, trigonometry, and basic charts. [page:1]</div>
+      </div>
+    </div>
+
+    <div class="section grid-2">
+      <div class="card">
+        <div class="card-header">
+          <h2>4. English Daily Tracker</h2>
+          <p>Daily 30 to 40 minute maintenance block focused on vocabulary, grammar accuracy, and reading stamina.</p>
+        </div>
+        <div class="card-body stack">
+          <div class="grid-3">
+            <div class="topic-block">
+              <h4>Vocabulary</h4>
+              <div class="check-list">
+                <label class="check"><input type="checkbox" checked> Previous year words</label>
+                <label class="check"><input type="checkbox"> Synonyms</label>
+                <label class="check"><input type="checkbox"> Antonyms</label>
+                <label class="check"><input type="checkbox"> Idioms</label>
+                <label class="check"><input type="checkbox"> One word substitution</label>
+              </div>
+            </div>
+            <div class="topic-block">
+              <h4>Grammar</h4>
+              <div class="check-list">
+                <label class="check"><input type="checkbox" checked> Error detection</label>
+                <label class="check"><input type="checkbox"> Sentence improvement</label>
+                <label class="check"><input type="checkbox"> Fill blanks</label>
+                <label class="check"><input type="checkbox"> Active passive</label>
+                <label class="check"><input type="checkbox"> Narration</label>
+              </div>
+            </div>
+            <div class="topic-block">
+              <h4>Reading</h4>
+              <div class="check-list">
+                <label class="check"><input type="checkbox"> Cloze test</label>
+                <label class="check"><input type="checkbox"> Comprehension</label>
+              </div>
+            </div>
+          </div>
+          <table class="mini-table">
+            <thead><tr><th>Daily record</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>New words learned</td><td>14</td></tr>
+              <tr><td>Grammar rules revised</td><td>Tense consistency, subject-verb agreement</td></tr>
+              <tr><td>Questions solved</td><td>26</td></tr>
+              <tr><td>Accuracy</td><td>85%</td></tr>
+            </tbody>
+          </table>
+          <div class="footer-note">Official English includes vocabulary, grammar, sentence structure, spot the error, fill in the blanks, synonyms, antonyms, idioms, one-word substitution, sentence improvement, active/passive, narration, shuffling, cloze passage, and comprehension passage. [page:1]</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>5. General Awareness - Science Tracker</h2>
+          <p>Science-focused GA structure with NCERT concept, PYQ reinforcement, revision, and MCQ practice tracking.</p>
+        </div>
+        <div class="card-body stack">
+          <div class="grid-3">
+            <div class="topic-block">
+              <h4>Physics</h4>
+              <div class="check-list">
+                <label class="check"><input type="checkbox"> Units</label>
+                <label class="check"><input type="checkbox" checked> Motion</label>
+                <label class="check"><input type="checkbox"> Force</label>
+                <label class="check"><input type="checkbox"> Energy</label>
+                <label class="check"><input type="checkbox"> Electricity</label>
+                <label class="check"><input type="checkbox"> Magnetism</label>
+                <label class="check"><input type="checkbox"> Light</label>
+                <label class="check"><input type="checkbox"> Sound</label>
+              </div>
+            </div>
+            <div class="topic-block">
+              <h4>Chemistry</h4>
+              <div class="check-list">
+                <label class="check"><input type="checkbox"> Atom</label>
+                <label class="check"><input type="checkbox"> Elements</label>
+                <label class="check"><input type="checkbox"> Periodic table</label>
+                <label class="check"><input type="checkbox"> Chemical reactions</label>
+                <label class="check"><input type="checkbox"> Acid base salt</label>
+                <label class="check"><input type="checkbox"> Metals non-metals</label>
+              </div>
+            </div>
+            <div class="topic-block">
+              <h4>Biology</h4>
+              <div class="check-list">
+                <label class="check"><input type="checkbox"> Cell</label>
+                <label class="check"><input type="checkbox"> Human body</label>
+                <label class="check"><input type="checkbox"> Disease</label>
+                <label class="check"><input type="checkbox"> Vitamins</label>
+                <label class="check"><input type="checkbox"> Plants</label>
+                <label class="check"><input type="checkbox"> Environment</label>
+              </div>
+            </div>
+          </div>
+          <table class="mini-table">
+            <thead><tr><th>Track</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>NCERT concept</td><td>Physics basics started, Chemistry pending, Biology pending</td></tr>
+              <tr><td>SSC PYQ</td><td>Motion, force, human body partially covered</td></tr>
+              <tr><td>Revision</td><td>1-day revision active for science facts</td></tr>
+              <tr><td>MCQ practice</td><td>22 today, 140 total science PYQs solved</td></tr>
+            </tbody>
+          </table>
+          <div class="footer-note">Official GA tests current events plus India, neighboring countries, history, culture, geography, economy, general policy, and scientific research. [page:1]</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section grid-2">
+      <div class="card">
+        <div class="card-header">
+          <h2>6. SSC CGL Tier 1 Exam Tracking</h2>
+          <p>Section-wise preparation view for the qualifying Tier 1 paper.</p>
+        </div>
+        <div class="card-body stack">
+          <table>
+            <thead>
+              <tr><th>Section</th><th>Questions</th><th>Marks</th><th>Concept %</th><th>PYQ %</th><th>Accuracy %</th><th>Revision count</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Reasoning</td><td>25</td><td>50</td><td>58%</td><td>46%</td><td>78%</td><td>3</td></tr>
+              <tr><td>Quant</td><td>25</td><td>50</td><td>49%</td><td>41%</td><td>71%</td><td>4</td></tr>
+              <tr><td>English</td><td>25</td><td>50</td><td>63%</td><td>52%</td><td>85%</td><td>3</td></tr>
+              <tr><td>GA</td><td>25</td><td>50</td><td>37%</td><td>44%</td><td>66%</td><td>5</td></tr>
+            </tbody>
+          </table>
+          <div class="footer-note">Tier 1 has 100 MCQs for 200 marks with 0.50 negative marking per wrong answer and remains qualifying in nature. [page:1][page:2]</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>7. SSC CGL Tier 2 Tracking Connection</h2>
+          <p>Link present study with future Paper I demands so foundation work is not wasted.</p>
+        </div>
+        <div class="card-body stack">
+          <table class="mini-table">
+            <thead><tr><th>Area</th><th>Tier 2 connection</th></tr></thead>
+            <tbody>
+              <tr><td>Quant Tier 2</td><td>Advanced practice needed; Tier 1 arithmetic must become high-speed and low-error first. Tier 2 Paper I includes Mathematical Abilities as a full scored module. [page:1]</td></tr>
+              <tr><td>Reasoning</td><td>Helps Tier 1 heavily; reasoning and general intelligence also remain part of Tier 2 Paper I Section I. [page:1]</td></tr>
+              <tr><td>English Tier 2</td><td>Needs stronger grammar, vocabulary, and passage work because English has the highest share in Paper I. [page:1]</td></tr>
+              <tr><td>GA</td><td>Needs more depth, better retention, and current-affairs linkage because GA remains a scored Tier 2 module. [page:1]</td></tr>
+            </tbody>
+          </table>
+          <div class="check-list">
+            <label class="check"><input type="checkbox" checked> Tier 1 foundation</label>
+            <label class="check"><input type="checkbox"> Tier 1 PYQ mastery</label>
+            <label class="check"><input type="checkbox"> Tier 1 mock phase</label>
+            <label class="check"><input type="checkbox"> Tier 2 advanced preparation</label>
+          </div>
+          <div class="footer-note">Current official Tier 2 Paper I has scored modules for Mathematical Abilities, Reasoning and General Intelligence, English Language and Comprehension, General Awareness, plus a mandatory qualifying Computer Knowledge module and DEST. [page:1]</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section grid-2">
+      <div class="card">
+        <div class="card-header">
+          <h2>8. Mistake Analysis System</h2>
+          <p>Track recurring failure reasons so revision targets the actual problem, not just the topic name.</p>
+        </div>
+        <div class="card-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Topic</th>
+                <th>Question Type</th>
+                <th>Mistake Reason</th>
+                <th>Solution</th>
+                <th>Revision date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>09 Jul 2026</td>
+                <td>Quant</td>
+                <td>Simplification</td>
+                <td>Fraction based BODMAS</td>
+                <td>Calculation mistake, Time issue</td>
+                <td>Redo 25 medium questions with timer and fraction simplification sheet</td>
+                <td>10 Jul 2026</td>
+              </tr>
+              <tr>
+                <td>08 Jul 2026</td>
+                <td>GA</td>
+                <td>Motion</td>
+                <td>Concept MCQ</td>
+                <td>Concept mistake</td>
+                <td>Re-read NCERT summary and solve 15 PYQs</td>
+                <td>09 Jul 2026</td>
+              </tr>
+              <tr>
+                <td>07 Jul 2026</td>
+                <td>English</td>
+                <td>Error detection</td>
+                <td>Tense</td>
+                <td>Silly mistake</td>
+                <td>Mark tense triggers and revise grammar rules</td>
+                <td>14 Jul 2026</td>
+              </tr>
+              <tr>
+                <td>07 Jul 2026</td>
+                <td>Quant</td>
+                <td>Percentage</td>
+                <td>Successive percentage</td>
+                <td>Forgot formula</td>
+                <td>Revise shortcut card before practice</td>
+                <td>14 Jul 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>9. Revision System</h2>
+          <p>Simple 1-day, 7-day, and 30-day revision cycle for working-person sustainability.</p>
+        </div>
+        <div class="card-body stack">
+          <div class="badge">First revision: After 1 day</div>
+          <div class="badge">Second revision: After 7 days</div>
+          <div class="badge">Third revision: After 30 days</div>
+          <table>
+            <thead><tr><th>Topic</th><th>Last studied date</th><th>Next revision date</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Analogy</td><td>09 Jul 2026</td><td>10 Jul 2026</td><td class="mid">1-day revision due</td></tr>
+              <tr><td>Simplification</td><td>09 Jul 2026</td><td>10 Jul 2026</td><td class="mid">1-day revision due</td></tr>
+              <tr><td>Motion</td><td>08 Jul 2026</td><td>15 Jul 2026</td><td class="strong">7-day revision scheduled</td></tr>
+              <tr><td>Vocabulary list 1</td><td>01 Jul 2026</td><td>31 Jul 2026</td><td class="strong">30-day revision scheduled</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="section card">
+      <div class="card-header">
+        <h2>10. Dashboard Summary</h2>
+        <p>Execution-focused summary for hours, questions, accuracy, strengths, weaknesses, and pending areas.</p>
+      </div>
+      <div class="card-body stack">
+        <div class="grid-3">
+          <div class="topic-block">
+            <h4>Performance summary</h4>
+            <table class="mini-table">
+              <tr><th>Total study hours</th><td>168</td></tr>
+              <tr><th>Total questions solved</th><td>4,280</td></tr>
+              <tr><th>Overall accuracy</th><td>74%</td></tr>
+              <tr><th>Strong topics</th><td>Analogy, Error detection, Vocabulary basics</td></tr>
+              <tr><th>Weak topics</th><td>Simplification speed, Motion facts, Series patterns</td></tr>
+              <tr><th>Pending topics</th><td>11 high-priority, 19 medium-priority</td></tr>
+            </table>
+          </div>
+          <div class="topic-block">
+            <h4>Subject progress</h4>
+            <div class="label-row"><span>Reasoning</span><span>58%</span></div>
+            <div class="progress"><span style="width:58%"></span></div>
+            <div class="label-row" style="margin-top:10px;"><span>Quant</span><span>49%</span></div>
+            <div class="progress amber"><span style="width:49%"></span></div>
+            <div class="label-row" style="margin-top:10px;"><span>English</span><span>63%</span></div>
+            <div class="progress green"><span style="width:63%"></span></div>
+            <div class="label-row" style="margin-top:10px;"><span>GA</span><span>37%</span></div>
+            <div class="progress red"><span style="width:37%"></span></div>
+          </div>
+          <div class="topic-block">
+            <h4>Preparation logic</h4>
+            <div class="check-list">
+              <label class="check"><input type="checkbox" checked> Build concepts topic-wise</label>
+              <label class="check"><input type="checkbox" checked> Start PYQs from Day 1</label>
+              <label class="check"><input type="checkbox" checked> Delay full mocks in early phase</label>
+              <label class="check"><input type="checkbox"> Begin section tests after core arithmetic + reasoning basics</label>
+              <label class="check"><input type="checkbox"> Shift into mock phase after PYQ accuracy stabilizes</label>
+            </div>
+          </div>
+        </div>
+        <div class="footer-note">The latest official scheme shows two computer-based tiers, Tier 1 with four equal sections and Tier 2 Paper I compulsory for all posts, while Paper II is only for JSO/Statistical Investigator applicants. [page:1]</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

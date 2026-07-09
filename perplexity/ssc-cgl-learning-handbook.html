@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSC CGL Learning Handbook</title>
+  <style>
+    :root {
+      --text-xs: 0.78rem;
+      --text-sm: 0.92rem;
+      --text-base: 1rem;
+      --text-lg: 1.18rem;
+      --text-xl: 1.55rem;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --radius-sm: 0.4rem;
+      --radius-md: 0.65rem;
+      --radius-lg: 0.9rem;
+      --bg: #121314;
+      --surface: #191b1d;
+      --surface-2: #212428;
+      --surface-3: #292d31;
+      --border: #343a40;
+      --text: #e8ecef;
+      --muted: #aab4bd;
+      --faint: #7e8790;
+      --accent: #4aa3a2;
+      --accent-2: #3b6fb6;
+      --warn: #d9a441;
+      --danger: #d86c6c;
+      --shadow: 0 10px 30px rgba(0,0,0,.28);
+      --sidebar-w: 340px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; scroll-behavior: smooth; }
+    body {
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: var(--text-base);
+      line-height: 1.62;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; color: inherit; }
+    button { cursor: pointer; border: 0; background: none; }
+    ::selection { background: rgba(74,163,162,.35); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+    .app {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      height: 100vh;
+    }
+    .sidebar {
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: linear-gradient(180deg, #17191b, #141618 35%, #121314);
+      padding: var(--space-6);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(74,163,162,.28), rgba(59,111,182,.28));
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      border: 1px solid rgba(255,255,255,.08);
+      flex: 0 0 auto;
+    }
+    .brand h1 { font-size: var(--text-lg); line-height: 1.15; }
+    .brand p { color: var(--muted); font-size: var(--text-xs); margin-top: 0.15rem; }
+    .sidebar-tools {
+      display: grid;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+    .search-wrap, .meta-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+    .search-wrap { padding: var(--space-3) var(--space-4); }
+    .search-wrap input {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      outline: 0;
+    }
+    .meta-card { padding: var(--space-4); display: grid; gap: var(--space-3); }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: var(--space-3);
+    }
+    .meta-pill {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+    }
+    .meta-pill strong { display: block; font-size: var(--text-sm); }
+    .meta-pill span { color: var(--muted); font-size: var(--text-xs); }
+    .jump-list { display: grid; gap: .45rem; }
+    .jump-btn {
+      width: 100%;
+      text-align: left;
+      padding: .7rem .8rem;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid transparent;
+      color: var(--muted);
+    }
+    .jump-btn:hover, .jump-btn.active {
+      background: rgba(74,163,162,.12);
+      color: var(--text);
+      border-color: rgba(74,163,162,.3);
+    }
+    .chapter-block { margin-top: var(--space-6); }
+    .chapter-block h2 {
+      font-size: var(--text-sm);
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-3);
+    }
+    .nav-list { display: grid; gap: .45rem; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      width: 100%;
+      padding: .75rem .85rem;
+      border-radius: var(--radius-md);
+      text-align: left;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid transparent;
+    }
+    .nav-item:hover, .nav-item.active {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .nav-item .tag {
+      font-size: .72rem;
+      color: var(--faint);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: .18rem .45rem;
+    }
+    .content {
+      overflow-y: auto;
+      padding: var(--space-6) var(--space-8) var(--space-10);
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(180deg, rgba(18,19,20,.95), rgba(18,19,20,.82) 75%, rgba(18,19,20,0));
+      backdrop-filter: blur(6px);
+      padding-bottom: var(--space-5);
+      margin-bottom: var(--space-2);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr .95fr;
+      gap: var(--space-6);
+      align-items: start;
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: var(--space-5);
+    }
+    .hero h2 { font-size: var(--text-xl); line-height: 1.18; margin-bottom: var(--space-3); }
+    .hero p, .panel p { color: var(--muted); }
+    .hero-points { display: grid; gap: .6rem; margin-top: var(--space-4); }
+    .hero-points li { list-style: none; padding-left: 1.1rem; position: relative; color: var(--text); }
+    .hero-points li::before { content: "•"; position: absolute; left: 0; color: var(--accent); }
+    .badge-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: var(--space-3); }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .28rem .62rem;
+      border-radius: 999px;
+      font-size: .77rem;
+      border: 1px solid rgba(74,163,162,.28);
+      background: rgba(74,163,162,.1);
+      color: #b9e2e1;
+    }
+    .stats { display: grid; gap: var(--space-3); }
+    .stat {
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+    .stat strong { display:block; margin-bottom: .25rem; }
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: var(--space-4);
+      margin: var(--space-6) 0;
+    }
+    .toc a {
+      display: block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+    }
+    .toc a:hover { border-color: rgba(74,163,162,.4); background: rgba(74,163,162,.08); }
+    .toc strong { display:block; margin-bottom: .4rem; }
+    .toc span { color: var(--muted); font-size: var(--text-sm); }
+    .subject {
+      margin-top: var(--space-8);
+      padding-top: var(--space-4);
+    }
+    .subject-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+    .subject-title h2 { font-size: 1.45rem; margin-bottom: .35rem; }
+    .subject-title p { color: var(--muted); max-width: 90ch; }
+    .section-note {
+      color: #d5dbc2;
+      background: rgba(217,164,65,.08);
+      border: 1px solid rgba(217,164,65,.28);
+      padding: .85rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-4);
+    }
+    details.chapter {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-4);
+      overflow: hidden;
+    }
+    details.chapter[open] { border-color: rgba(74,163,162,.34); }
+    summary.chapter-head {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: var(--space-4);
+      align-items: center;
+      padding: 1rem 1.1rem;
+      cursor: pointer;
+      user-select: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.015), rgba(255,255,255,0));
+    }
+    summary.chapter-head::-webkit-details-marker { display:none; }
+    .chapter-title strong { display:block; font-size: 1.03rem; }
+    .chapter-title span { color: var(--muted); font-size: var(--text-sm); }
+    .chapter-actions { display:flex; align-items:center; gap:.55rem; }
+    .tiny-btn {
+      padding: .45rem .7rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--muted);
+      font-size: .78rem;
+    }
+    .tiny-btn:hover, .tiny-btn.saved {
+      color: var(--text);
+      border-color: rgba(74,163,162,.35);
+      background: rgba(74,163,162,.12);
+    }
+    .caret {
+      color: var(--faint);
+      font-size: .9rem;
+      transition: transform .16s ease;
+    }
+    details[open] .caret { transform: rotate(90deg); }
+    .chapter-body {
+      padding: 0 1.1rem 1.1rem;
+      border-top: 1px solid var(--border);
+      display: grid;
+      gap: var(--space-4);
+    }
+    .grid-2 { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--space-4); }
+    .card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+    .card h4 {
+      font-size: var(--text-sm);
+      color: #dce4ea;
+      margin-bottom: .55rem;
+      letter-spacing: .02em;
+    }
+    .card p { color: var(--muted); }
+    .card ul { margin-left: 1.1rem; color: var(--text); }
+    .card li { margin: .32rem 0; }
+    .formula {
+      display:block;
+      font-family: "Consolas", "SFMono-Regular", monospace;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      padding: .7rem .8rem;
+      border-radius: .6rem;
+      margin-top: .55rem;
+      color: #d9f0ef;
+      white-space: pre-wrap;
+    }
+    .method { border-left: 3px solid rgba(74,163,162,.7); }
+    .warn { border-left: 3px solid rgba(217,164,65,.8); }
+    .danger { border-left: 3px solid rgba(216,108,108,.8); }
+    .chapter-footer {
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: var(--space-4);
+      color: var(--faint);
+      font-size: .8rem;
+      padding-top: .2rem;
+    }
+    .hidden { display:none !important; }
+    .empty-search {
+      margin-top: var(--space-6);
+      padding: var(--space-5);
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-lg);
+      color: var(--muted);
+    }
+    .bookmark-count { color: #b9e2e1; }
+    .subsection-title {
+      font-size: var(--text-sm);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-top: .15rem;
+      margin-bottom: -.2rem;
+    }
+    .quick-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .92rem;
+      background: var(--surface-2);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .quick-table th, .quick-table td {
+      border: 1px solid var(--border);
+      padding: .72rem .78rem;
+      vertical-align: top;
+      text-align: left;
+    }
+    .quick-table th { color: var(--text); background: rgba(255,255,255,.02); }
+    .quick-table td { color: var(--muted); }
+    .mono { font-variant-numeric: tabular-nums; font-family: Consolas, monospace; }
+    .footer-space { height: var(--space-8); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-label="SSC logo">
+            <path d="M5 6h14M5 12h10M5 18h14"></path>
+            <path d="M17 9l2 3-2 3"></path>
+          </svg>
+        </div>
+        <div>
+          <h1>SSC CGL Handbook</h1>
+          <p>Offline theory dashboard for Tier 1 + Tier 2</p>
+        </div>
+      </div>
+
+      <div class="sidebar-tools">
+        <div class="search-wrap">
+          <input id="searchInput" type="search" placeholder="Search chapter, formula, trick, rule..." aria-label="Search topics" />
+        </div>
+        <div class="meta-card">
+          <div class="meta-grid">
+            <div class="meta-pill"><strong id="topicCount">0 topics</strong><span>Total chapters</span></div>
+            <div class="meta-pill"><strong id="bookmarkCount" class="bookmark-count">0 saved</strong><span>Bookmarks</span></div>
+          </div>
+          <div>
+            <div class="subsection-title">Quick jump</div>
+            <div class="jump-list">
+              <button class="jump-btn" data-jump="#reasoning">Reasoning</button>
+              <button class="jump-btn" data-jump="#quant">Quantitative Aptitude</button>
+              <button class="jump-btn" data-jump="#english">English</button>
+              <button class="jump-btn" data-jump="#ga">General Awareness</button>
+              <button class="jump-btn" id="showBookmarks">Saved topics only</button>
+              <button class="jump-btn" id="showAllTopics">Show all topics</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-block">
+        <h2>Navigation</h2>
+        <div id="navList" class="nav-list"></div>
+      </div>
+    </aside>
+
+    <main class="content" id="mainContent">
+      <div class="topbar">
+        <section class="hero">
+          <div class="panel">
+            <div class="badge-row">
+              <span class="badge">Concept-first</span>
+              <span class="badge">Fast revision</span>
+              <span class="badge">Exam-oriented</span>
+            </div>
+            <h2>Complete SSC CGL theory notes in one file.</h2>
+            <p>This is a handbook, not a tracker and not a question bank. The structure is built for brutal exam efficiency: learn the pattern, know the method, memorize the rule, avoid the trap, and revise fast.</p>
+            <ul class="hero-points">
+              <li>Every chapter contains concept, method, shortcuts, common mistakes, Tier 1 vs Tier 2 angle, and revision notes.</li>
+              <li>Search any keyword instantly and jump straight to the topic.</li>
+              <li>Bookmark high-value topics; the file remembers saved items and last opened topic.</li>
+            </ul>
+          </div>
+          <div class="panel stats">
+            <div class="stat"><strong>How to use</strong><p>Read one chapter completely once. Then revisit only “methods”, “mistakes”, “memorize”, and “Tier approach” sections during revision.</p></div>
+            <div class="stat"><strong>Reality check</strong><p>SSC is not cracked by reading theory endlessly. It is cracked when theory is compressed into recognizable patterns and reusable methods.</p></div>
+            <div class="stat"><strong>Daily flow</strong><p><span class="mono">30–40 min:</span> 15 min rule revision, 10 min formula/memory drill, 10–15 min one weak chapter.</p></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="toc">
+        <a href="#reasoning"><strong>Reasoning</strong><span>Logic patterns, verbal and non-verbal chapters, arrangement methods, figure logic.</span></a>
+        <a href="#quant"><strong>Quantitative Aptitude</strong><span>Arithmetic + advanced maths, formulas, usage, calculation speed methods.</span></a>
+        <a href="#english"><strong>English</strong><span>Grammar rules, repeated SSC errors, vocabulary memory, daily study style.</span></a>
+        <a href="#ga"><strong>General Awareness</strong><span>Science, history, geography, polity, economy, memory-first fact sheets.</span></a>
+      </section>
+
+      <section class="subject" id="reasoning">
+        <div class="subject-header">
+          <div class="subject-title">
+            <h2>Subject 1: Reasoning</h2>
+            <p>Reasoning is not “IQ.” It is pattern filtering under time pressure. The winning habit is to identify the question family within 3–5 seconds and apply the standard solution route without emotional guessing.</p>
+          </div>
+        </div>
+        <div class="section-note">Tier 1 demands speed and fast elimination. Tier 2 usually pushes more layered conditions, tighter distractors, and slightly longer logical chains.</div>
+
+        <details class="chapter" id="reasoning-analogy" data-subject="Reasoning" open>
+          <summary class="chapter-head">
+            <div class="chapter-title"><strong>Analogy</strong><span>Relationship matching between words, numbers, letters, or figures.</span></div>
+            <div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-analogy">☆ Save</button></div>
+            <span class="caret">▶</span>
+          </summary>
+          <div class="chapter-body">
+            <div class="grid-2">
+              <div class="card"><h4>Basic explanation</h4><p>An analogy asks: what exact relation connects the first pair, and which option repeats the same relation? If you don’t define the relation in one line, you are just guessing.</p></div>
+              <div class="card method"><h4>Identification method</h4><ul><li>Check type first: meaning, classification, cause-effect, part-whole, tool-work, degree, number operation, letter gap.</li><li>Never look at options before stating the relation in words.</li><li>If 2+ relations seem possible, choose the most precise one.</li></ul></div>
+              <div class="card"><h4>SSC patterns</h4><ul><li>Word analogy: country-capital, animal-young one, object-material, profession-tool.</li><li>Number analogy: square/cube, prime jumps, digit sum, multiplication plus/minus constant.</li><li>Alphabet analogy: positional difference, reverse alphabet, pair symmetry.</li></ul></div>
+              <div class="card warn"><h4>Shortcut and topper trick</h4><p>In number analogy, first test the quickest families: square/cube, prime, digit sum, product, ratio, difference. In alphabet analogy, write positions only when mental mapping fails.</p></div>
+              <div class="card"><h4>Step-by-step solving</h4><ul><li>Convert the first pair into a rule.</li><li>Classify rule as semantic, arithmetic, or positional.</li><li>Apply same rule to third term.</li><li>Reject options that fit partially but not exactly.</li></ul></div>
+              <div class="card danger"><h4>Common mistakes</h4><ul><li>Choosing broad relation instead of exact relation.</li><li>Ignoring order; A:B may not equal B:A.</li><li>Using forced logic after seeing options.</li></ul></div>
+            </div>
+            <div class="card"><h4>Tier 1 vs Tier 2</h4><p>Tier 1 keeps the relation more visible. Tier 2 may mix double relations, e.g. category plus degree, or number operation plus constant. PYQ trend: analogy remains a stable scoring area because pattern families repeat heavily.</p></div>
+            <div class="chapter-footer"><span>Revision note: define the relation in six words or fewer.</span><span>Rule > option temptation.</span></div>
+          </div>
+        </details>
+
+        <details class="chapter" id="reasoning-classification" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Classification / Odd One Out</strong><span>Three follow one rule; one breaks it.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-classification">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Core idea</h4><p>Odd one out is reverse analogy. Find the common property of most options and spot the intruder.</p></div><div class="card method"><h4>Fast approach</h4><ul><li>Look for category first, then sub-category, then property.</li><li>In numbers, test parity, prime/composite, perfect square, divisibility, digit sum.</li><li>In letters, check same gap pattern.</li></ul></div><div class="card"><h4>SSC repeated types</h4><ul><li>Animal-bird-fish mixes.</li><li>State-capital or ministry-person mismatch.</li><li>One number breaking common arithmetic property.</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Students often pick a weird-looking option instead of proving the common rule among the other three.</p></div></div><div class="card"><h4>Tier angle</h4><p>Tier 1 uses direct families. Tier 2 may require a second-level filter, like all are metals but one is alloy, or all are squares of primes except one.</p></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-number-series" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Number Series</strong><span>Missing term or wrong term through numerical pattern.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-number-series">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Zero to basic</h4><p>A series is solved by checking the simplest consistent pattern first. Most losses happen because students jump to fancy logic before testing basic operations.</p></div><div class="card method"><h4>Order of checking</h4><ul><li>Difference</li><li>Second difference</li><li>Ratio/division</li><li>Alternate terms</li><li>Square/cube/primes/Fibonacci-style additions</li><li>Digit operations</li></ul></div><div class="card"><h4>SSC patterns</h4><ul><li>Alternating + and - with growing constants.</li><li>Multiply then add/subtract.</li><li>Prime number movement.</li><li>Square-based terms: 4, 9, 16 with offsets.</li></ul></div><div class="card warn"><h4>Topper trick</h4><p>Write the gap row once. If gaps don’t talk, split into odd-even positions immediately. That single habit saves stupid time.</p></div><div class="card"><h4>Example</h4><p>3, 8, 15, 24, ? → gaps are 5, 7, 9, so next gap 11; answer 35.</p></div><div class="card danger"><h4>Common trap</h4><p>Forcing one rule on the entire series when the actual pattern is alternate terms.</p></div></div><div class="card"><h4>Tier 1 vs Tier 2</h4><p>Tier 1 is usually one-step recognizable. Tier 2 can chain two operations or use wrong-number detection requiring back-checking on both sides.</p></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-alphabet-series" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Alphabet Series</strong><span>Letter positions, gaps, reverse order, skipping patterns.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-alphabet-series">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Must memorize</h4><p>Know A=1 to Z=26 cold. Also know reverse positions: A=26, B=25... That is non-negotiable.</p></div><div class="card method"><h4>Solving route</h4><ul><li>Convert letters to positions only when needed.</li><li>Check constant gap, alternating gap, reverse movement, pair symmetry.</li><li>For mixed letters and numbers, separate both tracks.</li></ul></div><div class="card"><h4>Important rules</h4><ul><li>Opposite letters sum to 27: A+Z, B+Y, C+X.</li><li>Middle letters: M=13, N=14.</li><li>Vowel positions worth memorizing: A 1, E 5, I 9, O 15, U 21.</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Wrong numbering, ignoring reverse sequence, and missing alternate-term patterns.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-coding" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Coding-Decoding</strong><span>Old pattern coding, matrix coding, letter/word transformation.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-coding">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Basic explanation</h4><p>Coding means original data is transformed through a rule. Your job is to detect the rule family before testing the option.</p></div><div class="card method"><h4>Main types</h4><ul><li>Letter shift coding.</li><li>Word substitution coding.</li><li>Number coding by letter positions.</li><li>New pattern coding with symbols.</li><li>Matrix or language coding from given statements.</li></ul></div><div class="card"><h4>Identification trick</h4><ul><li>Compare first and last letters.</li><li>Check length change.</li><li>See whether coding is direct, reversed, alternate, or grouped.</li><li>For statement-based coding, mark common word/common code pairs first.</li></ul></div><div class="card warn"><h4>SSC topper trick</h4><p>In language coding, start from the pair of statements that shares exactly one common word. That isolates one code fast.</p></div><div class="card danger"><h4>Common mistakes</h4><ul><li>Using one decoded relation globally without verifying all positions.</li><li>Ignoring repeated letters and order.</li><li>Confusing direct code with word-position code.</li></ul></div></div><div class="card"><h4>Tier angle</h4><p>Tier 1 asks direct coding. Tier 2 prefers statement-based or multi-step transforms. PYQ trend: language coding and matrix coding reward calm deduction, not speed panic.</p></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-blood-relation" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Blood Relation</strong><span>Family tree logic, generation, gender, and relation tracing.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-blood-relation">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Basic</h4><p>Blood relation is just structured family mapping. Confusion starts only when you try to do it in your head without a rough tree.</p></div><div class="card method"><h4>Step method</h4><ul><li>Take central person as reference.</li><li>Mark generation levels vertically.</li><li>Use symbols: M/F, up for parents, down for children, same line for siblings/spouse.</li><li>Resolve pronouns carefully.</li></ul></div><div class="card"><h4>Repeated SSC patterns</h4><ul><li>Pointing/family introduction questions.</li><li>Coded relation symbols.</li><li>Mixed statements with ‘only son’, ‘maternal’, ‘paternal’.</li></ul></div><div class="card warn"><h4>Shortcut</h4><p>Ignore names. Track only relation labels and gender certainty. Names are noise.</p></div><div class="card danger"><h4>Mistakes</h4><ul><li>Assuming gender where not given.</li><li>Confusing maternal and paternal sides.</li><li>Forgetting reference person changes in the last statement.</li></ul></div></div><div class="card"><h4>Tier difference</h4><p>Tier 1 is shorter and mostly direct. Tier 2 may combine coded relations or layered family chains. Previous questions repeat the same family-tree skeletons with different wording.</p></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-direction" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Direction & Distance</strong><span>Movement, turning, coordinates, final direction and shortest distance.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-direction">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Core idea</h4><p>Treat movement as coordinate changes. North-south is vertical, east-west is horizontal. Stop imagining roads dramatically; draw a clean path.</p></div><div class="card method"><h4>Standard solving approach</h4><ul><li>Assume start at origin.</li><li>Turn right/left based on current facing, not fixed north.</li><li>Compute final coordinates.</li><li>Shortest distance = straight-line distance; for perpendicular legs use Pythagoras.</li></ul><span class="formula">Distance = √(x² + y²)</span></div><div class="card"><h4>SSC patterns</h4><ul><li>Simple turns and facing.</li><li>Distance after multiple moves.</li><li>How far and in which direction from start.</li><li>Shadow-based direction with time of day.</li></ul></div><div class="card danger"><h4>Common mistakes</h4><p>Turning according to map north instead of current facing direction, and mixing total path length with shortest distance.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-ranking" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Order & Ranking</strong><span>Position from top/bottom, left/right, middle and total count.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-ranking">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Basic formula logic</h4><p>If one rank from top and one from bottom are known for the same person, total people = top rank + bottom rank - 1.</p><span class="formula">Total = Rank from top + Rank from bottom - 1</span></div><div class="card method"><h4>How to solve</h4><ul><li>Write positions linearly.</li><li>Watch whether the row/queue direction is left-right or front-back.</li><li>Middle position exists only when total count is odd.</li></ul></div><div class="card"><h4>SSC traps</h4><ul><li>Interchanging left and right after turning.</li><li>Using formula for two different people.</li><li>Missing that the row has been rearranged.</li></ul></div><div class="card warn"><h4>Tier approach</h4><p>Tier 1 direct formula. Tier 2 may combine ranking with arrangement or coded order.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-sitting" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Sitting Arrangement</strong><span>Linear, circular, facing in/out, variable constraints.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-sitting">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Truth</h4><p>This chapter destroys time because students don’t structure information. One clean diagram beats rereading clues five times.</p></div><div class="card method"><h4>Solving order</h4><ul><li>Choose framework: line or circle.</li><li>Place absolute positions first.</li><li>Then fixed relations: immediate left/right, second to left, opposite.</li><li>Then negative clues: not next to, not at end, not facing.</li><li>Test remaining options systematically.</li></ul></div><div class="card"><h4>Facing rule</h4><ul><li>Facing center: left is clockwise, right is anticlockwise.</li><li>Facing outside: left is anticlockwise, right is clockwise.</li></ul></div><div class="card warn"><h4>Shortcut</h4><p>For circular arrangement, fix one person at top to remove rotational duplicates unless orientation is tied to a real direction.</p></div><div class="card danger"><h4>Mistakes</h4><ul><li>Changing facing rule midway.</li><li>Not marking uncertain placements separately.</li><li>Trying to mentally solve without a structured grid.</li></ul></div></div><div class="card"><h4>Tier difference</h4><p>Tier 1 uses fewer clues. Tier 2 can combine professions/colors/people. Previous SSC arrangements are usually moderate, not CAT-level monsters, so overcomplicating is stupidity.</p></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-syllogism" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Syllogism</strong><span>All/Some/No relations between sets.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-syllogism">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Basic explanation</h4><p>Syllogism is set logic. Ignore English sentence feel; translate statements into set relations.</p></div><div class="card method"><h4>Core rules</h4><ul><li>All A are B → A lies fully inside B.</li><li>No A is B → no overlap.</li><li>Some A are B → at least one overlap.</li><li>Some A are not B → at least one outside.</li></ul></div><div class="card"><h4>SSC solving method</h4><ul><li>Draw quick Venn if direct.</li><li>For conclusion checking, accept only guaranteed truth.</li><li>Possibility-based conclusion requires checking whether any case allows it without violating statements.</li></ul></div><div class="card danger"><h4>Common mistakes</h4><ul><li>Treating “some” as “some but not all.”</li><li>Concluding converse: All A are B does not mean all B are A.</li><li>Using real-world knowledge over statement logic.</li></ul></div></div><div class="card"><h4>Tier angle</h4><p>Tier 2 may include possibility cases or more premises. PYQ trend is stable: if your basic set logic is clean, this remains a gift chapter.</p></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-statement-conclusion" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Statement & Conclusion</strong><span>Does the conclusion logically follow from given statements?</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-statement-conclusion">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Simple explanation</h4><p>A conclusion must be logically forced by the statement. If it is merely likely, emotionally appealing, or generally true, reject it.</p></div><div class="card method"><h4>Approach</h4><ul><li>Read only statement facts.</li><li>Ignore external knowledge.</li><li>Check whether the conclusion is definite, probable, or unrelated.</li><li>Extreme words like all, only, always need strict support.</li></ul></div><div class="card warn"><h4>Pattern recognition</h4><p>SSC often traps students with socially sensible conclusions that are not logically guaranteed. Logic does not care about your feelings.</p></div><div class="card danger"><h4>Mistakes</h4><p>Importing assumptions from common sense and confusing cause with correlation.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-statement-assumption" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Statement & Assumption</strong><span>Hidden premise on which the statement depends.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-statement-assumption">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Concept</h4><p>An assumption is an unstated idea taken for granted. If that idea is false, the statement weakens or collapses.</p></div><div class="card method"><h4>Check method</h4><ul><li>Use the “negation test” mentally.</li><li>If negating the assumption makes the statement pointless or weak, the assumption likely holds.</li><li>Advertisements, advice, and policy statements often hide assumptions.</li></ul></div><div class="card"><h4>SSC repeated forms</h4><ul><li>Advice statements.</li><li>Government or company announcements.</li><li>Appeals and recommendations.</li></ul></div><div class="card danger"><h4>Trap</h4><p>Do not confuse supporting fact with necessary assumption. An assumption is required, not merely helpful.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-venn" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Venn Diagram</strong><span>Set overlap in word groups and data relation logic.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-venn">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Basic</h4><p>Venn Diagram questions test category overlap, containment, and separation. Convert words into sets, not stories.</p></div><div class="card method"><h4>Method</h4><ul><li>Identify if groups are disjoint, overlapping, or subset.</li><li>Use minimum-circle structure first.</li><li>For numerical data, fill the central intersection first when all totals are given.</li></ul></div><div class="card"><h4>Repeated SSC patterns</h4><ul><li>Profession-gender-activity groups.</li><li>Sports/club/language overlaps.</li><li>Logical relation among three words.</li></ul></div><div class="card warn"><h4>Shortcut</h4><p>When exact relation is unknown between two groups but both are inside a bigger set, use the safer diagram that preserves both possibilities if options ask only broad relation.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-calendar" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Calendar</strong><span>Odd days, leap year, day-date relation.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-calendar">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Core rules</h4><ul><li>Ordinary year = 365 days = 1 odd day.</li><li>Leap year = 366 days = 2 odd days.</li><li>Leap year if divisible by 4, but century years must be divisible by 400.</li></ul></div><div class="card method"><h4>How to solve</h4><ul><li>Count odd days from a reference point.</li><li>Know month odd days by practice, not by panic.</li><li>For same calendar year, compare leap status and start day.</li></ul></div><div class="card warn"><h4>Memory trick</h4><p>Month days: 30 for Apr, Jun, Sep, Nov; Feb 28 or 29; rest 31. Stop relying on finger tricks if they slow you down.</p></div><div class="card danger"><h4>Mistakes</h4><p>Ignoring leap day impact for January/February vs later months and mishandling century years.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-clock" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Clock</strong><span>Angle, coincidence, opposite positions, time relation.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-clock">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Need-to-know formulas</h4><span class="formula">Angle = |30H - 5.5M|
+Coincidence roughly every 65 5/11 minutes
+Opposite hands when angle = 180°</span></div><div class="card method"><h4>Usage</h4><ul><li>Hour hand moves continuously, not jump-wise.</li><li>Minute hand speed = 6° per minute.</li><li>Hour hand speed = 0.5° per minute.</li></ul></div><div class="card"><h4>Tier approach</h4><p>Tier 1 usually direct angle finding. Tier 2 may ask mirror clock or relative position logic with more conditions.</p></div><div class="card danger"><h4>Common mistakes</h4><p>Using 30H only and forgetting the hour hand moves with minutes too.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-math-ops" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Mathematical Operations</strong><span>Symbol replacement and operator interchanges.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-math-ops">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Basic</h4><p>Operators are replaced by symbols. Your job is to remap symbols correctly before calculating.</p></div><div class="card method"><h4>Solving route</h4><ul><li>Write symbol meaning first.</li><li>Replace entire expression.</li><li>Apply BODMAS normally.</li><li>For options, test quickly by simplification.</li></ul></div><div class="card danger"><h4>Mistake</h4><p>Doing the calculation before remapping completely.</p></div><div class="card warn"><h4>SSC trick</h4><p>In symbol-interchange questions, if one interchange fixes all operator order positions, verify with one side fast and skip full expansion.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-missing-number" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Missing Number</strong><span>Matrix and diagram number logic.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-missing-number">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Pattern families</h4><ul><li>Row/column sum or product.</li><li>Diagonal relation.</li><li>Outer numbers combine to inner number.</li><li>Square or difference relation.</li></ul></div><div class="card method"><h4>Identification</h4><p>Check basic operations in order: +, -, ×, ÷, square, digit sum. Most SSC missing numbers use two-step arithmetic, not magic.</p></div><div class="card"><h4>Example</h4><p>If top row is 2, 3, 11 and pattern is 2×3+5 = 11, verify same logic in the next row before choosing.</p></div><div class="card danger"><h4>Mistake</h4><p>Not cross-checking the guessed rule across all available rows/boxes.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-counting-figures" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Counting Figures</strong><span>Count triangles, squares, rectangles, lines in complex diagrams.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-counting-figures">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Core idea</h4><p>Count systematically by size and orientation. Random visual counting guarantees missed figures.</p></div><div class="card method"><h4>Method</h4><ul><li>Count smallest figures first.</li><li>Then combine adjacent figures to make larger ones.</li><li>Track orientation separately when diagonals exist.</li></ul></div><div class="card warn"><h4>Topper trick</h4><p>Touch-count with a finger or pointer path on screen. Your eyes lie when figures overlap.</p></div><div class="card danger"><h4>Mistakes</h4><p>Double counting same figure or skipping rotated/combined shapes.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-mirror-water" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Mirror Image & Water Image</strong><span>Lateral inversion vs top-bottom inversion.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-mirror-water">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Rule</h4><p>Mirror image reverses left and right. Water image reverses top and bottom. Stop mixing them; that error is embarrassingly common.</p></div><div class="card method"><h4>Approach</h4><ul><li>Look for asymmetrical markers first: arrows, slants, letter openings.</li><li>Use edge-point comparison rather than full figure imagination.</li><li>Remember letters/digits with symmetry: A, H, I, M, O, T, U, V, W, X, Y may reduce effort.</li></ul></div><div class="card danger"><h4>Mistake</h4><p>Rotating mentally instead of reflecting.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-paper-embedded" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Paper Folding, Cutting & Embedded Figures</strong><span>Hidden pattern tracking in folded or complex visual forms.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-paper-embedded">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Paper folding</h4><p>Each fold mirrors cuts onto the folded layers. Unfold in reverse order mentally.</p></div><div class="card method"><h4>Embedded figure method</h4><ul><li>Search the target figure by line-angle pattern, not full shape.</li><li>Ignore extra lines; only required structure matters.</li><li>Focus on unique corners, intersections, and lengths.</li></ul></div><div class="card"><h4>SSC pattern</h4><p>Questions usually use one or two folds, not extreme visual complexity. Calm scanning beats speed panic.</p></div><div class="card danger"><h4>Mistake</h4><p>Expecting exact visual cleanliness in embedded figures; the target may be disguised inside clutter.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-dice-cubes" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Dice / Cubes & Cuboids</strong><span>Opposite faces, painted surfaces, visible faces, counting blocks.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-dice-cubes">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Dice basics</h4><ul><li>Faces seen together are adjacent.</li><li>Faces never seen together in valid views may be opposite.</li><li>Use common-face method for two views.</li></ul></div><div class="card method"><h4>Cubes and cuboids basics</h4><p>For painted cube questions, classify mini-cubes by exposed faces: corner cubes = 3, edge cubes = 2, face-center cubes = 1, inner cubes = 0.</p><span class="formula">If cube is divided into n parts per edge:
+Corner = 8
+Edge = 12(n-2)
+Face center = 6(n-2)²
+Inner = (n-2)³</span></div><div class="card"><h4>Usage</h4><p>Use only when all outer surfaces are painted. If some faces are unpainted, adjust face counts before applying formulas blindly.</p></div><div class="card danger"><h4>Mistakes</h4><p>Applying full-paint formulas to partial-paint problems and confusing opposite with adjacent faces.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="reasoning-figure-nonverbal" data-subject="Reasoning">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Figure Series & Non-verbal Reasoning</strong><span>Shape progression, rotation, counting, shading, symmetry, rule sequence.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="reasoning-figure-nonverbal">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Question types</h4><ul><li>Rotation and reflection.</li><li>Addition/deletion of elements.</li><li>Movement of dots/lines.</li><li>Shading alternation.</li><li>Embedded sequence in complex forms.</li></ul></div><div class="card method"><h4>Pattern recognition framework</h4><ul><li>Observe count change.</li><li>Observe direction change.</li><li>Observe fill/unfill pattern.</li><li>Observe alternate frame logic.</li></ul></div><div class="card warn"><h4>Fast trick</h4><p>For non-verbal series, look at what changes, not what stays same. The static part is noise.</p></div><div class="card danger"><h4>Tier difference</h4><p>Tier 1 mostly direct visuals; Tier 2 may add denser distractors. Still, the logic families repeat more than students admit.</p></div></div></div>
+        </details>
+      </section>
+
+      <section class="subject" id="quant">
+        <div class="subject-header"><div class="subject-title"><h2>Subject 2: Quantitative Aptitude</h2><p>SSC Quant is won by ruthless formula recall plus decision speed. You do not need Olympiad-level genius. You need to know which formula to apply, when to avoid long calculation, and how not to commit basic arithmetic suicide.</p></div></div>
+        <div class="section-note">Tier 1 rewards speed, option logic, simplification, and percentage-based shortcuts. Tier 2 expects stronger algebraic handling, cleaner setup, and fewer calculation errors.</div>
+
+        <details class="chapter" id="quant-simplification" data-subject="Quantitative Aptitude" open>
+          <summary class="chapter-head"><div class="chapter-title"><strong>Simplification</strong><span>BODMAS, fraction-decimal-percent conversion, fast arithmetic reduction.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-simplification">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Concept</h4><p>This chapter is basically controlled arithmetic. If your number sense is weak, you bleed marks everywhere else too.</p></div><div class="card method"><h4>Fast calculation methods</h4><ul><li>Cancel before multiplying.</li><li>Convert mixed fractions to improper form early.</li><li>Use common denominators only when needed.</li><li>Memorize square values up to 30 and cube values up to 20.</li></ul></div><div class="card"><h4>Important values</h4><span class="formula">1/2=50%, 1/3=33.33%, 1/4=25%, 1/5=20%, 1/6=16.67%, 1/8=12.5%, 1/9=11.11%, 1/11=9.09%</span></div><div class="card warn"><h4>SSC trick</h4><p>Approximation is useful only if options are wide enough. If options are tight, do exact work; fake speed becomes negative speed.</p></div><div class="card danger"><h4>Mistakes</h4><p>Breaking BODMAS order, sign errors, and failing to reduce fractions before multiplication.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-number-system" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Number System</strong><span>Divisibility, factors, multiples, remainders, HCF, LCM, base properties.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-number-system">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Core concepts</h4><ul><li>Natural, whole, integers, rational and irrational numbers.</li><li>Prime/composite, even/odd.</li><li>Factor count and remainder logic.</li></ul></div><div class="card method"><h4>Formulas</h4><span class="formula">If N = p^a q^b r^c,
+Number of factors = (a+1)(b+1)(c+1)
+Sum of factors = (p^(a+1)-1)/(p-1) × ...
+HCF × LCM = Product of two numbers</span></div><div class="card"><h4>Divisibility rules to memorize</h4><ul><li>3 or 9 by digit sum.</li><li>4 by last two digits.</li><li>8 by last three digits.</li><li>11 by alternating sum difference.</li></ul></div><div class="card warn"><h4>When to use what</h4><p>Use prime factorization for HCF/LCM and factor count. Use Euclid-style logic or direct division when numbers are ugly but small.</p></div><div class="card danger"><h4>Common mistakes</h4><p>Mixing HCF and LCM interpretation in word problems and mishandling negative remainders.</p></div></div><div class="card"><h4>Tier approach</h4><p>Tier 1: divisibility, factor count, unit digit, quick LCM/HCF. Tier 2: deeper remainder, cyclicity, and structured number property questions.</p></div></div>
+        </details>
+
+        <details class="chapter" id="quant-percentage" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Percentage</strong><span>Base chapter for profit-loss, SI-CI, DI, ratio conversion.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-percentage">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Concept</h4><p>Percentage is normalized comparison per hundred. If you are slow here, half of arithmetic becomes slow.</p><span class="formula">x% of y = (x/100) × y</span></div><div class="card method"><h4>Fast methods</h4><ul><li>10% shift decimal one place.</li><li>5% = half of 10%.</li><li>1% = divide by 100.</li><li>Successive percentage change uses net formula.</li></ul><span class="formula">Net change = a + b + ab/100</span></div><div class="card"><h4>Important values</h4><ul><li>12.5% = 1/8</li><li>16.67% = 1/6</li><li>20% = 1/5</li><li>25% = 1/4</li><li>33.33% = 1/3</li><li>37.5% = 3/8</li><li>66.67% = 2/3</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Applying percentage increase and decrease symmetrically. A 20% increase followed by 20% decrease does not return to original.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-ratio" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Ratio & Proportion</strong><span>Comparison, scaling, direct and inverse relation.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-ratio">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Basic</h4><p>Ratio compares quantities of same unit. Proportion means two ratios are equal.</p><span class="formula">a:b = c:d  ⇒  ad = bc</span></div><div class="card method"><h4>Usage</h4><ul><li>Use ratio when total or parts are scalable.</li><li>Use proportion when cross-product relation is clean.</li><li>Add/subtract in ratio only after converting to common scale.</li></ul></div><div class="card"><h4>SSC tricks</h4><ul><li>Compound ratio in partnership and work questions.</li><li>Convert ratio to fraction for percentage links.</li><li>Use common multiplier for age and mixture problems.</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Adding terms of ratio directly to actual quantities without defining the common multiplier.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-average-age" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Average & Age</strong><span>Mean concept, age-shift logic, replacement and group averages.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-average-age">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Average formula</h4><span class="formula">Average = Sum of observations / Number of observations</span><p>Average is balance point, not mystical arithmetic.</p></div><div class="card method"><h4>Age solving approach</h4><ul><li>Age difference stays constant.</li><li>Use present age as variable when relation is time-shifted.</li><li>For average change after inclusion/replacement, use total sum change.</li></ul></div><div class="card"><h4>SSC variations</h4><ul><li>Average of consecutive numbers.</li><li>Change in average after new member joins.</li><li>Father-son and sibling age ratio with time shift.</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Using ratio as absolute age and forgetting the same number of years applies to all people.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-profit-loss-discount" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Profit & Loss / Discount</strong><span>CP, SP, MP, marked price discounts and gain-loss relation.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-profit-loss-discount">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Formulas</h4><span class="formula">Profit = SP - CP
+Loss = CP - SP
+Profit% = Profit/CP × 100
+Loss% = Loss/CP × 100
+Discount = MP - SP
+Discount% = Discount/MP × 100</span></div><div class="card method"><h4>When to use which base</h4><p>Profit and loss percentages use CP as base. Discount uses MP as base. Mixing bases is a rookie mistake.</p></div><div class="card"><h4>SSC special tricks</h4><ul><li>Use ratio method: 20% profit means CP:SP = 100:120 = 5:6.</li><li>Successive discounts: net discount = a + b - ab/100.</li><li>Dishonest dealer questions often combine weight and price.</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Taking profit % on SP and discount % on CP. That is flatly wrong.</p></div></div><div class="card"><h4>Tier difference</h4><p>Tier 1 direct formulas and percentage links. Tier 2 may combine marked price, discount, GST-like adjustments, or false weights.</p></div></div>
+        </details>
+
+        <details class="chapter" id="quant-interest" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Simple Interest & Compound Interest</strong><span>Interest growth, annual/half-yearly compounding, CI-SI comparison.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-interest">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Formulas</h4><span class="formula">SI = PRT / 100
+Amount(SI) = P(1 + RT/100)
+Amount(CI) = P(1 + R/100)^T
+CI = Amount - P</span></div><div class="card method"><h4>Usage rules</h4><ul><li>Use SI when interest applies only on principal.</li><li>Use CI when interest is added back each period.</li><li>For half-yearly compounding: rate half, time double.</li></ul></div><div class="card"><h4>SSC special points</h4><ul><li>Difference between CI and SI for 2 years often tested.</li><li>For 2 years, difference = P(R/100)^2.</li><li>For 3 years, use standard expanded difference carefully.</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Applying yearly formula directly to half-yearly compounding and forgetting amount vs interest distinction.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-work-pipes" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Time & Work / Pipe & Cistern</strong><span>Work efficiency, combined rates, leak and fill logic.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-work-pipes">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Core logic</h4><p>Work is rate-based. Stop using random LCM tricks unless you understand why.</p><span class="formula">If A finishes in x days, one day work = 1/x
+Combined work = sum of rates</span></div><div class="card method"><h4>LCM method</h4><p>Take total work as LCM of individual days when it simplifies arithmetic. Then efficiency = work/day.</p></div><div class="card"><h4>Pipe usage</h4><ul><li>Filling pipe adds rate.</li><li>Leak/outlet subtracts rate.</li><li>Alternate opening questions require segment-wise work addition.</li></ul></div><div class="card warn"><h4>Topper trick</h4><p>If men, women, boys are related by efficiency ratio, convert everything into one unit before touching days.</p></div><div class="card danger"><h4>Mistakes</h4><p>Adding time directly instead of rates, and mishandling “works together for some days then one leaves” type questions.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-tsd" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Time Speed Distance / Train / Boat & Stream</strong><span>Uniform motion, relative speed, length crossing, upstream-downstream.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-tsd">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Main formula</h4><span class="formula">Speed = Distance / Time
+Distance = Speed × Time
+Time = Distance / Speed</span></div><div class="card method"><h4>Train formulas</h4><ul><li>Crossing pole: time = train length / speed.</li><li>Crossing platform: time = (train + platform length) / speed.</li><li>Two trains opposite: relative speed adds.</li><li>Same direction: relative speed subtracts.</li></ul></div><div class="card"><h4>Boat & stream</h4><span class="formula">Downstream speed = b + s
+Upstream speed = b - s
+Still water speed = (D + U)/2
+Stream speed = (D - U)/2</span></div><div class="card warn"><h4>Speed conversion</h4><span class="formula">1 m/s = 18/5 km/h
+1 km/h = 5/18 m/s</span></div><div class="card danger"><h4>Mistakes</h4><p>Using total speed instead of relative speed, forgetting unit conversion, and ignoring total distance covered by both objects.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-mixture-partnership" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Mixture & Allegation / Partnership</strong><span>Weighted average of values and profit sharing by investment-time.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-mixture-partnership">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Allegation rule</h4><span class="formula">Cheaper quantity : Dearer quantity = (Dearer price - Mean price) : (Mean price - Cheaper price)</span></div><div class="card method"><h4>When to use</h4><ul><li>Use allegation when two components form a mean value.</li><li>Use weighted average when there are more than two components or added/removed quantity over stages.</li></ul></div><div class="card"><h4>Partnership rule</h4><span class="formula">Profit share ∝ Capital × Time</span><p>If capital changes mid-year, split time blocks. Don’t fake it.</p></div><div class="card danger"><h4>Mistakes</h4><p>Using capital ratio alone when investment durations differ.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-algebra" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Algebra</strong><span>Identities, linear and quadratic equations, simplification of expressions.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-algebra">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Must-know identities</h4><span class="formula">(a+b)^2 = a^2 + 2ab + b^2
+(a-b)^2 = a^2 - 2ab + b^2
+a^2-b^2 = (a-b)(a+b)
+(a+b)^3 = a^3+b^3+3ab(a+b)
+a^3-b^3 = (a-b)(a^2+ab+b^2)</span></div><div class="card method"><h4>Usage</h4><ul><li>Expand only when simplification is required.</li><li>Factorize when cancellation is possible.</li><li>In quadratic equations, first bring to standard form.</li></ul></div><div class="card"><h4>SSC repeated forms</h4><ul><li>Identity-based numerical substitution.</li><li>Roots of quadratic.</li><li>Equation in one variable.</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Sign errors in expansion and unnecessary expansion when factorization is faster.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-geometry" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Geometry</strong><span>Lines, angles, triangles, quadrilaterals, circles, polygon basics.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-geometry">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><table class="quick-table"><tr><th>Topic</th><th>Rule to memorize</th><th>Exam use</th></tr><tr><td>Triangle</td><td>Angle sum = 180°; exterior angle = sum of opposite interior angles.</td><td>Direct angle finding, similarity, perimeter/area relation.</td></tr><tr><td>Special triangle</td><td>Equilateral angles 60° each; isosceles base angles equal.</td><td>Fast elimination in angle questions.</td></tr><tr><td>Circle</td><td>Angle in semicircle = 90°; tangent is perpendicular to radius at point of contact.</td><td>Repeated direct geometry questions.</td></tr><tr><td>Quadrilateral</td><td>Angle sum = 360°.</td><td>Polygon angle problems.</td></tr></table><div class="grid-2" style="margin-top:1rem;"><div class="card method"><h4>Approach</h4><p>Draw a neat figure and mark known relations. Geometry punishes messy visualization.</p></div><div class="card danger"><h4>Mistakes</h4><p>Assuming shapes are drawn to scale and using appearance instead of theorem.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-mensuration" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Mensuration 2D & 3D</strong><span>Area, perimeter, surface area, volume.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-mensuration">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><table class="quick-table"><tr><th>Figure</th><th>Formula</th><th>Memory note</th></tr><tr><td>Rectangle</td><td class="mono">Area = l×b; Perimeter = 2(l+b)</td><td>Base shape for many composites.</td></tr><tr><td>Triangle</td><td class="mono">Area = 1/2 × b × h</td><td>Heron only when sides are given cleanly.</td></tr><tr><td>Circle</td><td class="mono">Area = πr²; Circumference = 2πr</td><td>Use π = 22/7 or 3.14 as required.</td></tr><tr><td>Cylinder</td><td class="mono">CSA = 2πrh; TSA = 2πr(r+h); V = πr²h</td><td>Don’t mix curved and total area.</td></tr><tr><td>Cone</td><td class="mono">CSA = πrl; TSA = πr(l+r); V = 1/3 πr²h</td><td>l is slant height.</td></tr><tr><td>Sphere</td><td class="mono">SA = 4πr²; V = 4/3 πr³</td><td>3D memory staple.</td></tr></table><div class="grid-2" style="margin-top:1rem;"><div class="card warn"><h4>SSC trick</h4><p>In comparison questions, leave π common and compare ratios first.</p></div><div class="card danger"><h4>Mistakes</h4><p>Using diameter in place of radius and confusing TSA with CSA.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-trigonometry" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Trigonometry & Height-Distance</strong><span>Standard ratios, identities, angle values, application in heights.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-trigonometry">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Standard values to memorize</h4><span class="formula">θ:      0°   30°   45°   60°   90°
+sinθ:    0   1/2  1/√2  √3/2  1
+cosθ:    1   √3/2 1/√2  1/2   0
+tanθ:    0   1/√3 1     √3    undefined</span></div><div class="card method"><h4>Main identities</h4><span class="formula">sin²θ + cos²θ = 1
+sec²θ - tan²θ = 1
+cosec²θ - cot²θ = 1</span><p>Memorize these exactly; partial memory is useless.</p></div><div class="card"><h4>Height & Distance usage</h4><span class="formula">tanθ = Perpendicular / Base</span><p>Form a right triangle, identify angle of elevation/depression, then apply the correct ratio.</p></div><div class="card danger"><h4>Mistakes</h4><p>Interchanging opposite and adjacent side, and not converting the language into a right triangle diagram first.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="quant-coordinate-di" data-subject="Quantitative Aptitude">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Coordinate Geometry & Data Interpretation</strong><span>Distance, section basics, graphs, tables, pie and bar data.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="quant-coordinate-di">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Coordinate formulas</h4><span class="formula">Distance between (x1,y1) and (x2,y2) = √[(x2-x1)^2 + (y2-y1)^2]
+Midpoint = ((x1+x2)/2, (y1+y2)/2)</span></div><div class="card method"><h4>DI exam method</h4><ul><li>Read units first.</li><li>Mark what is asked: ratio, difference, percentage, average.</li><li>Do not read all data blindly; target the relevant cells/bars only.</li><li>Use approximation only if options permit.</li></ul></div><div class="card"><h4>Tier 1 vs Tier 2</h4><p>Tier 1 DI is simpler and often percentage-based. Tier 2 can push more table extraction and two-step calculations.</p></div><div class="card danger"><h4>Mistakes</h4><p>Ignoring units, mixing percentage points with percentage change, and over-reading irrelevant data.</p></div></div></div>
+        </details>
+      </section>
+
+      <section class="subject" id="english">
+        <div class="subject-header"><div class="subject-title"><h2>Subject 3: English</h2><p>SSC English is a rule-based scoring section disguised as language skill. Stop treating it like vague “fluency.” The exam repeats grammar patterns, common error zones, and predictable vocabulary families.</p></div></div>
+        <div class="section-note">Daily 30–40 minute model: 10 min grammar rules, 10 min error spotting + sentence improvement logic, 10 min vocabulary memory, 5–10 min reading or para-jumble practice.</div>
+
+        <details class="chapter" id="english-parts" data-subject="English" open>
+          <summary class="chapter-head"><div class="chapter-title"><strong>Parts of Speech</strong><span>Noun, pronoun, verb, adjective, adverb, preposition, conjunction, interjection, article use.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="english-parts">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Simple explanation</h4><p>Parts of speech tell what job a word is doing in a sentence. Same word can play different roles depending on use.</p></div><div class="card method"><h4>Exam importance</h4><p>Error spotting and sentence improvement become easier when you first identify the function of the underlined word or phrase.</p></div><div class="card"><h4>Memory technique</h4><ul><li>Noun names.</li><li>Pronoun replaces noun.</li><li>Verb shows action/state.</li><li>Adjective qualifies noun.</li><li>Adverb qualifies verb/adjective/adverb.</li></ul></div><div class="card danger"><h4>Common mistake</h4><p>Calling every descriptive word an adjective and forgetting adverbs can modify adjectives too.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="english-noun-pronoun" data-subject="English">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Noun & Pronoun Rules</strong><span>Number, gender, case, agreement, pronoun reference.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="english-noun-pronoun">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Noun rules</h4><ul><li>Some nouns look plural but take singular verb: news, politics, mathematics.</li><li>Some have same singular/plural: deer, sheep, aircraft.</li><li>Collective noun may be singular as one unit.</li></ul></div><div class="card method"><h4>Pronoun rules</h4><ul><li>Pronoun must agree with noun in number and person.</li><li>Each/every/everyone/anyone takes singular pronoun in traditional SSC patterns.</li><li>Pronoun reference must be clear.</li></ul></div><div class="card"><h4>Repeated SSC errors</h4><ul><li>One should do his duty / one should do one’s duty type construction.</li><li>Each of the boys has done his work.</li><li>Neither of the two has completed his task.</li></ul></div><div class="card danger"><h4>Common mistakes</h4><p>Pronoun without clear antecedent and mismatch between singular subject and plural pronoun.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="english-verb-sva-tense" data-subject="English">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Verb Rules, Subject Verb Agreement & Tense</strong><span>Main grammar backbone for SSC.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="english-verb-sva-tense">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><table class="quick-table"><tr><th>Rule</th><th>Meaning</th><th>SSC trap</th></tr><tr><td>Subject-verb agreement</td><td>Verb agrees with true subject, not nearby noun.</td><td>“The quality of mangoes is...” not “are”.</td></tr><tr><td>Either/Neither</td><td>Usually singular verb when singular subjects are joined.</td><td>Nearby-plural confusion.</td></tr><tr><td>Along with/with/as well as</td><td>Does not change core subject number.</td><td>Extra noun distracts.</td></tr><tr><td>Tense consistency</td><td>Sequence must fit time logic.</td><td>Mixing present and past without reason.</td></tr></table><div class="grid-2" style="margin-top:1rem;"><div class="card method"><h4>Identification trick</h4><p>Find the real subject first, cut off prepositional phrases, then test the verb.</p></div><div class="card warn"><h4>Memory technique</h4><p>Make your own 10-line tense map. If tense is still fuzzy, your grammar base is weak, not unlucky.</p></div><div class="card danger"><h4>Common mistakes</h4><p>Choosing verb by nearest noun, ignoring indefinite pronoun rules, and misusing has/have/had after collective phrases.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="english-voice-narration" data-subject="English">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Voice & Narration</strong><span>Active-passive transformation and direct-indirect speech.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="english-voice-narration">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Voice basics</h4><p>Passive voice shifts object to subject position. Only transitive verbs form passive normally.</p><span class="formula">Active: Subject + Verb + Object
+Passive: Object + be + V3 + by + Subject</span></div><div class="card method"><h4>Narration basics</h4><ul><li>Change reporting verb as per sentence type.</li><li>Backshift tense when reporting verb is past, unless universal truth/current validity holds.</li><li>Change pronoun and time/place words by context.</li></ul></div><div class="card"><h4>SSC repeated rules</h4><ul><li>Imperative: ordered/requested/advised + to-infinitive.</li><li>Question: asked/inquired + if/whether or question word.</li><li>Exclamation: exclaimed with joy/sorrow.</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Forcing passive for intransitive verbs and changing tense mechanically without context.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="english-articles-prepositions" data-subject="English">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Articles, Preposition, Conjunction, Adjective, Adverb</strong><span>High-frequency grammar zones.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="english-articles-prepositions">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Articles</h4><ul><li>Use “a” before consonant sound, “an” before vowel sound.</li><li>Use “the” for specific/unique things, superlatives, rivers, mountain ranges, newspapers.</li><li>Zero article with many abstract/uncountable nouns in general sense.</li></ul></div><div class="card method"><h4>Preposition memory</h4><ul><li>Interested in, good at, capable of, prefer to, differ from, comply with.</li><li>Memorize as phrases, not isolated words.</li></ul></div><div class="card"><h4>Adjective/Adverb traps</h4><ul><li>Adjective after linking verbs: feel bad, seem happy.</li><li>Hard vs hardly, late vs lately, near vs nearly.</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Choosing article from spelling instead of sound and translating Hindi structures directly into English prepositions.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="english-error-improvement" data-subject="English">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Error Spotting & Sentence Improvement</strong><span>Applied grammar diagnosis.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="english-error-improvement">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Solving method</h4><ul><li>Check subject-verb agreement.</li><li>Check tense and verb form.</li><li>Check article, preposition, pronoun.</li><li>Check parallelism and comparison.</li><li>Check idiomatic usage.</li></ul></div><div class="card warn"><h4>SSC repeated rules</h4><p>One of the + plural noun + singular verb; no sooner...than; hardly/scarcely...when; prefer X to Y; between two = better, among many = best context matters.</p></div><div class="card danger"><h4>Common mistakes</h4><p>Changing a grammatically correct but unfamiliar sentence because it sounds odd.</p></div><div class="card"><h4>Exam approach</h4><p>Do not hunt every error at once. Scan in a fixed order. Structured scanning beats language ego.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="english-cloze-reading-parajumble" data-subject="English">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Fill in the Blanks, Cloze Test, Reading Comprehension, Para Jumble</strong><span>Context-based English topics.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="english-cloze-reading-parajumble">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Fill/Cloze method</h4><ul><li>Check grammar fit first.</li><li>Then meaning and collocation.</li><li>Read one line before and after the blank.</li><li>In cloze, keep tone consistency across passage.</li></ul></div><div class="card method"><h4>Reading comprehension method</h4><ul><li>Read questions first if passage is factual.</li><li>Mark keywords and line references mentally.</li><li>Choose answer supported by passage, not opinion.</li></ul></div><div class="card"><h4>Para jumble method</h4><ul><li>Find opening sentence: general intro, no pronoun dependency.</li><li>Find mandatory pairs: pronoun-reference, article-noun, cause-effect, chronology.</li><li>Find closing sentence: conclusion/result.</li></ul></div><div class="card danger"><h4>Mistakes</h4><p>Choosing the most beautiful sentence instead of the one linked logically with neighbors.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="english-vocab" data-subject="English">
+          <summary class="chapter-head"><div class="chapter-title"><strong>One Word Substitution, Idioms & Phrases, Synonyms, Antonyms, Spelling</strong><span>Vocabulary and phrase memory block.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="english-vocab">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Memory techniques</h4><ul><li>Study words in clusters: praise words, criticism words, government words, personality words.</li><li>Use root/prefix/suffix: bene, mal, anti, auto, omni, graph, logy.</li><li>Revise with contrast pairs: scarce-abundant, ancient-modern.</li></ul></div><div class="card method"><h4>Spelling correction method</h4><p>Look for vowel swap, double consonant, silent letters, and common confusions like principal/principle, stationery/stationary, complement/compliment.</p></div><div class="card"><h4>SSC repeated areas</h4><ul><li>Legal, social, moral, government, education vocabulary.</li><li>Common idioms like at sixes and sevens, beat about the bush, a bolt from the blue.</li></ul></div><div class="card warn"><h4>Daily 10-minute vocabulary block</h4><p>5 new words, 5 old revisions, 5 idioms twice a week. That is boring but effective. Fancy methods usually fail.</p></div></div></div>
+        </details>
+      </section>
+
+      <section class="subject" id="ga">
+        <div class="subject-header"><div class="subject-title"><h2>Subject 4: General Awareness</h2><p>GA is memory under compression. You are not preparing for a PhD. You need short exam-focused theory, repeated facts, and strong recall hooks. Long textbook reading here is mostly wasted effort.</p></div></div>
+        <div class="section-note">Best study model: one science + one static GK block daily. Revise old facts more than you collect new ones, otherwise you are hoarding information, not learning it.</div>
+
+        <details class="chapter" id="ga-physics" data-subject="General Awareness" open>
+          <summary class="chapter-head"><div class="chapter-title"><strong>Physics</strong><span>Units, motion, force, energy, heat, light, sound, electricity, magnetism, instruments.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="ga-physics">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><table class="quick-table"><tr><th>Area</th><th>Exam-focused theory</th><th>Things to memorize</th></tr><tr><td>Units & Measurement</td><td>SI units matter more than derivation.</td><td>Force Newton, Work Joule, Power Watt, Pressure Pascal, Current Ampere.</td></tr><tr><td>Motion & Force</td><td>Velocity has direction; speed doesn’t. Newton’s laws explain inertia, acceleration, action-reaction.</td><td>Momentum = mass × velocity.</td></tr><tr><td>Work Energy Power</td><td>Work when force causes displacement. Energy = capacity to do work. Power = rate of doing work.</td><td class="mono">W = F×s, P = W/t</td></tr><tr><td>Heat, Light, Sound</td><td>Heat transfer by conduction, convection, radiation. Light shows reflection/refraction. Sound needs medium.</td><td>Concave vs convex uses; SONAR uses sound reflection.</td></tr><tr><td>Electricity & Magnetism</td><td>Current flows in circuit, resistance opposes current, magnets have poles and fields.</td><td>Ohm’s law: V=IR; fuse in series.</td></tr></table><div class="grid-2" style="margin-top:1rem;"><div class="card"><h4>Important instruments</h4><ul><li>Barometer: atmospheric pressure</li><li>Ammeter: current</li><li>Voltmeter: potential difference</li><li>Hydrometer: relative density of liquid</li><li>Seismograph: earthquakes</li></ul></div><div class="card warn"><h4>Memory trick</h4><p>Link scientist to signature discovery only: Newton-laws/gravity, Faraday-electromagnetism, Ohm-electric law, Pascal-pressure, Archimedes-buoyancy.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="ga-chemistry" data-subject="General Awareness">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Chemistry</strong><span>Atom, molecule, periodic table, reactions, acid-base-salt, metals, carbon, daily chemistry.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="ga-chemistry">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Core theory</h4><ul><li>Atom is basic particle of element; molecule is combination of atoms.</li><li>Elements arranged in periodic table by atomic number.</li><li>Chemical reaction forms new substances.</li></ul></div><div class="card method"><h4>Repeated SSC points</h4><ul><li>Acid turns blue litmus red; base turns red litmus blue.</li><li>pH below 7 acidic, 7 neutral, above 7 basic.</li><li>Metals are malleable, ductile, good conductors; non-metals mostly opposite.</li></ul></div><div class="card"><h4>Everyday chemistry</h4><ul><li>Baking soda: sodium bicarbonate.</li><li>Washing soda: sodium carbonate.</li><li>Plaster of Paris: calcium sulfate hemihydrate.</li><li>Vinegar contains acetic acid.</li><li>LPG mainly propane and butane.</li></ul></div><div class="card danger"><h4>Memorize</h4><p>Element symbols, common compounds, ore-metal links, and basic gas properties. These are repeated more than flashy theory.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="ga-biology" data-subject="General Awareness">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Biology</strong><span>Cell, body systems, diseases, vitamins, nutrition, plants, animals, genetics.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="ga-biology">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><table class="quick-table"><tr><th>Area</th><th>Short theory</th><th>Memorize</th></tr><tr><td>Cell</td><td>Cell is structural and functional unit of life.</td><td>Nucleus controls activities; mitochondria = powerhouse.</td></tr><tr><td>Human body systems</td><td>Digestive, respiratory, circulatory, nervous, excretory, endocrine, reproductive systems appear often.</td><td>Largest gland liver, largest organ skin, purifier kidney, pump heart.</td></tr><tr><td>Diseases</td><td>Know deficiency, viral, bacterial, vector-borne types.</td><td>Malaria-mosquito, TB-bacteria, AIDS-virus, anemia-iron deficiency.</td></tr><tr><td>Vitamins & nutrition</td><td>Deficiency diseases are repeated SSC territory.</td><td>Vit C-scurvy, Vit D-rickets, Vit B1-beri beri, Vit A-night blindness.</td></tr><tr><td>Genetics</td><td>Genes carry hereditary traits.</td><td>Mendel = father of genetics.</td></tr></table><div class="grid-2" style="margin-top:1rem;"><div class="card"><h4>Plant facts</h4><ul><li>Photosynthesis mainly in leaves.</li><li>Xylem carries water, phloem carries food.</li><li>Stomata help gas exchange.</li></ul></div><div class="card warn"><h4>Memory trick</h4><p>Map each vitamin with one disease and one food source. That three-point cluster sticks better than isolated facts.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="ga-history" data-subject="General Awareness">
+          <summary class="chapter-head"><div class="chapter-title"><strong>History</strong><span>Ancient, Medieval, Modern India and Freedom Movement.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="ga-history">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><table class="quick-table"><tr><th>Period</th><th>Exam-focused notes</th><th>Repeated SSC points</th></tr><tr><td>Ancient India</td><td>Indus Valley features, Vedic age, Buddhism, Jainism, Maurya, Gupta.</td><td>Harappan drainage, Ashoka, Kautilya, Gupta as golden age.</td></tr><tr><td>Medieval India</td><td>Delhi Sultanate, Mughals, administration and architecture.</td><td>Akbar policies, Mansabdari, major monuments.</td></tr><tr><td>Modern India</td><td>European arrival, British expansion, reforms, revolts.</td><td>Battle of Plassey, Buxar, Governor-Generals, Acts.</td></tr><tr><td>Freedom Movement</td><td>Congress sessions, Gandhian movements, revolutionary actions, constitutional developments.</td><td>Non-Cooperation, Civil Disobedience, Quit India, INC founding, partition timeline.</td></tr></table><div class="card" style="margin-top:1rem;"><h4>Memory method</h4><p>Study history in timelines. If dates float unconnected, retention dies. Build chains: event → leader → year → result.</p></div></div>
+        </details>
+
+        <details class="chapter" id="ga-geography" data-subject="General Awareness">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Geography</strong><span>Indian and world geography, climate, rivers, mountains, resources.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="ga-geography">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Indian geography</h4><ul><li>Physiographic divisions: Himalayas, Northern Plains, Plateau, Desert, Coastal Plains, Islands.</li><li>Know major rivers, tributaries, dams, soil types, crops, states.</li><li>Monsoon and climate zones are repeated.</li></ul></div><div class="card method"><h4>World geography</h4><ul><li>Major deserts, mountains, grasslands, seas, straits, important countries-capitals-currencies.</li><li>Latitudes and longitudes basics matter.</li></ul></div><div class="card"><h4>Things to memorize</h4><ul><li>Highest peak, longest river, largest desert by type.</li><li>Important passes and plateaus.</li><li>National parks and biosphere reserves in India.</li></ul></div><div class="card warn"><h4>Memory trick</h4><p>Use map-based revision. Pure text geography revision is inefficient and forgettable.</p></div></div></div>
+        </details>
+
+        <details class="chapter" id="ga-polity" data-subject="General Awareness">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Polity</strong><span>Constitution, rights, parliament, president, PM, judiciary.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="ga-polity">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><table class="quick-table"><tr><th>Topic</th><th>Short note</th><th>Memorize</th></tr><tr><td>Constitution</td><td>Supreme law of India; adopted 26 Nov 1949, effective 26 Jan 1950.</td><td>Preamble, key features, schedules, parts.</td></tr><tr><td>Fundamental Rights</td><td>Core rights guaranteed to citizens with constitutional remedies.</td><td>Articles overview and right-to-constitutional-remedies importance.</td></tr><tr><td>Parliament</td><td>President + Lok Sabha + Rajya Sabha.</td><td>Money bill, ordinary bill, joint sitting basics.</td></tr><tr><td>President & PM</td><td>President is constitutional head; PM is real executive head of council of ministers.</td><td>Election basics, powers, appointments.</td></tr><tr><td>Judiciary</td><td>Supreme Court, High Courts, judicial review, independence.</td><td>Chief justice, writs, PIL basics.</td></tr></table><div class="card" style="margin-top:1rem;"><h4>SSC repeated points</h4><p>Schedules, fundamental duties, directive principles, amendment process basics, emergency provisions, constitutional bodies.</p></div></div>
+        </details>
+
+        <details class="chapter" id="ga-economics" data-subject="General Awareness">
+          <summary class="chapter-head"><div class="chapter-title"><strong>Economics</strong><span>Basic economy, budget, banking, inflation and important terms.</span></div><div class="chapter-actions"><button class="tiny-btn bookmark-btn" data-key="ga-economics">☆ Save</button></div><span class="caret">▶</span></summary>
+          <div class="chapter-body"><div class="grid-2"><div class="card"><h4>Core theory</h4><ul><li>Economy studies production, distribution, and consumption.</li><li>GDP measures value of final goods and services.</li><li>Inflation means persistent rise in general price level.</li></ul></div><div class="card method"><h4>Banking notes</h4><ul><li>RBI is central bank.</li><li>Repo: RBI lends to banks; reverse repo: banks park money with RBI.</li><li>CRR and SLR are liquidity control tools.</li></ul></div><div class="card"><h4>Budget and terms</h4><ul><li>Fiscal deficit, revenue deficit, direct tax, indirect tax, subsidy, disinvestment.</li><li>Know basic market terms: demand, supply, monopoly, per capita income.</li></ul></div><div class="card warn"><h4>Memory rule</h4><p>Do not drown in newspaper economics. SSC mostly wants definitions, institutions, and clean basic concepts.</p></div></div></div>
+        </details>
+      </section>
+
+      <div id="emptySearch" class="empty-search hidden">No topic matched your search. That means either the keyword is too specific or you typed nonsense. Try a chapter name, formula keyword, grammar rule, or concept family.</div>
+      <div class="footer-space"></div>
+    </main>
+  </div>
+
+  <script>
+    const chapters = [...document.querySelectorAll('details.chapter')];
+    const navList = document.getElementById('navList');
+    const searchInput = document.getElementById('searchInput');
+    const bookmarkCount = document.getElementById('bookmarkCount');
+    const topicCount = document.getElementById('topicCount');
+    const emptySearch = document.getElementById('emptySearch');
+    const showBookmarksBtn = document.getElementById('showBookmarks');
+    const showAllTopicsBtn = document.getElementById('showAllTopics');
+    const mainContent = document.getElementById('mainContent');
+    const jumpButtons = [...document.querySelectorAll('[data-jump]')];
+
+    topicCount.textContent = `${chapters.length} topics`;
+
+    const store = {
+      get(key, fallback) {
+        try {
+          const raw = localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : fallback;
+        } catch {
+          return fallback;
+        }
+      },
+      set(key, value) {
+        try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+      }
+    };
+
+    let bookmarks = new Set(store.get('sscHandbookBookmarks', []));
+    let savedViewOnly = false;
+
+    function syncBookmarkUI() {
+      document.querySelectorAll('.bookmark-btn').forEach(btn => {
+        const key = btn.dataset.key;
+        const saved = bookmarks.has(key);
+        btn.classList.toggle('saved', saved);
+        btn.textContent = saved ? '★ Saved' : '☆ Save';
+      });
+      bookmarkCount.textContent = `${bookmarks.size} saved`;
+      store.set('sscHandbookBookmarks', [...bookmarks]);
+    }
+
+    function buildNav() {
+      navList.innerHTML = '';
+      chapters.forEach(ch => {
+        const btn = document.createElement('button');
+        btn.className = 'nav-item';
+        btn.dataset.target = `#${ch.id}`;
+        btn.innerHTML = `<span>${ch.querySelector('strong').textContent}</span><span class="tag">${ch.dataset.subject.split(' ')[0]}</span>`;
+        btn.addEventListener('click', () => openTopic(ch.id, true));
+        navList.appendChild(btn);
+      });
+    }
+
+    function setActiveNav(id) {
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.target === `#${id}`);
+      });
+    }
+
+    function setActiveJump(hash) {
+      jumpButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.jump === hash));
+    }
+
+    function openTopic(id, smooth = false) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.open = true;
+      const top = el.offsetTop - 18;
+      mainContent.scrollTo({ top, behavior: smooth ? 'smooth' : 'auto' });
+      store.set('sscHandbookLastTopic', id);
+      setActiveNav(id);
+      const subjectSection = el.closest('.subject');
+      if (subjectSection) setActiveJump(`#${subjectSection.id}`);
+    }
+
+    function applySearch() {
+      const q = searchInput.value.trim().toLowerCase();
+      let visible = 0;
+      chapters.forEach(ch => {
+        const text = ch.textContent.toLowerCase();
+        const matchesSearch = !q || text.includes(q);
+        const matchesBookmark = !savedViewOnly || bookmarks.has(ch.id);
+        const show = matchesSearch && matchesBookmark;
+        ch.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      emptySearch.classList.toggle('hidden', visible !== 0);
+    }
+
+    document.querySelectorAll('.bookmark-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const key = btn.dataset.key;
+        if (bookmarks.has(key)) bookmarks.delete(key); else bookmarks.add(key);
+        syncBookmarkUI();
+        applySearch();
+      });
+    });
+
+    chapters.forEach(ch => {
+      ch.addEventListener('toggle', () => {
+        if (ch.open) {
+          store.set('sscHandbookLastTopic', ch.id);
+          setActiveNav(ch.id);
+          const subjectSection = ch.closest('.subject');
+          if (subjectSection) setActiveJump(`#${subjectSection.id}`);
+        }
+      });
+    });
+
+    searchInput.addEventListener('input', applySearch);
+
+    jumpButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = document.querySelector(btn.dataset.jump);
+        if (!target) return;
+        mainContent.scrollTo({ top: target.offsetTop - 10, behavior: 'smooth' });
+        setActiveJump(btn.dataset.jump);
+      });
+    });
+
+    showBookmarksBtn.addEventListener('click', () => {
+      savedViewOnly = true;
+      showBookmarksBtn.classList.add('active');
+      showAllTopicsBtn.classList.remove('active');
+      applySearch();
+    });
+
+    showAllTopicsBtn.addEventListener('click', () => {
+      savedViewOnly = false;
+      showAllTopicsBtn.classList.add('active');
+      showBookmarksBtn.classList.remove('active');
+      applySearch();
+    });
+
+    buildNav();
+    syncBookmarkUI();
+    showAllTopicsBtn.classList.add('active');
+    applySearch();
+
+    const lastTopic = store.get('sscHandbookLastTopic', null);
+    if (lastTopic && document.getElementById(lastTopic)) {
+      openTopic(lastTopic, false);
+    } else {
+      openTopic(chapters[0].id, false);
+    }
+
+    let visibleChapters = chapters.filter(ch => !ch.classList.contains('hidden'));
+    const observer = new IntersectionObserver(entries => {
+      const current = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (current) {
+        setActiveNav(current.target.id);
+        const subjectSection = current.target.closest('.subject');
+        if (subjectSection) setActiveJump(`#${subjectSection.id}`);
+      }
+    }, { root: mainContent, threshold: [0.2, 0.55, 0.8] });
+
+    chapters.forEach(ch => observer.observe(ch));
+  </script>
+</body>
+</html>
