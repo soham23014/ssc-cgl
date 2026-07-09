@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSC CGL 2026 Study Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #0D1117;
+      --sidebar: #111827;
+      --card: #161B22;
+      --card-2: #1C2128;
+      --border: #30363D;
+      --text: #FFFFFF;
+      --muted: #9CA3AF;
+      --primary: #3B82F6;
+      --primary-soft: rgba(59,130,246,0.16);
+      --success: #22C55E;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --purple: #8B5CF6;
+      --cyan: #06B6D4;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; overflow: hidden; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      font-variant-numeric: tabular-nums lining-nums;
+    }
+    button, input, select, textarea { font: inherit; }
+    .app {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      grid-template-rows: 64px 1fr;
+      grid-template-areas:
+        "sidebar topbar"
+        "sidebar main";
+      height: 100vh;
+      width: 100vw;
+    }
+    .sidebar {
+      grid-area: sidebar;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      gap: 16px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 8px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--cyan));
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 800;
+    }
+    .logo h1 { margin: 0; font-size: 16px; font-weight: 700; }
+    .logo p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+    .nav-group { display: flex; flex-direction: column; gap: 8px; }
+    .nav-title {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 11px;
+      padding: 0 10px;
+      margin-top: 4px;
+    }
+    .nav-btn {
+      width: 100%;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text);
+      padding: 11px 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: 140ms ease;
+      text-align: left;
+    }
+    .nav-btn:hover, .nav-btn.active {
+      background: var(--primary-soft);
+      border-color: rgba(59,130,246,0.28);
+      color: #DDEBFF;
+    }
+    .sidebar-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      display: grid;
+      gap: 8px;
+    }
+    .topbar {
+      grid-area: topbar;
+      background: rgba(13,17,23,0.92);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      gap: 16px;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 16px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .page-title { font-size: 18px; font-weight: 700; }
+    .top-chip {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .global-search {
+      width: 340px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 12px;
+      height: 40px;
+    }
+    .global-search input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+    }
+    .main {
+      grid-area: main;
+      overflow: auto;
+      padding: 18px;
+    }
+    .view { display: none; }
+    .view.active { display: block; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 18px 10px;
+      gap: 16px;
+    }
+    .card-title { font-size: 16px; font-weight: 700; }
+    .card-subtitle { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .card-body { padding: 0 18px 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .metric {
+      padding: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .metric-label { color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+    .metric-value { font-size: 28px; font-weight: 800; }
+    .metric-note { margin-top: 8px; font-size: 12px; color: var(--muted); }
+    .accent-primary { color: var(--primary); }
+    .accent-success { color: var(--success); }
+    .accent-warning { color: var(--warning); }
+    .accent-danger { color: var(--danger); }
+    .toolbar, .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .toolbar { margin-bottom: 14px; }
+    .field, .field-sm {
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      padding: 10px 12px;
+      outline: none;
+    }
+    .field { min-width: 180px; }
+    .field-sm { min-width: 120px; }
+    textarea.field {
+      resize: vertical;
+      min-height: 84px;
+      font-family: inherit;
+    }
+    .btn {
+      border: 1px solid var(--border);
+      background: var(--card-2);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 140ms ease;
+      font-weight: 600;
+    }
+    .btn:hover { filter: brightness(1.08); }
+    .btn-primary { background: var(--primary); border-color: #2563EB; }
+    .btn-success { background: #14532D; border-color: #166534; }
+    .btn-warning { background: #78350F; border-color: #92400E; }
+    .btn-danger { background: #7F1D1D; border-color: #991B1B; }
+    .btn-ghost { background: transparent; }
+    .table-wrap {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--card-2);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1200px;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(48,54,61,0.8);
+      vertical-align: top;
+    }
+    th {
+      background: #11151C;
+      color: #CBD5E1;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      text-align: left;
+      font-weight: 700;
+    }
+    tr:hover td { background: rgba(255,255,255,0.015); }
+    .mini-input, .mini-select, .mini-textarea {
+      width: 100%;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text);
+      padding: 6px 7px;
+      border-radius: 8px;
+      outline: none;
+      font-size: 12px;
+    }
+    .mini-textarea { min-height: 58px; resize: vertical; font-family: inherit; }
+    .mini-input:focus, .mini-select:focus, .mini-textarea:focus {
+      border-color: rgba(59,130,246,0.45);
+      background: rgba(59,130,246,0.08);
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+    .status-not-started { background: rgba(156,163,175,0.15); color: #D1D5DB; border-color: rgba(156,163,175,0.2); }
+    .status-in-progress { background: rgba(59,130,246,0.14); color: #BFDBFE; border-color: rgba(59,130,246,0.25); }
+    .status-revision { background: rgba(245,158,11,0.14); color: #FCD34D; border-color: rgba(245,158,11,0.25); }
+    .status-completed { background: rgba(34,197,94,0.14); color: #86EFAC; border-color: rgba(34,197,94,0.25); }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 14px;
+    }
+    .chart-box { height: 300px; }
+    .chart-box.tall { height: 360px; }
+    .section-gap { margin-bottom: 14px; }
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card-2);
+    }
+    .list-item small, .muted { color: var(--muted); }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: #0F141A;
+      border: 1px solid rgba(48,54,61,0.8);
+      overflow: hidden;
+    }
+    .progress-bar > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--cyan));
+      border-radius: inherit;
+    }
+    .empty {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.01);
+    }
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+    .kbd {
+      padding: 3px 7px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #0B0F14;
+      font-size: 11px;
+      color: #D1D5DB;
+    }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-mark">CGL</div>
+        <div>
+          <h1>SSC CGL 2026</h1>
+          <p>Smart Study Tracker</p>
+        </div>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-title">Workspace</div>
+        <button class="nav-btn active" data-view-target="dashboard"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
+        <button class="nav-btn" data-view-target="syllabus"><i class="fa-solid fa-book-open"></i> Syllabus Tracker</button>
+        <button class="nav-btn" data-view-target="study"><i class="fa-solid fa-clock"></i> Study Log</button>
+        <button class="nav-btn" data-view-target="revision"><i class="fa-solid fa-rotate"></i> Revision Planner</button>
+        <button class="nav-btn" data-view-target="mocks"><i class="fa-solid fa-file-pen"></i> Mock Analysis</button>
+        <button class="nav-btn" data-view-target="weightage"><i class="fa-solid fa-chart-pie"></i> Weightage & Cut-offs</button>
+        <button class="nav-btn" data-view-target="reports"><i class="fa-solid fa-table-list"></i> Reports</button>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-title">Utilities</div>
+        <button class="nav-btn" id="backupBtn"><i class="fa-solid fa-download"></i> Backup JSON</button>
+        <button class="nav-btn" id="restoreBtn"><i class="fa-solid fa-upload"></i> Restore JSON</button>
+        <input id="restoreInput" class="hidden" type="file" accept="application/json">
+        <button class="nav-btn" id="exportStudyCsvBtn"><i class="fa-solid fa-file-csv"></i> Export Study CSV</button>
+        <button class="nav-btn" id="exportSyllabusCsvBtn"><i class="fa-solid fa-file-export"></i> Export Syllabus CSV</button>
+        <button class="nav-btn" id="printReportBtn"><i class="fa-solid fa-print"></i> Print Report</button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="tag"><i class="fa-solid fa-database"></i> LocalStorage auto-save</div>
+        <div class="tag"><i class="fa-solid fa-wifi"></i> Offline-first desktop app</div>
+        <div class="tag"><i class="fa-solid fa-keyboard"></i> Press <span class="kbd">/</span> to search</div>
+      </div>
+    </aside>
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <div>
+          <div class="page-title" id="pageTitle">Dashboard</div>
+        </div>
+        <div class="top-chip" id="autosaveStatus">Auto-saved</div>
+        <div class="top-chip" id="examCountdownChip">Exam countdown</div>
+      </div>
+      <div class="topbar-right">
+        <div class="global-search">
+          <i class="fa-solid fa-magnifying-glass" style="color: var(--muted);"></i>
+          <input id="globalSearch" type="text" placeholder="Search topics, dates, notes, subjects..." />
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="view active" id="dashboardView">
+        <div class="grid-4 section-gap" id="dashboardMetrics"></div>
+
+        <div class="two-col section-gap">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Study progress</div>
+                <div class="card-subtitle">Weekly hours, accuracy and completion</div>
+              </div>
+            </div>
+            <div class="card-body chart-box tall">
+              <canvas id="studyTrendChart"></canvas>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Today & next</div>
+                <div class="card-subtitle">Revision queue and active streak</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="list" id="todaySummaryList"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2 section-gap">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Subject-wise time</div>
+                <div class="card-subtitle">Hours invested by subject</div>
+              </div>
+            </div>
+            <div class="card-body chart-box">
+              <canvas id="subjectTimeChart"></canvas>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Mock score trend</div>
+                <div class="card-subtitle">Best, average and latest direction</div>
+              </div>
+            </div>
+            <div class="card-body chart-box">
+              <canvas id="mockTrendChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="syllabusView">
+        <div class="card section-gap">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Complete syllabus tracker</div>
+              <div class="card-subtitle">Editable official structure with custom topics, notes, revision and accuracy tracking</div>
+            </div>
+            <div class="toolbar">
+              <button class="btn btn-primary" id="addSyllabusRowBtn"><i class="fa-solid fa-plus"></i> Add topic</button>
+              <button class="btn" id="seedDefaultDataBtn"><i class="fa-solid fa-arrows-rotate"></i> Reset defaults</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="filters section-gap">
+              <select class="field-sm" id="syllabusTierFilter"><option value="">All tiers</option></select>
+              <select class="field-sm" id="syllabusSubjectFilter"><option value="">All subjects</option></select>
+              <select class="field-sm" id="syllabusStatusFilter"><option value="">All status</option><option>Not Started</option><option>In Progress</option><option>Revision</option><option>Completed</option></select>
+              <select class="field-sm" id="syllabusDifficultyFilter"><option value="">All difficulty</option><option>Easy</option><option>Medium</option><option>Hard</option></select>
+              <select class="field-sm" id="syllabusPriorityFilter"><option value="">All priority</option><option>Low</option><option>Medium</option><option>High</option></select>
+              <select class="field-sm" id="syllabusRevisionFilter"><option value="">All revision</option><option value="due">Revision Due</option><option value="weak">Weak Topics</option></select>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Tier</th><th>Subject</th><th>Section</th><th>Topic</th><th>Subtopic</th><th>Status</th><th>Priority</th><th>Difficulty</th><th>Est. Weight</th><th>Q Solved</th><th>Accuracy %</th><th>Last Revision</th><th>Next Revision</th><th>Source</th><th>Completion %</th><th>Notes</th><th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="syllabusTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="studyView">
+        <div class="card section-gap">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Study tracker</div>
+              <div class="card-subtitle">Daily study sessions, solved questions, mistakes and time analysis</div>
+            </div>
+            <div class="toolbar">
+              <button class="btn btn-primary" id="addStudyRowBtn"><i class="fa-solid fa-plus"></i> Add study entry</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="filters section-gap">
+              <input class="field" id="studyDateFilter" type="date">
+              <select class="field-sm" id="studySubjectFilter"><option value="">All subjects</option></select>
+              <select class="field-sm" id="studyTierFilter"><option value="">All tiers</option></select>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Study Date</th><th>Tier</th><th>Subject</th><th>Topic</th><th>Subtopic</th><th>Time Studied (min)</th><th>Questions</th><th>Correct</th><th>Wrong</th><th>Accuracy %</th><th>Mistakes</th><th>Remarks</th><th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="studyTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="revisionView">
+        <div class="grid-3 section-gap" id="revisionMetrics"></div>
+        <div class="grid-2 section-gap">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Today's revision</div>
+                <div class="card-subtitle">Due today and overdue topics</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="list" id="todayRevisionList"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Upcoming revision</div>
+                <div class="card-subtitle">Next 7 days schedule</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="list" id="upcomingRevisionList"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card section-gap">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Revision system rules</div>
+              <div class="card-subtitle">Accuracy-driven spaced repetition</div>
+            </div>
+          </div>
+          <div class="card-body grid-3">
+            <div class="metric"><div class="metric-label">Weak topics</div><div class="metric-value accent-danger">D1 · D2 · D4 · D7 · D14 · D21</div><div class="metric-note">Accuracy below 60% or mock error restart</div></div>
+            <div class="metric"><div class="metric-label">Medium topics</div><div class="metric-value accent-warning">D1 · D3 · D7 · D15 · D30</div><div class="metric-note">Accuracy from 60% to 80%</div></div>
+            <div class="metric"><div class="metric-label">Strong topics</div><div class="metric-value accent-success">D3 · D7 · D21 · D45</div><div class="metric-note">Accuracy above 80%</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="mocksView">
+        <div class="grid-4 section-gap" id="mockMetrics"></div>
+        <div class="card section-gap">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Mock test analysis</div>
+              <div class="card-subtitle">Unlimited mock tests with automatic score, trend and subject review guidance</div>
+            </div>
+            <div class="toolbar">
+              <button class="btn btn-primary" id="addMockRowBtn"><i class="fa-solid fa-plus"></i> Add mock</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Mock Name</th><th>Date</th><th>Tier</th><th>Marks</th><th>Questions</th><th>Correct</th><th>Wrong</th><th>Accuracy %</th><th>Time Taken (min)</th><th>Rank</th><th>Weak Subjects</th><th>Strong Subjects</th><th>Remarks</th><th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="mockTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="grid-2 section-gap">
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Mock performance</div><div class="card-subtitle">Score movement across attempts</div></div></div>
+            <div class="card-body chart-box"><canvas id="mockScoreChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Accuracy trend</div><div class="card-subtitle">Latest consistency</div></div></div>
+            <div class="card-body chart-box"><canvas id="mockAccuracyChart"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="weightageView">
+        <div class="grid-3 section-gap" id="cutoffMetrics"></div>
+        <div class="grid-2 section-gap">
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Tier 1 weightage</div><div class="card-subtitle">Official equal split</div></div></div>
+            <div class="card-body chart-box"><canvas id="tier1WeightageChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Tier 2 weightage</div><div class="card-subtitle">Paper I section share</div></div></div>
+            <div class="card-body chart-box"><canvas id="tier2WeightageChart"></canvas></div>
+          </div>
+        </div>
+        <div class="grid-2 section-gap">
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Section marks</div><div class="card-subtitle">Tier 1 and Tier 2 mark distribution</div></div></div>
+            <div class="card-body chart-box"><canvas id="sectionMarksChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Cut-off forecast</div><div class="card-subtitle">3-year trend with 2026 planning range</div></div></div>
+            <div class="card-body chart-box"><canvas id="cutoffChart"></canvas></div>
+          </div>
+        </div>
+        <div class="card section-gap">
+          <div class="card-header"><div><div class="card-title">Official exam structure</div><div class="card-subtitle">Tier-wise score planning reference</div></div></div>
+          <div class="card-body grid-2">
+            <div>
+              <div class="table-wrap">
+                <table style="min-width:100%;">
+                  <thead><tr><th colspan="4">Tier 1</th></tr></thead>
+                  <tbody>
+                    <tr><td>Reasoning</td><td>25 Questions</td><td>50 Marks</td><td>25%</td></tr>
+                    <tr><td>General Awareness</td><td>25 Questions</td><td>50 Marks</td><td>25%</td></tr>
+                    <tr><td>Quantitative Aptitude</td><td>25 Questions</td><td>50 Marks</td><td>25%</td></tr>
+                    <tr><td>English</td><td>25 Questions</td><td>50 Marks</td><td>25%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div>
+              <div class="table-wrap">
+                <table style="min-width:100%;">
+                  <thead><tr><th colspan="4">Tier 2 Paper I</th></tr></thead>
+                  <tbody>
+                    <tr><td>Mathematical Abilities</td><td>90 Marks</td><td>23.1%</td><td>Main scoring</td></tr>
+                    <tr><td>Reasoning</td><td>90 Marks</td><td>23.1%</td><td>Main scoring</td></tr>
+                    <tr><td>English Language</td><td>135 Marks</td><td>34.6%</td><td>Highest share</td></tr>
+                    <tr><td>General Awareness</td><td>75 Marks</td><td>19.2%</td><td>Main scoring</td></tr>
+                    <tr><td>Computer Knowledge</td><td>60 Marks</td><td>15.4%</td><td>Qualifying</td></tr>
+                    <tr><td>Statistics Paper II</td><td>200 Marks</td><td>Optional</td><td>JSO / SI only</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="reportsView">
+        <div class="grid-4 section-gap" id="reportMetrics"></div>
+        <div class="grid-2 section-gap">
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Subject accuracy</div><div class="card-subtitle">Average accuracy by subject</div></div></div>
+            <div class="card-body chart-box"><canvas id="subjectAccuracyChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Topic completion</div><div class="card-subtitle">Completed vs pending topics</div></div></div>
+            <div class="card-body chart-box"><canvas id="topicCompletionChart"></canvas></div>
+          </div>
+        </div>
+        <div class="grid-2 section-gap">
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Most revised topics</div><div class="card-subtitle">Top revision frequency</div></div></div>
+            <div class="card-body"><div class="list" id="mostRevisedList"></div></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Weak and strong topics</div><div class="card-subtitle">Instant focus list</div></div></div>
+            <div class="card-body"><div class="list" id="weakStrongList"></div></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'sscCglStudyTrackerData_v1';
+    const EXAM_DATE = '2026-08-15';
+    const tier1Weightage = [
+      { label: 'Reasoning', value: 25 },
+      { label: 'General Awareness', value: 25 },
+      { label: 'Quantitative Aptitude', value: 25 },
+      { label: 'English', value: 25 }
+    ];
+    const tier2Weightage = [
+      { label: 'Math', value: 23.1 },
+      { label: 'Reasoning', value: 23.1 },
+      { label: 'English', value: 34.6 },
+      { label: 'GA', value: 19.2 },
+      { label: 'Computer', value: 15.4 }
+    ];
+    const historicalCutoffs = [
+      { year: 2023, otherPosts: 150.05, jso: 168.54 },
+      { year: 2024, otherPosts: 153.19, jso: 167.02 },
+      { year: 2025, otherPosts: 136.83, jso: 153.46 }
+    ];
+
+    const chartRefs = {};
+
+    function uid() {
+      return Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+    }
+
+    function todayStr() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function addDays(dateStr, days) {
+      const d = new Date(dateStr + 'T00:00:00');
+      d.setDate(d.getDate() + days);
+      return d.toISOString().slice(0, 10);
+    }
+
+    function diffDays(from, to) {
+      const a = new Date(from + 'T00:00:00');
+      const b = new Date(to + 'T00:00:00');
+      return Math.ceil((b - a) / 86400000);
+    }
+
+    function safeNumber(value) {
+      const n = Number(value);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function round(value, digits = 1) {
+      const p = 10 ** digits;
+      return Math.round((safeNumber(value) + Number.EPSILON) * p) / p;
+    }
+
+    function accuracyOf(correct, wrong) {
+      const c = safeNumber(correct);
+      const w = safeNumber(wrong);
+      const total = c + w;
+      return total ? round((c / total) * 100, 1) : 0;
+    }
+
+    function formatHours(minutes) {
+      return round(minutes / 60, 1);
+    }
+
+    function determineStrength(accuracy, mockError = false) {
+      if (mockError) return 'Weak';
+      if (accuracy < 60) return 'Weak';
+      if (accuracy <= 80) return 'Medium';
+      return 'Strong';
+    }
+
+    function revisionOffsets(strength) {
+      if (strength === 'Weak') return [1, 2, 4, 7, 14, 21];
+      if (strength === 'Medium') return [1, 3, 7, 15, 30];
+      return [3, 7, 21, 45];
+    }
+
+    function nextRevisionDate(lastRevision, strength, mockError = false) {
+      const base = lastRevision || todayStr();
+      const offsets = revisionOffsets(determineStrength(safeNumber(strength) === strength ? strength : strength, mockError));
+      return addDays(base, offsets[0]);
+    }
+
+    function calcCompletion(status, qs, accuracy) {
+      const solved = safeNumber(qs);
+      const acc = safeNumber(accuracy);
+      if (status === 'Completed') return 100;
+      if (status === 'Revision') return Math.min(95, Math.max(45, round((solved / 10) * 100 * 0.35 + acc * 0.65, 0)));
+      if (status === 'In Progress') return Math.min(85, Math.max(10, round((solved / 10) * 100 * 0.4 + acc * 0.4, 0)));
+      return solved > 0 ? Math.min(25, round(solved * 2, 0)) : 0;
+    }
+
+    function autoSaveStatus(text) {
+      const el = document.getElementById('autosaveStatus');
+      el.textContent = text;
+      clearTimeout(autoSaveStatus.timer);
+      autoSaveStatus.timer = setTimeout(() => { el.textContent = 'Auto-saved'; }, 1500);
+    }
+
+    function defaultData() {
+      const syllabus = [
+        ['Tier 1','Reasoning','Reasoning','Analogies','Semantic analogy', 'Not Started','High','Medium',25,0,0,'','','SSC Official',0,''],
+        ['Tier 1','Reasoning','Reasoning','Classification','Number/figural classification', 'Not Started','Medium','Medium',25,0,0,'','','SSC Official',0,''],
+        ['Tier 1','Reasoning','Reasoning','Series','Number and figural series', 'In Progress','High','Hard',25,32,62,todayStr(),addDays(todayStr(),1),'SSC Official',54,'Need speed practice'],
+        ['Tier 1','General Awareness','GA','History','Modern India', 'In Progress','High','Hard',25,40,58,todayStr(),addDays(todayStr(),1),'Lucent + PYQ',51,'Revise chronology'],
+        ['Tier 1','General Awareness','GA','Polity','Constitution basics', 'Revision','High','Medium',25,55,81,todayStr(),addDays(todayStr(),3),'Notes',78,'Article numbers weak'],
+        ['Tier 1','Quantitative Aptitude','Math','Arithmetic','Percentages', 'In Progress','High','Medium',25,86,74,todayStr(),addDays(todayStr(),3),'Class notes',69,''],
+        ['Tier 1','Quantitative Aptitude','Math','Arithmetic','Profit and loss', 'Not Started','High','Hard',25,0,0,'','','Class notes',0,''],
+        ['Tier 1','English','English','Grammar','Spotting errors', 'Revision','High','Medium',25,77,84,todayStr(),addDays(todayStr(),3),'PYQ',85,''],
+        ['Tier 1','English','English','Vocabulary','One word substitution', 'In Progress','Medium','Medium',25,36,72,todayStr(),addDays(todayStr(),3),'Word list',65,''],
+        ['Tier 2','Mathematical Abilities','Math','Advanced Math','Algebra', 'In Progress','High','Hard',23.1,52,61,todayStr(),addDays(todayStr(),1),'Tier 2 Book',56,''],
+        ['Tier 2','Mathematical Abilities','Math','Advanced Math','Trigonometry', 'Not Started','High','Hard',23.1,0,0,'','','Tier 2 Book',0,''],
+        ['Tier 2','Reasoning','Reasoning','Reasoning','Critical thinking', 'In Progress','Medium','Medium',23.1,28,79,todayStr(),addDays(todayStr(),3),'Module practice',70,''],
+        ['Tier 2','English Language','English','Comprehension','Cloze passage', 'Revision','High','Medium',34.6,64,88,todayStr(),addDays(todayStr(),3),'Editorial notes',88,''],
+        ['Tier 2','General Awareness','GA','Economy','Budget and banking', 'In Progress','High','Hard',19.2,24,57,todayStr(),addDays(todayStr(),1),'Monthly CA',48,''],
+        ['Tier 2','Computer Knowledge Test','Computer','Basics','MS Office', 'Completed','Medium','Easy',15.4,50,92,todayStr(),addDays(todayStr(),7),'Short notes',100,''],
+        ['Tier 2','Statistics Paper II','Statistics','Statistics','Measures of central tendency', 'Not Started','Low','Hard',200,0,0,'','','Stats module',0,'Only if applying JSO']
+      ].map(r => ({
+        id: uid(), tier: r[0], subject: r[1], section: r[2], topic: r[3], subtopic: r[4], status: r[5], priority: r[6], difficulty: r[7], estimatedWeight: r[8], questionsSolved: r[9], accuracy: r[10], lastRevision: r[11], nextRevision: r[12], source: r[13], completion: r[14], notes: r[15], revisionCount: 0, mockError: false
+      }));
+
+      const studyLogs = [
+        { id: uid(), studyDate: todayStr(), tier: 'Tier 1', subject: 'Quantitative Aptitude', topic: 'Arithmetic', subtopic: 'Percentages', timeStudied: 95, questionsSolved: 40, correct: 29, wrong: 11, mistakes: 'Conversion and percentage increase', remarks: 'Need formula sheet' },
+        { id: uid(), studyDate: todayStr(), tier: 'Tier 1', subject: 'English', topic: 'Grammar', subtopic: 'Spotting errors', timeStudied: 55, questionsSolved: 30, correct: 25, wrong: 5, mistakes: 'Tense consistency', remarks: 'Good pace' },
+        { id: uid(), studyDate: addDays(todayStr(), -1), tier: 'Tier 2', subject: 'General Awareness', topic: 'Economy', subtopic: 'Budget and banking', timeStudied: 60, questionsSolved: 25, correct: 14, wrong: 11, mistakes: 'Static terms mixed up', remarks: 'Revise RBI roles' },
+        { id: uid(), studyDate: addDays(todayStr(), -2), tier: 'Tier 2', subject: 'Mathematical Abilities', topic: 'Advanced Math', subtopic: 'Algebra', timeStudied: 80, questionsSolved: 34, correct: 21, wrong: 13, mistakes: 'Equation simplification', remarks: 'Practice daily' },
+        { id: uid(), studyDate: addDays(todayStr(), -3), tier: 'Tier 1', subject: 'General Awareness', topic: 'Polity', subtopic: 'Constitution basics', timeStudied: 45, questionsSolved: 35, correct: 30, wrong: 5, mistakes: 'Schedules confusion', remarks: 'Improve retention' }
+      ];
+
+      const mocks = [
+        { id: uid(), mockName: 'Full Mock 01', date: addDays(todayStr(), -21), tier: 'Tier 1', marks: 132, questions: 100, correct: 67, wrong: 33, timeTaken: 58, rank: 842, weakSubjects: 'GA, Math', strongSubjects: 'English', remarks: 'Need better speed' },
+        { id: uid(), mockName: 'Full Mock 02', date: addDays(todayStr(), -14), tier: 'Tier 1', marks: 141, questions: 100, correct: 71, wrong: 29, timeTaken: 57, rank: 611, weakSubjects: 'GA', strongSubjects: 'English, Reasoning', remarks: 'Stability improved' },
+        { id: uid(), mockName: 'Full Mock 03', date: addDays(todayStr(), -7), tier: 'Tier 2', marks: 286, questions: 150, correct: 103, wrong: 47, timeTaken: 116, rank: 394, weakSubjects: 'Math', strongSubjects: 'English', remarks: 'Tier 2 needs maths push' }
+      ];
+
+      const settings = { theme: 'dark', examDate: EXAM_DATE };
+      return { syllabus, studyLogs, mocks, settings };
+    }
+
+    let appState = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return defaultData();
+        const parsed = JSON.parse(raw);
+        return {
+          syllabus: parsed.syllabus || [],
+          studyLogs: parsed.studyLogs || [],
+          mocks: parsed.mocks || [],
+          settings: parsed.settings || { theme: 'dark', examDate: EXAM_DATE }
+        };
+      } catch (e) {
+        return defaultData();
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      autoSaveStatus('Saved just now');
+    }
+
+    function deriveSyllabusFields(row) {
+      row.questionsSolved = safeNumber(row.questionsSolved);
+      row.accuracy = safeNumber(row.accuracy);
+      row.estimatedWeight = safeNumber(row.estimatedWeight);
+      row.completion = safeNumber(row.completion) || calcCompletion(row.status, row.questionsSolved, row.accuracy);
+      const strength = determineStrength(row.accuracy, row.mockError);
+      if (row.lastRevision) row.nextRevision = addDays(row.lastRevision, revisionOffsets(strength)[0]);
+      return row;
+    }
+
+    function deriveStudyFields(row) {
+      row.timeStudied = safeNumber(row.timeStudied);
+      row.questionsSolved = safeNumber(row.questionsSolved);
+      row.correct = safeNumber(row.correct);
+      row.wrong = safeNumber(row.wrong);
+      row.accuracy = accuracyOf(row.correct, row.wrong);
+      return row;
+    }
+
+    function deriveMockFields(row) {
+      row.questions = safeNumber(row.questions);
+      row.correct = safeNumber(row.correct);
+      row.wrong = safeNumber(row.wrong);
+      row.marks = safeNumber(row.marks);
+      row.timeTaken = safeNumber(row.timeTaken);
+      row.rank = safeNumber(row.rank);
+      row.accuracy = accuracyOf(row.correct, row.wrong);
+      return row;
+    }
+
+    function normalizeState() {
+      appState.syllabus = appState.syllabus.map(deriveSyllabusFields);
+      appState.studyLogs = appState.studyLogs.map(deriveStudyFields);
+      appState.mocks = appState.mocks.map(deriveMockFields);
+    }
+
+    function subjectList() {
+      return [...new Set(appState.syllabus.map(r => r.subject).filter(Boolean))].sort();
+    }
+
+    function tierList() {
+      return [...new Set(appState.syllabus.map(r => r.tier).filter(Boolean))].sort();
+    }
+
+    function updateFilterOptions() {
+      const subjects = subjectList();
+      const tiers = tierList();
+      const map = [
+        ['syllabusSubjectFilter', subjects],
+        ['studySubjectFilter', subjects]
+      ];
+      map.forEach(([id, values]) => {
+        const el = document.getElementById(id);
+        const current = el.value;
+        el.innerHTML = '<option value="">All subjects</option>' + values.map(v => `<option ${v===current?'selected':''}>${v}</option>`).join('');
+      });
+      ['syllabusTierFilter','studyTierFilter'].forEach(id => {
+        const el = document.getElementById(id);
+        const current = el.value;
+        el.innerHTML = '<option value="">All tiers</option>' + tiers.map(v => `<option ${v===current?'selected':''}>${v}</option>`).join('');
+      });
+    }
+
+    function filteredSyllabus() {
+      const search = document.getElementById('globalSearch').value.trim().toLowerCase();
+      const tier = document.getElementById('syllabusTierFilter').value;
+      const subject = document.getElementById('syllabusSubjectFilter').value;
+      const status = document.getElementById('syllabusStatusFilter').value;
+      const difficulty = document.getElementById('syllabusDifficultyFilter').value;
+      const priority = document.getElementById('syllabusPriorityFilter').value;
+      const revisionFilter = document.getElementById('syllabusRevisionFilter').value;
+      const today = todayStr();
+      return appState.syllabus.filter(r => {
+        if (tier && r.tier !== tier) return false;
+        if (subject && r.subject !== subject) return false;
+        if (status && r.status !== status) return false;
+        if (difficulty && r.difficulty !== difficulty) return false;
+        if (priority && r.priority !== priority) return false;
+        if (revisionFilter === 'due' && !(r.nextRevision && r.nextRevision <= today)) return false;
+        if (revisionFilter === 'weak' && determineStrength(r.accuracy, r.mockError) !== 'Weak') return false;
+        if (!search) return true;
+        const blob = Object.values(r).join(' ').toLowerCase();
+        return blob.includes(search);
+      });
+    }
+
+    function filteredStudyLogs() {
+      const search = document.getElementById('globalSearch').value.trim().toLowerCase();
+      const date = document.getElementById('studyDateFilter').value;
+      const subject = document.getElementById('studySubjectFilter').value;
+      const tier = document.getElementById('studyTierFilter').value;
+      return appState.studyLogs.filter(r => {
+        if (date && r.studyDate !== date) return false;
+        if (subject && r.subject !== subject) return false;
+        if (tier && r.tier !== tier) return false;
+        if (!search) return true;
+        return Object.values(r).join(' ').toLowerCase().includes(search);
+      });
+    }
+
+    function renderSyllabusTable() {
+      const tbody = document.getElementById('syllabusTableBody');
+      const rows = filteredSyllabus();
+      if (!rows.length) {
+        tbody.innerHTML = `<tr><td colspan="17"><div class="empty">No syllabus rows match the current filters.</div></td></tr>`;
+        return;
+      }
+      tbody.innerHTML = rows.map(row => `
+        <tr>
+          <td><input class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="tier" value="${escapeHtml(row.tier)}"></td>
+          <td><input class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="subject" value="${escapeHtml(row.subject)}"></td>
+          <td><input class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="section" value="${escapeHtml(row.section)}"></td>
+          <td><input class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="topic" value="${escapeHtml(row.topic)}"></td>
+          <td><input class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="subtopic" value="${escapeHtml(row.subtopic)}"></td>
+          <td>
+            <select class="mini-select" data-table="syllabus" data-id="${row.id}" data-field="status">
+              ${['Not Started','In Progress','Revision','Completed'].map(v => `<option ${v===row.status?'selected':''}>${v}</option>`).join('')}
+            </select>
+          </td>
+          <td>
+            <select class="mini-select" data-table="syllabus" data-id="${row.id}" data-field="priority">
+              ${['Low','Medium','High'].map(v => `<option ${v===row.priority?'selected':''}>${v}</option>`).join('')}
+            </select>
+          </td>
+          <td>
+            <select class="mini-select" data-table="syllabus" data-id="${row.id}" data-field="difficulty">
+              ${['Easy','Medium','Hard'].map(v => `<option ${v===row.difficulty?'selected':''}>${v}</option>`).join('')}
+            </select>
+          </td>
+          <td><input type="number" step="0.1" class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="estimatedWeight" value="${row.estimatedWeight}"></td>
+          <td><input type="number" class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="questionsSolved" value="${row.questionsSolved}"></td>
+          <td><input type="number" step="0.1" class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="accuracy" value="${row.accuracy}"></td>
+          <td><input type="date" class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="lastRevision" value="${row.lastRevision || ''}"></td>
+          <td><input type="date" class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="nextRevision" value="${row.nextRevision || ''}"></td>
+          <td><input class="mini-input" data-table="syllabus" data-id="${row.id}" data-field="source" value="${escapeHtml(row.source || '')}"></td>
+          <td>
+            <div style="min-width:120px;">
+              <div class="status-badge ${statusClass(row.status)}">${row.completion}%</div>
+              <div class="progress-bar" style="margin-top:8px;"><span style="width:${Math.min(100, safeNumber(row.completion))}%"></span></div>
+            </div>
+          </td>
+          <td><textarea class="mini-textarea" data-table="syllabus" data-id="${row.id}" data-field="notes">${escapeHtml(row.notes || '')}</textarea></td>
+          <td><button class="btn btn-ghost" onclick="deleteRow('syllabus','${row.id}')"><i class="fa-solid fa-trash"></i></button></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderStudyTable() {
+      const tbody = document.getElementById('studyTableBody');
+      const rows = filteredStudyLogs();
+      if (!rows.length) {
+        tbody.innerHTML = `<tr><td colspan="13"><div class="empty">No study entries match the current filters.</div></td></tr>`;
+        return;
+      }
+      tbody.innerHTML = rows.map(row => `
+        <tr>
+          <td><input type="date" class="mini-input" data-table="studyLogs" data-id="${row.id}" data-field="studyDate" value="${row.studyDate}"></td>
+          <td><input class="mini-input" data-table="studyLogs" data-id="${row.id}" data-field="tier" value="${escapeHtml(row.tier)}"></td>
+          <td><input class="mini-input" data-table="studyLogs" data-id="${row.id}" data-field="subject" value="${escapeHtml(row.subject)}"></td>
+          <td><input class="mini-input" data-table="studyLogs" data-id="${row.id}" data-field="topic" value="${escapeHtml(row.topic)}"></td>
+          <td><input class="mini-input" data-table="studyLogs" data-id="${row.id}" data-field="subtopic" value="${escapeHtml(row.subtopic)}"></td>
+          <td><input type="number" class="mini-input" data-table="studyLogs" data-id="${row.id}" data-field="timeStudied" value="${row.timeStudied}"></td>
+          <td><input type="number" class="mini-input" data-table="studyLogs" data-id="${row.id}" data-field="questionsSolved" value="${row.questionsSolved}"></td>
+          <td><input type="number" class="mini-input" data-table="studyLogs" data-id="${row.id}" data-field="correct" value="${row.correct}"></td>
+          <td><input type="number" class="mini-input" data-table="studyLogs" data-id="${row.id}" data-field="wrong" value="${row.wrong}"></td>
+          <td><span class="status-badge ${accuracyBadge(row.accuracy)}">${row.accuracy}%</span></td>
+          <td><textarea class="mini-textarea" data-table="studyLogs" data-id="${row.id}" data-field="mistakes">${escapeHtml(row.mistakes || '')}</textarea></td>
+          <td><textarea class="mini-textarea" data-table="studyLogs" data-id="${row.id}" data-field="remarks">${escapeHtml(row.remarks || '')}</textarea></td>
+          <td><button class="btn btn-ghost" onclick="deleteRow('studyLogs','${row.id}')"><i class="fa-solid fa-trash"></i></button></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderMockTable() {
+      const tbody = document.getElementById('mockTableBody');
+      const search = document.getElementById('globalSearch').value.trim().toLowerCase();
+      const rows = appState.mocks.filter(r => !search || Object.values(r).join(' ').toLowerCase().includes(search));
+      if (!rows.length) {
+        tbody.innerHTML = `<tr><td colspan="14"><div class="empty">No mock tests available.</div></td></tr>`;
+        return;
+      }
+      tbody.innerHTML = rows.map(row => `
+        <tr>
+          <td><input class="mini-input" data-table="mocks" data-id="${row.id}" data-field="mockName" value="${escapeHtml(row.mockName)}"></td>
+          <td><input type="date" class="mini-input" data-table="mocks" data-id="${row.id}" data-field="date" value="${row.date}"></td>
+          <td><input class="mini-input" data-table="mocks" data-id="${row.id}" data-field="tier" value="${escapeHtml(row.tier)}"></td>
+          <td><input type="number" class="mini-input" data-table="mocks" data-id="${row.id}" data-field="marks" value="${row.marks}"></td>
+          <td><input type="number" class="mini-input" data-table="mocks" data-id="${row.id}" data-field="questions" value="${row.questions}"></td>
+          <td><input type="number" class="mini-input" data-table="mocks" data-id="${row.id}" data-field="correct" value="${row.correct}"></td>
+          <td><input type="number" class="mini-input" data-table="mocks" data-id="${row.id}" data-field="wrong" value="${row.wrong}"></td>
+          <td><span class="status-badge ${accuracyBadge(row.accuracy)}">${row.accuracy}%</span></td>
+          <td><input type="number" class="mini-input" data-table="mocks" data-id="${row.id}" data-field="timeTaken" value="${row.timeTaken}"></td>
+          <td><input type="number" class="mini-input" data-table="mocks" data-id="${row.id}" data-field="rank" value="${row.rank}"></td>
+          <td><textarea class="mini-textarea" data-table="mocks" data-id="${row.id}" data-field="weakSubjects">${escapeHtml(row.weakSubjects || '')}</textarea></td>
+          <td><textarea class="mini-textarea" data-table="mocks" data-id="${row.id}" data-field="strongSubjects">${escapeHtml(row.strongSubjects || '')}</textarea></td>
+          <td><textarea class="mini-textarea" data-table="mocks" data-id="${row.id}" data-field="remarks">${escapeHtml(row.remarks || '')}</textarea></td>
+          <td><button class="btn btn-ghost" onclick="deleteRow('mocks','${row.id}')"><i class="fa-solid fa-trash"></i></button></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderDashboard() {
+      const metrics = getMetrics();
+      const root = document.getElementById('dashboardMetrics');
+      root.innerHTML = [
+        metricCard('Overall Progress', metrics.overallProgress + '%', 'Completion across syllabus tracker', 'accent-primary'),
+        metricCard("Today's Study", formatHours(metrics.todayMinutes) + ' hrs', 'Minutes logged today', 'accent-success'),
+        metricCard("Today's Revision", metrics.todayRevisionCount, 'Topics due today', 'accent-warning'),
+        metricCard('Average Accuracy', metrics.avgAccuracy + '%', 'Study + syllabus blended', metrics.avgAccuracy >= 75 ? 'accent-success' : 'accent-warning'),
+        metricCard('Current Streak', metrics.currentStreak + ' days', 'Continuous study-day streak', 'accent-primary'),
+        metricCard('Pending Topics', metrics.pendingTopics, 'Not started and in progress', 'accent-danger'),
+        metricCard('Completed Topics', metrics.completedTopics, 'Fully completed syllabus rows', 'accent-success'),
+        metricCard('Next Revision', metrics.nextRevisionLabel, 'Closest upcoming revision', 'accent-warning')
+      ].join('');
+
+      document.getElementById('todaySummaryList').innerHTML = buildSummaryList([
+        ['Weekly Progress', formatHours(metrics.weekMinutes) + ' hrs', metrics.weeklyProgressLabel],
+        ['Monthly Progress', formatHours(metrics.monthMinutes) + ' hrs', metrics.monthlyProgressLabel],
+        ['Upcoming Mock Test', metrics.latestMockLabel, metrics.latestMockNote],
+        ['Revision Due', metrics.todayRevisionCount + ' topics', metrics.overdueCount + ' overdue']
+      ]);
+    }
+
+    function renderRevision() {
+      const metrics = getMetrics();
+      const root = document.getElementById('revisionMetrics');
+      root.innerHTML = [
+        metricCard('Overdue Revision', metrics.overdueCount, 'Topics behind schedule', metrics.overdueCount ? 'accent-danger' : 'accent-success'),
+        metricCard('Upcoming Revision', metrics.upcomingRevisionCount, 'Next 7 days', 'accent-warning'),
+        metricCard('Weak Topics', metrics.weakTopicCount, 'Accuracy below 60% or mock error', 'accent-danger')
+      ].join('');
+
+      const todayList = document.getElementById('todayRevisionList');
+      const upcomingList = document.getElementById('upcomingRevisionList');
+      todayList.innerHTML = listFromTopics(metrics.todayRevisionTopics, 'No revision due today.');
+      upcomingList.innerHTML = listFromTopics(metrics.upcomingTopics, 'No revision planned in the next 7 days.');
+    }
+
+    function renderMocks() {
+      const metrics = getMetrics();
+      const root = document.getElementById('mockMetrics');
+      root.innerHTML = [
+        metricCard('Highest Score', metrics.highestMockScore, 'Best mock marks', 'accent-success'),
+        metricCard('Lowest Score', metrics.lowestMockScore, 'Lowest mock marks', 'accent-danger'),
+        metricCard('Average Score', metrics.avgMockScore, 'Across all mocks', 'accent-primary'),
+        metricCard('Improvement %', metrics.mockImprovement + '%', 'Latest vs earliest score', metrics.mockImprovement >= 0 ? 'accent-success' : 'accent-danger')
+      ].join('');
+    }
+
+    function renderWeightage() {
+      const forecast = getCutoffForecast();
+      const root = document.getElementById('cutoffMetrics');
+      root.innerHTML = [
+        metricCard('2026 Other Posts', forecast.expectedOtherRange, 'Expected range', 'accent-primary'),
+        metricCard('Safe Target', '155+', 'Tier 1 safer target', 'accent-success'),
+        metricCard('JSO Expected', forecast.expectedJsoRange, 'Expected range', 'accent-warning'),
+        metricCard('JSO Safe', '170+', 'Safer planning target', 'accent-success'),
+        metricCard('Tier 2 Safe Score', '300+', 'Safer final-stage target', 'accent-success'),
+        metricCard('3-Year Avg', forecast.avgOther, 'Other posts average', 'accent-primary')
+      ].join('');
+    }
+
+    function renderReports() {
+      const metrics = getMetrics();
+      const root = document.getElementById('reportMetrics');
+      root.innerHTML = [
+        metricCard('Subject-wise Hours', Object.keys(metrics.subjectTime).length, 'Subjects with study time', 'accent-primary'),
+        metricCard('Revision Completion', metrics.revisionCompletion + '%', 'Completed or handled due topics', 'accent-success'),
+        metricCard('Most Revised Topic', metrics.mostRevisedLabel, 'Highest revision count', 'accent-warning'),
+        metricCard('Least Revised Topic', metrics.leastRevisedLabel, 'Lowest revision count', 'accent-danger')
+      ].join('');
+      document.getElementById('mostRevisedList').innerHTML = buildNamedStats(metrics.mostRevisedTopics, 'No revision activity yet.');
+      document.getElementById('weakStrongList').innerHTML = buildWeakStrong(metrics);
+    }
+
+    function metricCard(label, value, note, className = '') {
+      return `
+        <div class="metric">
+          <div class="metric-label">${label}</div>
+          <div class="metric-value ${className}">${value}</div>
+          <div class="metric-note">${note}</div>
+        </div>
+      `;
+    }
+
+    function buildSummaryList(items) {
+      return items.map(([title, value, note]) => `
+        <div class="list-item">
+          <div><div style="font-weight:700;">${title}</div><small>${note}</small></div>
+          <div style="font-weight:800;">${value}</div>
+        </div>
+      `).join('');
+    }
+
+    function listFromTopics(topics, emptyText) {
+      if (!topics.length) return `<div class="empty">${emptyText}</div>`;
+      return topics.map(t => `
+        <div class="list-item">
+          <div>
+            <div style="font-weight:700;">${escapeHtml(t.subject)} · ${escapeHtml(t.topic)}</div>
+            <small>${escapeHtml(t.subtopic || '')}</small>
+          </div>
+          <div style="text-align:right;">
+            <div>${t.nextRevision || '—'}</div>
+            <small>${determineStrength(t.accuracy, t.mockError)}</small>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function buildNamedStats(items, emptyText) {
+      if (!items.length) return `<div class="empty">${emptyText}</div>`;
+      return items.map(i => `
+        <div class="list-item">
+          <div>
+            <div style="font-weight:700;">${escapeHtml(i.label)}</div>
+            <small>${escapeHtml(i.note || '')}</small>
+          </div>
+          <div style="font-weight:800;">${i.value}</div>
+        </div>
+      `).join('');
+    }
+
+    function buildWeakStrong(metrics) {
+      const weak = metrics.weakTopics.slice(0, 5).map(t => `${t.subject} · ${t.topic} (${t.accuracy}%)`).join('<br>') || 'No weak topics';
+      const strong = metrics.strongTopics.slice(0, 5).map(t => `${t.subject} · ${t.topic} (${t.accuracy}%)`).join('<br>') || 'No strong topics';
+      return `
+        <div class="list-item"><div><div style="font-weight:700;">Weak focus</div><small>Below 60% or mock error</small></div><div style="text-align:right;">${weak}</div></div>
+        <div class="list-item"><div><div style="font-weight:700;">Strong zones</div><small>Above 80% accuracy</small></div><div style="text-align:right;">${strong}</div></div>
+      `;
+    }
+
+    function getMetrics() {
+      const today = todayStr();
+      const syllabus = appState.syllabus;
+      const study = appState.studyLogs;
+      const mocks = [...appState.mocks].sort((a,b) => a.date.localeCompare(b.date));
+      const totalTopics = syllabus.length || 1;
+      const completedTopics = syllabus.filter(r => r.status === 'Completed').length;
+      const pendingTopics = syllabus.filter(r => r.status !== 'Completed').length;
+      const overallProgress = round(syllabus.reduce((sum, r) => sum + safeNumber(r.completion), 0) / totalTopics, 1);
+      const todayMinutes = study.filter(r => r.studyDate === today).reduce((sum, r) => sum + safeNumber(r.timeStudied), 0);
+      const weekDates = Array.from({ length: 7 }, (_, i) => addDays(today, -i));
+      const monthDates = Array.from({ length: 30 }, (_, i) => addDays(today, -i));
+      const weekMinutes = study.filter(r => weekDates.includes(r.studyDate)).reduce((sum, r) => sum + safeNumber(r.timeStudied), 0);
+      const monthMinutes = study.filter(r => monthDates.includes(r.studyDate)).reduce((sum, r) => sum + safeNumber(r.timeStudied), 0);
+      const syllabusAcc = syllabus.map(r => safeNumber(r.accuracy)).filter(Boolean);
+      const studyAcc = study.map(r => safeNumber(r.accuracy)).filter(Boolean);
+      const avgAccuracy = round((syllabusAcc.concat(studyAcc).reduce((a,b) => a+b, 0)) / (syllabusAcc.length + studyAcc.length || 1), 1);
+      const dueTopics = syllabus.filter(r => r.nextRevision && r.nextRevision <= today);
+      const overdueTopics = syllabus.filter(r => r.nextRevision && r.nextRevision < today);
+      const upcomingTopics = syllabus.filter(r => r.nextRevision && r.nextRevision > today && diffDays(today, r.nextRevision) <= 7).sort((a,b) => a.nextRevision.localeCompare(b.nextRevision));
+      const weakTopics = syllabus.filter(r => determineStrength(r.accuracy, r.mockError) === 'Weak').sort((a,b) => a.accuracy - b.accuracy);
+      const strongTopics = syllabus.filter(r => determineStrength(r.accuracy, r.mockError) === 'Strong').sort((a,b) => b.accuracy - a.accuracy);
+      const nextRevision = syllabus.filter(r => r.nextRevision && r.nextRevision >= today).sort((a,b) => a.nextRevision.localeCompare(b.nextRevision))[0];
+      const datesWithStudy = [...new Set(study.map(r => r.studyDate))].sort();
+      let currentStreak = 0;
+      let cursor = today;
+      while (datesWithStudy.includes(cursor)) {
+        currentStreak += 1;
+        cursor = addDays(cursor, -1);
+      }
+      const subjectTime = study.reduce((acc, r) => {
+        acc[r.subject] = (acc[r.subject] || 0) + safeNumber(r.timeStudied);
+        return acc;
+      }, {});
+      const highestMockScore = mocks.length ? Math.max(...mocks.map(r => r.marks)) : 0;
+      const lowestMockScore = mocks.length ? Math.min(...mocks.map(r => r.marks)) : 0;
+      const avgMockScore = mocks.length ? round(mocks.reduce((s,r)=>s+r.marks,0)/mocks.length,1) : 0;
+      const mockImprovement = mocks.length > 1 ? round(((mocks[mocks.length-1].marks - mocks[0].marks) / (mocks[0].marks || 1)) * 100, 1) : 0;
+      const latestMock = mocks[mocks.length - 1];
+      const revisionCompletion = dueTopics.length ? round(((dueTopics.length - overdueTopics.length) / dueTopics.length) * 100, 1) : 100;
+      const sortedRevised = [...syllabus].sort((a,b) => (b.revisionCount || 0) - (a.revisionCount || 0));
+      const mostRevisedTopics = sortedRevised.filter(r => (r.revisionCount || 0) > 0).slice(0, 5).map(r => ({ label: r.subject + ' · ' + r.topic, value: r.revisionCount, note: r.subtopic }));
+      const leastRevised = [...syllabus].sort((a,b) => (a.revisionCount || 0) - (b.revisionCount || 0))[0];
+      return {
+        totalTopics,
+        completedTopics,
+        pendingTopics,
+        overallProgress,
+        todayMinutes,
+        weekMinutes,
+        monthMinutes,
+        avgAccuracy,
+        todayRevisionCount: dueTopics.length,
+        overdueCount: overdueTopics.length,
+        upcomingRevisionCount: upcomingTopics.length,
+        weakTopicCount: weakTopics.length,
+        todayRevisionTopics: dueTopics.sort((a,b) => (a.nextRevision || '').localeCompare(b.nextRevision || '')).slice(0, 8),
+        upcomingTopics: upcomingTopics.slice(0, 8),
+        currentStreak,
+        subjectTime,
+        highestMockScore,
+        lowestMockScore,
+        avgMockScore,
+        mockImprovement,
+        latestMockLabel: latestMock ? latestMock.mockName : 'Not scheduled',
+        latestMockNote: latestMock ? latestMock.date + ' · ' + latestMock.marks + ' marks' : 'Add your first mock',
+        nextRevisionLabel: nextRevision ? `${nextRevision.subject} · ${nextRevision.nextRevision}` : 'No upcoming revision',
+        weekDates,
+        weeklyProgressLabel: weekMinutes >= 600 ? 'Strong output' : 'Needs more hours',
+        monthlyProgressLabel: monthMinutes >= 2400 ? 'On track this month' : 'Below target month',
+        revisionCompletion,
+        mostRevisedTopics,
+        mostRevisedLabel: mostRevisedTopics[0] ? mostRevisedTopics[0].label : 'None',
+        leastRevisedLabel: leastRevised ? leastRevised.subject + ' · ' + leastRevised.topic : 'None',
+        weakTopics,
+        strongTopics
+      };
+    }
+
+    function getCutoffForecast() {
+      const avgOther = round(historicalCutoffs.reduce((s,r)=>s+r.otherPosts,0)/historicalCutoffs.length,2);
+      const avgJso = round(historicalCutoffs.reduce((s,r)=>s+r.jso,0)/historicalCutoffs.length,2);
+      return {
+        avgOther,
+        avgJso,
+        expectedOtherRange: '145–150',
+        expectedJsoRange: '160–166'
+      };
+    }
+
+    function dashboardTrendData() {
+      const today = new Date(todayStr() + 'T00:00:00');
+      const labels = [];
+      const hours = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(d.getDate() - i);
+        const key = d.toISOString().slice(0,10);
+        labels.push(key.slice(5));
+        const mins = appState.studyLogs.filter(r => r.studyDate === key).reduce((s,r)=>s+safeNumber(r.timeStudied),0);
+        hours.push(round(mins/60,1));
+      }
+      return { labels, hours };
+    }
+
+    function destroyChart(id) {
+      if (chartRefs[id]) chartRefs[id].destroy();
+    }
+
+    function makeChart(id, config) {
+      destroyChart(id);
+      chartRefs[id] = new Chart(document.getElementById(id), config);
+    }
+
+    function renderCharts() {
+      const metrics = getMetrics();
+      const trend = dashboardTrendData();
+      const subjectEntries = Object.entries(metrics.subjectTime);
+      const mocks = [...appState.mocks].sort((a,b)=>a.date.localeCompare(b.date));
+      const subjectAccuracyMap = {};
+      appState.studyLogs.forEach(r => {
+        if (!subjectAccuracyMap[r.subject]) subjectAccuracyMap[r.subject] = [];
+        subjectAccuracyMap[r.subject].push(r.accuracy);
+      });
+      const subjectAccLabels = Object.keys(subjectAccuracyMap);
+      const subjectAccValues = subjectAccLabels.map(k => round(subjectAccuracyMap[k].reduce((a,b)=>a+b,0)/subjectAccuracyMap[k].length,1));
+      const completionCounts = {
+        Completed: appState.syllabus.filter(r => r.status === 'Completed').length,
+        Pending: appState.syllabus.filter(r => r.status !== 'Completed').length
+      };
+
+      const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#E5E7EB' } } },
+        scales: {
+          x: { ticks: { color: '#9CA3AF' }, grid: { color: 'rgba(48,54,61,0.35)' } },
+          y: { ticks: { color: '#9CA3AF' }, grid: { color: 'rgba(48,54,61,0.35)' } }
+        }
+      };
+
+      makeChart('studyTrendChart', {
+        type: 'line',
+        data: { labels: trend.labels, datasets: [
+          { label: 'Study hours', data: trend.hours, borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.15)', tension: 0.35, fill: true },
+          { label: 'Avg accuracy', data: trend.labels.map(() => metrics.avgAccuracy), borderColor: '#22C55E', borderDash: [6,4], pointRadius: 0, yAxisID: 'y1' }
+        ]},
+        options: {
+          ...commonOptions,
+          scales: {
+            x: commonOptions.scales.x,
+            y: { ...commonOptions.scales.y, title: { display: true, text: 'Hours', color: '#9CA3AF' } },
+            y1: { position: 'right', ticks: { color: '#9CA3AF' }, grid: { drawOnChartArea: false }, min: 0, max: 100 }
+          }
+        }
+      });
+
+      makeChart('subjectTimeChart', {
+        type: 'bar',
+        data: { labels: subjectEntries.map(([k]) => k), datasets: [{ label: 'Hours', data: subjectEntries.map(([,v]) => round(v/60,1)), backgroundColor: ['#3B82F6','#22C55E','#F59E0B','#8B5CF6','#06B6D4','#EF4444'] }] },
+        options: commonOptions
+      });
+
+      makeChart('mockTrendChart', {
+        type: 'line',
+        data: { labels: mocks.map(m => m.mockName), datasets: [{ label: 'Marks', data: mocks.map(m => m.marks), borderColor: '#8B5CF6', backgroundColor: 'rgba(139,92,246,0.15)', tension: 0.35, fill: true }] },
+        options: commonOptions
+      });
+
+      makeChart('mockScoreChart', {
+        type: 'line',
+        data: { labels: mocks.map(m => m.mockName), datasets: [{ label: 'Marks', data: mocks.map(m => m.marks), borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.15)', fill: true, tension: 0.35 }] },
+        options: commonOptions
+      });
+
+      makeChart('mockAccuracyChart', {
+        type: 'bar',
+        data: { labels: mocks.map(m => m.mockName), datasets: [{ label: 'Accuracy %', data: mocks.map(m => m.accuracy), backgroundColor: '#22C55E' }] },
+        options: { ...commonOptions, scales: { ...commonOptions.scales, y: { ...commonOptions.scales.y, min: 0, max: 100 } } }
+      });
+
+      makeChart('tier1WeightageChart', {
+        type: 'pie',
+        data: { labels: tier1Weightage.map(r=>r.label), datasets: [{ data: tier1Weightage.map(r=>r.value), backgroundColor: ['#3B82F6','#22C55E','#F59E0B','#8B5CF6'] }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#E5E7EB' } } } }
+      });
+
+      makeChart('tier2WeightageChart', {
+        type: 'pie',
+        data: { labels: tier2Weightage.map(r=>r.label), datasets: [{ data: tier2Weightage.map(r=>r.value), backgroundColor: ['#3B82F6','#22C55E','#F59E0B','#8B5CF6','#06B6D4'] }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#E5E7EB' } } } }
+      });
+
+      makeChart('sectionMarksChart', {
+        type: 'bar',
+        data: { labels: ['T1 Reasoning','T1 GA','T1 QA','T1 English','T2 Math','T2 Reasoning','T2 English','T2 GA','T2 Computer'], datasets: [{ label: 'Marks', data: [50,50,50,50,90,90,135,75,60], backgroundColor: '#3B82F6' }] },
+        options: commonOptions
+      });
+
+      makeChart('cutoffChart', {
+        type: 'line',
+        data: {
+          labels: ['2023','2024','2025','2026 Forecast'],
+          datasets: [
+            { label: 'Other Posts', data: [150.05,153.19,136.83,147.5], borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.15)', tension: 0.35 },
+            { label: 'JSO', data: [168.54,167.02,153.46,163], borderColor: '#F59E0B', backgroundColor: 'rgba(245,158,11,0.15)', tension: 0.35 }
+          ]
+        },
+        options: commonOptions
+      });
+
+      makeChart('subjectAccuracyChart', {
+        type: 'bar',
+        data: { labels: subjectAccLabels, datasets: [{ label: 'Accuracy %', data: subjectAccValues, backgroundColor: '#22C55E' }] },
+        options: { ...commonOptions, scales: { ...commonOptions.scales, y: { ...commonOptions.scales.y, min: 0, max: 100 } } }
+      });
+
+      makeChart('topicCompletionChart', {
+        type: 'doughnut',
+        data: { labels: ['Completed','Pending'], datasets: [{ data: [completionCounts.Completed, completionCounts.Pending], backgroundColor: ['#22C55E','#EF4444'] }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#E5E7EB' } } } }
+      });
+    }
+
+    function renderAll() {
+      normalizeState();
+      updateFilterOptions();
+      renderSyllabusTable();
+      renderStudyTable();
+      renderMockTable();
+      renderDashboard();
+      renderRevision();
+      renderMocks();
+      renderWeightage();
+      renderReports();
+      renderCharts();
+      renderCountdown();
+    }
+
+    function renderCountdown() {
+      const examDate = appState.settings.examDate || EXAM_DATE;
+      const days = Math.max(0, diffDays(todayStr(), examDate));
+      document.getElementById('examCountdownChip').textContent = `${days} days to SSC CGL 2026`;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;');
+    }
+
+    function statusClass(status) {
+      if (status === 'Completed') return 'status-completed';
+      if (status === 'Revision') return 'status-revision';
+      if (status === 'In Progress') return 'status-in-progress';
+      return 'status-not-started';
+    }
+
+    function accuracyBadge(acc) {
+      if (acc > 80) return 'status-completed';
+      if (acc >= 60) return 'status-revision';
+      return 'status-not-started';
+    }
+
+    function deleteRow(table, id) {
+      appState[table] = appState[table].filter(r => r.id !== id);
+      saveState();
+      renderAll();
+    }
+    window.deleteRow = deleteRow;
+
+    function addSyllabusRow() {
+      appState.syllabus.unshift(deriveSyllabusFields({
+        id: uid(), tier: 'Tier 1', subject: 'Reasoning', section: 'Custom', topic: 'New Topic', subtopic: '', status: 'Not Started', priority: 'Medium', difficulty: 'Medium', estimatedWeight: 10, questionsSolved: 0, accuracy: 0, lastRevision: '', nextRevision: '', source: 'Custom', completion: 0, notes: '', revisionCount: 0, mockError: false
+      }));
+      saveState();
+      renderAll();
+    }
+
+    function addStudyRow() {
+      appState.studyLogs.unshift(deriveStudyFields({
+        id: uid(), studyDate: todayStr(), tier: 'Tier 1', subject: 'Reasoning', topic: 'New Study', subtopic: '', timeStudied: 60, questionsSolved: 20, correct: 10, wrong: 10, mistakes: '', remarks: ''
+      }));
+      saveState();
+      renderAll();
+    }
+
+    function addMockRow() {
+      appState.mocks.unshift(deriveMockFields({
+        id: uid(), mockName: 'New Mock', date: todayStr(), tier: 'Tier 1', marks: 0, questions: 100, correct: 0, wrong: 0, timeTaken: 60, rank: 0, weakSubjects: '', strongSubjects: '', remarks: ''
+      }));
+      saveState();
+      renderAll();
+    }
+
+    function exportJsonBackup() {
+      const blob = new Blob([JSON.stringify(appState, null, 2)], { type: 'application/json' });
+      downloadBlob(blob, `ssc-cgl-2026-backup-${todayStr()}.json`);
+    }
+
+    function restoreJson(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const data = JSON.parse(reader.result);
+          appState = {
+            syllabus: data.syllabus || [],
+            studyLogs: data.studyLogs || [],
+            mocks: data.mocks || [],
+            settings: data.settings || { theme: 'dark', examDate: EXAM_DATE }
+          };
+          saveState();
+          renderAll();
+        } catch (e) {
+          alert('Invalid backup file.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function toCsv(rows) {
+      if (!rows.length) return '';
+      const headers = Object.keys(rows[0]);
+      const esc = v => '"' + String(v ?? '').replaceAll('"', '""') + '"';
+      return [headers.map(esc).join(','), ...rows.map(r => headers.map(h => esc(r[h])).join(','))].join('\n');
+    }
+
+    function exportCsv(kind) {
+      const rows = kind === 'study' ? appState.studyLogs : appState.syllabus;
+      const blob = new Blob([toCsv(rows)], { type: 'text/csv;charset=utf-8' });
+      downloadBlob(blob, `ssc-cgl-2026-${kind}-${todayStr()}.csv`);
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function printReport() {
+      window.print();
+    }
+
+    function resetDefaults() {
+      if (!confirm('Reset all data to the default SSC CGL tracker dataset? This will overwrite current data.')) return;
+      appState = defaultData();
+      saveState();
+      renderAll();
+    }
+
+    document.addEventListener('input', (e) => {
+      const target = e.target;
+      if (target.matches('[data-table][data-id][data-field]')) {
+        const table = target.dataset.table;
+        const id = target.dataset.id;
+        const field = target.dataset.field;
+        const row = appState[table].find(r => r.id === id);
+        if (!row) return;
+        row[field] = target.value;
+        if (table === 'syllabus') {
+          if (['questionsSolved','accuracy','estimatedWeight'].includes(field)) row[field] = safeNumber(target.value);
+          if (['status','questionsSolved','accuracy','lastRevision'].includes(field)) {
+            row.completion = calcCompletion(row.status, row.questionsSolved, row.accuracy);
+            if (field === 'accuracy' || field === 'lastRevision') {
+              const strength = determineStrength(row.accuracy, row.mockError);
+              if (row.lastRevision) row.nextRevision = addDays(row.lastRevision, revisionOffsets(strength)[0]);
+            }
+          }
+        }
+        if (table === 'studyLogs') {
+          if (['timeStudied','questionsSolved','correct','wrong'].includes(field)) row[field] = safeNumber(target.value);
+          row.accuracy = accuracyOf(row.correct, row.wrong);
+          syncStudyToSyllabus(row);
+        }
+        if (table === 'mocks') {
+          if (['marks','questions','correct','wrong','timeTaken','rank'].includes(field)) row[field] = safeNumber(target.value);
+          row.accuracy = accuracyOf(row.correct, row.wrong);
+          applyMockImpact(row);
+        }
+        saveState();
+        renderAll();
+      }
+      if (target.id === 'globalSearch' || target.id.endsWith('Filter')) {
+        renderAll();
+      }
+    });
+
+    function syncStudyToSyllabus(studyRow) {
+      const match = appState.syllabus.find(s => s.subject === studyRow.subject && s.topic === studyRow.topic && s.subtopic === studyRow.subtopic);
+      if (!match) return;
+      match.questionsSolved = safeNumber(match.questionsSolved) + safeNumber(studyRow.questionsSolved);
+      match.accuracy = round((safeNumber(match.accuracy) + safeNumber(studyRow.accuracy)) / 2, 1);
+      match.lastRevision = studyRow.studyDate;
+      match.revisionCount = safeNumber(match.revisionCount) + 1;
+      match.mockError = false;
+      match.status = match.completion >= 85 ? 'Revision' : 'In Progress';
+      match.completion = calcCompletion(match.status, match.questionsSolved, match.accuracy);
+      match.nextRevision = addDays(match.lastRevision, revisionOffsets(determineStrength(match.accuracy, false))[0]);
+    }
+
+    function applyMockImpact(mockRow) {
+      const weakSubjects = String(mockRow.weakSubjects || '').split(',').map(s => s.trim()).filter(Boolean);
+      appState.syllabus.forEach(row => {
+        if (weakSubjects.some(s => row.subject.toLowerCase().includes(s.toLowerCase()) || row.section.toLowerCase().includes(s.toLowerCase()))) {
+          row.mockError = true;
+          row.lastRevision = mockRow.date;
+          row.nextRevision = addDays(mockRow.date, 1);
+        }
+      });
+    }
+
+    document.getElementById('addSyllabusRowBtn').addEventListener('click', addSyllabusRow);
+    document.getElementById('addStudyRowBtn').addEventListener('click', addStudyRow);
+    document.getElementById('addMockRowBtn').addEventListener('click', addMockRow);
+    document.getElementById('backupBtn').addEventListener('click', exportJsonBackup);
+    document.getElementById('restoreBtn').addEventListener('click', () => document.getElementById('restoreInput').click());
+    document.getElementById('restoreInput').addEventListener('change', e => { if (e.target.files[0]) restoreJson(e.target.files[0]); });
+    document.getElementById('exportStudyCsvBtn').addEventListener('click', () => exportCsv('study'));
+    document.getElementById('exportSyllabusCsvBtn').addEventListener('click', () => exportCsv('syllabus'));
+    document.getElementById('printReportBtn').addEventListener('click', printReport);
+    document.getElementById('seedDefaultDataBtn').addEventListener('click', resetDefaults);
+
+    document.querySelectorAll('[data-view-target]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-btn[data-view-target]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.dataset.viewTarget;
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById(target + 'View').classList.add('active');
+        document.getElementById('pageTitle').textContent = btn.textContent.trim();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        document.getElementById('globalSearch').focus();
+      }
+    });
+
+    normalizeState();
+    saveState();
+    renderAll();
+  </script>
+</body>
+</html>
